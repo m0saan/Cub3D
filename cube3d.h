@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/01 20:46:00 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/02/02 18:43:11 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CUBE3D_H
 
 #define PI 3.14159265359
+#define TWO_PI (2 * PI)
 
 #define TRUE 1
 #define FALSE 0
@@ -39,19 +40,7 @@
 
 # define MAX_INT 2147483647
 #define BUFFER_SIZE 90
-typedef	struct 		s_ray
-{
-	float	ray_angle;
-	float	wall_h_x;
-	float	wall_h_y;
-	float	distance;
-	int		wall_h_vert;
-	int		is_ray_facing_up;
-	int		is_ray_facing_down;
-	int		is_ray_facing_right;
-	int		is_ray_facing_left;
-	int		wall_h_content;
-}					t_rays[NUM_RAYS];
+
 typedef struct		s_struct
 {
 	int     		bpp;
@@ -84,11 +73,17 @@ typedef struct		s_struct
 	float horiz_touch_x;
 	float horiz_touch_y;
 	int	found_horiz_wall_hit;
+	float save_vert_wall_hit_x;
+	float save_vert_wall_hit_y;
+	float vert_touch_x;
+	float vert_touch_y;
+	int	found_vert_wall_hit;
+	int	vert_wall_hit_content;
+
 	int is_ray_facing_down;
 	int is_ray_facing_up;
 	int is_ray_facing_right;
 	int is_ray_facing_left;
-
 }					t_struct;
 typedef struct		s_struc
 {
@@ -123,9 +118,10 @@ int		key_hook(int keycode,void *param);
 int 	initialize_window(t_struct *data);
 int		move_player(t_struct *data);
 void	circle(t_struct *data);
-void	draw_line(t_struct *data, float wall_hit_x, float wall_hit_y, float ray_angle);
+void	draw_line(t_struct *data);
 void	ft_draw(t_struct *data, int x, int y, int color);
 int		if_wall(float x, float y);
 int		update(t_struct *data);
+void	line(t_struct *data,int x0, int y0, int x1, int y1);
 
 #endif
