@@ -66,20 +66,18 @@ typedef struct		s_struct
 
 	float dx;
 	float dy;
+	float ray_angle;
 	float x_intercept;
 	float y_intercept;
 	float save_horiz_wall_hit_x;
 	float save_horiz_wall_hit_y;
-	float horiz_touch_x;
-	float horiz_touch_y;
-	int	found_horiz_wall_hit;
 	float save_vert_wall_hit_x;
 	float save_vert_wall_hit_y;
-	float vert_touch_x;
-	float vert_touch_y;
+	int	found_horiz_wall_hit;
 	int	found_vert_wall_hit;
 	int	vert_wall_hit_content;
-
+	float horz_hit_distance;
+	float vert_hit_distance;
 	int is_ray_facing_down;
 	int is_ray_facing_up;
 	int is_ray_facing_right;
