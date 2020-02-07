@@ -26,8 +26,7 @@
 #define WINDOW_WIDTH (NUM_COLS * SQUARE_SIZE)
 #define WINDOW_HEIGHT (NUM_ROWS * SQUARE_SIZE)
 
-#define CROSS_WALL 10
-#define NUM_RAYS (WINDOW_WIDTH / CROSS_WALL)
+#define NUM_RAYS (WINDOW_WIDTH)
 #define FOV_ANGLE (60 * (PI / 180))
 
 #include <unistd.h>

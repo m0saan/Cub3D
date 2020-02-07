@@ -30,6 +30,7 @@ typedef	struct 		s_ray
 	int		is_ray_facing_left;
 	int		wall_h_content;
 }					t_ray[NUM_RAYS];
+t_ray	rays[NUM_RAYS];
 void	initialize_player(t_struct *data)
 {
 	data->bpp = 0;
@@ -68,6 +69,7 @@ void	initialize_player(t_struct *data)
 	data->horz_hit_distance = 0;
 	data->vert_hit_distance = 0;
 }
+
 float limit_angle(float angle) {
     angle = remainderf(angle, TWO_PI);
     if (angle < 0) {
@@ -157,7 +159,7 @@ void	get_smalest_distance(t_struct *data, int found_horiz_wall_hit, int found_ve
         : MAX_INT;
 }
 
-void	fill_out_ray(int ray_id, t_struct *data, t_ray *rays)
+void	fill_out_ray(int ray_id, t_struct *data)
 {
     if (data->vert_hit_distance < data->horz_hit_distance) 
 	{
@@ -182,7 +184,7 @@ void	fill_out_ray(int ray_id, t_struct *data, t_ray *rays)
     rays[ray_id]->is_ray_facing_right = data->is_ray_facing_right;
 }
 
-void cast_single_ray(int ray_id, float ray_angle,t_struct *data,t_ray *rays) 
+void cast_single_ray(int ray_id, float ray_angle,t_struct *data) 
 {
 	int found_horiz_wall_hit = FALSE;
 	int found_vert_wall_hit = FALSE;
@@ -195,24 +197,53 @@ void cast_single_ray(int ray_id, float ray_angle,t_struct *data,t_ray *rays)
 	horizontal_ray_intersection(ray_angle, data, &found_horiz_wall_hit);
 	vertical_ray_intersection(ray_angle, data, &found_vert_wall_hit);
 	get_smalest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
-	fill_out_ray(ray_id, data, rays);
+	fill_out_ray(ray_id, data);
 }
+void	render_walls(t_struct *data)
+{
+	int i;
+	float y = 0;
+	float top_pixel;
+	float bottom_pixel;
+	float distance_to_projection_plane;
+	float wall_height;
 
-void	render_all_rays(t_struct *data, t_ray *rays)
+	i = 0;
+	top_pixel = 0;
+	bottom_pixel = 0;
+	distance_to_projection_plane = 0;
+	wall_height = 0;
+	
+	while (i < NUM_RAYS)
+	{
+		distance_to_projection_plane = (WINDOW_WIDTH * 0.5) / tan(FOV_ANGLE / 2);
+		wall_height = (SQUARE_SIZE / rays[i]->distance) * distance_to_projection_plane;
+		top_pixel = (WINDOW_HEIGHT / 2) - (wall_height / 2);
+		top_pixel = top_pixel < 0 ? 0 : top_pixel;
+		bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_height / 2);
+		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
+		y = top_pixel;
+		while (y < bottom_pixel)
+		{
+			ft_draw(data, i, y, 0xfcba03);
+			y++;
+		}
+		i++;
+	}
+}
+void	render_all_rays(t_struct *data)
 {
 	int i;
 
 	i = 0;
-	while (i < 1)
+	while (i < NUM_RAYS)
 	{
 		line(data, data->x, data->y, rays[i]->wall_h_x, rays[i]->wall_h_y);
 		i++;
 	}
 }
-
 void	cast_rays(t_struct *data)
 {
-	t_ray rays[NUM_RAYS];
 	int ray_id;
 	int i;
 	float ray_angle;
@@ -220,14 +251,14 @@ void	cast_rays(t_struct *data)
 	ray_id = 0;
 	i = 0;
 	ray_angle = data->rotation_angle - (FOV_ANGLE / 2);
-	while (i < 1)
+	while (i < NUM_RAYS)
 	{
-		cast_single_ray(ray_id, ray_angle, data, rays);
+		cast_single_ray(ray_id, ray_angle, data);
 		i++;
 		ray_angle += FOV_ANGLE / NUM_RAYS;
 		ray_id++;
 	}
-	render_all_rays(data, rays);
+	//render_all_rays(data);
 }
 void	draw_line(t_struct *data)
 {
@@ -248,12 +279,15 @@ void	draw_line(t_struct *data)
 }
 int		update(t_struct *data)
 {
-	render_map(data);
-	circle(data);
-	draw_line(data);
+	// render_map(data);
+	// circle(data);
+	// draw_line(data);
 	cast_rays(data);
+	render_walls(data);
 	move_player(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	mlx_de
 	return (TRUE);
 }
 
@@ -297,28 +331,22 @@ int	render_map(t_struct *data)
 }
 
 void	line(t_struct *data,int X0, int Y0, int X1, int Y1) 
-{ 
-    // calculate dx & dy 
+{
     int dx = X1 - X0; 
     int dy = Y1 - Y0; 
   
-    // calculate steps required for generating pixels 
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy); 
   
-    // calculate increment in x & y for each steps 
     float Xinc = dx / (float) steps; 
     float Yinc = dy / (float) steps; 
   
-    // Put pixel for each step 
     float X = X0; 
     float Y = Y0; 
     for (int i = 0; i <= steps; i++) 
     { 
-        ft_draw (data, X,Y,0xff1100);  // put pixel at (X,Y) 
-        X += Xinc;           // increment in x at each step 
-        Y += Yinc;           // increment in y at each step 
-        //delay(100);          // for visualization of line- 
-                             // generation step by step 
+        ft_draw (data, X,Y,0xff1100);
+        X += Xinc;
+        Y += Yinc;
     } 
 } 
 void	fill_square(int square_x, int square_y, int tile_size, int tile_color, t_struct *data)
@@ -412,7 +440,7 @@ void            ft_draw(t_struct *data, int x, int y, int color)
 	char    *dst;
 
 	dst = data->img_data + (y * data->size_line + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(u_int32_t*)dst = color;
 }
 
 int initialize_window(t_struct *data)
@@ -439,5 +467,6 @@ int main()
 
 	data = malloc(sizeof(t_struct));
 	initialize_window(data);
+	free(data);
 	return 0;
 }
