@@ -30,6 +30,7 @@ typedef	struct 		s_ray
 	int		is_ray_facing_right;
 	int		is_ray_facing_left;
 	int		wall_h_content;
+    int		was_hit_vertical;
 }					t_ray[NUM_RAYS];
 t_ray	rays[NUM_RAYS];
 void	initialize_player(t_struct *data)
@@ -52,8 +53,8 @@ void	initialize_player(t_struct *data)
 	data->turn_direction = 0;
 	data->walk_direction = 0;
 	data->rotation_angle = PI / 2;
-	data->walk_speed = 5;
-	data->turn_speed = 3 * (PI / 180);
+	data->walk_speed = 2;
+	data->turn_speed = 2 * (PI / 180);
 	data->is_ray_facing_down = 0;
 	data->is_ray_facing_up = 0;
 	data->is_ray_facing_right = 0;
@@ -84,9 +85,8 @@ float distance_between_points(float x1, float y1, float x2, float y2)
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-void	horizontal_ray_intersection(float ray_angle, t_struct *data, int *found_horiz_wall_hit)
+void	horizontal_ray_intersection(float ray_angle, t_struct *data, int *found_horiz_wall_hit, int *horz_wall_content)
 {
-	int horzWallContent = 0;
 	float	horiz_touch_x;
 	float 	horiz_touch_y;
 
@@ -108,7 +108,7 @@ void	horizontal_ray_intersection(float ray_angle, t_struct *data, int *found_hor
         if (if_wall(xToCheck, yToCheck)) {
             data->save_horiz_wall_hit_x = horiz_touch_x;
             data->save_horiz_wall_hit_y = horiz_touch_y;
-            horzWallContent = map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)];
+            *horz_wall_content = map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)];
             *found_horiz_wall_hit = TRUE;
             break;
         } else {
@@ -117,9 +117,8 @@ void	horizontal_ray_intersection(float ray_angle, t_struct *data, int *found_hor
         }
     }
 }
-void	vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_wall_hit)
+void	vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_wall_hit, int *vert_wall_content)
 {
-	int vert_wall_content;
 	float vert_touch_x;
 	float vert_touch_y;
 	vert_wall_content = 0;
@@ -139,7 +138,7 @@ void	vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_
         if (if_wall(xToCheck, yToCheck)) {
             data->save_vert_wall_hit_x =  vert_touch_x;
             data->save_vert_wall_hit_y =  vert_touch_y;
-            vert_wall_content = map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)];
+           	vert_wall_content = &(map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)]);
             *found_vert_wall_hit = TRUE;
             break;
         } else {
@@ -158,23 +157,23 @@ void	get_smalest_distance(t_struct *data, int found_horiz_wall_hit, int found_ve
         : MAX_INT;
 }
 
-void	fill_out_ray(int ray_id, t_struct *data)
+void	fill_out_ray(int ray_id, t_struct *data, int vert_wall_content, int horz_wall_content)
 {
     if (data->vert_hit_distance < data->horz_hit_distance) 
 	{
         rays[ray_id]->distance = data->vert_hit_distance;
         rays[ray_id]->wall_h_x = data->save_vert_wall_hit_x;
         rays[ray_id]->wall_h_y = data->save_vert_wall_hit_y;
-        //rays[ray_id]->wallHitContent = vertWallContent;
-        //rays[ray_id]->wasHitVertical = TRUE;
+        rays[ray_id]->wall_h_content = vert_wall_content;
+        rays[ray_id]->was_hit_vertical = TRUE;
     }
 	else
 	{
         rays[ray_id]->distance = data->horz_hit_distance;
         rays[ray_id]->wall_h_x = data->save_horiz_wall_hit_x;
         rays[ray_id]->wall_h_y = data->save_horiz_wall_hit_y;
-        //rays[ray_id]->wallHitContent = horzWallContent;
-        //rays[ray_id]->wasHitVertical = FALSE;
+        rays[ray_id]->wall_h_content = horz_wall_content;
+        rays[ray_id]->was_hit_vertical = FALSE;
     }
     rays[ray_id]->ray_angle = data->ray_angle;
     rays[ray_id]->is_ray_facing_down = data->is_ray_facing_down;
@@ -187,21 +186,25 @@ void cast_single_ray(int ray_id, float ray_angle,t_struct *data)
 {
 	int found_horiz_wall_hit = FALSE;
 	int found_vert_wall_hit = FALSE;
+	int vert_wall_content = 0;
+	int horz_wall_content = 0;
+
     ray_angle = limit_angle(ray_angle);
 	data->ray_angle = ray_angle;
     data->is_ray_facing_down = ray_angle > 0 && ray_angle < PI;
     data->is_ray_facing_up = !(data->is_ray_facing_down);
     data->is_ray_facing_right = ray_angle < 0.5 * PI || ray_angle > 1.5 * PI;
    	data->is_ray_facing_left = !(data->is_ray_facing_right);
-	horizontal_ray_intersection(ray_angle, data, &found_horiz_wall_hit);
-	vertical_ray_intersection(ray_angle, data, &found_vert_wall_hit);
+	horizontal_ray_intersection(ray_angle, data, &found_horiz_wall_hit, &horz_wall_content);
+	vertical_ray_intersection(ray_angle, data, &found_vert_wall_hit, &vert_wall_content);
 	get_smalest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
-	fill_out_ray(ray_id, data);
+	fill_out_ray(ray_id, data, vert_wall_content, horz_wall_content);
 }
 void	render_walls(t_struct *data)
 {
 	int i;
 	float y = 0;
+	float corrected_dsitance;
 	float top_pixel;
 	float bottom_pixel;
 	float distance_to_projection_plane;
@@ -215,18 +218,22 @@ void	render_walls(t_struct *data)
 	
 	while (i < NUM_RAYS)
 	{
+		corrected_dsitance = rays[i]->distance * cos(rays[i]->ray_angle - data->rotation_angle);
 		distance_to_projection_plane = (WINDOW_WIDTH * 0.5) / tan(FOV_ANGLE / 2);
-		wall_height = (SQUARE_SIZE / rays[i]->distance) * distance_to_projection_plane;
+		wall_height = (SQUARE_SIZE / corrected_dsitance) * distance_to_projection_plane;
 		top_pixel = (WINDOW_HEIGHT / 2) - (wall_height / 2);
 		top_pixel = top_pixel < 0 ? 0 : top_pixel;
 		bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_height / 2);
 		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
 		y = top_pixel;
-		while (y < bottom_pixel)
-		{
-			ft_draw(data, i, y, 0xfcba03);
-			y++;
-		}
+		int cielling = 0;
+		while (cielling++ < top_pixel)
+			ft_draw(data, i, cielling, 0x4b7bec);
+		while (y++ < bottom_pixel)
+			ft_draw(data, i, y, rays[i]->was_hit_vertical ? 0x2c3e50 : 0x34495e);
+		cielling = bottom_pixel;
+		while(cielling++ < WINDOW_HEIGHT)
+			ft_draw(data, cielling, i, 0x4b7bec);
 		i++;
 	}
 }
