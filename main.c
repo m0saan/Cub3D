@@ -1,4 +1,5 @@
 #include "cube3d.h"
+#define MINI 0.3
 void	line(t_struct *data,  int X0, int Y0, int X1, int Y1);
 int	map[NUM_ROWS][NUM_COLS] =
 {
@@ -99,14 +100,12 @@ void	horizontal_ray_intersection(float ray_angle, t_struct *data, int *found_hor
     data->dx *= (data->is_ray_facing_right && data->dx < 0) ? -1 : 1;
     horiz_touch_x = data->x_intercept;
     horiz_touch_y = data->y_intercept;
-
     while (horiz_touch_x >= 0 && horiz_touch_x <= WINDOW_WIDTH && horiz_touch_y >= 0 && horiz_touch_y <= WINDOW_HEIGHT) 
 	{
         float xToCheck = horiz_touch_x;
         float yToCheck = horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
         
         if (if_wall(xToCheck, yToCheck)) {
-            // found a wall hit
             data->save_horiz_wall_hit_x = horiz_touch_x;
             data->save_horiz_wall_hit_y = horiz_touch_y;
             horzWallContent = map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)];
@@ -238,7 +237,7 @@ void	render_all_rays(t_struct *data)
 	i = 0;
 	while (i < NUM_RAYS)
 	{
-		line(data, data->x, data->y, rays[i]->wall_h_x, rays[i]->wall_h_y);
+		line(data, data->x * MINI , data->y * MINI, rays[i]->wall_h_x * MINI , rays[i]->wall_h_y * MINI);
 		i++;
 	}
 }
@@ -258,7 +257,7 @@ void	cast_rays(t_struct *data)
 		ray_angle += FOV_ANGLE / NUM_RAYS;
 		ray_id++;
 	}
-	//render_all_rays(data);
+	render_all_rays(data);
 }
 void	draw_line(t_struct *data)
 {
@@ -273,21 +272,38 @@ void	draw_line(t_struct *data)
 	{
 		j = data->y;
 		while (j++ < data->y + 1)
-			ft_draw(data, i + cos(data->rotation_angle) * radius , j + sin(data->rotation_angle) * radius , 0x4287f5);
+			ft_draw(data, i + cos(data->rotation_angle) * radius * MINI , j + sin(data->rotation_angle) * radius * MINI , 0x4287f5);
 	radius -= 1;
 	}
+}
+void	render_firt_time(t_struct *data)
+{
+	cast_rays(data);
+	move_player(data);
+	render_walls(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+}
+void	mini_map(t_struct *data)
+{
+	render_map(data);
+	circle(data);
+	cast_rays(data);
+	move_player(data);
 }
 int		update(t_struct *data)
 {
 	// render_map(data);
 	// circle(data);
 	// draw_line(data);
-	cast_rays(data);
-	render_walls(data);
-	move_player(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	mlx_de
+	data->img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data->img_data =  mlx_get_data_addr(data->img_ptr, &data->bpp, &data->size_line, &data->endian);
+	cast_rays(data);
+	move_player(data);
+	render_walls(data);
+	mini_map(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (TRUE);
 }
 
@@ -360,7 +376,7 @@ void	fill_square(int square_x, int square_y, int tile_size, int tile_color, t_st
 	{
 		j = square_y;
 		while (j++ < tile_size + square_y)
-			ft_draw(data ,i, j , tile_color);
+			ft_draw(data ,i * MINI, j * MINI, tile_color);
 	}
 }
 
@@ -427,7 +443,7 @@ void	circle(t_struct *data)
 		i = 0;
 		while (i <= two_pi)
 		{
-			ft_draw(data, (cos(i) * get_radius) + data->x, (sin(i) * get_radius) + data->y, 0xfcba03);
+			ft_draw(data, MINI * ((cos(i) * get_radius) + data->x),  MINI * ((sin(i) * get_radius) + data->y), 0xfcba03);
 			i += 0.1;
 		}
 		get_radius-= 0.1;
@@ -454,6 +470,7 @@ int initialize_window(t_struct *data)
 		return (FALSE);
 	if ((data->img_data =  mlx_get_data_addr(data->img_ptr, &data->bpp, &data->size_line, &data->endian)) == NULL)
 		return (FALSE);
+	render_firt_time(data);
 	mlx_hook(data->win_ptr,3,1L<<1,key_released, data);
 	mlx_hook(data->win_ptr,2,1L<<0,key_pressed, data);
 	mlx_loop_hook(data->mlx_ptr, update, data);

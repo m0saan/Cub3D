@@ -4,6 +4,7 @@
         "string_view": "c",
         "iterator": "c",
         "string": "c",
-        "vector": "c"
+        "vector": "c",
+        "cube3d.h": "c"
     }
 }
