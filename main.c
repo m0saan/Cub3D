@@ -72,7 +72,8 @@ void	initialize_player(t_struct *data)
 	data->vert_hit_distance = 0;
 }
 
-float limit_angle(float angle) {
+float limit_angle(float angle) 
+{
     angle = remainderf(angle, TWO_PI);
     if (angle < 0) {
         angle = TWO_PI + angle;
@@ -228,21 +229,29 @@ void	render_walls(t_struct *data)
 		y = top_pixel;
 		int cielling = 0;
 		while (cielling++ < top_pixel)
-			ft_draw(data, i, cielling, 0x4b7bec);
-		while (y++ < bottom_pixel)
+			ft_draw(data, i, cielling, 0X3498db);
+		while (y < bottom_pixel)
+		{
 			ft_draw(data, i, y, rays[i]->was_hit_vertical ? 0x2c3e50 : 0x34495e);
+			y++;
+		}
 		cielling = bottom_pixel;
-		while(cielling++ < WINDOW_HEIGHT)
-			ft_draw(data, cielling, i, 0x4b7bec);
+		while (cielling < WINDOW_HEIGHT)
+		{
+			ft_draw(data,i, cielling, 0x7f8c8d);
+			cielling++;
+		}
+		
 		i++;
 	}
 }
+
 void	render_all_rays(t_struct *data)
 {
 	int i;
 
 	i = 0;
-	while (i < NUM_RAYS)
+	while (i < NUM_RAYS)\
 	{
 		line(data, data->x * MINI , data->y * MINI, rays[i]->wall_h_x * MINI , rays[i]->wall_h_y * MINI);
 		i++;
@@ -286,8 +295,8 @@ void	draw_line(t_struct *data)
 void	render_firt_time(t_struct *data)
 {
 	cast_rays(data);
-	move_player(data);
 	render_walls(data);
+	move_player(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
 void	mini_map(t_struct *data)
