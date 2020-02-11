@@ -231,6 +231,8 @@ void texture(t_struct *data)
 void render_walls(t_struct *data)
 {
 	int i;
+	int txt_offset_x;
+	int txt_offset_y;
 	float y = 0;
 	float corrected_dsitance;
 	float top_pixel;
@@ -255,11 +257,14 @@ void render_walls(t_struct *data)
 		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
 		y = top_pixel;
 		int cielling = 0;
+		txt_offset_x = rays[i]->was_hit_vertical ? (remainderf(rays[i]->wall_h_y, SQUARE_SIZE)) : remainderf(rays[i]->wall_h_x, SQUARE_SIZE);
 		while (cielling++ < top_pixel)
 			ft_draw(data, i, cielling, 0x575fcf);
 		while (y < bottom_pixel)
 		{
-			ft_draw(data, i, y, rays[i]->was_hit_vertical ? 0x2c3e50 : 0x34495e);
+			txt_offset_y = (y - top_pixel) * ((float)TEX_HEIGHT / (int)distance_to_projection_plane);
+			//ft_draw(data, i, y, rays[i]->was_hit_vertical ? 0x2c3e50 : 0x34495e);
+			texture(data);
 			y++;
 		}
 		cielling = bottom_pixel;
@@ -500,7 +505,7 @@ void ft_draw(t_struct *data, int x, int y, int color)
 	char *dst;
 
 	dst = data->img_data + (y * data->size_line + x * (data->bpp / 8));
-	*(u_int16_t *)dst = color;
+	*(u_int32_t *)dst = color;
 }
 
 int initialize_window(t_struct *data)
