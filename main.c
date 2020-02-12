@@ -1,6 +1,7 @@
 #include "cube3d.h"
 #define MINI 0.3
 void line(t_struct *data, int X0, int Y0, int X1, int Y1);
+
 int map[NUM_ROWS][NUM_COLS] =
 	{
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -32,6 +33,7 @@ typedef struct s_ray
 	int was_hit_vertical;
 } t_ray[NUM_RAYS];
 t_ray rays[NUM_RAYS];
+uint32_t buff[TEX_WIDTH * TEX_HEIGHT] = {};
 void initialize_player(t_struct *data)
 {
 	data->bpp = 0;
@@ -210,29 +212,32 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 }
 void texture(t_struct *data)
 {
-	int i;
-	int j;
+	int x;
+	int y;
+	int pos = 0;
 
-	i = 0;
-	j = 0;
-	while (i < TEX_WIDTH)
+	x = 0;
+	y = 0;
+	while (x < TEX_WIDTH)
 	{
-		while (j < TEX_HEIGHT)
+		y = 0;
+		while (y < TEX_HEIGHT)
 		{
-			if (i % 8 && j % 8)
-				ft_draw(data, i, j, 0x1e272e);
-			else
-				ft_draw(data, i, j, 0x3c40c6);
-			j++;
+			pos = (TEX_WIDTH * y) + x;
+			buff[pos] = (x % 8 && y % 8) ? 0x1e272e : 0x3c40c6;
+			printf("texture : %u\n", buff[pos]);
+			y++;
 		}
-		i++;
+		x++;
 	}
 }
 void render_walls(t_struct *data)
 {
 	int i;
-	int txt_offset_x;
-	int txt_offset_y;
+	int pos = 0;
+	int txt_offset_x = 0;
+	int txt_offset_y = 0;
+	int cielling = 0;
 	float y = 0;
 	float corrected_dsitance;
 	float top_pixel;
@@ -256,24 +261,23 @@ void render_walls(t_struct *data)
 		bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_height / 2);
 		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
 		y = top_pixel;
-		int cielling = 0;
-		txt_offset_x = rays[i]->was_hit_vertical ? (remainderf(rays[i]->wall_h_y, SQUARE_SIZE)) : remainderf(rays[i]->wall_h_x, SQUARE_SIZE);
-		while (cielling++ < top_pixel)
-			ft_draw(data, i, cielling, 0x575fcf);
+		txt_offset_x = rays[i]->was_hit_vertical ? ((int)rays[i]->wall_h_y % SQUARE_SIZE) : ((int)rays[i]->wall_h_x % SQUARE_SIZE);
+		// while (cielling++ < top_pixel)
+		// 	ft_draw(data, i, cielling, 0xffa801);
 		while (y < bottom_pixel)
 		{
-			txt_offset_y = (y - top_pixel) * ((float)TEX_HEIGHT / (int)distance_to_projection_plane);
-			//ft_draw(data, i, y, rays[i]->was_hit_vertical ? 0x2c3e50 : 0x34495e);
-			texture(data);
+			txt_offset_y = (y - top_pixel) / (int)distance_to_projection_plane;
+			pos = (int)((TEX_WIDTH * txt_offset_y) + txt_offset_x) < (TEX_HEIGHT * TEX_WIDTH);
+			ft_draw(data, i, y, buff[pos]);
+		//	printf("buff[pos] == %u\npos == %d\n", buff[pos], pos);
 			y++;
 		}
-		cielling = bottom_pixel;
-		while (cielling < WINDOW_HEIGHT)
-		{
-			ft_draw(data, i, cielling, 0x7f8c8d);
-			cielling++;
-		}
-
+		// cielling = bottom_pixel;
+		// while (cielling < WINDOW_HEIGHT)
+		// {
+		// 	ft_draw(data, i, cielling, 0x0fbcf9);
+		// 	cielling++;
+		// }
 		i++;
 	}
 }
@@ -327,8 +331,8 @@ void draw_line(t_struct *data)
 void render_firt_time(t_struct *data)
 {
 	cast_rays(data);
-	render_walls(data);
 	texture(data);
+	render_walls(data);
 	move_player(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
@@ -339,7 +343,7 @@ void mini_map(t_struct *data)
 	cast_rays(data);
 	move_player(data);
 }
-int update(t_struct *data)
+int update(t_struct *data, uint32_t *buff)
 {
 	// render_map(data);
 	// circle(data);
@@ -349,9 +353,9 @@ int update(t_struct *data)
 	data->img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp, &data->size_line, &data->endian);
 	cast_rays(data);
+	texture(data);
 	move_player(data);
 	render_walls(data);
-	texture(data);
 	mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (TRUE);

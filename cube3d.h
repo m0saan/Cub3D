@@ -83,6 +83,7 @@ typedef struct		s_struct
 	int is_ray_facing_up;
 	int is_ray_facing_right;
 	int is_ray_facing_left;
+	uint32_t* buff;
 }					t_struct;
 typedef struct		s_struc
 {
@@ -120,7 +121,7 @@ void	circle(t_struct *data);
 void	draw_line(t_struct *data);
 void	ft_draw(t_struct *data, int x, int y, int color);
 int		if_wall(float x, float y);
-int		update(t_struct *data);
+int		update(t_struct *data, uint32_t *buff);
 void	line(t_struct *data,int x0, int y0, int x1, int y1);
 
 #endif
