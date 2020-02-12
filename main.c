@@ -33,7 +33,7 @@ typedef struct s_ray
 	int was_hit_vertical;
 } t_ray[NUM_RAYS];
 t_ray rays[NUM_RAYS];
-uint32_t buff[TEX_WIDTH * TEX_HEIGHT] = {};
+uint32_t buff[TEX_WIDTH * TEX_HEIGHT + 1] = {};
 void initialize_player(t_struct *data)
 {
 	data->bpp = 0;
@@ -224,8 +224,7 @@ void texture(t_struct *data)
 		while (y < TEX_HEIGHT)
 		{
 			pos = (TEX_WIDTH * y) + x;
-			buff[pos] = (x % 8 && y % 8) ? 0x1e272e : 0x3c40c6;
-			printf("texture : %u\n", buff[pos]);
+			buff[pos] = (x % 8 && y % 8) ? 0x3c40c6 : 0x1e272e;
 			y++;
 		}
 		x++;
@@ -261,23 +260,23 @@ void render_walls(t_struct *data)
 		bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_height / 2);
 		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
 		y = top_pixel;
-		txt_offset_x = rays[i]->was_hit_vertical ? ((int)rays[i]->wall_h_y % SQUARE_SIZE) : ((int)rays[i]->wall_h_x % SQUARE_SIZE);
-		// while (cielling++ < top_pixel)
-		// 	ft_draw(data, i, cielling, 0xffa801);
+		txt_offset_x = (rays[i]->was_hit_vertical) ? ((int)rays[i]->wall_h_y % SQUARE_SIZE) : ((int)rays[i]->wall_h_x % SQUARE_SIZE);
+		while (cielling++ < top_pixel)
+			ft_draw(data, i, cielling, 0x87ceeb);
 		while (y < bottom_pixel)
 		{
-			txt_offset_y = (y - top_pixel) / (int)distance_to_projection_plane;
-			pos = (int)((TEX_WIDTH * txt_offset_y) + txt_offset_x) < (TEX_HEIGHT * TEX_WIDTH);
+			txt_offset_y = (y + (int)(wall_height / 2) - (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH / (int)wall_height);
+			pos = (TEX_WIDTH * txt_offset_y) + txt_offset_x;
+			pos = (pos > TEX_HEIGHT * TEX_WIDTH) ? (TEX_WIDTH * TEX_HEIGHT) : pos;
 			ft_draw(data, i, y, buff[pos]);
-		//	printf("buff[pos] == %u\npos == %d\n", buff[pos], pos);
 			y++;
 		}
-		// cielling = bottom_pixel;
-		// while (cielling < WINDOW_HEIGHT)
-		// {
-		// 	ft_draw(data, i, cielling, 0x0fbcf9);
-		// 	cielling++;
-		// }
+		cielling = bottom_pixel;
+		while (cielling < WINDOW_HEIGHT)
+		{
+			ft_draw(data, i, cielling, 0xCDB99C);
+			cielling++;
+		}
 		i++;
 	}
 }
