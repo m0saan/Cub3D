@@ -33,7 +33,7 @@ typedef struct s_ray
 	int was_hit_vertical;
 } t_ray[NUM_RAYS];
 t_ray rays[NUM_RAYS];
-uint32_t buff[TEX_WIDTH * TEX_HEIGHT + 1] = {};
+uint32_t buff[TEX_WIDTH * TEX_HEIGHT + 1];
 void initialize_player(t_struct *data)
 {
 	data->bpp = 0;
@@ -210,7 +210,26 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 	get_smalest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
 	fill_out_ray(ray_id, data, vert_wall_content, horz_wall_content);
 }
-void texture(t_struct *data)
+uint32_t 	*texture_from_file(t_struct *data)
+{
+	int x;
+	int y;
+	int pos = 0;
+	int width;
+	int height;
+	int bpp, size_line, endian;
+	char *txt_path;
+
+	width = 64;
+	height = 64;
+	x = 0;
+	y = 0;
+	txt_path = "./textures/redbrick.xpm";
+	data->xpm_ptr = mlx_xpm_file_to_image(data->mlx_ptr, txt_path, &width, &height);
+	data->img_data = mlx_get_data_addr(data->xpm_ptr, &data->bpp, &data->size_line, &data->endian);
+	return *(uint32_t*)data->img_ptr;
+}
+void 	texture(t_struct *data)
 {
 	int x;
 	int y;
@@ -268,7 +287,8 @@ void render_walls(t_struct *data)
 			txt_offset_y = (y + (int)(wall_height / 2) - (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH / (int)wall_height);
 			pos = (TEX_WIDTH * txt_offset_y) + txt_offset_x;
 			pos = (pos > TEX_HEIGHT * TEX_WIDTH) ? (TEX_WIDTH * TEX_HEIGHT) : pos;
-			ft_draw(data, i, y, buff[pos]);
+			uint32_t *bb = texture_from_file(data);
+			ft_draw(data, i, y, bb[pos]);
 			y++;
 		}
 		cielling = bottom_pixel;
