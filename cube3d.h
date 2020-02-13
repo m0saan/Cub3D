@@ -73,7 +73,7 @@ typedef struct s_ray
 	int was_hit_vertical;
 } t_ray[NUM_RAYS];
 t_ray rays[NUM_RAYS];
-uint32_t buff[TEX_WIDTH * TEX_HEIGHT + 1];
+uint32_t buff[TEX_WIDTH * TEX_HEIGHT + 2];
 
 typedef struct s_struct
 {

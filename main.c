@@ -1,25 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 15:34:48 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/13 15:35:20 by moboustt         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+  
+#include "cube3d.h"
+#define MINI 0.3
 
-# include "cube3d.h"
-# define MINI 0.3
-void line(t_struct *data, int X0, int Y0, int X1, int Y1);
-void ft_draw_texture(t_struct *data, int x, int y, int color)
-{
-	char *dst;
-
-	dst = (char *)(data->img_data_texture) + (y * data->size_line_text + x * (data->bpp_text / 8));
-	*(u_int32_t *)dst = color;
-}
 void initialize_player(t_struct *data)
 {
 	data->bpp = 0;
@@ -58,6 +40,101 @@ void initialize_player(t_struct *data)
 	data->horz_hit_distance = 0;
 	data->vert_hit_distance = 0;
 }
+
+float limit_angle(float angle)
+{
+	angle = remainderf(angle, TWO_PI);
+	if (angle < 0)
+	{
+		angle = TWO_PI + angle;
+	}
+	return angle;
+}
+
+float distance_between_points(float x1, float y1, float x2, float y2)
+{
+	return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
+void horizontal_ray_intersection(float ray_angle, t_struct *data, int *found_horiz_wall_hit, int *horz_wall_content)
+{
+	float horiz_touch_x;
+	float horiz_touch_y;
+
+	data->y_intercept = floor(data->y / SQUARE_SIZE) * SQUARE_SIZE;
+	data->y_intercept += data->is_ray_facing_down ? SQUARE_SIZE : 0;
+	data->x_intercept = data->x + (data->y_intercept - data->y) / tan(ray_angle);
+	data->dy = SQUARE_SIZE;
+	data->dy *= data->is_ray_facing_up ? -1 : 1;
+	data->dx = SQUARE_SIZE / tan(ray_angle);
+	data->dx *= (data->is_ray_facing_left && data->dx > 0) ? -1 : 1;
+	data->dx *= (data->is_ray_facing_right && data->dx < 0) ? -1 : 1;
+	horiz_touch_x = data->x_intercept;
+	horiz_touch_y = data->y_intercept;
+	while (horiz_touch_x >= 0 && horiz_touch_x <= WINDOW_WIDTH && horiz_touch_y >= 0 && horiz_touch_y <= WINDOW_HEIGHT)
+	{
+		float xToCheck = horiz_touch_x;
+		float yToCheck = horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
+
+		if (if_wall(xToCheck, yToCheck))
+		{
+			data->save_horiz_wall_hit_x = horiz_touch_x;
+			data->save_horiz_wall_hit_y = horiz_touch_y;
+			*horz_wall_content = map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)];
+			*found_horiz_wall_hit = TRUE;
+			break;
+		}
+		else
+		{
+			horiz_touch_x += data->dx;
+			horiz_touch_y += data->dy;
+		}
+	}
+}
+void vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_wall_hit, int *vert_wall_content)
+{
+	float vert_touch_x;
+	float vert_touch_y;
+	vert_wall_content = 0;
+	data->x_intercept = floor(data->x / SQUARE_SIZE) * SQUARE_SIZE;
+	data->x_intercept += data->is_ray_facing_right ? SQUARE_SIZE : 0;
+	data->y_intercept = data->y + (data->x_intercept - data->x) * tan(ray_angle);
+	data->dx = SQUARE_SIZE;
+	data->dx *= data->is_ray_facing_left ? -1 : 1;
+	data->dy = SQUARE_SIZE * tan(ray_angle);
+	data->dy *= (data->is_ray_facing_up && data->dy > 0) ? -1 : 1;
+	data->dy *= (data->is_ray_facing_down && data->dy < 0) ? -1 : 1;
+	vert_touch_x = data->x_intercept;
+	vert_touch_y = data->y_intercept;
+	while (vert_touch_x >= 0 && vert_touch_x <= WINDOW_WIDTH && vert_touch_y >= 0 && vert_touch_y <= WINDOW_HEIGHT)
+	{
+		float xToCheck = vert_touch_x + (data->is_ray_facing_left ? -1 : 0);
+		float yToCheck = vert_touch_y;
+		if (if_wall(xToCheck, yToCheck))
+		{
+			data->save_vert_wall_hit_x = vert_touch_x;
+			data->save_vert_wall_hit_y = vert_touch_y;
+			vert_wall_content = &(map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)]);
+			*found_vert_wall_hit = TRUE;
+			break;
+		}
+		else
+		{
+			vert_touch_x += data->dx;
+			vert_touch_y += data->dy;
+		}
+	}
+}
+void get_smalest_distance(t_struct *data, int found_horiz_wall_hit, int found_vert_wall_hit)
+{
+	data->horz_hit_distance = found_horiz_wall_hit
+								  ? distance_between_points(data->x, data->y, data->save_horiz_wall_hit_x, data->save_horiz_wall_hit_y)
+								  : MAX_INT;
+	data->vert_hit_distance = found_vert_wall_hit
+								  ? distance_between_points(data->x, data->y, data->save_vert_wall_hit_x, data->save_vert_wall_hit_y)
+								  : MAX_INT;
+}
+
 void fill_out_ray(int ray_id, t_struct *data, int vert_wall_content, int horz_wall_content)
 {
 	if (data->vert_hit_distance < data->horz_hit_distance)
@@ -101,7 +178,94 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 	get_smalest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
 	fill_out_ray(ray_id, data, vert_wall_content, horz_wall_content);
 }
+void	texture_from_file(t_struct *data)
+{
+	int width;
+	int height;
+	char *txt_path;
 
+	width = 0;
+	height = 0;
+	txt_path = "./textures/redbrick.xpm";
+	data->xpm_ptr = mlx_xpm_file_to_image(data->mlx_ptr, txt_path, &width, &height);
+	data->img_data_texture = (int*)mlx_get_data_addr(data->xpm_ptr, &data->bpp_text, &data->size_line_text, &data->endian_text);
+}
+void 	texture(t_struct *data)
+{
+	int x;
+	int y;
+	int pos = 0;
+
+	x = 0;
+	y = 0;
+	while (x < TEX_WIDTH)
+	{
+		y = 0;
+		while (y < TEX_HEIGHT)
+		{
+			pos = (TEX_WIDTH * y) + x;
+			buff[pos] = (x % 8 && y % 8) ? 0x3c40c6 : 0x1e272e;
+			y++;
+		}
+		x++;
+	}
+}
+void render_walls(t_struct *data)
+{
+	int i;
+	int pos = 0;
+	int txt_offset_x = 0;
+	int txt_offset_y = 0;
+	int cielling = 0;
+	float y = 0;
+	float corrected_dsitance;
+	float top_pixel;
+	float bottom_pixel;
+	float distance_to_projection_plane;
+	float wall_height;
+
+	i = 0;
+	top_pixel = 0;
+	bottom_pixel = 0;
+	distance_to_projection_plane = 0;
+	wall_height = 0;
+	texture_from_file(data);
+	while (i < NUM_RAYS)
+	{
+		corrected_dsitance = rays[i]->distance * cos(rays[i]->ray_angle - data->rotation_angle);
+		distance_to_projection_plane = (WINDOW_WIDTH * 0.5) / tan(FOV_ANGLE / 2);
+		wall_height = (SQUARE_SIZE / corrected_dsitance) * distance_to_projection_plane;
+		top_pixel = (WINDOW_HEIGHT / 2) - (wall_height / 2);
+		top_pixel = top_pixel < 0 ? 0 : top_pixel;
+		bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_height / 2);
+		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
+		y = top_pixel;
+		txt_offset_x = (rays[i]->was_hit_vertical) ? ((int)rays[i]->wall_h_y % SQUARE_SIZE) : ((int)rays[i]->wall_h_x % SQUARE_SIZE);
+		while (cielling++ < top_pixel)
+			ft_draw(data, i, cielling, 0x87ceeb);
+		while (y < bottom_pixel)
+		{
+			txt_offset_y = (y + (int)(wall_height / 2) - (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH / (int)wall_height);
+			pos = (TEX_WIDTH * txt_offset_y) + txt_offset_x;
+			pos = (pos >= TEX_HEIGHT * TEX_WIDTH) ? (TEX_WIDTH * TEX_HEIGHT - 1) : pos;
+			if (pos >= TEX_HEIGHT * TEX_HEIGHT || pos < 0)
+			{
+				printf("Yessssss!!\n");
+				printf("%d\n", pos);
+			}
+				
+			ft_draw(data, i, y, (int)data->img_data_texture[pos]);
+			y++;
+		}
+		cielling = bottom_pixel;
+		while (cielling < WINDOW_HEIGHT)
+		{
+			ft_draw(data, i, cielling, 0xCDB99C);
+			cielling++;
+		}
+		i++;
+	}
+}
 
 void render_all_rays(t_struct *data)
 {
