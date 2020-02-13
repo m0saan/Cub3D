@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/13 15:47:43 by moboustt          #+#    #+#             */
+/*   Updated: 2020/02/13 15:47:56 by moboustt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 void texture_from_file(t_struct *data)
@@ -33,53 +45,44 @@ void texture(t_struct *data)
 		x++;
 	}
 }
+void	calculate_wall_projection(t_struct *data)
+{
+		data->corrected_dsitance = rays[data->i_wall_index]->distance * cos(rays[data->i_wall_index]->ray_angle - data->rotation_angle);
+		data->distance_to_projection_plane = (WINDOW_WIDTH * 0.5) / tan(FOV_ANGLE / 2);
+		data->wall_height = (SQUARE_SIZE / data->corrected_dsitance) * data->distance_to_projection_plane;
+		data->top_pixel = (WINDOW_HEIGHT / 2) - (data->wall_height / 2);
+		data->top_pixel = data->top_pixel < 0 ? 0 : data->top_pixel;
+		data->bottom_pixel = (WINDOW_HEIGHT / 2) + (data->wall_height / 2);
+		data->bottom_pixel = data->bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : data->bottom_pixel;
+}
 void render_walls(t_struct *data)
 {
-	int i;
 	int pos = 0;
 	int txt_offset_x = 0;
 	int txt_offset_y = 0;
 	int cielling = 0;
 	float y = 0;
-	float corrected_dsitance;
-	float top_pixel;
-	float bottom_pixel;
-	float distance_to_projection_plane;
-	float wall_height;
-
-	i = 0;
-	top_pixel = 0;
-	bottom_pixel = 0;
-	distance_to_projection_plane = 0;
-	wall_height = 0;
 	texture_from_file(data);
-	while (i < NUM_RAYS)
+	while (data->i_wall_index < NUM_RAYS)
 	{
-		corrected_dsitance = rays[i]->distance * cos(rays[i]->ray_angle - data->rotation_angle);
-		distance_to_projection_plane = (WINDOW_WIDTH * 0.5) / tan(FOV_ANGLE / 2);
-		wall_height = (SQUARE_SIZE / corrected_dsitance) * distance_to_projection_plane;
-		top_pixel = (WINDOW_HEIGHT / 2) - (wall_height / 2);
-		top_pixel = top_pixel < 0 ? 0 : top_pixel;
-		bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_height / 2);
-		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
-		y = top_pixel;
-		txt_offset_x = (rays[i]->was_hit_vertical) ? ((int)rays[i]->wall_h_y % SQUARE_SIZE) : ((int)rays[i]->wall_h_x % SQUARE_SIZE);
-		while (cielling++ < top_pixel)
-			ft_draw(data, i, cielling, 0x87ceeb);
-		while (y < bottom_pixel)
+		y = data->top_pixel;
+		txt_offset_x = (rays[data->i_wall_index]->was_hit_vertical) ? ((int)rays[data->i_wall_index]->wall_h_y % SQUARE_SIZE) : ((int)rays[data->i_wall_index]->wall_h_x % SQUARE_SIZE);
+		while (cielling++ < data->top_pixel)
+			ft_draw(data, data->i_wall_index, cielling, 0x87ceeb);
+		while (y < data->bottom_pixel)
 		{
-			txt_offset_y = (y + (int)(wall_height / 2) - (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH / (int)wall_height);
+			txt_offset_y = (y + (int)(data->wall_height / 2) - (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH / (int)data->wall_height);
 			pos = (TEX_WIDTH * txt_offset_y) + txt_offset_x;
 			pos = (pos > TEX_HEIGHT * TEX_WIDTH) ? (TEX_WIDTH * TEX_HEIGHT) : pos;
-			ft_draw(data, i, y, data->img_data_texture[pos]);
+			ft_draw(data, data->i_wall_index, y, data->img_data_texture[pos]);
 			y++;
 		}
-		cielling = bottom_pixel;
+		cielling = data->bottom_pixel;
 		while (cielling < WINDOW_HEIGHT)
 		{
-			ft_draw(data, i, cielling, 0xCDB99C);
+			ft_draw(data, data->i_wall_index, cielling, 0xCDB99C);
 			cielling++;
 		}
-		i++;
+		data->i_wall_index++;
 	}
 }

@@ -38,8 +38,6 @@ int			ft_atoi(const char *s)
 		return (0);
 	while ((str[i] >= 0 && str[i] <= 26) || (str[i] >= 28 && str[i] <= 32))
 		i++;
-	if (str[i] == '\e')
-		return (0);
 	if (str[i] == '-')
 		rc = 1;
 	if (str[i] == '+' || str[i] == '-')
