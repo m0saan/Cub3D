@@ -42,11 +42,32 @@
 #define MAX_INT 2147483647
 #define BUFFER_SIZE 90
 
+typedef struct s_ray
+{
+	float ray_angle;
+	float wall_h_x;
+	float wall_h_y;
+	float distance;
+	int wall_h_vert;
+	int is_ray_facing_up;
+	int is_ray_facing_down;
+	int is_ray_facing_right;
+	int is_ray_facing_left;
+	int wall_h_content;
+	int was_hit_vertical;
+} t_ray[NUM_RAYS];
+t_ray rays[NUM_RAYS];
+uint32_t buff[TEX_WIDTH * TEX_HEIGHT + 1];
+
 typedef struct s_struct
 {
 	int bpp;
 	int size_line;
 	int endian;
+	int bpp_text;
+	int size_line_text;
+	int endian_text;
+	int *img_data_texture;
 	void *xpm_ptr;
 	void *mlx_ptr;
 	void *img_ptr;
@@ -124,5 +145,27 @@ void ft_draw(t_struct *data, int x, int y, int color);
 int if_wall(float x, float y);
 int update(t_struct *data, uint32_t *buff);
 void line(t_struct *data, int x0, int y0, int x1, int y1);
+void ft_draw_texture(t_struct *data, int x, int y, int color);
+float limit_angle(float angle);
+float distance_between_points(float x1, float y1, float x2, float y2);
+void horizontal_ray_intersection(float ray_angle, t_struct *data, int *found_horiz_wall_hit, int *horz_wall_content);
+void vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_wall_hit, int *vert_wall_content);
+void get_smalest_distance(t_struct *data, int found_horiz_wall_hit, int found_vert_wall_hit);
+void cast_single_ray(int ray_id, float ray_angle, t_struct *data);
+void fill_out_ray(int ray_id, t_struct *data, int vert_wall_content, int horz_wall_content);
+void render_all_rays(t_struct *data);
+void cast_rays(t_struct *data);
+void draw_line(t_struct *data);
+void render_firt_time(t_struct *data);
+void mini_map(t_struct *data);
+int update(t_struct *data, uint32_t *buff);
+int if_wall(float x, float y);
+int ft_close(void *param);
+int key_pressed(int keycode, t_struct *data);
+int key_released(int keycode, t_struct *data);
+void circle(t_struct *data);
+void texture_from_file(t_struct *data);
+void texture(t_struct *data);
+void render_walls(t_struct *data);
 
 #endif

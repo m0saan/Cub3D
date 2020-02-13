@@ -1,7 +1,25 @@
-#include "cube3d.h"
-#define MINI 0.3
-void line(t_struct *data, int X0, int Y0, int X1, int Y1);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/13 15:34:48 by moboustt          #+#    #+#             */
+/*   Updated: 2020/02/13 15:35:20 by moboustt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+# include "cube3d.h"
+# define MINI 0.3
+void line(t_struct *data, int X0, int Y0, int X1, int Y1);
+void ft_draw_texture(t_struct *data, int x, int y, int color)
+{
+	char *dst;
+
+	dst = (char *)(data->img_data_texture) + (y * data->size_line_text + x * (data->bpp_text / 8));
+	*(u_int32_t *)dst = color;
+}
 int map[NUM_ROWS][NUM_COLS] =
 	{
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -18,22 +36,7 @@ int map[NUM_ROWS][NUM_COLS] =
 		{1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 'N', 0, 1},
 		{1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
-typedef struct s_ray
-{
-	float ray_angle;
-	float wall_h_x;
-	float wall_h_y;
-	float distance;
-	int wall_h_vert;
-	int is_ray_facing_up;
-	int is_ray_facing_down;
-	int is_ray_facing_right;
-	int is_ray_facing_left;
-	int wall_h_content;
-	int was_hit_vertical;
-} t_ray[NUM_RAYS];
-t_ray rays[NUM_RAYS];
-uint32_t buff[TEX_WIDTH * TEX_HEIGHT + 1];
+
 void initialize_player(t_struct *data)
 {
 	data->bpp = 0;
@@ -210,96 +213,7 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 	get_smalest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
 	fill_out_ray(ray_id, data, vert_wall_content, horz_wall_content);
 }
-uint32_t 	*texture_from_file(t_struct *data)
-{
-	int x;
-	int y;
-	int pos = 0;
-	int width;
-	int height;
-	int bpp, size_line, endian;
-	char *txt_path;
 
-	width = 64;
-	height = 64;
-	x = 0;
-	y = 0;
-	txt_path = "./textures/redbrick.xpm";
-	data->xpm_ptr = mlx_xpm_file_to_image(data->mlx_ptr, txt_path, &width, &height);
-	data->img_data = mlx_get_data_addr(data->xpm_ptr, &data->bpp, &data->size_line, &data->endian);
-	return *(uint32_t*)data->img_ptr;
-}
-void 	texture(t_struct *data)
-{
-	int x;
-	int y;
-	int pos = 0;
-
-	x = 0;
-	y = 0;
-	while (x < TEX_WIDTH)
-	{
-		y = 0;
-		while (y < TEX_HEIGHT)
-		{
-			pos = (TEX_WIDTH * y) + x;
-			buff[pos] = (x % 8 && y % 8) ? 0x3c40c6 : 0x1e272e;
-			y++;
-		}
-		x++;
-	}
-}
-void render_walls(t_struct *data)
-{
-	int i;
-	int pos = 0;
-	int txt_offset_x = 0;
-	int txt_offset_y = 0;
-	int cielling = 0;
-	float y = 0;
-	float corrected_dsitance;
-	float top_pixel;
-	float bottom_pixel;
-	float distance_to_projection_plane;
-	float wall_height;
-
-	i = 0;
-	top_pixel = 0;
-	bottom_pixel = 0;
-	distance_to_projection_plane = 0;
-	wall_height = 0;
-
-	while (i < NUM_RAYS)
-	{
-		corrected_dsitance = rays[i]->distance * cos(rays[i]->ray_angle - data->rotation_angle);
-		distance_to_projection_plane = (WINDOW_WIDTH * 0.5) / tan(FOV_ANGLE / 2);
-		wall_height = (SQUARE_SIZE / corrected_dsitance) * distance_to_projection_plane;
-		top_pixel = (WINDOW_HEIGHT / 2) - (wall_height / 2);
-		top_pixel = top_pixel < 0 ? 0 : top_pixel;
-		bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_height / 2);
-		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
-		y = top_pixel;
-		txt_offset_x = (rays[i]->was_hit_vertical) ? ((int)rays[i]->wall_h_y % SQUARE_SIZE) : ((int)rays[i]->wall_h_x % SQUARE_SIZE);
-		while (cielling++ < top_pixel)
-			ft_draw(data, i, cielling, 0x87ceeb);
-		while (y < bottom_pixel)
-		{
-			txt_offset_y = (y + (int)(wall_height / 2) - (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH / (int)wall_height);
-			pos = (TEX_WIDTH * txt_offset_y) + txt_offset_x;
-			pos = (pos > TEX_HEIGHT * TEX_WIDTH) ? (TEX_WIDTH * TEX_HEIGHT) : pos;
-			uint32_t *bb = texture_from_file(data);
-			ft_draw(data, i, y, bb[pos]);
-			y++;
-		}
-		cielling = bottom_pixel;
-		while (cielling < WINDOW_HEIGHT)
-		{
-			ft_draw(data, i, cielling, 0xCDB99C);
-			cielling++;
-		}
-		i++;
-	}
-}
 
 void render_all_rays(t_struct *data)
 {
