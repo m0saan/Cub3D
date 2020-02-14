@@ -1,8 +1,7 @@
-  
-#include "cube3d.h"
-#define MINI 0.3
 
-void initialize_player(t_struct *data)
+#include "cube3d.h"
+
+void	initialize_player(t_struct *data)
 {
 	data->bpp = 0;
 	data->endian = 0;
@@ -39,103 +38,129 @@ void initialize_player(t_struct *data)
 	data->vert_wall_hit_content = FALSE;
 	data->horz_hit_distance = 0;
 	data->vert_hit_distance = 0;
+	data->corrected_dsitance = 0;
+	data->top_pixel = 0;
+	data->bottom_pixel = 0;
+	data->distance_to_projection_plane = 0;
+	data->wall_height = 0;
 }
 
-float limit_angle(float angle)
+float	limit_angle(float angle)
 {
 	angle = remainderf(angle, TWO_PI);
 	if (angle < 0)
 	{
 		angle = TWO_PI + angle;
 	}
-	return angle;
+	return (angle);
 }
 
-float distance_between_points(float x1, float y1, float x2, float y2)
+float	distance_between_points(float x1, float y1, float x2, float y2)
 {
-	return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-void horizontal_ray_intersection(float ray_angle, t_struct *data, int *found_horiz_wall_hit, int *horz_wall_content)
+void	calculate_horz_ray_intercept(t_struct *data, float ray_angle)
 {
-	float horiz_touch_x;
-	float horiz_touch_y;
-
 	data->y_intercept = floor(data->y / SQUARE_SIZE) * SQUARE_SIZE;
 	data->y_intercept += data->is_ray_facing_down ? SQUARE_SIZE : 0;
-	data->x_intercept = data->x + (data->y_intercept - data->y) / tan(ray_angle);
+	data->x_intercept = data->x + (data->y_intercept - data->y) /
+	tan(ray_angle);
 	data->dy = SQUARE_SIZE;
 	data->dy *= data->is_ray_facing_up ? -1 : 1;
 	data->dx = SQUARE_SIZE / tan(ray_angle);
 	data->dx *= (data->is_ray_facing_left && data->dx > 0) ? -1 : 1;
 	data->dx *= (data->is_ray_facing_right && data->dx < 0) ? -1 : 1;
-	horiz_touch_x = data->x_intercept;
-	horiz_touch_y = data->y_intercept;
-	while (horiz_touch_x >= 0 && horiz_touch_x <= WINDOW_WIDTH && horiz_touch_y >= 0 && horiz_touch_y <= WINDOW_HEIGHT)
-	{
-		float xToCheck = horiz_touch_x;
-		float yToCheck = horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
+	data->horiz_touch_x = data->x_intercept;
+	data->horiz_touch_y = data->y_intercept;
+}
 
-		if (if_wall(xToCheck, yToCheck))
+void	horizontal_ray_intersection(float ray_angle, t_struct *data,
+int *found_horiz_wall_hit, int *horz_wall_content)
+{
+	float x_to_check;
+	float y_to_check;
+
+	calculate_horz_ray_intercept(data, ray_angle);
+	while (data->horiz_touch_x >= 0 && data->horiz_touch_x <= WINDOW_WIDTH &&
+	data->horiz_touch_y >= 0 && data->horiz_touch_y <= WINDOW_HEIGHT)
+	{
+		x_to_check = data->horiz_touch_x;
+		y_to_check = data->horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
+		if (if_wall(x_to_check, y_to_check))
 		{
-			data->save_horiz_wall_hit_x = horiz_touch_x;
-			data->save_horiz_wall_hit_y = horiz_touch_y;
-			*horz_wall_content = map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)];
+			data->save_horiz_wall_hit_x = data->horiz_touch_x;
+			data->save_horiz_wall_hit_y = data->horiz_touch_y;
+			*horz_wall_content = map[(int)floor(y_to_check / SQUARE_SIZE)]
+			[(int)floor(x_to_check / SQUARE_SIZE)];
 			*found_horiz_wall_hit = TRUE;
-			break;
+			break ;
 		}
 		else
 		{
-			horiz_touch_x += data->dx;
-			horiz_touch_y += data->dy;
+			data->horiz_touch_x += data->dx;
+			data->horiz_touch_y += data->dy;
 		}
 	}
 }
-void vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_wall_hit, int *vert_wall_content)
+
+void	calculate_vert_ray_intercept(t_struct *data, float ray_angle)
 {
-	float vert_touch_x;
-	float vert_touch_y;
-	vert_wall_content = 0;
 	data->x_intercept = floor(data->x / SQUARE_SIZE) * SQUARE_SIZE;
 	data->x_intercept += data->is_ray_facing_right ? SQUARE_SIZE : 0;
-	data->y_intercept = data->y + (data->x_intercept - data->x) * tan(ray_angle);
+	data->y_intercept = data->y + (data->x_intercept - data->x) *
+	tan(ray_angle);
 	data->dx = SQUARE_SIZE;
 	data->dx *= data->is_ray_facing_left ? -1 : 1;
 	data->dy = SQUARE_SIZE * tan(ray_angle);
 	data->dy *= (data->is_ray_facing_up && data->dy > 0) ? -1 : 1;
 	data->dy *= (data->is_ray_facing_down && data->dy < 0) ? -1 : 1;
-	vert_touch_x = data->x_intercept;
-	vert_touch_y = data->y_intercept;
-	while (vert_touch_x >= 0 && vert_touch_x <= WINDOW_WIDTH && vert_touch_y >= 0 && vert_touch_y <= WINDOW_HEIGHT)
+	data->vert_touch_x = data->x_intercept;
+	data->vert_touch_y = data->y_intercept;
+}
+
+void	vertical_ray_intersection(float ray_angle, t_struct *data,
+int *found_vert_wall_hit, int *vert_wall_content)
+{
+	float x_to_check;
+	float y_to_check;
+
+	calculate_vert_ray_intercept(data, ray_angle);
+	while (data->vert_touch_x >= 0 && data->vert_touch_x <= WINDOW_WIDTH &&
+	data->vert_touch_y >= 0 && data->vert_touch_y <= WINDOW_HEIGHT)
 	{
-		float xToCheck = vert_touch_x + (data->is_ray_facing_left ? -1 : 0);
-		float yToCheck = vert_touch_y;
-		if (if_wall(xToCheck, yToCheck))
+		x_to_check = data->vert_touch_x + (data->is_ray_facing_left ? -1 : 0);
+		y_to_check = data->vert_touch_y;
+		if (if_wall(x_to_check, y_to_check))
 		{
-			data->save_vert_wall_hit_x = vert_touch_x;
-			data->save_vert_wall_hit_y = vert_touch_y;
-			vert_wall_content = &(map[(int)floor(yToCheck / SQUARE_SIZE)][(int)floor(xToCheck / SQUARE_SIZE)]);
+			data->save_vert_wall_hit_x = data->vert_touch_x;
+			data->save_vert_wall_hit_y = data->vert_touch_y;
+			vert_wall_content = &(map[(int)floor(y_to_check / SQUARE_SIZE)]
+			[(int)floor(x_to_check / SQUARE_SIZE)]);
 			*found_vert_wall_hit = TRUE;
-			break;
+			break ;
 		}
 		else
 		{
-			vert_touch_x += data->dx;
-			vert_touch_y += data->dy;
+			data->vert_touch_x += data->dx;
+			data->vert_touch_y += data->dy;
 		}
 	}
 }
-void get_smalest_distance(t_struct *data, int found_horiz_wall_hit, int found_vert_wall_hit)
+
+void	get_smalest_distance(t_struct *data, int found_horiz_wall_hit,
+int found_vert_wall_hit)
 {
-	data->horz_hit_distance = found_horiz_wall_hit
-								  ? distance_between_points(data->x, data->y, data->save_horiz_wall_hit_x, data->save_horiz_wall_hit_y)
-								  : MAX_INT;
-	data->vert_hit_distance = found_vert_wall_hit
-								  ? distance_between_points(data->x, data->y, data->save_vert_wall_hit_x, data->save_vert_wall_hit_y)
-								  : MAX_INT;
+	data->horz_hit_distance = found_horiz_wall_hit ?
+	distance_between_points(data->x, data->y,
+	data->save_horiz_wall_hit_x,data->save_horiz_wall_hit_y) : MAX_INT;
+	data->vert_hit_distance = found_vert_wall_hit ?
+	distance_between_points(data->x, data->y,
+	data->save_vert_wall_hit_x, data->save_vert_wall_hit_y) : MAX_INT;
 }
 
-void fill_out_ray(int ray_id, t_struct *data, int vert_wall_content, int horz_wall_content)
+void	fill_out_ray(int ray_id, t_struct *data, int vert_wall_content,
+int horz_wall_content)
 {
 	if (data->vert_hit_distance < data->horz_hit_distance)
 	{
@@ -160,129 +185,101 @@ void fill_out_ray(int ray_id, t_struct *data, int vert_wall_content, int horz_wa
 	rays[ray_id]->is_ray_facing_right = data->is_ray_facing_right;
 }
 
-void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
+void	cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 {
-	int found_horiz_wall_hit = FALSE;
-	int found_vert_wall_hit = FALSE;
-	int vert_wall_content = 0;
-	int horz_wall_content = 0;
+	int found_horiz_wall_hit;
+	int found_vert_wall_hit;
+	int vert_wall_content;
+	int horz_wall_content;
 
+	found_horiz_wall_hit = FALSE;
+	found_vert_wall_hit = FALSE;
+	horz_wall_content = 0;
+	vert_wall_content = 0;
 	ray_angle = limit_angle(ray_angle);
 	data->ray_angle = ray_angle;
 	data->is_ray_facing_down = ray_angle > 0 && ray_angle < PI;
 	data->is_ray_facing_up = !(data->is_ray_facing_down);
 	data->is_ray_facing_right = ray_angle < 0.5 * PI || ray_angle > 1.5 * PI;
 	data->is_ray_facing_left = !(data->is_ray_facing_right);
-	horizontal_ray_intersection(ray_angle, data, &found_horiz_wall_hit, &horz_wall_content);
-	vertical_ray_intersection(ray_angle, data, &found_vert_wall_hit, &vert_wall_content);
+	horizontal_ray_intersection(ray_angle, data,
+	&found_horiz_wall_hit, &horz_wall_content);
+	vertical_ray_intersection(ray_angle, data,
+	&found_vert_wall_hit, &vert_wall_content);
 	get_smalest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
 	fill_out_ray(ray_id, data, vert_wall_content, horz_wall_content);
 }
+
 void	texture_from_file(t_struct *data)
 {
-	int width;
-	int height;
-	char *txt_path;
+	int		width;
+	int		height;
+	char	*txt_path;
 
 	width = 0;
 	height = 0;
 	txt_path = "./textures/redbrick.xpm";
-	data->xpm_ptr = mlx_xpm_file_to_image(data->mlx_ptr, txt_path, &width, &height);
-	data->img_data_texture = (int*)mlx_get_data_addr(data->xpm_ptr, &data->bpp_text, &data->size_line_text, &data->endian_text);
+	data->xpm_ptr = mlx_xpm_file_to_image(data->mlx_ptr, txt_path,
+	&width, &height);
+	data->img_data_texture = (int *)mlx_get_data_addr(data->xpm_ptr,
+	&data->bpp_text, &data->size_line_text, &data->endian_text);
 }
-void 	texture(t_struct *data)
-{
-	int x;
-	int y;
-	int pos = 0;
 
-	x = 0;
-	y = 0;
-	while (x < TEX_WIDTH)
-	{
-		y = 0;
-		while (y < TEX_HEIGHT)
-		{
-			pos = (TEX_WIDTH * y) + x;
-			buff[pos] = (x % 8 && y % 8) ? 0x3c40c6 : 0x1e272e;
-			y++;
-		}
-		x++;
-	}
+void	calculate_wall_projection(t_struct *data)
+{
+	data->corrected_dsitance = rays[data->i_wall_index]->distance *
+	cos(rays[data->i_wall_index]->ray_angle - data->rotation_angle);
+	data->distance_to_projection_plane = (WINDOW_WIDTH * 0.5)
+	/ tan(FOV_ANGLE / 2);
+	data->wall_height = (SQUARE_SIZE / data->corrected_dsitance) *
+	data->distance_to_projection_plane;
+	data->top_pixel = (WINDOW_HEIGHT / 2) - (data->wall_height / 2);
+	data->top_pixel = data->top_pixel < 0 ? 0 : data->top_pixel;
+	data->bottom_pixel = (WINDOW_HEIGHT / 2) + (data->wall_height / 2);
+	data->bottom_pixel = data->bottom_pixel > WINDOW_HEIGHT
+	? WINDOW_HEIGHT
+	: data->bottom_pixel;
 }
-void render_walls(t_struct *data)
-{
-	int i;
-	int pos = 0;
-	int txt_offset_x = 0;
-	int txt_offset_y = 0;
-	int cielling = 0;
-	float y = 0;
-	float corrected_dsitance;
-	float top_pixel;
-	float bottom_pixel;
-	float distance_to_projection_plane;
-	float wall_height;
 
-	i = 0;
-	top_pixel = 0;
-	bottom_pixel = 0;
-	distance_to_projection_plane = 0;
-	wall_height = 0;
+void	render_walls(t_struct *data)
+{
+	int		cielling;
+	float	y;
+
+	data->i_wall_index = 0;
 	texture_from_file(data);
-	while (i < NUM_RAYS)
+	while (data->i_wall_index++ < NUM_RAYS - 1)
 	{
-		corrected_dsitance = rays[i]->distance * cos(rays[i]->ray_angle - data->rotation_angle);
-		distance_to_projection_plane = (WINDOW_WIDTH * 0.5) / tan(FOV_ANGLE / 2);
-		wall_height = (SQUARE_SIZE / corrected_dsitance) * distance_to_projection_plane;
-		top_pixel = (WINDOW_HEIGHT / 2) - (wall_height / 2);
-		top_pixel = top_pixel < 0 ? 0 : top_pixel;
-		bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_height / 2);
-		bottom_pixel = bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : bottom_pixel;
-		y = top_pixel;
-		txt_offset_x = (rays[i]->was_hit_vertical) ? ((int)rays[i]->wall_h_y % SQUARE_SIZE) : ((int)rays[i]->wall_h_x % SQUARE_SIZE);
-		while (cielling++ < top_pixel)
-			ft_draw(data, i, cielling, 0x87ceeb);
-		while (y < bottom_pixel)
+		calculate_wall_projection(data);
+		y = data->top_pixel;
+		data->txt_offset_x = (rays[data->i_wall_index]->was_hit_vertical)
+		? ((int)rays[data->i_wall_index]->wall_h_y % SQUARE_SIZE)
+		: ((int)rays[data->i_wall_index]->wall_h_x % SQUARE_SIZE);
+		while (cielling++ < data->top_pixel)
+			ft_draw(data, data->i_wall_index, cielling, 0x87ceeb);
+		while (y++ < data->bottom_pixel - 1)
 		{
-			txt_offset_y = (y + (int)(wall_height / 2) - (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH / (int)wall_height);
-			pos = (TEX_WIDTH * txt_offset_y) + txt_offset_x;
-			pos = (pos >= TEX_HEIGHT * TEX_WIDTH) ? (TEX_WIDTH * TEX_HEIGHT - 1) : pos;
-			if (pos >= TEX_HEIGHT * TEX_HEIGHT || pos < 0)
-			{
-				printf("Yessssss!!\n");
-				printf("%d\n", pos);
-			}
-				
-			ft_draw(data, i, y, (int)data->img_data_texture[pos]);
-			y++;
+			data->txt_offset_y = (y + (int)(data->wall_height / 2)
+			- (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH
+			/ (int)data->wall_height);
+			ft_draw(data, data->i_wall_index, y,
+			(int)data->img_data_texture[((TEX_WIDTH * data->txt_offset_y)
+			+ data->txt_offset_x)
+			>= (TEX_HEIGHT * TEX_WIDTH)
+			? (TEX_WIDTH * TEX_HEIGHT - 1)
+			: ((TEX_WIDTH * data->txt_offset_y) + data->txt_offset_x)]);
 		}
-		cielling = bottom_pixel;
-		while (cielling < WINDOW_HEIGHT)
-		{
-			ft_draw(data, i, cielling, 0xCDB99C);
-			cielling++;
-		}
-		i++;
+		cielling = data->bottom_pixel;
+		while (cielling++ < WINDOW_HEIGHT - 1)
+			ft_draw(data, data->i_wall_index, cielling, 0xCDB99C);
 	}
 }
 
-void render_all_rays(t_struct *data)
+void	cast_rays(t_struct *data)
 {
-	int i;
-
-	i = 0;
-	while (i < NUM_RAYS)
-	{
-		line(data, data->x * MINI, data->y * MINI, rays[i]->wall_h_x * MINI, rays[i]->wall_h_y * MINI);
-		i++;
-	}
-}
-void cast_rays(t_struct *data)
-{
-	int ray_id;
-	int i;
-	float ray_angle;
+	int		ray_id;
+	int		i;
+	float	ray_angle;
 
 	ray_id = 0;
 	i = 0;
@@ -294,132 +291,63 @@ void cast_rays(t_struct *data)
 		ray_angle += FOV_ANGLE / NUM_RAYS;
 		ray_id++;
 	}
-	render_all_rays(data);
 }
-void draw_line(t_struct *data)
-{
-	float j;
-	float i;
-	float radius;
 
-	i = data->x;
-	j = data->y;
-	radius = 40;
-	while (radius > 0)
-	{
-		j = data->y;
-		while (j++ < data->y + 1)
-			ft_draw(data, i + cos(data->rotation_angle) * radius * MINI, j + sin(data->rotation_angle) * radius * MINI, 0x4287f5);
-		radius -= 1;
-	}
-}
-void render_firt_time(t_struct *data)
+void	render_firt_time(t_struct *data)
 {
 	cast_rays(data);
-	texture(data);
 	render_walls(data);
 	move_player(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
-void mini_map(t_struct *data)
+
+int		update(t_struct *data, uint32_t *buff)
 {
-	render_map(data);
-	circle(data);
-	cast_rays(data);
-	move_player(data);
-}
-int update(t_struct *data, uint32_t *buff)
-{
-	// render_map(data);
-	// circle(data);
-	// draw_line(data);
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp, &data->size_line, &data->endian);
+	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
+	&data->size_line, &data->endian);
 	cast_rays(data);
-	texture(data);
 	move_player(data);
 	render_walls(data);
-	mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (TRUE);
 }
 
-int if_wall(float x, float y)
+int		if_wall(float x, float y)
 {
+	int map_index_x;
+	int map_index_y;
+
 	if ((x < 0 || x > WINDOW_WIDTH) || (y < 0 || y > WINDOW_HEIGHT))
 		return TRUE;
-	int map_index_x = floor((x / 64));
-	int map_index_y = floor((y / 64));
-	return map[map_index_y][map_index_x] != 0;
+	map_index_x = floor((x / 64));
+	map_index_y = floor((y / 64));
+	return (map[map_index_y][map_index_x] != 0);
 }
 
-int render_map(t_struct *data)
+void	line(t_struct *data, int x0, int y0, int x1, int y1)
 {
-	int i;
-	int j;
-	int square_x;
-	int square_y;
-	int square_color;
-
-	i = 0;
-	j = 0;
-	square_x = 0;
-	square_y = 0;
-	square_color = 0;
-
-	while (i < NUM_ROWS)
-	{
-		while (j < NUM_COLS)
-		{
-			square_x = j * SQUARE_SIZE;
-			square_y = i * SQUARE_SIZE;
-			square_color = map[i][j] != 0 ? 0x2ecc71 : 0xecf0f1;
-			fill_square(square_x - 1, square_y - 1, SQUARE_SIZE, square_color, data);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (TRUE);
-}
-
-void line(t_struct *data, int X0, int Y0, int X1, int Y1)
-{
-	int dx = X1 - X0;
-	int dy = Y1 - Y0;
+	int dx = x1 - x0;
+	int dy = y1 - y0;
 
 	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
 
-	float Xinc = dx / (float)steps;
-	float Yinc = dy / (float)steps;
+	float x_inc = dx / (float)steps;
+	float y_inc = dy / (float)steps;
 
-	float X = X0;
-	float Y = Y0;
+	float x = x0;
+	float y = y0;
 	for (int i = 0; i <= steps; i++)
 	{
-		ft_draw(data, X, Y, 0xff1100);
-		X += Xinc;
-		Y += Yinc;
-	}
-}
-void fill_square(int square_x, int square_y, int tile_size, int tile_color, t_struct *data)
-{
-	int i;
-	int j;
-
-	i = square_x;
-	j = 0;
-	while (i++ < tile_size + square_x)
-	{
-		j = square_y;
-		while (j++ < tile_size + square_y)
-			ft_draw(data, i * MINI, j * MINI, tile_color);
+		ft_draw(data, x, y, 0xff1100);
+		x += x_inc;
+		y += y_inc;
 	}
 }
 
-int move_player(t_struct *data)
+int		move_player(t_struct *data)
 {
 	data->rotation_angle += data->turn_direction * data->turn_speed;
 	data->move_step = data->walk_direction * data->walk_speed;
@@ -434,13 +362,13 @@ int move_player(t_struct *data)
 	return (TRUE);
 }
 
-int ft_close(void *param)
+int		ft_close(void *param)
 {
 	(void)param;
 	exit(0);
 }
 
-int key_pressed(int keycode, t_struct *data)
+int		key_pressed(int keycode, t_struct *data)
 {
 	if (keycode == 53)
 		ft_close(data);
@@ -455,7 +383,7 @@ int key_pressed(int keycode, t_struct *data)
 	return (TRUE);
 }
 
-int key_released(int keycode, t_struct *data)
+int		key_released(int keycode, t_struct *data)
 {
 	if (keycode == 126)
 		data->walk_direction = 0;
@@ -468,28 +396,7 @@ int key_released(int keycode, t_struct *data)
 	return (TRUE);
 }
 
-void circle(t_struct *data)
-{
-	float two_pi;
-	float i;
-	float get_radius;
-
-	two_pi = 2 * PI;
-	i = 0;
-	get_radius = data->radius;
-	while (get_radius > 0)
-	{
-		i = 0;
-		while (i <= two_pi)
-		{
-			ft_draw(data, MINI * ((cos(i) * get_radius) + data->x), MINI * ((sin(i) * get_radius) + data->y), 0xfcba03);
-			i += 0.1;
-		}
-		get_radius -= 0.1;
-	}
-}
-
-void ft_draw(t_struct *data, int x, int y, int color)
+void	ft_draw(t_struct *data, int x, int y, int color)
 {
 	char *dst;
 
@@ -497,7 +404,7 @@ void ft_draw(t_struct *data, int x, int y, int color)
 	*(u_int32_t *)dst = color;
 }
 
-int initialize_window(t_struct *data)
+int		initialize_window(t_struct *data)
 {
 	initialize_player(data);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
@@ -516,7 +423,7 @@ int initialize_window(t_struct *data)
 	return (TRUE);
 }
 
-int main()
+int		main()
 {
 	t_struct *data;
 

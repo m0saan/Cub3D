@@ -13,11 +13,19 @@
 #ifndef CUBE3D_H
 #define CUBE3D_H
 
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <mlx.h>
+#include <fcntl.h>
+
 #define PI 3.14159265359
 #define TWO_PI (2 * PI)
 
 #define TRUE 1
 #define FALSE 0
+#define MINI 0.3
 
 #define SQUARE_SIZE 64
 #define NUM_ROWS 14
@@ -30,14 +38,6 @@
 
 #define NUM_RAYS (WINDOW_WIDTH)
 #define FOV_ANGLE (60 * (PI / 180))
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-#include <mlx.h>
-#include <string.h>
-#include <fcntl.h>
 
 #define MAX_INT 2147483647
 #define BUFFER_SIZE 90
@@ -57,7 +57,8 @@ int map[NUM_ROWS][NUM_COLS] =
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1},
 		{1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 'N', 0, 1},
 		{1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1},
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	};
 typedef struct s_ray
 {
 	float ray_angle;
@@ -128,8 +129,14 @@ typedef struct s_struct
 	float distance_to_projection_plane;
 	float wall_height;
 	int i_wall_index;
-	uint32_t *buff;
-} t_struct;
+	int txt_offset_x;
+	int txt_offset_y;
+
+	float vert_touch_x;
+	float vert_touch_y;
+	float horiz_touch_x;
+	float horiz_touch_y;
+}		t_struct;
 typedef struct s_struc
 {
 	int fd;
@@ -154,7 +161,6 @@ void gnl_verify_line(char **line, char **stack, char **heap);
 int gnl_read_line(char **line, char **stack, char **heap, int byte, int fd);
 int ft_atoi(const char *s);
 char **ft_split(const char *ss, char c);
-void fill_square(int square_x, int square_y, int tile_size, int square_color, t_struct *data);
 void render_player(t_struct *data);
 void initialize_player(t_struct *data);
 int render_map(t_struct *data);
@@ -166,7 +172,6 @@ void circle(t_struct *data);
 void draw_line(t_struct *data);
 void ft_draw(t_struct *data, int x, int y, int color);
 int if_wall(float x, float y);
-int update(t_struct *data, uint32_t *buff);
 void line(t_struct *data, int x0, int y0, int x1, int y1);
 void ft_draw_texture(t_struct *data, int x, int y, int color);
 float limit_angle(float angle);
@@ -178,15 +183,12 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data);
 void fill_out_ray(int ray_id, t_struct *data, int vert_wall_content, int horz_wall_content);
 void render_all_rays(t_struct *data);
 void cast_rays(t_struct *data);
-void draw_line(t_struct *data);
 void render_firt_time(t_struct *data);
 void mini_map(t_struct *data);
 int update(t_struct *data, uint32_t *buff);
-int if_wall(float x, float y);
 int ft_close(void *param);
 int key_pressed(int keycode, t_struct *data);
 int key_released(int keycode, t_struct *data);
-void circle(t_struct *data);
 void texture_from_file(t_struct *data);
 void texture(t_struct *data);
 void render_walls(t_struct *data);
