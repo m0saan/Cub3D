@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
+/*   Updated: 2020/02/14 20:23:27 by moboustt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cube3d.h"
 
@@ -153,7 +164,8 @@ int found_vert_wall_hit)
 {
 	data->horz_hit_distance = found_horiz_wall_hit ?
 	distance_between_points(data->x, data->y,
-	data->save_horiz_wall_hit_x,data->save_horiz_wall_hit_y) : MAX_INT;
+			data->save_horiz_wall_hit_x, data->save_horiz_wall_hit_y)
+	: MAX_INT;
 	data->vert_hit_distance = found_vert_wall_hit ?
 	distance_between_points(data->x, data->y,
 	data->save_vert_wall_hit_x, data->save_vert_wall_hit_y) : MAX_INT;
@@ -321,7 +333,7 @@ int		if_wall(float x, float y)
 	int map_index_y;
 
 	if ((x < 0 || x > WINDOW_WIDTH) || (y < 0 || y > WINDOW_HEIGHT))
-		return TRUE;
+		return (TRUE);
 	map_index_x = floor((x / 64));
 	map_index_y = floor((y / 64));
 	return (map[map_index_y][map_index_x] != 0);
@@ -329,17 +341,24 @@ int		if_wall(float x, float y)
 
 void	line(t_struct *data, int x0, int y0, int x1, int y1)
 {
-	int dx = x1 - x0;
-	int dy = y1 - y0;
+	size_t	i;
+	int		dx;
+	int		dy;
+	float	x;
+	float	y;
+	int		steps;
+	float	x_inc;
+	float	y_inc;
 
-	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-
-	float x_inc = dx / (float)steps;
-	float y_inc = dy / (float)steps;
-
-	float x = x0;
-	float y = y0;
-	for (int i = 0; i <= steps; i++)
+	i = 0;
+	dx = x1 - x0;
+	dy = y1 - y0;
+	steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+	x_inc = dx / (float)steps;
+	y_inc = dy / (float)steps;
+	x = x0;
+	y = y0;
+	while (i++ <= steps)
 	{
 		ft_draw(data, x, y, 0xff1100);
 		x += x_inc;
@@ -351,14 +370,15 @@ int		move_player(t_struct *data)
 {
 	data->rotation_angle += data->turn_direction * data->turn_speed;
 	data->move_step = data->walk_direction * data->walk_speed;
-	data->updated_player_x = data->x + cos(data->rotation_angle) * data->move_step;
-	data->updated_player_y = data->y + sin(data->rotation_angle) * data->move_step;
+	data->updated_player_x = data->x
+	+ cos(data->rotation_angle) * data->move_step;
+	data->updated_player_y = data->y
+	+ sin(data->rotation_angle) * data->move_step;
 	if (!if_wall(data->updated_player_x, data->updated_player_y))
 	{
 		data->x = data->updated_player_x;
 		data->y = data->updated_player_y;
 	}
-
 	return (TRUE);
 }
 
@@ -409,11 +429,14 @@ int		initialize_window(t_struct *data)
 	initialize_player(data);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
 		return (FALSE);
-	if ((data->win_ptr = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "Cube3d")) == NULL)
+	if ((data->win_ptr = mlx_new_window(data->mlx_ptr,
+	WINDOW_WIDTH, WINDOW_HEIGHT, "Cube3d")) == NULL)
 		return (FALSE);
-	if ((data->img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT)) == NULL)
+	if ((data->img_ptr = mlx_new_image(data->mlx_ptr,
+	WINDOW_WIDTH, WINDOW_HEIGHT)) == NULL)
 		return (FALSE);
-	if ((data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp, &data->size_line, &data->endian)) == NULL)
+	if ((data->img_data = mlx_get_data_addr(data->img_ptr,
+	&data->bpp, &data->size_line, &data->endian)) == NULL)
 		return (FALSE);
 	render_firt_time(data);
 	mlx_hook(data->win_ptr, 3, 1L << 1, key_released, data);
@@ -423,12 +446,12 @@ int		initialize_window(t_struct *data)
 	return (TRUE);
 }
 
-int		main()
+int		main(void)
 {
 	t_struct *data;
 
 	data = malloc(sizeof(t_struct));
 	initialize_window(data);
 	free(data);
-	return 0;
+	return (0);
 }
