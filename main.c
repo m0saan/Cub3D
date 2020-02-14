@@ -12,7 +12,7 @@
 
 #include "cube3d.h"
 
-void	initialize_player(t_struct *data)
+void	initialize_1(t_struct *data)
 {
 	data->bpp = 0;
 	data->endian = 0;
@@ -34,6 +34,11 @@ void	initialize_player(t_struct *data)
 	data->rotation_angle = PI / 2;
 	data->walk_speed = 2;
 	data->turn_speed = 2 * (PI / 180);
+	initialize_2(data);
+}
+
+void	initialize_2(t_struct *data)
+{
 	data->is_ray_facing_down = 0;
 	data->is_ray_facing_up = 0;
 	data->is_ray_facing_right = 0;
@@ -253,6 +258,19 @@ void	calculate_wall_projection(t_struct *data)
 	: data->bottom_pixel;
 }
 
+void	ft_ljodran(t_struct *data, int y)
+{
+	data->txt_offset_y = (y + (int)(data->wall_height / 2)
+	- (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH
+	/ (int)data->wall_height);
+	ft_draw(data, data->i_wall_index, y,
+	(int)data->img_data_texture[((TEX_WIDTH * data->txt_offset_y)
+	+ data->txt_offset_x)
+	>= (TEX_HEIGHT * TEX_WIDTH)
+	? (TEX_WIDTH * TEX_HEIGHT - 1)
+	: ((TEX_WIDTH * data->txt_offset_y) + data->txt_offset_x)]);
+}
+
 void	render_walls(t_struct *data)
 {
 	int		cielling;
@@ -270,17 +288,7 @@ void	render_walls(t_struct *data)
 		while (cielling++ < data->top_pixel)
 			ft_draw(data, data->i_wall_index, cielling, 0x87ceeb);
 		while (y++ < data->bottom_pixel - 1)
-		{
-			data->txt_offset_y = (y + (int)(data->wall_height / 2)
-			- (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH
-			/ (int)data->wall_height);
-			ft_draw(data, data->i_wall_index, y,
-			(int)data->img_data_texture[((TEX_WIDTH * data->txt_offset_y)
-			+ data->txt_offset_x)
-			>= (TEX_HEIGHT * TEX_WIDTH)
-			? (TEX_WIDTH * TEX_HEIGHT - 1)
-			: ((TEX_WIDTH * data->txt_offset_y) + data->txt_offset_x)]);
-		}
+			ft_ljodran(data, y);
 		cielling = data->bottom_pixel;
 		while (cielling++ < WINDOW_HEIGHT - 1)
 			ft_draw(data, data->i_wall_index, cielling, 0xCDB99C);
@@ -338,22 +346,26 @@ int		if_wall(float x, float y)
 	map_index_y = floor((y / 64));
 	return (map[map_index_y][map_index_x] != 0);
 }
+void	ft_abs_ddd(int *x0, int *y0, int *x1, int *y1)
+{
+	int		dx;
+	int		dy;
+	int		steps;
 
+	dx = x1 - x0;
+	dy = y1 - y0;
+	steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+}
 void	line(t_struct *data, int x0, int y0, int x1, int y1)
 {
 	size_t	i;
-	int		dx;
-	int		dy;
 	float	x;
 	float	y;
-	int		steps;
 	float	x_inc;
 	float	y_inc;
 
 	i = 0;
-	dx = x1 - x0;
-	dy = y1 - y0;
-	steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+	ft_abs_ddd(&x0, &y0, &x1, &y1)
 	x_inc = dx / (float)steps;
 	y_inc = dy / (float)steps;
 	x = x0;
@@ -426,7 +438,7 @@ void	ft_draw(t_struct *data, int x, int y, int color)
 
 int		initialize_window(t_struct *data)
 {
-	initialize_player(data);
+	initialize_1(data);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
 		return (FALSE);
 	if ((data->win_ptr = mlx_new_window(data->mlx_ptr,
