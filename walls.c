@@ -65,18 +65,19 @@ void	render_walls(t_struct *data)
 	texture_from_file(data);
 	while (data->i_wall_index++ < NUM_RAYS - 1)
 	{
+		cielling = 0;
 		calculate_wall_projection(data);
 		y = data->top_pixel;
 		data->txt_offset_x = (rays[data->i_wall_index]->was_hit_vertical)
 		? ((int)rays[data->i_wall_index]->wall_h_y % SQUARE_SIZE)
 		: ((int)rays[data->i_wall_index]->wall_h_x % SQUARE_SIZE);
 		while (cielling++ < data->top_pixel)
-			ft_draw(data, data->i_wall_index, cielling, 0x87ceeb);
+			ft_draw(data, data->i_wall_index, cielling, 0x77b5fe);
 		while (y++ < data->bottom_pixel - 1)
 			ft_ljodran(data, y);
 		cielling = data->bottom_pixel;
 		while (cielling++ < WINDOW_HEIGHT - 1)
-			ft_draw(data, data->i_wall_index, cielling, 0xCDB99C);
+			ft_draw(data, data->i_wall_index, cielling, 0x9e5e6f);
 	}
 }
 

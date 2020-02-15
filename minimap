@@ -74,7 +74,7 @@ void fill_square(int square_x, int square_y, int tile_size, int tile_color, t_st
 			ft_draw(data, i * MINI, j * MINI, tile_color);
 	}
 }
-
+/*
 int render_map(t_struct *data)
 {
 	int i;
@@ -104,6 +104,7 @@ int render_map(t_struct *data)
 	}
 	return (TRUE);
 }
+*/
 void render_all_rays(t_struct *data)
 {
 	int i;
@@ -118,7 +119,6 @@ void render_all_rays(t_struct *data)
 
 void mini_map(t_struct *data)
 {
-	render_map(data);
 	circle(data);
 	cast_rays(data);
 	move_player(data);
