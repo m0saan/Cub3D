@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/14 00:09:17 by moboustt          #+#    #+#             */
-/*   Updated: 2020/01/14 15:51:03 by moboustt         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cube3d.h"
 
 static int		skip_number(const char *str)
@@ -22,6 +10,13 @@ static int		skip_number(const char *str)
 	while (str[i] >= 48 && str[i] <= 57 && (str[i] != ' ' || str[i] != ','))
 		i++;
 	return (i);
+}
+void	read_mapp(t_read *data, int pos)
+{
+	if (data->line[pos] == '1')
+	{
+		printf("%s\n", data->line);
+	}
 }
 void read_map(t_read *data)
 {
@@ -59,12 +54,11 @@ void read_map(t_read *data)
 			data->c_blue = ft_atoi(&data->line[pos + 1]);
 		}
 		pos = 0;
+		read_mapp(data, pos);
 	}
+	
 }
-void	read_map(t_read *data)
-{
 
-}
 int main()
 {
 	t_read *data;
