@@ -124,6 +124,9 @@ typedef struct		s_struct
 	int				steps;
 	float			x_inc;
 	float			y_inc;
+
+	int was_touching_sprite;
+	
 }					t_struct;
 typedef struct	s_struc
 {

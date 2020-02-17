@@ -30,7 +30,7 @@ void	texture_from_file(t_struct *data)
 void	calculate_wall_projection(t_struct *data)
 {
 	data->corrected_dsitance = rays[data->i_wall_index]->distance *
-	cos(rays[data->i_wall_index]->ray_angle - data->rotation_angle);
+	c os(rays[data->i_wall_index]->ray_angle - data->rotation_angle);
 	data->distance_to_projection_plane = (WINDOW_WIDTH * 0.5)
 	/ tan(FOV_ANGLE / 2);
 	data->wall_height = (SQUARE_SIZE / data->corrected_dsitance) *
@@ -58,26 +58,27 @@ void	ft_ljodran(t_struct *data, int y)
 
 void	render_walls(t_struct *data)
 {
-	int		cielling;
+	int		ceilling;
+	int		floor;
 	float	y;
 
 	data->i_wall_index = 0;
 	texture_from_file(data);
 	while (data->i_wall_index++ < NUM_RAYS - 1)
 	{
-		cielling = 0;
+		ceilling = 0;
 		calculate_wall_projection(data);
 		y = data->top_pixel;
 		data->txt_offset_x = (rays[data->i_wall_index]->was_hit_vertical)
 		? ((int)rays[data->i_wall_index]->wall_h_y % SQUARE_SIZE)
 		: ((int)rays[data->i_wall_index]->wall_h_x % SQUARE_SIZE);
-		while (cielling++ < data->top_pixel)
-			ft_draw(data, data->i_wall_index, cielling, 0x77b5fe);
+		while (ceilling++ < data->top_pixel)
+			ft_draw(data, data->i_wall_index, ceilling, 0x77b5fe);
 		while (y++ < data->bottom_pixel - 1)
 			ft_ljodran(data, y);
-		cielling = data->bottom_pixel;
-		while (cielling++ < WINDOW_HEIGHT - 1)
-			ft_draw(data, data->i_wall_index, cielling, 0x9e5e6f);
+		floor = data->bottom_pixel;
+		while (floor++ < WINDOW_HEIGHT - 1)
+			ft_draw(data, data->i_wall_index, floor, 0x9e5e6f);
 	}
 }
 
@@ -97,4 +98,6 @@ void	cast_rays(t_struct *data)
 		ray_angle += FOV_ANGLE / NUM_RAYS;
 		ray_id++;
 	}
+	render_all_rays(data);
 }
+
