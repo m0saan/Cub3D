@@ -120,8 +120,8 @@ int		initialize_window(t_struct *data)
 	&data->bpp, &data->size_line, &data->endian)) == NULL)
 		return (FALSE);
 	render_firt_time(data);
-	mlx_hook(data->win_ptr, 3, 1L << 1, key_released, data);
-	mlx_hook(data->win_ptr, 2, 1L << 0, key_pressed, data);
+	mlx_hook(data->win_ptr, 3, 0, key_released, data);
+	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
 	mlx_loop_hook(data->mlx_ptr, update, data);
 	mlx_loop(data->mlx_ptr);
 	return (TRUE);

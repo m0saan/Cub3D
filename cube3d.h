@@ -141,6 +141,10 @@ typedef struct	s_struc
 	signed int	c_red;
 	signed int	c_green;
 	signed int	c_blue;
+	char *path_to_the_north_texture;
+	char *path_to_the_south_texture;
+	char *path_to_the_west_texture;
+	char *path_to_the_east_texture;
 }				t_read;
 
 int		get_next_line(int fd, char **line);

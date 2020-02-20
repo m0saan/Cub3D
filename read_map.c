@@ -1,6 +1,5 @@
 #include "cube3d.h"
-/*
-int Map[NUM_ROWS][NUM_COLS];
+
 static int		skip_number(const char *str)
 {
 	int i;
@@ -12,72 +11,65 @@ static int		skip_number(const char *str)
 		i++;
 	return (i);
 }
-void	read_mapp(t_read *data, int pos)
-{
-	char **line;
-	int i = 0;
-	int j =0;
-	
-	if (data->line[pos] == '1')
-	{
-		while (i++ < NUM_ROWS)
-		{
-			j = 0;
-			while (j++ < NUM_COLS)
-				printf("%c\n", line[i][j]);
-		}
-		while (data->line[i])
-		{
-			while (j++ < NUM_COLS)
-			{
-				if (data->line[j] != ' ')
-					Map[i][j] = data->line[j];
-			}
-			i++;
-		}
-	}
-}
-void read_map(t_read *data)
+void read_map(t_read *data, char *buff)
 {
 	int pos;
+	int i;
 
 	pos = 0;
-	data->fd = open("map.cub", O_RDONLY);
-	while (get_next_line(data->fd, &data->line))
+	i = 0;
+	while (buff[pos])
 	{
-		if (data->line[pos] == 'R')
+		if (buff[pos] == 'R')
 		{
 			pos++;
-			data->height = ft_atoi(&data->line[pos++]);
-			pos += skip_number(&data->line[pos]);
-			data->width = ft_atoi(&data->line[pos]);
-			pos = 0;
+			data->height = ft_atoi(&buff[pos++]);
+			pos += skip_number(&buff[pos]);
+			data->width = ft_atoi(&buff[pos]);
 		}
-		if (data->line[pos] == 'F')
+		if (buff[pos] == 'F')
 		{
 			pos++;
-			data->f_red = ft_atoi(&data->line[pos++]);
-			pos += skip_number(&data->line[pos]);
-			data->f_green = ft_atoi(&data->line[pos + 1]);
-			pos += skip_number(&data->line[pos]);
-			data->f_blue = ft_atoi(&data->line[pos + 1]);
-			pos = 0;
+			data->f_red = ft_atoi(&buff[pos++]);
+			pos += skip_number(&buff[pos]);
+			data->f_green = ft_atoi(&buff[pos + 1]);
+			pos += skip_number(&buff[pos]);
+			data->f_blue = ft_atoi(&buff[pos + 1]);
 		}
-		if (data->line[pos] == 'C')
+		if (buff[pos] == 'C')
 		{
 			pos += 2;
-			data->c_red = ft_atoi(&data->line[pos]);
-			pos += skip_number(&data->line[pos]);
-			data->c_green = ft_atoi(&data->line[pos + 1]);
-			pos += skip_number(&data->line[pos]);
-			data->c_blue = ft_atoi(&data->line[pos + 1]);
+			data->c_red = ft_atoi(&buff[pos]);
+			pos += skip_number(&buff[pos]);
+			data->c_green = ft_atoi(&buff[pos + 1]);
+			pos += skip_number(&buff[pos]);
+			data->c_blue = ft_atoi(&buff[pos + 1]);
 		}
-		pos = 0;
-		read_mapp(data, pos);
+		if (buff[pos] == 'N' && buff[pos + 1] == 'O')
+		{
+			if (buff[pos] == ' ')
+				pos++;
+			if (buff[pos] == '.' && buff[pos + 1] == '/')
+				data->path_to_the_north_texture = &buff[pos];
+		}
+		pos++;
 	}
-	
 }
-*/
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned int	i;
+	char			*bb;
+
+	i = 0;
+	bb = b;
+	while (i < len)
+	{
+		bb[i] = c;
+		i++;
+	}
+	return (bb);
+}
 
 int		count_lines(char *buff)
 {
@@ -116,17 +108,33 @@ int		parse(t_read *data, char **av)
 	int fd;
 	int len = 1024;
 	char *buff[len];
+	ft_memset(buff, 0, len);
 	fd = open("map.cub", O_RDONLY);
 	if (fd < 0 || read(fd, buff, len) < 0)
 		return (0);
+	read_map(data, (char *)buff);
 	printf("Number of lines : %d\n", count_lines((char *)buff));
 	printf("line length : %d\n", line_length((char *)buff));
 	printf("%s\n", (char *)buff);
+	return (1);
 }
 
 int main(int argc, char **argv)
 {
 	t_read *data;
+	data = malloc(sizeof(t_read));
 	parse(data, argv);
+	printf("Height : %d\n", data->height);
+	printf("Height : %d\n", data->width);
+	printf("----------------------------------\n");
+	printf("Height : %d\n", data->c_red);
+	printf("Height : %d\n", data->c_green);
+	printf("Height : %d\n", data->c_blue);
+	printf("----------------------------------\n");
+	printf("Height : %d\n", data->f_red);
+	printf("Height : %d\n", data->f_green);
+	printf("Height : %d\n", data->f_blue);
+	printf("----------------------------------\n");
+	printf("NO : %s\n", data->path_to_the_north_texture);
 	return 0;
 }
