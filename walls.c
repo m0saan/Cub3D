@@ -30,7 +30,7 @@ void	texture_from_file(t_struct *data)
 void	calculate_wall_projection(t_struct *data)
 {
 	data->corrected_dsitance = rays[data->i_wall_index]->distance *
-	c os(rays[data->i_wall_index]->ray_angle - data->rotation_angle);
+	cos(rays[data->i_wall_index]->ray_angle - data->rotation_angle);
 	data->distance_to_projection_plane = (WINDOW_WIDTH * 0.5)
 	/ tan(FOV_ANGLE / 2);
 	data->wall_height = (SQUARE_SIZE / data->corrected_dsitance) *

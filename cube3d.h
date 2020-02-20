@@ -126,6 +126,7 @@ typedef struct		s_struct
 	float			y_inc;
 
 	int was_touching_sprite;
+	int which_radius;
 	
 }					t_struct;
 typedef struct	s_struc

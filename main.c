@@ -187,7 +187,7 @@ void circle(t_struct *data)
 
 	two_pi = 2 * PI;
 	i = 0;
-	get_radius = data->radius;
+	get_radius = data->which_radius ? SQUARE_SIZE : data->radius;
 	while (get_radius > 0)
 	{
 		i = 0;
