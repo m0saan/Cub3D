@@ -69,12 +69,12 @@ int		check_boudded_map(t_struct *data)
 		j = 0;
 		while (j < 29)
 		{
-			if (data->map[i][j] == (int)0 || data->map[i][j] == (int)1 || data->map[i][j] == (int)2 || data->map[i][j] == (int)'N')
-			{
-				printf("%d	%d	%d", i,j, data->map[i][j]);
-				write(1,"Map containing unknown elements\n", 32);
-				return 0;
-			}
+			// if (data->map[i][j] != 0 && data->map[i][j] != 1 && data->map[i][j] != 2 && data->map[i][j] != 'N')
+			// {
+			// 	printf("%d	%d	%d", i,j, data->map[i][j]);
+			// 	write(1,"Map containing unknown elements\n", 32);
+			// 	return 0;
+			// }
 			if (data->map[i][0] != 1 || data->map[i][data->l_length - 1] != 1)
 				return 0;
 			if (data->map[0][j] != 1 || data->map[data->n_lines - 1][j] != 1)
@@ -106,6 +106,8 @@ int		mapito(t_struct *data, int *pos, char *buff)
 		while (j < data->l_length && buff[*pos] != '\n')
 		{
 			buff[*pos] == ' ' ? *pos += 1 : *pos;
+			if (buff[*pos] != '1' && buff[*pos] != '0' && buff[*pos] != '2' && buff[*pos] != 'N')
+				return 0;
 			data->map[i][j] = ft_atoi(&buff[*pos]);
 			j++;
 			*pos += 1;
