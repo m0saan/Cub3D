@@ -67,7 +67,7 @@ int		move_player(t_struct *data)
 	+ cos(data->rotation_angle) * data->move_step;
 	data->updated_player_y = data->y
 	+ sin(data->rotation_angle) * data->move_step;
-	if (!if_wall(data->updated_player_x, data->updated_player_y))
+	if (!if_wall(data->updated_player_x, data->updated_player_y, data))
 	{
 		data->x = data->updated_player_x;
 		data->y = data->updated_player_y;

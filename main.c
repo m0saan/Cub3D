@@ -12,27 +12,6 @@
 
 #include "cube3d.h"
 
-int map[NUM_ROWS][NUM_COLS] =
-{
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-	{1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-	{1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1},
-	{1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-	{1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1},
-	{1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-	{1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1},
-	{1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 'N', 0, 1},
-	{1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1},
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
-void	sprite(t_struct *data)
-{
-
-}
 void	horizontal_ray_intersection(float ray_angle, t_struct *data,
 int *found_horiz_wall_hit, int *horz_wall_content)
 {
@@ -45,13 +24,13 @@ int *found_horiz_wall_hit, int *horz_wall_content)
 	{
 		x_to_check = data->horiz_touch_x;
 		y_to_check = data->horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
-		if (if_wall(x_to_check, y_to_check))
+		if (if_wall(x_to_check, y_to_check, data))
 		{
 			data->save_horiz_wall_hit_x = data->horiz_touch_x;
 			data->save_horiz_wall_hit_y = data->horiz_touch_y;
-			*horz_wall_content = map[(int)floor(y_to_check / SQUARE_SIZE)]
+			*horz_wall_content = data->map[(int)floor(y_to_check / SQUARE_SIZE)]
 			[(int)floor(x_to_check / SQUARE_SIZE)];
-			if ( map[(int)floor(y_to_check / SQUARE_SIZE)][(int)floor(x_to_check / SQUARE_SIZE)] == 2)
+			if ( data->map[(int)floor(y_to_check / SQUARE_SIZE)][(int)floor(x_to_check / SQUARE_SIZE)] == 2)
 				data->was_touching_sprite = 1;
 			*found_horiz_wall_hit = TRUE;
 			break ;
@@ -76,11 +55,11 @@ int *found_vert_wall_hit, int *vert_wall_content)
 	{
 		x_to_check = data->vert_touch_x + (data->is_ray_facing_left ? -1 : 0);
 		y_to_check = data->vert_touch_y;
-		if (if_wall(x_to_check, y_to_check))
+		if (if_wall(x_to_check, y_to_check, data))
 		{
 			data->save_vert_wall_hit_x = data->vert_touch_x;
 			data->save_vert_wall_hit_y = data->vert_touch_y;
-			vert_wall_content = &(map[(int)floor(y_to_check / SQUARE_SIZE)]
+			vert_wall_content = &(data->map[(int)floor(y_to_check / SQUARE_SIZE)]
 			[(int)floor(x_to_check / SQUARE_SIZE)]);
 			*found_vert_wall_hit = TRUE;
 			break ;
@@ -93,7 +72,7 @@ int *found_vert_wall_hit, int *vert_wall_content)
 	}
 }
 
-int		if_wall(float x, float y)
+int		if_wall(float x, float y, t_struct *data)
 {
 	int map_index_x;
 	int map_index_y;
@@ -102,7 +81,7 @@ int		if_wall(float x, float y)
 		return (TRUE);
 	map_index_x = floor((x / 64));
 	map_index_y = floor((y / 64));
-	return (map[map_index_y][map_index_x] != 0);
+	return (data->map[map_index_y][map_index_x] != 0);
 }
 
 int		initialize_window(t_struct *data)
@@ -127,11 +106,18 @@ int		initialize_window(t_struct *data)
 	return (TRUE);
 }
 
-int		main(int argc, char *argv[])
+int		main(int ac, char *av[])
 {
+	if (ac != 2)
+	{
+		write(1, "No map included!\n", 17);
+		return 1;
+	}
 	t_struct *data;
 
 	data = malloc(sizeof(t_struct));
+	if (mainO(data, av))
+		return 1;
 	initialize_window(data);
 	free(data);
 	return (0);
@@ -235,10 +221,10 @@ int render_map(t_struct *data)
 		{
 			square_x = j * SQUARE_SIZE;
 			square_y = i * SQUARE_SIZE;
-			if (map[i][j] == 2)
+			if (data->map[i][j] == 2)
 				square_color = 0xa29bfe;
 			else
-				square_color = map[i][j] != 0 ? 0x2ecc71 : 0xecf0f1;
+				square_color = data->map[i][j] != 0 ? 0x2ecc71 : 0xecf0f1;
 			fill_square(square_x - 1, square_y - 1, SQUARE_SIZE, square_color, data);
 			j++;
 		}
@@ -266,4 +252,9 @@ void mini_map(t_struct *data)
 	circle(data);
 	cast_rays(data);
 	move_player(data);
+}
+
+unsigned long creatergb(int r, int g, int b)
+{   
+    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }

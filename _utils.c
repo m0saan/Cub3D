@@ -46,3 +46,21 @@ int			ft_atoi(const char *s)
 		return (-ft_res(str, i));
 	return (ft_res(str, i));
 }
+
+char	*ft_strchr(const char *s, int c)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = (char *)s;
+	while (str[i] != '\0')
+	{
+		if (s[i] == c)
+			return (&str[i]);
+		i++;
+	}
+	if (s[i] == (char)c)
+		return (&str[i]);
+	return (NULL);
+}

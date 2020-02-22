@@ -20,10 +20,24 @@ void	texture_from_file(t_struct *data)
 
 	width = 0;
 	height = 0;
-	txt_path = "./textures/redbrick.xpm";
-	data->xpm_ptr = mlx_xpm_file_to_image(data->mlx_ptr, txt_path,
+	data->xpm_ptr1 = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/redbrick.xpm",
 	&width, &height);
-	data->img_data_texture = (int *)mlx_get_data_addr(data->xpm_ptr,
+	data->img_data_texture1 = (int *)mlx_get_data_addr(data->xpm_ptr1,
+	&data->bpp_text, &data->size_line_text, &data->endian_text);
+
+	data->xpm_ptr2 = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/sand.xpm",
+	&width, &height);
+	data->img_data_texture2 = (int *)mlx_get_data_addr(data->xpm_ptr2,
+	&data->bpp_text, &data->size_line_text, &data->endian_text);
+
+	data->xpm_ptr3 = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/stone.xpm",
+	&width, &height);
+	data->img_data_texture3 = (int *)mlx_get_data_addr(data->xpm_ptr3,
+	&data->bpp_text, &data->size_line_text, &data->endian_text);
+
+	data->xpm_ptr4 = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/wood.xpm",
+	&width, &height);
+	data->img_data_texture4 = (int *)mlx_get_data_addr(data->xpm_ptr4,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
 }
 
@@ -45,11 +59,20 @@ void	calculate_wall_projection(t_struct *data)
 
 void	ft_ljodran(t_struct *data, int y)
 {
+	int *which_text;
 	data->txt_offset_y = (y + (int)(data->wall_height / 2)
 	- (WINDOW_HEIGHT / 2)) * ((float)TEX_WIDTH
 	/ (int)data->wall_height);
+	if (!rays[data->i_wall_index]->was_hit_vertical && rays[data->i_wall_index]->is_ray_facing_down)
+		which_text = data->img_data_texture1;
+	else if (!rays[data->i_wall_index]->was_hit_vertical && rays[data->i_wall_index]->is_ray_facing_up)
+		which_text = data->img_data_texture2;
+	else if ((rays[data->i_wall_index]->was_hit_vertical) && rays[data->i_wall_index]->is_ray_facing_left) 
+		which_text = data->img_data_texture3;
+	else if ((rays[data->i_wall_index]->was_hit_vertical) && rays[data->i_wall_index]->is_ray_facing_right) 
+		which_text = data->img_data_texture4;
 	ft_draw(data, data->i_wall_index, y,
-	(int)data->img_data_texture[((TEX_WIDTH * data->txt_offset_y)
+	(int)which_text[((TEX_WIDTH * data->txt_offset_y)
 	+ data->txt_offset_x)
 	>= (TEX_HEIGHT * TEX_WIDTH)
 	? (TEX_WIDTH * TEX_HEIGHT - 1)
@@ -73,12 +96,12 @@ void	render_walls(t_struct *data)
 		? ((int)rays[data->i_wall_index]->wall_h_y % SQUARE_SIZE)
 		: ((int)rays[data->i_wall_index]->wall_h_x % SQUARE_SIZE);
 		while (ceilling++ < data->top_pixel)
-			ft_draw(data, data->i_wall_index, ceilling, 0x77b5fe);
+			ft_draw(data, data->i_wall_index, ceilling, (int)data->img_data_texture4);
 		while (y++ < data->bottom_pixel - 1)
 			ft_ljodran(data, y);
 		floor = data->bottom_pixel;
 		while (floor++ < WINDOW_HEIGHT - 1)
-			ft_draw(data, data->i_wall_index, floor, 0x9e5e6f);
+			ft_draw(data, data->i_wall_index, floor, (int)(data->img_data_texture3));
 	}
 }
 

@@ -84,3 +84,4 @@ void	ft_draw(t_struct *data, int x, int y, int color)
 	dst = data->img_data + (y * data->size_line + x * (data->bpp / 8));
 	*(u_int32_t *)dst = color;
 }
+

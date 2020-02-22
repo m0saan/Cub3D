@@ -41,7 +41,7 @@
 
 # define MAX_INT 2147483647
 # define BUFFER_SIZE 90
-
+# define MAP_NOT_BOUNDED "error : the map is not bounded\n"
 typedef struct		s_ray
 {
 	float			ray_angle;
@@ -68,8 +68,14 @@ typedef struct		s_struct
 	int				bpp_text;
 	int				size_line_text;
 	int				endian_text;
-	int				*img_data_texture;
-	void			*xpm_ptr;
+	int				*img_data_texture1;
+	int				*img_data_texture2;
+	int				*img_data_texture3;
+	int				*img_data_texture4;
+	void			*xpm_ptr1;
+	void			*xpm_ptr2;
+	void			*xpm_ptr3;
+	void			*xpm_ptr4;
 	void			*mlx_ptr;
 	void			*img_ptr;
 	void			*win_ptr;
@@ -128,24 +134,26 @@ typedef struct		s_struct
 	int was_touching_sprite;
 	int which_radius;
 	
-}					t_struct;
-typedef struct	s_struc
-{
+	int n_lines;
+	int l_length;
 	int			fd;
 	char		*line;
-	signed int	width;
-	signed int	height;
+	signed int	w_width;
+	signed int	w_height;
 	signed int	f_red;
 	signed int	f_green;
 	signed int	f_blue;
 	signed int	c_red;
 	signed int	c_green;
 	signed int	c_blue;
-	char *path_to_the_north_texture;
-	char *path_to_the_south_texture;
-	char *path_to_the_west_texture;
-	char *path_to_the_east_texture;
-}				t_read;
+	char path_to_the_north_texture[100];
+	char path_to_the_south_texture[100];
+	char path_to_the_west_texture[100];
+	char path_to_the_east_texture[100];
+	int **map;
+	int locate_player_x;
+	int locate_player_y;
+}					t_struct;
 
 int		get_next_line(int fd, char **line);
 void	free_d_shit(char **to_free);
@@ -170,7 +178,7 @@ int		move_player(t_struct *data);
 void	circle(t_struct *data);
 void	draw_line(t_struct *data);
 void	ft_draw(t_struct *data, int x, int y, int color);
-int		if_wall(float x, float y);
+int		if_wall(float x, float y, t_struct *data);
 void	line(t_struct *data, int x0, int y0, int x1, int y1);
 void	ft_draw_texture(t_struct *data, int x, int y, int color);
 float	limit_angle(float angle);
@@ -197,5 +205,15 @@ void	texture(t_struct *data);
 void	render_walls(t_struct *data);
 void	calculate_vert_ray_intercept(t_struct *data, float ray_angle);
 void	calculate_horz_ray_intercept(t_struct *data, float ray_angle);
-
+int		mainO(t_struct *data, char **av);
+void    initialize_file_struct(t_struct *data);
+int		parse(t_struct *data, char **av);
+int		read_map(t_struct *data, char *buff);
+int		mapito(t_struct *data, int *pos, char *buff);
+int		check_boudded_map(t_struct *data);
+int		line_length(char *line);
+int		count_lines(char *buff);
+void	*ft_memset(void *b, int c, size_t len);
+unsigned long creatergb(int r, int g, int b);
+char	*ft_strchr(const char *s, int c);
 #endif
