@@ -28,15 +28,9 @@
 # define MINI 0.3
 
 # define SQUARE_SIZE 64
-# define NUM_ROWS 14
-# define NUM_COLS 29
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
-# define WINDOW_WIDTH (NUM_COLS * SQUARE_SIZE)
-# define WINDOW_HEIGHT (NUM_ROWS * SQUARE_SIZE)
-
-# define NUM_RAYS (WINDOW_WIDTH)
 # define FOV_ANGLE (60 * (PI / 180))
 
 # define MAX_INT 2147483647
@@ -55,9 +49,10 @@ typedef struct		s_ray
 	int				is_ray_facing_left;
 	int				wall_h_content;
 	int				was_hit_vertical;
-}					t_ray;
+}					t_ray[1920];
 
-t_ray				*rays;
+t_ray rays[1920];
+
 uint32_t			buff[TEX_WIDTH * TEX_HEIGHT + 1];
 
 typedef struct		s_struct
@@ -126,6 +121,9 @@ typedef struct		s_struct
 	float			vert_touch_y;
 	float			horiz_touch_x;
 	float			horiz_touch_y;
+
+	int m_width;
+	int m_height;
 
 	float x_horz_to_check;
 	float y_horz_to_check;

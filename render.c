@@ -24,13 +24,13 @@ int		update(t_struct *data, uint32_t *buff)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	data->img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height);
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 	&data->size_line, &data->endian);
 	cast_rays(data);
 	move_player(data);
 	render_walls(data);
-	mini_map(data);
+	//mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (TRUE);
 }

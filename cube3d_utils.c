@@ -14,6 +14,8 @@
 
 void	initialize_1(t_struct *data)
 {
+	data->m_width = data->l_length * SQUARE_SIZE;
+	data->m_height = data->n_lines * SQUARE_SIZE;
 	data->bpp = 0;
 	data->endian = 0;
 	data->size_line = 1;
@@ -24,8 +26,8 @@ void	initialize_1(t_struct *data)
 	data->move_step = 0;
 	data->updated_player_x = 0;
 	data->updated_player_y = 0;
-	data->x = WINDOW_WIDTH / 2;
-	data->y = WINDOW_HEIGHT / 2;
+	data->x = data->m_width/ 2;
+	data->y = data->m_height / 2;
 	data->radius = 10;
 	data->width = 6;
 	data->height = 6;

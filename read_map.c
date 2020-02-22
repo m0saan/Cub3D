@@ -69,11 +69,12 @@ int		check_boudded_map(t_struct *data)
 		j = 0;
 		while (j < 29)
 		{
-			// if ((data->map[i][j] >= 0 || data->map[i][j] != 1 || data->map[i][j] != 2) || data->map[i][j] != 'N')
-			// {
-			// 	write(1,"Map containing unknown elements\n", 32);
-			// 	return 0;
-			// }
+			if (data->map[i][j] == (int)0 || data->map[i][j] == (int)1 || data->map[i][j] == (int)2 || data->map[i][j] == (int)'N')
+			{
+				printf("%d	%d	%d", i,j, data->map[i][j]);
+				write(1,"Map containing unknown elements\n", 32);
+				return 0;
+			}
 			if (data->map[i][0] != 1 || data->map[i][data->l_length - 1] != 1)
 				return 0;
 			if (data->map[0][j] != 1 || data->map[data->n_lines - 1][j] != 1)
