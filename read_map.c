@@ -129,9 +129,9 @@ int read_map(t_struct *data, char *buff)
 		if (buff[pos] == 'R')
 		{
 			pos++;
-			data->height = ft_atoi(&buff[pos++]);
+			data->w_width = ft_atoi(&buff[pos++]);
 			pos += skip_number(&buff[pos]);
-			data->width = ft_atoi(&buff[pos]);
+			data->w_height = ft_atoi(&buff[pos]);
 			get_to_map +=1;
 		}
 		if (buff[pos] == 'F')

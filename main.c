@@ -15,23 +15,22 @@
 void	horizontal_ray_intersection(float ray_angle, t_struct *data,
 int *found_horiz_wall_hit, int *horz_wall_content)
 {
-	float x_to_check;
-	float y_to_check;
-
 	calculate_horz_ray_intercept(data, ray_angle);
 	while (data->horiz_touch_x >= 0 && data->horiz_touch_x <= WINDOW_WIDTH &&
 	data->horiz_touch_y >= 0 && data->horiz_touch_y <= WINDOW_HEIGHT)
 	{
-		x_to_check = data->horiz_touch_x;
-		y_to_check = data->horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
-		if (if_wall(x_to_check, y_to_check, data))
+		data->x_horz_to_check = data->horiz_touch_x;
+		data->y_horz_to_check = data->horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
+		if (if_wall(data->x_horz_to_check, data->y_horz_to_check, data))
 		{
 			data->save_horiz_wall_hit_x = data->horiz_touch_x;
 			data->save_horiz_wall_hit_y = data->horiz_touch_y;
-			*horz_wall_content = data->map[(int)floor(y_to_check / SQUARE_SIZE)]
-			[(int)floor(x_to_check / SQUARE_SIZE)];
-			if ( data->map[(int)floor(y_to_check / SQUARE_SIZE)][(int)floor(x_to_check / SQUARE_SIZE)] == 2)
-				data->was_touching_sprite = 1;
+			*horz_wall_content = data->map[(int)floor(data->y_horz_to_check / SQUARE_SIZE)]
+			[(int)floor(data->x_horz_to_check / SQUARE_SIZE)];
+			if ( data->map[(int)floor(data->y_horz_to_check / SQUARE_SIZE)][(int)floor(data->x_horz_to_check / SQUARE_SIZE)] == 2)
+				data->was_horz_touching_sprite = 1;
+			else
+				data->was_horz_touching_sprite = 0;
 			*found_horiz_wall_hit = TRUE;
 			break ;
 		}
@@ -46,21 +45,22 @@ int *found_horiz_wall_hit, int *horz_wall_content)
 void	vertical_ray_intersection(float ray_angle, t_struct *data,
 int *found_vert_wall_hit, int *vert_wall_content)
 {
-	float x_to_check;
-	float y_to_check;
-
 	calculate_vert_ray_intercept(data, ray_angle);
 	while (data->vert_touch_x >= 0 && data->vert_touch_x <= WINDOW_WIDTH &&
 	data->vert_touch_y >= 0 && data->vert_touch_y <= WINDOW_HEIGHT)
 	{
-		x_to_check = data->vert_touch_x + (data->is_ray_facing_left ? -1 : 0);
-		y_to_check = data->vert_touch_y;
-		if (if_wall(x_to_check, y_to_check, data))
+		data->x_vert_to_check = data->vert_touch_x + (data->is_ray_facing_left ? -1 : 0);
+		data->y_vert_to_check = data->vert_touch_y;
+		if (if_wall(data->x_vert_to_check, data->y_vert_to_check, data))
 		{
 			data->save_vert_wall_hit_x = data->vert_touch_x;
 			data->save_vert_wall_hit_y = data->vert_touch_y;
-			vert_wall_content = &(data->map[(int)floor(y_to_check / SQUARE_SIZE)]
-			[(int)floor(x_to_check / SQUARE_SIZE)]);
+			vert_wall_content = &(data->map[(int)floor(data->y_vert_to_check / SQUARE_SIZE)]
+			[(int)floor(data->x_vert_to_check / SQUARE_SIZE)]);
+			if (data->map[(int)floor(data->y_vert_to_check / SQUARE_SIZE)][(int)floor(data->x_vert_to_check / SQUARE_SIZE)] == 2)
+				data->was_vert_touching_sprite = 1;
+			else
+				data->was_vert_touching_sprite = 0;
 			*found_vert_wall_hit = TRUE;
 			break ;
 		}
@@ -86,14 +86,15 @@ int		if_wall(float x, float y, t_struct *data)
 
 int		initialize_window(t_struct *data)
 {
+	printf("width : %d\nheigh : %d\n", data->w_width, data->w_height);
 	initialize_1(data);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
 		return (FALSE);
 	if ((data->win_ptr = mlx_new_window(data->mlx_ptr,
-	WINDOW_WIDTH, WINDOW_HEIGHT, "Cube3d")) == NULL)
+	data->w_width, data->w_height, "Cube3d")) == NULL)
 		return (FALSE);
 	if ((data->img_ptr = mlx_new_image(data->mlx_ptr,
-	WINDOW_WIDTH, WINDOW_HEIGHT)) == NULL)
+	data->w_width, data->w_height)) == NULL)
 		return (FALSE);
 	if ((data->img_data = mlx_get_data_addr(data->img_ptr,
 	&data->bpp, &data->size_line, &data->endian)) == NULL)
@@ -116,14 +117,13 @@ int		main(int ac, char *av[])
 	t_struct *data;
 
 	data = malloc(sizeof(t_struct));
+	rays = malloc(sizeof(t_ray) * data->w_width);
 	if (mainO(data, av))
 		return 1;
 	initialize_window(data);
 	free(data);
 	return (0);
 }
-
-#include "cube3d.h"
 
 void draw_line(t_struct *data)
 {
@@ -222,8 +222,8 @@ int render_map(t_struct *data)
 			square_x = j * SQUARE_SIZE;
 			square_y = i * SQUARE_SIZE;
 			if (data->map[i][j] == 2)
-				square_color = 0xa29bfe;
-			else
+			 	square_color = 0xa29bfe;
+			 else
 				square_color = data->map[i][j] != 0 ? 0x2ecc71 : 0xecf0f1;
 			fill_square(square_x - 1, square_y - 1, SQUARE_SIZE, square_color, data);
 			j++;

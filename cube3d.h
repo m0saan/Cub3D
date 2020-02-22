@@ -55,9 +55,9 @@ typedef struct		s_ray
 	int				is_ray_facing_left;
 	int				wall_h_content;
 	int				was_hit_vertical;
-}					t_ray[NUM_RAYS];
+}					t_ray;
 
-t_ray				rays[NUM_RAYS];
+t_ray				*rays;
 uint32_t			buff[TEX_WIDTH * TEX_HEIGHT + 1];
 
 typedef struct		s_struct
@@ -127,11 +127,19 @@ typedef struct		s_struct
 	float			horiz_touch_x;
 	float			horiz_touch_y;
 
+	float x_horz_to_check;
+	float y_horz_to_check;
+	float x_vert_to_check;
+	float y_vert_to_check;
 	int				steps;
 	float			x_inc;
 	float			y_inc;
 
-	int was_touching_sprite;
+	void *sprite_xpm;
+	int *img_data_texture_sprite;
+
+	int was_horz_touching_sprite;
+	int was_vert_touching_sprite;
 	int which_radius;
 	
 	int n_lines;

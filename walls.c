@@ -39,6 +39,11 @@ void	texture_from_file(t_struct *data)
 	&width, &height);
 	data->img_data_texture4 = (int *)mlx_get_data_addr(data->xpm_ptr4,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
+
+	data->sprite_xpm = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/barrel.xpm",
+	&width, &height);
+	data->img_data_texture_sprite = (int *)mlx_get_data_addr(data->sprite_xpm,
+	&data->bpp_text, &data->size_line_text, &data->endian_text);
 }
 
 void	calculate_wall_projection(t_struct *data)
@@ -65,11 +70,11 @@ void	ft_ljodran(t_struct *data, int y)
 	/ (int)data->wall_height);
 	if (!rays[data->i_wall_index]->was_hit_vertical && rays[data->i_wall_index]->is_ray_facing_down)
 		which_text = data->img_data_texture1;
-	else if (!rays[data->i_wall_index]->was_hit_vertical && rays[data->i_wall_index]->is_ray_facing_up)
+	if (!rays[data->i_wall_index]->was_hit_vertical && rays[data->i_wall_index]->is_ray_facing_up)
 		which_text = data->img_data_texture2;
-	else if ((rays[data->i_wall_index]->was_hit_vertical) && rays[data->i_wall_index]->is_ray_facing_left) 
+	if ((rays[data->i_wall_index]->was_hit_vertical) && rays[data->i_wall_index]->is_ray_facing_left) 
 		which_text = data->img_data_texture3;
-	else if ((rays[data->i_wall_index]->was_hit_vertical) && rays[data->i_wall_index]->is_ray_facing_right) 
+	if ((rays[data->i_wall_index]->was_hit_vertical) && rays[data->i_wall_index]->is_ray_facing_right) 
 		which_text = data->img_data_texture4;
 	ft_draw(data, data->i_wall_index, y,
 	(int)which_text[((TEX_WIDTH * data->txt_offset_y)

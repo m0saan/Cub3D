@@ -5,6 +5,7 @@
         "iterator": "c",
         "string": "c",
         "vector": "c",
-        "cube3d.h": "c"
+        "cube3d.h": "c",
+        "stdio.h": "c"
     }
 }
