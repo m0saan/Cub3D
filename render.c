@@ -28,6 +28,7 @@ int		update(t_struct *data, uint32_t *buff)
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 	&data->size_line, &data->endian);
 	cast_rays(data);
+	render_sprite(data);
 	move_player(data);
 	render_walls(data);
 	//mini_map(data);

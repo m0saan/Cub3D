@@ -11,7 +11,13 @@
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
+void	render_sprite(t_struct *data)
+{
+	int i = 0;
+	while (i < 200)
+		if (data->sprite[i].distance > 0)
+			printf("distance == %d\n",data->sprite[i].distance);
+}
 void	horizontal_ray_intersection(float ray_angle, t_struct *data,
 int *found_horiz_wall_hit, int *horz_wall_content)
 {
@@ -27,10 +33,6 @@ int *found_horiz_wall_hit, int *horz_wall_content)
 			data->save_horiz_wall_hit_y = data->horiz_touch_y;
 			*horz_wall_content = data->map[(int)floor(data->y_horz_to_check / SQUARE_SIZE)]
 			[(int)floor(data->x_horz_to_check / SQUARE_SIZE)];
-			if ( data->map[(int)floor(data->y_horz_to_check / SQUARE_SIZE)][(int)floor(data->x_horz_to_check / SQUARE_SIZE)] == 2)
-				data->was_horz_touching_sprite = 1;
-			else
-				data->was_horz_touching_sprite = 0;
 			*found_horiz_wall_hit = TRUE;
 			break ;
 		}
@@ -57,10 +59,6 @@ int *found_vert_wall_hit, int *vert_wall_content)
 			data->save_vert_wall_hit_y = data->vert_touch_y;
 			vert_wall_content = &(data->map[(int)floor(data->y_vert_to_check / SQUARE_SIZE)]
 			[(int)floor(data->x_vert_to_check / SQUARE_SIZE)]);
-			if (data->map[(int)floor(data->y_vert_to_check / SQUARE_SIZE)][(int)floor(data->x_vert_to_check / SQUARE_SIZE)] == 2)
-				data->was_vert_touching_sprite = 1;
-			else
-				data->was_vert_touching_sprite = 0;
 			*found_vert_wall_hit = TRUE;
 			break ;
 		}
@@ -86,7 +84,6 @@ int		if_wall(float x, float y, t_struct *data)
 
 int		initialize_window(t_struct *data)
 {
-	printf("width : %d\n", data->w_width);
 	initialize_1(data);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
 		return (FALSE);

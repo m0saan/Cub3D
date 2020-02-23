@@ -27,6 +27,9 @@ int found_vert_wall_hit)
 void	fill_out_ray(int ray_id, t_struct *data, int vert_wall_content,
 int horz_wall_content)
 {
+	int i;
+
+	i = 0;
 	if (data->vert_hit_distance < data->horz_hit_distance)
 	{
 		rays[ray_id]->distance = data->vert_hit_distance;
@@ -34,6 +37,8 @@ int horz_wall_content)
 		rays[ray_id]->wall_h_y = data->save_vert_wall_hit_y;
 		rays[ray_id]->wall_h_content = vert_wall_content;
 		rays[ray_id]->was_hit_vertical = TRUE;
+		if (vert_wall_content == 2)
+			data->sprite[i].distance = data->vert_hit_distance;
 	}
 	else
 	{
@@ -42,7 +47,10 @@ int horz_wall_content)
 		rays[ray_id]->wall_h_y = data->save_horiz_wall_hit_y;
 		rays[ray_id]->wall_h_content = horz_wall_content;
 		rays[ray_id]->was_hit_vertical = FALSE;
+		if (horz_wall_content == 2)
+			data->sprite[i].distance = data->horz_hit_distance;
 	}
+	i++;
 	rays[ray_id]->ray_angle = data->ray_angle;
 	rays[ray_id]->is_ray_facing_down = data->is_ray_facing_down;
 	rays[ray_id]->is_ray_facing_up = data->is_ray_facing_up;

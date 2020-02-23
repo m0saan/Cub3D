@@ -35,7 +35,12 @@
 
 # define MAX_INT 2147483647
 # define BUFFER_SIZE 90
-# define MAP_NOT_BOUNDED "error : the map is not bounded\n"
+# define MAP_ERR "error : Map error\n"
+typedef struct	s_sprite
+{
+	int			distance;
+	int			pos;
+}				t_sprite;
 typedef struct		s_ray
 {
 	float			ray_angle;
@@ -51,7 +56,7 @@ typedef struct		s_ray
 	int				was_hit_vertical;
 }					t_ray[1920];
 
-t_ray rays[1920];
+t_ray				rays[1920];
 
 uint32_t			buff[TEX_WIDTH * TEX_HEIGHT + 1];
 
@@ -159,6 +164,7 @@ typedef struct		s_struct
 	int **map;
 	int locate_player_x;
 	int locate_player_y;
+	t_sprite	*sprite;
 }					t_struct;
 
 int		get_next_line(int fd, char **line);
@@ -222,4 +228,5 @@ int		count_lines(char *buff);
 void	*ft_memset(void *b, int c, size_t len);
 unsigned long creatergb(int r, int g, int b);
 char	*ft_strchr(const char *s, int c);
+void	render_sprite(t_struct *data);
 #endif
