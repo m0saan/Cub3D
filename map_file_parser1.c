@@ -44,8 +44,6 @@ int		line_length(char *line)
 	return (length);
 }
 
-
-
 int		check_boudded_map(t_struct *data)
 {
 	int i;
@@ -69,28 +67,28 @@ int		check_boudded_map(t_struct *data)
 	return (1);
 }
 
-int		fill_out_map(t_struct *data, int *pos, char *buff)
+int		fill_out_map(t_struct *data, char *buff)
 {
 	int i;
 	int j;
 
 	i = -1;
-	data->l_length = line_length(&buff[*pos]);
-	data->n_lines = count_lines(&buff[*pos]);
-	while (buff[*pos] != '\0' && i++ < data->n_lines - 1)
+	data->l_length = line_length(&buff[data->pos]);
+	data->n_lines = count_lines(&buff[data->pos]);
+	while (buff[data->pos] != '\0' && i++ < data->n_lines - 1)
 	{
 		data->map[i] = (int *)malloc(sizeof(int) * data->l_length);
-		buff[*pos] == '\n' ? (*pos += 1) : *pos;
+		buff[data->pos] == '\n' ? (data->pos += 1) : data->pos;
 		j = -1;
-		while (j++ < data->l_length && buff[*pos] != '\n')
+		while (j++ < data->l_length && buff[data->pos] != '\n')
 		{
-			buff[*pos] == ' ' ? *pos += 1 : *pos;
-			if (buff[*pos] != '1' && buff[*pos] != '0' && buff[*pos] != '2'
-			&& buff[*pos] != 'N' && buff[*pos] != 'W'
-			&& buff[*pos] != 'E' && buff[*pos] != 'S')
+			buff[data->pos] == ' ' ? data->pos += 1 : data->pos;
+			if (buff[data->pos] != '1' && buff[data->pos] != '0'
+            && buff[data->pos] != '2' && buff[data->pos] != 'N' && buff[data->pos] != 'W'
+			&& buff[data->pos] != 'E' && buff[data->pos] != 'S')
 				return (0);
-			data->map[i][j] = ft_atoi(&buff[*pos]);
-			*pos += 1;
+			data->map[i][j] = ft_atoi(&buff[data->pos]);
+			data->pos += 1;
 		}
 	}
 	if (!(check_boudded_map(data)))
@@ -100,8 +98,8 @@ int		fill_out_map(t_struct *data, int *pos, char *buff)
 
 void	initialize_file_struct(t_struct *data)
 {
-	data->fd = 0;
-	data->line = NULL;
+	data->pos = 0;
+	data->get_to_map = 0;
 	data->width = 0;
 	data->height = 0;
 	data->f_red = 0;

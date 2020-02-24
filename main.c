@@ -111,7 +111,7 @@ int		main(int ac, char *av[])
 	t_struct *data;
 
 	data = malloc(sizeof(t_struct));
-	if (parse_1(data, av))
+	if (parse(data, av))
 		return 1;
 	initialize_window(data);
 	free(data);
