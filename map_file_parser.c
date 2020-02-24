@@ -12,6 +12,28 @@
 
 #include "cube3d.h"
 
+char    *ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+        size_t  i;
+        size_t  j;
+
+        j = 0;
+        i = 0;
+        if (*needle == '\0')
+                return ((char *)haystack);
+        while (i < len && haystack[i] != '\0')
+        {
+                while (haystack[i + j] == needle[j] && i + j < len)
+                {
+                        if (needle[j + 1] == '\0')
+                                return ((char *)(haystack + i));
+                        j++;
+                }
+                j = 0;
+                i++;
+        }
+        return (0);
+}
 void	get_western_texture_path(t_struct *data, char *buff)
 {
 	int i;
@@ -83,6 +105,26 @@ int		read_map(t_struct *data, char *buff)
 	return (0);
 }
 
+int		check_textures_availibility(t_struct *data, char *buff)
+{
+	size_t i;
+	size_t len;
+
+	i = 0;
+	len = ft_strlen(buff);
+	while(buff[i])
+	{
+		if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len))
+		|| !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
+		{
+			write(1,"Texture error!\n", 15);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int		parse(t_struct *data, char **av)
 {
 	int		fd;
@@ -94,7 +136,9 @@ int		parse(t_struct *data, char **av)
 	initialize_file_struct(data);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || read(fd, buff, len) < 0)
-		return (0);
+		return (1);
+	if (check_textures_availibility(data, (char *)buff))
+		return (1);
 	if (!(ft_strchr((char *)buff, 'R')) || !(ft_strchr((char *)buff, 'F'))
 	|| !(ft_strchr((char *)buff, 'C')) || !(ft_strchr((char *)buff, 'S')))
 		return (1);

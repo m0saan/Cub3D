@@ -20,22 +20,22 @@ void	texture_from_file(t_struct *data)
 
 	width = 0;
 	height = 0;
-	data->xpm_ptr1 = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/redbrick.xpm",
+	data->xpm_ptr1 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_north_texture,
 	&width, &height);
 	data->img_data_texture1 = (int *)mlx_get_data_addr(data->xpm_ptr1,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
 
-	data->xpm_ptr2 = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/sand.xpm",
+	data->xpm_ptr2 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_south_texture,
 	&width, &height);
 	data->img_data_texture2 = (int *)mlx_get_data_addr(data->xpm_ptr2,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
 
-	data->xpm_ptr3 = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/stone.xpm",
+	data->xpm_ptr3 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_west_texture,
 	&width, &height);
 	data->img_data_texture3 = (int *)mlx_get_data_addr(data->xpm_ptr3,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
 
-	data->xpm_ptr4 = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/wood.xpm",
+	data->xpm_ptr4 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_east_texture,
 	&width, &height);
 	data->img_data_texture4 = (int *)mlx_get_data_addr(data->xpm_ptr4,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
