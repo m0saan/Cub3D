@@ -13,10 +13,7 @@
 #include "cube3d.h"
 void	render_sprite(t_struct *data)
 {
-	int i = 0;
-	while (i < 200)
-		if (data->sprite[i].distance > 0)
-			printf("distance == %d\n",data->sprite[i].distance);
+
 }
 void	horizontal_ray_intersection(float ray_angle, t_struct *data,
 int *found_horiz_wall_hit, int *horz_wall_content)
@@ -114,7 +111,7 @@ int		main(int ac, char *av[])
 	t_struct *data;
 
 	data = malloc(sizeof(t_struct));
-	if (mainO(data, av))
+	if (parse_1(data, av))
 		return 1;
 	initialize_window(data);
 	free(data);

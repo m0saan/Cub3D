@@ -47,7 +47,7 @@ int			ft_atoi(const char *s)
 	return (ft_res(str, i));
 }
 
-char	*ft_strchr(const char *s, int c)
+char		*ft_strchr(const char *s, int c)
 {
 	int		i;
 	char	*str;
@@ -63,4 +63,31 @@ char	*ft_strchr(const char *s, int c)
 	if (s[i] == (char)c)
 		return (&str[i]);
 	return (NULL);
+}
+
+void		*ft_memset(void *b, int c, size_t len)
+{
+	unsigned int	i;
+	char			*bb;
+
+	i = 0;
+	bb = b;
+	while (i < len)
+	{
+		bb[i] = c;
+		i++;
+	}
+	return (bb);
+}
+
+int			skip_number(const char *str)
+{
+	int i;
+
+	i = 0;
+	if (str[i] == ',' || str[i] == ' ')
+		i++;
+	while (str[i] >= 48 && str[i] <= 57 && (str[i] != ' ' || str[i] != ','))
+		i++;
+	return (i);
 }

@@ -217,11 +217,11 @@ void	texture(t_struct *data);
 void	render_walls(t_struct *data);
 void	calculate_vert_ray_intercept(t_struct *data, float ray_angle);
 void	calculate_horz_ray_intercept(t_struct *data, float ray_angle);
-int		mainO(t_struct *data, char **av);
+int		parse_1(t_struct *data, char **av);
 void    initialize_file_struct(t_struct *data);
-int		parse(t_struct *data, char **av);
+int		parse_2(t_struct *data, char **av);
 int		read_map(t_struct *data, char *buff);
-int		mapito(t_struct *data, int *pos, char *buff);
+int		fill_out_map(t_struct *data, int *pos, char *buff);
 int		check_boudded_map(t_struct *data);
 int		line_length(char *line);
 int		count_lines(char *buff);
@@ -229,4 +229,19 @@ void	*ft_memset(void *b, int c, size_t len);
 unsigned long creatergb(int r, int g, int b);
 char	*ft_strchr(const char *s, int c);
 void	render_sprite(t_struct *data);
+void    get_western_texture_path(t_struct *data, char *buff,
+int *pos, int *get_to_map);
+void    get_easter_texture_path(t_struct *data, char *buff,
+int *pos, int *get_to_map);
+void    get_resolution_values(t_struct *data, char *buff,
+int *pos, int *get_to_map);
+void    get_floor_values(t_struct *data, char *buff, int *pos, int *get_to_map);
+void    get_ceilling_values(t_struct *data, char *buff,
+int *pos, int *get_to_map);
+void    get_north_texture_path(t_struct *data, char *buff,
+int *pos, int *get_to_map);
+void    get_south_texture_path(t_struct *data, char *buff,
+int *pos, int *get_to_map);
+int			skip_number(const char *str);
+
 #endif
