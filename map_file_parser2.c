@@ -52,7 +52,7 @@ void	get_north_texture_path(t_struct *data, char *buff)
 		data->pos++;
 	while (buff[data->pos] != '\n')
 	{
-		data->path_to_the_north_texture[i] = buff[data->pos];
+		data->no[i] = buff[data->pos];
 		i++;
 		data->pos++;
 	}
@@ -68,7 +68,7 @@ void	get_south_texture_path(t_struct *data, char *buff)
 		data->pos++;
 	while (buff[data->pos] != '\n')
 	{
-		data->path_to_the_south_texture[i] = buff[data->pos];
+		data->so[i] = buff[data->pos];
 		i++;
 		data->pos++;
 	}

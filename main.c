@@ -83,16 +83,16 @@ int		initialize_window(t_struct *data)
 {
 	initialize_1(data);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
-		return (FALSE);
+		return (TRUE);
 	if ((data->win_ptr = mlx_new_window(data->mlx_ptr,
 	data->w_width, data->w_height, "Cube3d")) == NULL)
-		return (FALSE);
+		return (TRUE);
 	if ((data->img_ptr = mlx_new_image(data->mlx_ptr,
 	data->w_width, data->w_height)) == NULL)
-		return (FALSE);
+		return (TRUE);
 	if ((data->img_data = mlx_get_data_addr(data->img_ptr,
 	&data->bpp, &data->size_line, &data->endian)) == NULL)
-		return (FALSE);
+		return (TRUE);
 	render_firt_time(data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
@@ -111,6 +111,7 @@ int		main(int ac, char *av[])
 	t_struct *data;
 
 	data = malloc(sizeof(t_struct));
+	rays = malloc(sizeof(t_ray) * data->w_width);
 	if (parse(data, av))
 	{
 		return 1;

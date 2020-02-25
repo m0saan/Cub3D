@@ -1,9 +1,9 @@
-R 1920 1080
+R 2560 1440
 NO ./textures/redbrick.xpm
 SO ./textures/mossy.xpm
 WE ./textures/stone.xpm
 EA ./textures/wood.xpm
-S ./path_to_the_sprite_texture
+S ./textures/barrel.xpm
 F 220,100,0
 C 225,30,0
 

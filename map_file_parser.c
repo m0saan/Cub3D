@@ -43,7 +43,7 @@ void	get_western_texture_path(t_struct *data, char *buff)
 		(data->pos)++;
 	while (buff[(data->pos)] != '\n')
 	{
-		data->path_to_the_west_texture[i] = buff[(data->pos)];
+		data->we[i] = buff[(data->pos)];
 		i++;
 		(data->pos)++;
 	}
@@ -59,7 +59,7 @@ void	get_easter_texture_path(t_struct *data, char *buff)
 		(data->pos)++;
 	while (buff[(data->pos)] != '\n')
 	{
-		data->path_to_the_east_texture[i] = buff[(data->pos)];
+		data->ea[i] = buff[(data->pos)];
 		i++;
 		(data->pos)++;
 	}
@@ -94,12 +94,11 @@ int		read_map(t_struct *data, char *buff)
 			get_western_texture_path(data, buff);
 		if (buff[data->pos] == 'E' && buff[data->pos + 1] == 'A')
 			get_easter_texture_path(data, buff);
+		if (buff[data->pos] == 'S' && buff[data->pos + 1] == ' ')
+			get_sprite_path(data, buff);
 		if (buff[data->pos] == '1' && buff[data->pos + 1] == ' '
 		&& buff[data->pos + 2] == '1' && data->get_to_map == 7)
-		{
 			screw_this_norminette(data, buff);
-			break ;
-		}
 		data->pos++;
 	}
 	return (0);
@@ -134,13 +133,28 @@ int		check_read_vaues(t_struct *data)
 		write(1, "Error : missing width or height\n", 32);
 		return (1);
 	}
-	if (data->path_to_the_north_texture[0] == 0 || data->path_to_the_south_texture[0] == 0
-	|| data->path_to_the_west_texture[0] == 0 || data->path_to_the_east_texture[0] == 0)
+	if (data->no[0] == 0 || data->so[0] == 0
+	|| data->we[0] == 0 || data->we[0] == 0)
 	{
 		write(1, "Error : wrong textute path\n", 27);
 		return (1);
 	}
 	return (0);
+}
+void		get_sprite_path(t_struct *data, char *buff)
+{
+	int i;
+
+	i = 0;
+	data->pos += 2;
+	while (buff[data->pos] != '\n')
+	{
+		data->sp[i] = buff[data->pos];
+		i++;
+		data->pos++;
+	}
+	printf("sprite_path %s\n", data->sp);
+	//data->get_to_map += 1;
 }
 int		parse(t_struct *data, char **av)
 {

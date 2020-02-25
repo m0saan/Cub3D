@@ -24,9 +24,11 @@ int		update(t_struct *data, uint32_t *buff)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	data->img_ptr = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height);
-	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
-	&data->size_line, &data->endian);
+	if ((data->img_ptr = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height)) == NULL)
+		return (TRUE);
+	if ((data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
+	&data->size_line, &data->endian)) == NULL)
+		return (TRUE);
 	cast_rays(data);
 	render_sprite(data);
 	move_player(data);
