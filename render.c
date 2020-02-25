@@ -31,9 +31,8 @@ int		update(t_struct *data, uint32_t *buff)
 	render_sprite(data);
 	move_player(data);
 	render_walls(data);
-	//mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-	return (TRUE);
+	return (FALSE);
 }
 
 void	line(t_struct *data, int x0, int y0, int x1, int y1)

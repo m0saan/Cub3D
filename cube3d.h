@@ -157,10 +157,10 @@ typedef struct		s_struct
 	signed int	c_red;
 	signed int	c_green;
 	signed int	c_blue;
-	char path_to_the_north_texture[100];
-	char path_to_the_south_texture[100];
-	char path_to_the_west_texture[100];
-	char path_to_the_east_texture[100];
+	char path_to_the_north_texture[25];
+	char path_to_the_south_texture[25];
+	char path_to_the_west_texture[25];
+	char path_to_the_east_texture[25];
 	int **map;
 	int locate_player_x;
 	int locate_player_y;
@@ -236,5 +236,6 @@ void    get_ceilling_values(t_struct *data, char *buff);
 void    get_north_texture_path(t_struct *data, char *buff);
 void    get_south_texture_path(t_struct *data, char *buff);
 int			skip_number(const char *str);
+int		check_textures_f_c_s_availibility(t_struct *data, char *buff);
 
 #endif

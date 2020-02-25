@@ -98,7 +98,7 @@ int		initialize_window(t_struct *data)
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
 	mlx_loop_hook(data->mlx_ptr, update, data);
 	mlx_loop(data->mlx_ptr);
-	return (TRUE);
+	return (FALSE);
 }
 
 int		main(int ac, char *av[])
@@ -112,10 +112,14 @@ int		main(int ac, char *av[])
 
 	data = malloc(sizeof(t_struct));
 	if (parse(data, av))
+	{
 		return 1;
-	initialize_window(data);
+	}
+		
+	if (initialize_window(data))
+		return (TRUE);
 	free(data);
-	return (0);
+	return (FALSE);
 }
 
 void render_all_rays(t_struct *data)

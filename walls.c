@@ -20,30 +20,38 @@ void	texture_from_file(t_struct *data)
 
 	width = 0;
 	height = 0;
-	data->xpm_ptr1 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_north_texture,
-	&width, &height);
+	data->xpm_ptr1 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_north_texture, &width, &height);
+	data->xpm_ptr2 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_south_texture,&width, &height);
+	data->xpm_ptr3 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_west_texture,&width, &height);
+	data->xpm_ptr4 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_east_texture,&width, &height);
+	data->sprite_xpm = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/barrel.xpm",&width, &height);
+
+	if (!data->xpm_ptr1 || !data->xpm_ptr2 || !data->xpm_ptr3 || !data->xpm_ptr4)
+	{
+		write(1, "Error : wrong texture path!\n",28);
+		(ft_close(data));
+	}
+
 	data->img_data_texture1 = (int *)mlx_get_data_addr(data->xpm_ptr1,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
 
-	data->xpm_ptr2 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_south_texture,
-	&width, &height);
+
 	data->img_data_texture2 = (int *)mlx_get_data_addr(data->xpm_ptr2,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
 
-	data->xpm_ptr3 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_west_texture,
-	&width, &height);
+	
 	data->img_data_texture3 = (int *)mlx_get_data_addr(data->xpm_ptr3,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
 
-	data->xpm_ptr4 = mlx_xpm_file_to_image(data->mlx_ptr, data->path_to_the_east_texture,
-	&width, &height);
+
 	data->img_data_texture4 = (int *)mlx_get_data_addr(data->xpm_ptr4,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
 
-	data->sprite_xpm = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/barrel.xpm",
-	&width, &height);
+
 	data->img_data_texture_sprite = (int *)mlx_get_data_addr(data->sprite_xpm,
 	&data->bpp_text, &data->size_line_text, &data->endian_text);
+
+
 }
 
 void	calculate_wall_projection(t_struct *data)
@@ -129,6 +137,5 @@ void	cast_rays(t_struct *data)
 		ray_angle += FOV_ANGLE / data->w_width;
 		ray_id++;
 	}
-	//render_all_rays(data);
 }
 

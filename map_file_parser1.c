@@ -109,8 +109,8 @@ void	initialize_file_struct(t_struct *data)
 	data->c_green = 0;
 	data->c_blue = 0;
 	data->map = malloc(sizeof(int) * 30);
-	ft_memset(data->path_to_the_north_texture, 0, 100);
-	ft_memset(data->path_to_the_south_texture, 0, 100);
-	ft_memset(data->path_to_the_east_texture, 0, 100);
-	ft_memset(data->path_to_the_west_texture, 0, 100);
+	ft_memset(data->path_to_the_north_texture, 0, 25);
+	ft_memset(data->path_to_the_south_texture, 0, 25);
+	ft_memset(data->path_to_the_east_texture, 0, 25);
+	ft_memset(data->path_to_the_west_texture, 0, 25);
 }
