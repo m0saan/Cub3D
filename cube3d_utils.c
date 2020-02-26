@@ -26,7 +26,7 @@ void	initialize_1(t_struct *data)
 	data->move_step = 0;
 	data->updated_player_x = 0;
 	data->updated_player_y = 0;
-	data->x = data->m_width/ 2;
+	data->x = data->m_width / 2;
 	data->y = data->m_height / 2;
 	data->radius = 10;
 	data->width = 6;
@@ -88,4 +88,3 @@ void	ft_draw(t_struct *data, int x, int y, int color)
 	dst = data->img_data + (y * data->size_line + x * (data->bpp / 8));
 	*(u_int32_t *)dst = color;
 }
-

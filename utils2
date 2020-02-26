@@ -108,11 +108,45 @@ int render_map(t_struct *data)
 	}
 	return (TRUE);
 }
+void render_all_rays(t_struct *data)
+{
+	int i;
 
+	i = 0;
+	while (i < data->w_width)
+	{
+		line(data, data->x * MINI, data->y * MINI, rays[i].wall_h_x * MINI, rays[i].wall_h_y * MINI);
+		i++;
+	}
+}
 void mini_map(t_struct *data)
 {
 	render_map(data);
 	circle(data);
 	cast_rays(data);
 	move_player(data);
+}
+
+void	line(t_struct *data, int x0, int y0, int x1, int y1)
+{
+	size_t	i;
+	int		dx;
+	int		dy;
+	float	x;
+	float	y;
+
+	i = 0;
+	dx = x1 - x0;
+	dy = y1 - y0;
+	data->steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+	data->x_inc = dx / (float)data->steps;
+	data->y_inc = dy / (float)data->steps;
+	x = x0;
+	y = y0;
+	while (i++ <= data->steps)
+	{
+		ft_draw(data, x, y, 0xff1100);
+		x += data->x_inc;
+		y += data->y_inc;
+	}
 }

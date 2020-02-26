@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 #include "cube3d.h"
-void	render_sprite(t_struct *data)
-{
 
-}
-void	horizontal_ray_intersection(float ray_angle, t_struct *data,
+void		horizontal_ray_intersection(float ray_angle, t_struct *data,
 int *found_horiz_wall_hit, int *horz_wall_content)
 {
 	calculate_horz_ray_intercept(data, ray_angle);
@@ -23,13 +20,14 @@ int *found_horiz_wall_hit, int *horz_wall_content)
 	data->horiz_touch_y >= 0 && data->horiz_touch_y <= data->m_height)
 	{
 		data->x_horz_to_check = data->horiz_touch_x;
-		data->y_horz_to_check = data->horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
+		data->y_horz_to_check = data->horiz_touch_y
+		+ (data->is_ray_facing_up ? -1 : 0);
 		if (if_wall(data->x_horz_to_check, data->y_horz_to_check, data))
 		{
 			data->save_horiz_wall_hit_x = data->horiz_touch_x;
 			data->save_horiz_wall_hit_y = data->horiz_touch_y;
-			*horz_wall_content = data->map[(int)floor(data->y_horz_to_check / SQUARE_SIZE)]
-			[(int)floor(data->x_horz_to_check / SQUARE_SIZE)];
+			*horz_wall_content = data->map[(int)floor(data->y_horz_to_check
+			/ SQUARE_SIZE)][(int)floor(data->x_horz_to_check / SQUARE_SIZE)];
 			*found_horiz_wall_hit = TRUE;
 			break ;
 		}
@@ -41,21 +39,22 @@ int *found_horiz_wall_hit, int *horz_wall_content)
 	}
 }
 
-void	vertical_ray_intersection(float ray_angle, t_struct *data,
+void		vertical_ray_intersection(float ray_angle, t_struct *data,
 int *found_vert_wall_hit, int *vert_wall_content)
 {
 	calculate_vert_ray_intercept(data, ray_angle);
 	while (data->vert_touch_x >= 0 && data->vert_touch_x <= data->m_width &&
 	data->vert_touch_y >= 0 && data->vert_touch_y <= data->m_height)
 	{
-		data->x_vert_to_check = data->vert_touch_x + (data->is_ray_facing_left ? -1 : 0);
+		data->x_vert_to_check = data->vert_touch_x
+		+ (data->is_ray_facing_left ? -1 : 0);
 		data->y_vert_to_check = data->vert_touch_y;
 		if (if_wall(data->x_vert_to_check, data->y_vert_to_check, data))
 		{
 			data->save_vert_wall_hit_x = data->vert_touch_x;
 			data->save_vert_wall_hit_y = data->vert_touch_y;
-			vert_wall_content = &(data->map[(int)floor(data->y_vert_to_check / SQUARE_SIZE)]
-			[(int)floor(data->x_vert_to_check / SQUARE_SIZE)]);
+			vert_wall_content = &(data->map[(int)floor(data->y_vert_to_check
+			/ SQUARE_SIZE)][(int)floor(data->x_vert_to_check / SQUARE_SIZE)]);
 			*found_vert_wall_hit = TRUE;
 			break ;
 		}
@@ -67,7 +66,7 @@ int *found_vert_wall_hit, int *vert_wall_content)
 	}
 }
 
-int		if_wall(float x, float y, t_struct *data)
+int			if_wall(float x, float y, t_struct *data)
 {
 	int map_index_x;
 	int map_index_y;
@@ -79,7 +78,7 @@ int		if_wall(float x, float y, t_struct *data)
 	return (data->map[map_index_y][map_index_x] != 0);
 }
 
-int		initialize_window(t_struct *data)
+int			initialize_window(t_struct *data)
 {
 	initialize_1(data);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
@@ -101,41 +100,21 @@ int		initialize_window(t_struct *data)
 	return (FALSE);
 }
 
-int		main(int ac, char *av[])
+int			main(int ac, char *av[])
 {
+	t_struct *data;
+
 	if (ac != 2)
 	{
 		write(1, "No map included!\n", 17);
-		return 1;
+		return (1);
 	}
-	t_struct *data;
-
 	data = malloc(sizeof(t_struct));
-	rays = malloc(sizeof(t_ray) * data->w_width);
 	if (parse(data, av))
-	{
-		return 1;
-	}
-		
+		return (1);
+	rays = malloc(sizeof(t_ray) * data->w_width);
 	if (initialize_window(data))
 		return (TRUE);
 	free(data);
 	return (FALSE);
-}
-
-void render_all_rays(t_struct *data)
-{
-	int i;
-
-	i = 0;
-	while (i < data->w_width)
-	{
-		line(data, data->x * MINI, data->y * MINI, rays[i]->wall_h_x * MINI, rays[i]->wall_h_y * MINI);
-		i++;
-	}
-}
-
-unsigned long creatergb(int r, int g, int b)
-{   
-    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }

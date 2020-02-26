@@ -24,41 +24,17 @@ int		update(t_struct *data, uint32_t *buff)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	if ((data->img_ptr = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height)) == NULL)
+	if ((data->img_ptr = mlx_new_image(data->mlx_ptr,
+	data->w_width, data->w_height)) == NULL)
 		return (TRUE);
 	if ((data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 	&data->size_line, &data->endian)) == NULL)
 		return (TRUE);
 	cast_rays(data);
-	render_sprite(data);
 	move_player(data);
 	render_walls(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (FALSE);
-}
-
-void	line(t_struct *data, int x0, int y0, int x1, int y1)
-{
-	size_t	i;
-	int		dx;
-	int		dy;
-	float	x;
-	float	y;
-
-	i = 0;
-	dx = x1 - x0;
-	dy = y1 - y0;
-	data->steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-	data->x_inc = dx / (float)data->steps;
-	data->y_inc = dy / (float)data->steps;
-	x = x0;
-	y = y0;
-	while (i++ <= data->steps)
-	{
-		ft_draw(data, x, y, 0xff1100);
-		x += data->x_inc;
-		y += data->y_inc;
-	}
 }
 
 int		move_player(t_struct *data)

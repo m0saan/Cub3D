@@ -36,11 +36,12 @@
 # define MAX_INT 2147483647
 # define BUFFER_SIZE 90
 # define MAP_ERR "error : Map error\n"
-typedef struct	s_sprite
+
+typedef struct		s_sprite
 {
-	int			distance;
-	int			pos;
-}				t_sprite;
+	int				distance;
+	int				pos;
+}					t_sprite;
 typedef struct		s_ray
 {
 	float			ray_angle;
@@ -56,9 +57,9 @@ typedef struct		s_ray
 	int				was_hit_vertical;
 }					t_ray;
 
-t_ray				*rays;
+t_ray				*g_rays;
 
-uint32_t			buff[TEX_WIDTH * TEX_HEIGHT + 1];
+uint32_t			g_buff[TEX_WIDTH * TEX_HEIGHT + 1];
 
 typedef struct		s_struct
 {
@@ -127,45 +128,45 @@ typedef struct		s_struct
 	float			horiz_touch_x;
 	float			horiz_touch_y;
 
-	int m_width;
-	int m_height;
+	int				m_width;
+	int				m_height;
 
-	float x_horz_to_check;
-	float y_horz_to_check;
-	float x_vert_to_check;
-	float y_vert_to_check;
+	float			x_horz_to_check;
+	float			y_horz_to_check;
+	float			x_vert_to_check;
+	float			y_vert_to_check;
 	int				steps;
 	float			x_inc;
 	float			y_inc;
 
-	void *sprite_xpm;
-	int *img_data_texture_sprite;
+	void			*sprite_xpm;
+	int				*img_data_texture_sprite;
 
-	int was_horz_touching_sprite;
-	int was_vert_touching_sprite;
-	int which_radius;
-	
-	int n_lines;
-	int l_length;
-	int pos;
-	int get_to_map;
-	signed int	w_width;
-	signed int	w_height;
-	signed int	f_red;
-	signed int	f_green;
-	signed int	f_blue;
-	signed int	c_red;
-	signed int	c_green;
-	signed int	c_blue;
-	char no[25];
-	char so[25];
-	char we[25];
-	char ea[25];
-	char sp[25];
-	int **map;
-	int locate_player_x;
-	int locate_player_y;
-	t_sprite	*sprite;
+	int				was_horz_touching_sprite;
+	int				was_vert_touching_sprite;
+	int				which_radius;
+
+	int				n_lines;
+	int				l_length;
+	int				pos;
+	int				get_to_map;
+	signed int		w_width;
+	signed int		w_height;
+	signed int		f_red;
+	signed int		f_green;
+	signed int		f_blue;
+	signed int		c_red;
+	signed int		c_green;
+	signed int		c_blue;
+	char			no[25];
+	char			so[25];
+	char			we[25];
+	char			ea[25];
+	char			sp[25];
+	int				**map;
+	int				locate_player_x;
+	int				locate_player_y;
+	t_sprite		*sprite;
 }					t_struct;
 
 int		get_next_line(int fd, char **line);
@@ -219,25 +220,27 @@ void	render_walls(t_struct *data);
 void	calculate_vert_ray_intercept(t_struct *data, float ray_angle);
 void	calculate_horz_ray_intercept(t_struct *data, float ray_angle);
 int		parse(t_struct *data, char **av);
-void    initialize_file_struct(t_struct *data);
+void	initialize_file_struct(t_struct *data);
 int		read_map(t_struct *data, char *buff);
 int		fill_out_map(t_struct *data, char *buff);
 int		check_boudded_map(t_struct *data);
 int		line_length(char *line);
 int		count_lines(char *buff);
 void	*ft_memset(void *b, int c, size_t len);
-unsigned long creatergb(int r, int g, int b);
+uint32_t creatergb(int r, int g, int b);
 char	*ft_strchr(const char *s, int c);
 void	render_sprite(t_struct *data);
-void    get_western_texture_path(t_struct *data, char *buff);
-void    get_easter_texture_path(t_struct *data, char *buff);
-void    get_resolution_values(t_struct *data, char *buff);
-void    get_floor_values(t_struct *data, char *buff);
-void    get_ceilling_values(t_struct *data, char *buff);
-void    get_north_texture_path(t_struct *data, char *buff);
-void    get_south_texture_path(t_struct *data, char *buff);
+void	get_western_texture_path(t_struct *data, char *buff);
+void	get_easter_texture_path(t_struct *data, char *buff);
+void	get_resolution_values(t_struct *data, char *buff);
+void	get_floor_values(t_struct *data, char *buff);
+void	get_ceilling_values(t_struct *data, char *buff);
+void	get_north_texture_path(t_struct *data, char *buff);
+void	get_south_texture_path(t_struct *data, char *buff);
 int		skip_number(const char *str);
 int		check_textures_f_c_s_availibility(t_struct *data, char *buff);
 void	get_sprite_path(t_struct *data, char *buff);
+int		screw_this_norminette(t_struct *data, char *buff);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 #endif

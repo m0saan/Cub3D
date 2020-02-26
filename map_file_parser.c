@@ -12,70 +12,6 @@
 
 #include "cube3d.h"
 
-char    *ft_strnstr(const char *haystack, const char *needle, size_t len)
-{
-        size_t  i;
-        size_t  j;
-
-        j = 0;
-        i = 0;
-        if (*needle == '\0')
-                return ((char *)haystack);
-        while (i < len && haystack[i] != '\0')
-        {
-                while (haystack[i + j] == needle[j] && i + j < len)
-                {
-                        if (needle[j + 1] == '\0')
-                                return ((char *)(haystack + i));
-                        j++;
-                }
-                j = 0;
-                i++;
-        }
-        return (0);
-}
-void	get_western_texture_path(t_struct *data, char *buff)
-{
-	int i;
-
-	i = 0;
-	while (buff[(data->pos)] != '.' && buff[(data->pos) + 1] != '/')
-		(data->pos)++;
-	while (buff[(data->pos)] != '\n')
-	{
-		data->we[i] = buff[(data->pos)];
-		i++;
-		(data->pos)++;
-	}
-	data->get_to_map += 1;
-}
-
-void	get_easter_texture_path(t_struct *data, char *buff)
-{
-	int i;
-
-	i = 0;
-	while (buff[(data->pos)] != '.' && buff[(data->pos) + 1] != '/')
-		(data->pos)++;
-	while (buff[(data->pos)] != '\n')
-	{
-		data->ea[i] = buff[(data->pos)];
-		i++;
-		(data->pos)++;
-	}
-	data->get_to_map += 1;
-}
-
-int		screw_this_norminette(t_struct *data, char *buff)
-{
-	if (!(fill_out_map(data, buff)))
-	{
-		write(1, MAP_ERR, 18);
-		return (1);
-	}
-	return (0);
-}
-
 int		read_map(t_struct *data, char *buff)
 {
 	while (buff[data->pos])
@@ -97,7 +33,7 @@ int		read_map(t_struct *data, char *buff)
 		if (buff[data->pos] == 'S' && buff[data->pos + 1] == ' ')
 			get_sprite_path(data, buff);
 		if (buff[data->pos] == '1' && buff[data->pos + 1] == ' '
-		&& buff[data->pos + 2] == '1' && data->get_to_map == 7)
+		&& buff[data->pos + 2] == '1' && data->get_to_map == 8)
 			screw_this_norminette(data, buff);
 		data->pos++;
 	}
@@ -111,18 +47,18 @@ int		check_textures_f_c_s_availibility(t_struct *data, char *buff)
 
 	i = 0;
 	len = ft_strlen(buff);
-		if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len))
-		|| !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
-		{
-			write(1,"Texture error!\n", 15);
-			return (1);
-		}
-		if (!(ft_strchr((char *)buff, 'R')) || !(ft_strchr((char *)buff, 'F'))
-		|| !(ft_strchr((char *)buff, 'C')) || !(ft_strchr((char *)buff, 'S')))
-		{
-			write(1, "Error : valuable informations are not involved!\n", 48);
-			return (1);
-		}
+	if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len))
+	|| !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
+	{
+		write(1, "Texture error!\n", 15);
+		return (1);
+	}
+	if (!(ft_strchr((char *)buff, 'R')) || !(ft_strchr((char *)buff, 'F'))
+	|| !(ft_strchr((char *)buff, 'C')) || !(ft_strchr((char *)buff, 'S')))
+	{
+		write(1, "Error : valuable informations are not involved!\n", 48);
+		return (1);
+	}
 	return (0);
 }
 
@@ -141,7 +77,8 @@ int		check_read_vaues(t_struct *data)
 	}
 	return (0);
 }
-void		get_sprite_path(t_struct *data, char *buff)
+
+void	get_sprite_path(t_struct *data, char *buff)
 {
 	int i;
 
@@ -154,8 +91,9 @@ void		get_sprite_path(t_struct *data, char *buff)
 		data->pos++;
 	}
 	printf("sprite_path %s\n", data->sp);
-	//data->get_to_map += 1;
+	data->get_to_map += 1;
 }
+
 int		parse(t_struct *data, char **av)
 {
 	int		fd;
@@ -176,6 +114,6 @@ int		parse(t_struct *data, char **av)
 	if (read_map(data, (char *)buff))
 		return (1);
 	if (check_read_vaues(data))
-		return 1;
+		return (1);
 	return (0);
 }
