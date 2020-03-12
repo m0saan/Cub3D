@@ -34,7 +34,7 @@ void	initialize_1(t_struct *data)
 	data->turn_direction = 0;
 	data->walk_direction = 0;
 	data->rotation_angle = PI / 2;
-	data->walk_speed = 10;
+	data->walk_speed = 14;
 	data->turn_speed = 5 * (PI / 180);
 	data->which_radius = 0;
 	initialize_2(data);
@@ -62,7 +62,7 @@ void	initialize_2(t_struct *data)
 	data->bottom_pixel = 0;
 	data->distance_to_projection_plane = 0;
 	data->wall_height = 0;
-	data->sprite = malloc(sizeof(t_sprite) * 200);
+	data->count_spt = 2;
 	ft_memset(data->sprite, 0, 200);
 }
 

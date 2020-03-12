@@ -34,7 +34,7 @@ int		read_map(t_struct *data, char *buff)
 			get_sprite_path(data, buff);
 		if (buff[data->pos] == '1' && buff[data->pos + 1] == ' '
 		&& buff[data->pos + 2] == '1' && data->get_to_map == 8)
-			screw_this_norminette(data, buff);
+			return (screw_this_norminette(data, buff)) ? 1 : 0;
 		data->pos++;
 	}
 	return (0);

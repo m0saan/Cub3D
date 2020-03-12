@@ -74,6 +74,7 @@ int			screw_this_norminette(t_struct *data, char *buff)
 		write(1, MAP_ERR, 18);
 		return (1);
 	}
+	
 	return (0);
 }
 

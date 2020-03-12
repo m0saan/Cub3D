@@ -42,8 +42,8 @@ void	texture_from_file(t_struct *data)
 
 void	calculate_wall_projection(t_struct *data)
 {
-	data->corrected_dsitance = rays[data->i_wall_index].distance *
-	cos(rays[data->i_wall_index].ray_angle - data->rotation_angle);
+	data->corrected_dsitance = g_rays[data->i_wall_index].distance *
+	cos(g_rays[data->i_wall_index].ray_angle - data->rotation_angle);
 	data->distance_to_projection_plane = (data->w_width * 0.5)
 	/ tan(FOV_ANGLE / 2);
 	data->wall_height = (SQUARE_SIZE / data->corrected_dsitance) *
@@ -60,21 +60,21 @@ void	ft_ljodran(t_struct *data, int y)
 {
 	int *which_text;
 	int index;
-
+	
 	data->txt_offset_y = (y + (int)(data->wall_height / 2)
 	- (data->w_height / 2)) * ((float)TEX_WIDTH
 	/ (int)data->wall_height);
-	if (!rays[data->i_wall_index].was_hit_vertical
-	&& rays[data->i_wall_index].is_ray_facing_down)
+	if (!g_rays[data->i_wall_index].was_hit_vertical
+	&& g_rays[data->i_wall_index].is_ray_facing_down)
 		which_text = data->img_data_texture1;
-	else if (!rays[data->i_wall_index].was_hit_vertical
-	&& rays[data->i_wall_index].is_ray_facing_up)
+	else if (!g_rays[data->i_wall_index].was_hit_vertical
+	&& g_rays[data->i_wall_index].is_ray_facing_up)
 		which_text = data->img_data_texture2;
-	else if ((rays[data->i_wall_index].was_hit_vertical)
-	&& rays[data->i_wall_index].is_ray_facing_left)
+	else if ((g_rays[data->i_wall_index].was_hit_vertical)
+	&& g_rays[data->i_wall_index].is_ray_facing_left)
 		which_text = data->img_data_texture3;
-	else if ((rays[data->i_wall_index].was_hit_vertical)
-	&& rays[data->i_wall_index].is_ray_facing_right)
+	else if ((g_rays[data->i_wall_index].was_hit_vertical)
+	&& g_rays[data->i_wall_index].is_ray_facing_right)
 		which_text = data->img_data_texture4;
 	index = ((TEX_WIDTH * data->txt_offset_y)
 	+ data->txt_offset_x)
@@ -84,6 +84,7 @@ void	ft_ljodran(t_struct *data, int y)
 	index = index <= 0 ? 0 : index;
 	ft_draw(data, data->i_wall_index, y, (int)which_text[index]);
 }
+		
 
 void	render_walls(t_struct *data)
 {
@@ -98,9 +99,9 @@ void	render_walls(t_struct *data)
 		ceilling = 0;
 		calculate_wall_projection(data);
 		y = data->top_pixel;
-		data->txt_offset_x = (rays[data->i_wall_index].was_hit_vertical)
-		? ((int)rays[data->i_wall_index].wall_h_y % SQUARE_SIZE)
-		: ((int)rays[data->i_wall_index].wall_h_x % SQUARE_SIZE);
+		data->txt_offset_x = (g_rays[data->i_wall_index].was_hit_vertical)
+		? ((int)g_rays[data->i_wall_index].wall_h_y % SQUARE_SIZE)
+		: ((int)g_rays[data->i_wall_index].wall_h_x % SQUARE_SIZE);
 		while (ceilling++ < data->top_pixel)
 			ft_draw(data, data->i_wall_index, ceilling,
 			creatergb(data->c_red, data->c_green, data->c_blue));
@@ -108,8 +109,7 @@ void	render_walls(t_struct *data)
 			ft_ljodran(data, y);
 		floor = data->bottom_pixel;
 		while (floor++ < data->w_height - 1)
-			ft_draw(data, data->i_wall_index, floor,
-			(int)(data->img_data_texture3));
+			ft_draw(data, data->i_wall_index, floor, creatergb(data->f_red, data->c_green, data->c_blue));
 	}
 }
 

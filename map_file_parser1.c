@@ -56,6 +56,11 @@ int		check_boudded_map(t_struct *data)
 		j = 0;
 		while (j < 29)
 		{
+			if (data->map[i][j] == 78)
+			{
+				data->x = i * SQUARE_SIZE;
+				data->y = j *SQUARE_SIZE;
+			}
 			if (data->map[i][0] != 1 || data->map[i][data->l_length - 1] != 1)
 				return (0);
 			if (data->map[0][j] != 1 || data->map[data->n_lines - 1][j] != 1)
@@ -84,16 +89,18 @@ int		fill_out_map(t_struct *data, char *buff)
 		{
 			buff[data->pos] == ' ' ? data->pos += 1 : data->pos;
 			if (buff[data->pos] != '1' && buff[data->pos] != '0'
-            && buff[data->pos] != '2' && buff[data->pos] != 'N' && buff[data->pos] != 'W'
-			&& buff[data->pos] != 'E' && buff[data->pos] != 'S')
+			&& buff[data->pos] != '2' && buff[data->pos] != 'N'
+			&& buff[data->pos] != 'W' && buff[data->pos] != 'E'
+			&& buff[data->pos] != 'S')
 				return (0);
-			data->map[i][j] = ft_atoi(&buff[data->pos]);
+			if (buff[data->pos] == 'N')
+				data->map[i][j] = 'N';
+			else
+				data->map[i][j] = ft_atoi(&buff[data->pos]);
 			data->pos += 1;
 		}
 	}
-	if (!(check_boudded_map(data)))
-		return (0);
-	return (1);
+	return (!(check_boudded_map(data)) ? 0 : 1);
 }
 
 void	initialize_file_struct(t_struct *data)

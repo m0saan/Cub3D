@@ -32,26 +32,26 @@ int horz_wall_content)
 	i = 0;
 	if (data->vert_hit_distance < data->horz_hit_distance)
 	{
-		rays[ray_id].distance = data->vert_hit_distance;
-		rays[ray_id].wall_h_x = data->save_vert_wall_hit_x;
-		rays[ray_id].wall_h_y = data->save_vert_wall_hit_y;
-		rays[ray_id].wall_h_content = vert_wall_content;
-		rays[ray_id].was_hit_vertical = TRUE;
+		g_rays[ray_id].distance = data->vert_hit_distance;
+		g_rays[ray_id].wall_h_x = data->save_vert_wall_hit_x;
+		g_rays[ray_id].wall_h_y = data->save_vert_wall_hit_y;
+		g_rays[ray_id].wall_h_content = vert_wall_content;
+		g_rays[ray_id].was_hit_vertical = TRUE;
 	}
 	else
 	{
-		rays[ray_id].distance = data->horz_hit_distance;
-		rays[ray_id].wall_h_x = data->save_horiz_wall_hit_x;
-		rays[ray_id].wall_h_y = data->save_horiz_wall_hit_y;
-		rays[ray_id].wall_h_content = horz_wall_content;
-		rays[ray_id].was_hit_vertical = FALSE;
+		g_rays[ray_id].distance = data->horz_hit_distance;
+		g_rays[ray_id].wall_h_x = data->save_horiz_wall_hit_x;
+		g_rays[ray_id].wall_h_y = data->save_horiz_wall_hit_y;
+		g_rays[ray_id].wall_h_content = horz_wall_content;
+		g_rays[ray_id].was_hit_vertical = FALSE;
 	}
 	i++;
-	rays[ray_id].ray_angle = data->ray_angle;
-	rays[ray_id].is_ray_facing_down = data->is_ray_facing_down;
-	rays[ray_id].is_ray_facing_up = data->is_ray_facing_up;
-	rays[ray_id].is_ray_facing_left = data->is_ray_facing_left;
-	rays[ray_id].is_ray_facing_right = data->is_ray_facing_right;
+	g_rays[ray_id].ray_angle = data->ray_angle;
+	g_rays[ray_id].is_ray_facing_down = data->is_ray_facing_down;
+	g_rays[ray_id].is_ray_facing_up = data->is_ray_facing_up;
+	g_rays[ray_id].is_ray_facing_left = data->is_ray_facing_left;
+	g_rays[ray_id].is_ray_facing_right = data->is_ray_facing_right;
 }
 
 void	cast_single_ray(int ray_id, float ray_angle, t_struct *data)

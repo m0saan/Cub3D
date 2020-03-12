@@ -22,12 +22,12 @@ int *found_horiz_wall_hit, int *horz_wall_content)
 		data->x_horz_to_check = data->horiz_touch_x;
 		data->y_horz_to_check = data->horiz_touch_y
 		+ (data->is_ray_facing_up ? -1 : 0);
-		if (if_wall(data->x_horz_to_check, data->y_horz_to_check, data))
+		*horz_wall_content = data->map[(int)floor(data->y_horz_to_check
+		/ SQUARE_SIZE)][(int)floor(data->x_horz_to_check / SQUARE_SIZE)];
+		if (if_wall(data->x_horz_to_check, data->y_horz_to_check, data) && *horz_wall_content != 78 && *horz_wall_content != 2)
 		{
 			data->save_horiz_wall_hit_x = data->horiz_touch_x;
 			data->save_horiz_wall_hit_y = data->horiz_touch_y;
-			*horz_wall_content = data->map[(int)floor(data->y_horz_to_check
-			/ SQUARE_SIZE)][(int)floor(data->x_horz_to_check / SQUARE_SIZE)];
 			*found_horiz_wall_hit = TRUE;
 			break ;
 		}
@@ -49,12 +49,12 @@ int *found_vert_wall_hit, int *vert_wall_content)
 		data->x_vert_to_check = data->vert_touch_x
 		+ (data->is_ray_facing_left ? -1 : 0);
 		data->y_vert_to_check = data->vert_touch_y;
-		if (if_wall(data->x_vert_to_check, data->y_vert_to_check, data))
+		vert_wall_content = &(data->map[(int)floor(data->y_vert_to_check
+		/ SQUARE_SIZE)][(int)floor(data->x_vert_to_check / SQUARE_SIZE)]);
+		if (if_wall(data->x_vert_to_check, data->y_vert_to_check, data) && *vert_wall_content != 78 && *vert_wall_content != 2)
 		{
 			data->save_vert_wall_hit_x = data->vert_touch_x;
 			data->save_vert_wall_hit_y = data->vert_touch_y;
-			vert_wall_content = &(data->map[(int)floor(data->y_vert_to_check
-			/ SQUARE_SIZE)][(int)floor(data->x_vert_to_check / SQUARE_SIZE)]);
 			*found_vert_wall_hit = TRUE;
 			break ;
 		}
@@ -75,12 +75,15 @@ int			if_wall(float x, float y, t_struct *data)
 		return (TRUE);
 	map_index_x = floor((x / SQUARE_SIZE));
 	map_index_y = floor((y / SQUARE_SIZE));
-	return (data->map[map_index_y][map_index_x] != 0);
+	return (data->map[map_index_y][map_index_x] == 1);
 }
 
 int			initialize_window(t_struct *data)
 {
 	initialize_1(data);
+	printf("p->x : %f\n", data->x);
+	printf("p->y : %f\n", data->y);
+	printf("%d\n", data->map[704 / 64][1664 / 64]);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
 		return (TRUE);
 	if ((data->win_ptr = mlx_new_window(data->mlx_ptr,
@@ -92,6 +95,7 @@ int			initialize_window(t_struct *data)
 	if ((data->img_data = mlx_get_data_addr(data->img_ptr,
 	&data->bpp, &data->size_line, &data->endian)) == NULL)
 		return (TRUE);
+	initialize_sprite(data);
 	render_firt_time(data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
@@ -112,9 +116,11 @@ int			main(int ac, char *av[])
 	data = malloc(sizeof(t_struct));
 	if (parse(data, av))
 		return (1);
-	rays = malloc(sizeof(t_ray) * data->w_width);
+	printf("p->x : %f\n", data->x);
+	printf("p->y : %f\n", data->y);
+	g_rays = malloc(sizeof(t_ray) * data->w_width);
 	if (initialize_window(data))
 		return (TRUE);
-	free(data);
+	free(data);	
 	return (FALSE);
 }

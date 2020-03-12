@@ -39,9 +39,15 @@
 
 typedef struct		s_sprite
 {
-	int				distance;
-	int				pos;
+	int				*buff;
+	float			x;
+	float			y;
+	float			x_off;
+	float			y_off;
+	float			size;
+	float			dis;
 }					t_sprite;
+
 typedef struct		s_ray
 {
 	float			ray_angle;
@@ -58,7 +64,6 @@ typedef struct		s_ray
 }					t_ray;
 
 t_ray				*g_rays;
-
 uint32_t			g_buff[TEX_WIDTH * TEX_HEIGHT + 1];
 
 typedef struct		s_struct
@@ -166,81 +171,90 @@ typedef struct		s_struct
 	int				**map;
 	int				locate_player_x;
 	int				locate_player_y;
+
 	t_sprite		*sprite;
+	int				count_spt;
 }					t_struct;
 
-int		get_next_line(int fd, char **line);
-void	free_d_shit(char **to_free);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(const char *s1);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-size_t	ft_strlen(const char *s);
-int		gnl_get_index(char *stack);
-void	gnl_verify_line(char **line, char **stack, char **heap);
-int		gnl_read_line(char **line, char **stack, char **heap, int byte, int fd);
-int		ft_atoi(const char *s);
-char	**ft_split(const char *ss, char c);
-void	render_player(t_struct *data);
-void	initialize_1(t_struct *data);
-void	initialize_2(t_struct *data);
-int		render_map(t_struct *data);
-void	fill_square(int square_x, int square_y, int tile_size,
+int					get_next_line(int fd, char **line);
+void				free_d_shit(char **to_free);
+char				*ft_strjoin(char *s1, char *s2);
+char				*ft_strdup(const char *s1);
+char				*ft_substr(char *s, unsigned int start, size_t len);
+size_t				ft_strlen(const char *s);
+int					gnl_get_index(char *stack);
+void				gnl_verify_line(char **line, char **stack, char **heap);
+int					gnl_read_line(char **line, char **stack,
+char **heap, int byte, int fd);
+int					ft_atoi(const char *s);
+char				**ft_split(const char *ss, char c);
+void				render_player(t_struct *data);
+void				initialize_1(t_struct *data);
+void				initialize_2(t_struct *data);
+int					render_map(t_struct *data);
+void				fill_square(int square_x, int square_y, int tile_size,
 int square_color, t_struct *data);
-int		key_hook(int keycode, void *param);
-int		initialize_window(t_struct *data);
-int		move_player(t_struct *data);
-void	circle(t_struct *data);
-void	draw_line(t_struct *data);
-void	ft_draw(t_struct *data, int x, int y, int color);
-int		if_wall(float x, float y, t_struct *data);
-void	line(t_struct *data, int x0, int y0, int x1, int y1);
-void	ft_draw_texture(t_struct *data, int x, int y, int color);
-float	limit_angle(float angle);
-float	distance_between_points(float x1, float y1, float x2, float y2);
-void	horizontal_ray_intersection(float ray_angle, t_struct *data,
+int					key_hook(int keycode, void *param);
+int					initialize_window(t_struct *data);
+int					move_player(t_struct *data);
+void				circle(t_struct *data);
+void				draw_line(t_struct *data);
+void				ft_draw(t_struct *data, int x, int y, int color);
+int					if_wall(float x, float y, t_struct *data);
+void				line(t_struct *data, int x0, int y0, int x1, int y1);
+void				ft_draw_texture(t_struct *data, int x, int y, int color);
+float				limit_angle(float angle);
+float				distance_between_points(float x1, float y1,
+float x2, float y2);
+void				horizontal_ray_intersection(float ray_angle, t_struct *data,
 int *found_horiz_wall_hit, int *horz_wall_content);
 void	vertical_ray_intersection(float ray_angle, t_struct *data,
 int *found_vert_wall_hit, int *vert_wall_content);
-void	get_smalest_distance(t_struct *data, int found_horiz_wall_hit,
-int found_vert_wall_hit);
-void	cast_single_ray(int ray_id, float ray_angle, t_struct *data);
-void	fill_out_ray(int ray_id, t_struct *data, int vert_wall_content,
-int horz_wall_content);
-void	render_all_rays(t_struct *data);
-void	cast_rays(t_struct *data);
-void	render_firt_time(t_struct *data);
-void	mini_map(t_struct *data);
-int		update(t_struct *data, uint32_t *buff);
-int		ft_close(void *param);
-int		key_pressed(int keycode, t_struct *data);
-int		key_released(int keycode, t_struct *data);
-void	texture_from_file(t_struct *data);
-void	texture(t_struct *data);
-void	render_walls(t_struct *data);
-void	calculate_vert_ray_intercept(t_struct *data, float ray_angle);
-void	calculate_horz_ray_intercept(t_struct *data, float ray_angle);
-int		parse(t_struct *data, char **av);
-void	initialize_file_struct(t_struct *data);
-int		read_map(t_struct *data, char *buff);
-int		fill_out_map(t_struct *data, char *buff);
-int		check_boudded_map(t_struct *data);
-int		line_length(char *line);
-int		count_lines(char *buff);
-void	*ft_memset(void *b, int c, size_t len);
-uint32_t creatergb(int r, int g, int b);
-char	*ft_strchr(const char *s, int c);
-void	render_sprite(t_struct *data);
-void	get_western_texture_path(t_struct *data, char *buff);
-void	get_easter_texture_path(t_struct *data, char *buff);
-void	get_resolution_values(t_struct *data, char *buff);
-void	get_floor_values(t_struct *data, char *buff);
-void	get_ceilling_values(t_struct *data, char *buff);
-void	get_north_texture_path(t_struct *data, char *buff);
-void	get_south_texture_path(t_struct *data, char *buff);
-int		skip_number(const char *str);
-int		check_textures_f_c_s_availibility(t_struct *data, char *buff);
-void	get_sprite_path(t_struct *data, char *buff);
-int		screw_this_norminette(t_struct *data, char *buff);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+void				get_smalest_distance(t_struct *data,
+int found_horiz_wall_hit, int found_vert_wall_hit);
+void				cast_single_ray(int ray_id, float ray_angle,
+t_struct *data);
+void				fill_out_ray(int ray_id, t_struct *data,
+int vert_wall_content, int horz_wall_content);
+void				render_all_rays(t_struct *data);
+void				cast_rays(t_struct *data);
+void				render_firt_time(t_struct *data);
+void				mini_map(t_struct *data);
+int					update(t_struct *data, uint32_t *buff);
+int					ft_close(void *param);
+int					key_pressed(int keycode, t_struct *data);
+int					key_released(int keycode, t_struct *data);
+void				texture_from_file(t_struct *data);
+void				texture(t_struct *data);
+void				render_walls(t_struct *data);
+void				calculate_vert_ray_intercept(t_struct *data,
+float ray_angle);
+void				calculate_horz_ray_intercept(t_struct *data,
+float ray_angle);
+int					parse(t_struct *data, char **av);
+void				initialize_file_struct(t_struct *data);
+int					read_map(t_struct *data, char *buff);
+int					fill_out_map(t_struct *data, char *buff);
+int					check_boudded_map(t_struct *data);
+int					line_length(char *line);
+int					count_lines(char *buff);
+void				*ft_memset(void *b, int c, size_t len);
+uint32_t			creatergb(int r, int g, int b);
+char				*ft_strchr(const char *s, int c);
+void				render_sprite(t_struct *data);
+void				get_western_texture_path(t_struct *data, char *buff);
+void				get_easter_texture_path(t_struct *data, char *buff);
+void				get_resolution_values(t_struct *data, char *buff);
+void				get_floor_values(t_struct *data, char *buff);
+void				get_ceilling_values(t_struct *data, char *buff);
+void				get_north_texture_path(t_struct *data, char *buff);
+void				get_south_texture_path(t_struct *data, char *buff);
+int					skip_number(const char *str);
+int					check_textures_f_c_s_availibility(t_struct *data,
+char *buff);
+void				get_sprite_path(t_struct *data, char *buff);
+int					screw_this_norminette(t_struct *data, char *buff);
+char				*ft_strnstr(const char *haystack,
+const char *needle, size_t len);
 
 #endif
