@@ -24,7 +24,7 @@ int *found_horiz_wall_hit, int *horz_wall_content)
 		+ (data->is_ray_facing_up ? -1 : 0);
 		*horz_wall_content = data->map[(int)floor(data->y_horz_to_check
 		/ SQUARE_SIZE)][(int)floor(data->x_horz_to_check / SQUARE_SIZE)];
-		if (if_wall(data->x_horz_to_check, data->y_horz_to_check, data) && *horz_wall_content != 78 && *horz_wall_content != 2)
+		if (if_wall(data->x_horz_to_check, data->y_horz_to_check, data))
 		{
 			data->save_horiz_wall_hit_x = data->horiz_touch_x;
 			data->save_horiz_wall_hit_y = data->horiz_touch_y;
@@ -51,7 +51,7 @@ int *found_vert_wall_hit, int *vert_wall_content)
 		data->y_vert_to_check = data->vert_touch_y;
 		vert_wall_content = &(data->map[(int)floor(data->y_vert_to_check
 		/ SQUARE_SIZE)][(int)floor(data->x_vert_to_check / SQUARE_SIZE)]);
-		if (if_wall(data->x_vert_to_check, data->y_vert_to_check, data) && *vert_wall_content != 78 && *vert_wall_content != 2)
+		if (if_wall(data->x_vert_to_check, data->y_vert_to_check, data))
 		{
 			data->save_vert_wall_hit_x = data->vert_touch_x;
 			data->save_vert_wall_hit_y = data->vert_touch_y;
