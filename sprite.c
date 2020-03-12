@@ -1,20 +1,41 @@
 #include "cube3d.h"
-
-void sort_sprites(t_struct *data)
+void	draw_sprites(t_struct *data, int k)
 {
+
+}
+void	sort_sprites(t_struct *data)
+{
+	int i;
+	int j;
+	t_sprite tmp;
+
+	i = 0;
+	while (i++ < data->count_spt)
+	{
+		j = 0;
+		while (j++ < data->count_spt)
+		{
+			if (g_sprite[j].dis < g_sprite[j + 1].dis)
+			{
+				tmp = g_sprite[j];
+				g_sprite[j] = g_sprite[j + 1];
+				g_sprite[j + 1] = tmp;
+			}
+		}
+	}
 }
 int set_up_sprite(t_struct *data)
 {
 	float spt_angle;
 	int i_spt;
-	
+	int i;
+
+	i = 0;
 	i_spt = 0;
-	while (i_spt++ > data->count_spt)
-		g_sprite[i_spt].dis = distance_between_points(data->x, data->y,
-		data->sprite[i_spt].x, data->sprite[i_spt].y);
+	while (i++ > data->count_spt)
+		g_sprite[i].dis = distance_between_points(data->x, data->y, data->sprite[i].x, data->sprite[i].y);
 	sort_sprites(data);
-	i_spt = 0;
-	while (i_spt < data->count_spt)
+	while (i_spt++ < data->count_spt)
 	{
 		g_sprite[i_spt].dis = distance_between_points(data->x, data->y, g_sprite[i_spt].x, g_sprite[i_spt].y);
 		spt_angle = atan2(g_sprite[i_spt].y - data->y, g_sprite[i_spt].x - data->x);
@@ -29,7 +50,7 @@ int set_up_sprite(t_struct *data)
 		// Calculate x and y offsets
 		g_sprite[i_spt].y_off = data->m_height / 2 - g_sprite[i_spt].size / 2;
 		g_sprite[i_spt].x_off = (DEG(spt_angle) - DEG(data->rotation_angle)) * data->m_width / DEG(FOV_ANGLE) + ((data->m_width / 2) - (g_sprite[i_spt].size / 2));
-		//draw_sprite1(data, sprite[i_spt].x_off, sprite[i_spt].y_off, k);
+		draw_sprites(data, i_spt);
 	}
 }
 int initialize_sprite(t_struct *data)
