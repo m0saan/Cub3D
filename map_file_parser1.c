@@ -65,8 +65,10 @@ int		check_boudded_map(t_struct *data)
 				return (0);
 			if (data->map[0][j] != 1 || data->map[data->n_lines - 1][j] != 1)
 				return (0);
+			printf("%d", data->map[i][j]);
 			j++;
 		}
+		printf("\n");
 		i++;
 	}
 	return (1);

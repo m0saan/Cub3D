@@ -96,6 +96,10 @@ int			initialize_window(t_struct *data)
 	&data->bpp, &data->size_line, &data->endian)) == NULL)
 		return (TRUE);
 	initialize_sprite(data);
+	{
+		printf("%f\n", data->sprite[1].x);
+		printf("%f\n", data->sprite[1].y);
+	}
 	render_firt_time(data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
@@ -116,8 +120,6 @@ int			main(int ac, char *av[])
 	data = malloc(sizeof(t_struct));
 	if (parse(data, av))
 		return (1);
-	printf("p->x : %f\n", data->x);
-	printf("p->y : %f\n", data->y);
 	g_rays = malloc(sizeof(t_ray) * data->w_width);
 	if (initialize_window(data))
 		return (TRUE);

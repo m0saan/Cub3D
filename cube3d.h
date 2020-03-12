@@ -22,7 +22,7 @@
 
 # define PI 3.14159265359
 # define TWO_PI (2 * PI)
-# define DEG(x) x * 180 / M_PI
+# define deg(x) x * 180 / M_PI
 
 # define TRUE 1
 # define FALSE 0
@@ -258,5 +258,7 @@ void				get_sprite_path(t_struct *data, char *buff);
 int					screw_this_norminette(t_struct *data, char *buff);
 char				*ft_strnstr(const char *haystack,
 const char *needle, size_t len);
+int initialize_sprite(t_struct *data);
+void	set_up_sprite(t_struct *data);
 
 #endif

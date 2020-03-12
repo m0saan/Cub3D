@@ -63,7 +63,6 @@ void	initialize_2(t_struct *data)
 	data->distance_to_projection_plane = 0;
 	data->wall_height = 0;
 	data->count_spt = 2;
-	ft_memset(data->sprite, 0, 200);
 }
 
 float	limit_angle(float angle)
