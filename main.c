@@ -75,14 +75,12 @@ int			if_wall(float x, float y, t_struct *data)
 		return (TRUE);
 	map_index_x = floor((x / SQUARE_SIZE));
 	map_index_y = floor((y / SQUARE_SIZE));
-	return (data->map[map_index_y][map_index_x] == 1);
+	return (data->map[map_index_y][map_index_x] != 0);
 }
 
 int			initialize_window(t_struct *data)
 {
 	initialize_1(data);
-	printf("p->x : %f\n", data->x);
-	printf("p->y : %f\n", data->y);
 	printf("%d\n", data->map[704 / 64][1664 / 64]);
 	if ((data->mlx_ptr = mlx_init()) == NULL)
 		return (TRUE);
@@ -95,11 +93,7 @@ int			initialize_window(t_struct *data)
 	if ((data->img_data = mlx_get_data_addr(data->img_ptr,
 	&data->bpp, &data->size_line, &data->endian)) == NULL)
 		return (TRUE);
-	initialize_sprite(data);
-	{
-		printf("%f\n", data->sprite[1].x);
-		printf("%f\n", data->sprite[1].y);
-	}
+	//initialize_sprite(data);
 	render_firt_time(data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
@@ -120,7 +114,7 @@ int			main(int ac, char *av[])
 	data = malloc(sizeof(t_struct));
 	if (parse(data, av))
 		return (1);
-	g_rays = malloc(sizeof(t_ray) * data->w_width);
+	g_rays = (t_ray*)malloc(sizeof(t_ray) * data->w_width);
 	if (initialize_window(data))
 		return (TRUE);
 	free(data);	

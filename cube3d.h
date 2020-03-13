@@ -22,7 +22,7 @@
 
 # define PI 3.14159265359
 # define TWO_PI (2 * PI)
-# define deg(x) x * 180 / M_PI
+# define DEG(x) x * 180 / M_PI
 
 # define TRUE 1
 # define FALSE 0
@@ -65,7 +65,6 @@ typedef struct		s_ray
 }					t_ray;
 
 t_ray				*g_rays;
-t_sprite			*g_sprite;
 uint32_t			g_buff[TEX_WIDTH * TEX_HEIGHT + 1];
 
 typedef struct		s_struct

@@ -6,6 +6,14 @@
         "string": "c",
         "vector": "c",
         "cube3d.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "__hash_table": "c",
+        "__split_buffer": "c",
+        "bitset": "c",
+        "initializer_list": "c",
+        "memory": "c",
+        "unordered_map": "c",
+        "utility": "c",
+        "hashtable": "c"
     }
 }

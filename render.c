@@ -16,7 +16,6 @@ void	render_firt_time(t_struct *data)
 {
 	cast_rays(data);
 	render_walls(data);
-	set_up_sprite(data);
 	move_player(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
@@ -34,7 +33,6 @@ int		update(t_struct *data, uint32_t *buff)
 	cast_rays(data);
 	move_player(data);
 	render_walls(data);
-	set_up_sprite(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (FALSE);
 }

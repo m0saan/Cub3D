@@ -129,4 +129,5 @@ void	cast_rays(t_struct *data)
 		ray_angle += FOV_ANGLE / data->w_width;
 		ray_id++;
 	}
+	//set_up_sprite(data);
 }

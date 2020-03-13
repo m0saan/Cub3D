@@ -98,9 +98,9 @@ int		parse(t_struct *data, char **av)
 {
 	int		fd;
 	int		len;
+	len = 1024;
 	char	*buff[len];
 
-	len = 1024;
 	ft_memset(buff, 0, len);
 	initialize_file_struct(data);
 	fd = open(av[1], O_RDONLY);
