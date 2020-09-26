@@ -34,8 +34,8 @@ void	initialize_1(t_struct *data)
 	data->turn_direction = 0;
 	data->walk_direction = 0;
 	data->rotation_angle = PI / 2;
-	data->walk_speed = 14;
-	data->turn_speed = 5 * (PI / 180);
+	data->walk_speed = 13;
+	data->turn_speed = 4 * (PI / 180);
 	data->which_radius = 0;
 	initialize_2(data);
 }
@@ -62,7 +62,9 @@ void	initialize_2(t_struct *data)
 	data->bottom_pixel = 0;
 	data->distance_to_projection_plane = 0;
 	data->wall_height = 0;
-	data->count_spt = 2;
+	data->count_spt = 6;
+	data->m = 1;
+	data->h = 1;
 }
 
 float	limit_angle(float angle)

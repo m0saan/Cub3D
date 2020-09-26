@@ -1,6 +1,4 @@
-a.out
-a.out.dSYM
-cube3d.h.gch
-.DS_Store
-.idea
-.vscode
+Cub3D
+Cub3D.dSYM
+libs/
+textures

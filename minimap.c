@@ -13,29 +13,9 @@ void draw_line(t_struct *data)
 	{
 		j = data->y;
 		while (j++ < data->y + 1)
-			ft_draw(data, i + cos(data->rotation_angle) * radius * MINI, j + sin(data->rotation_angle) * radius * MINI, 0x4287f5);
+			ft_draw(data, (i + cos(data->rotation_angle) * radius ) * MINI,
+			(j + sin(data->rotation_angle) * radius) * MINI, 0x4287f5);
 		radius -= 1;
-	}
-}
-
-void 	texture(t_struct *data)
-{
-	int x;
-	int y;
-	int pos = 0;
-
-	x = 0;
-	y = 0;
-	while (x < TEX_WIDTH)
-	{
-		y = 0;
-		while (y < TEX_HEIGHT)
-		{
-			pos = (TEX_WIDTH * y) + x;
-			buff[pos] = (x % 8 && y % 8) ? 0x3c40c6 : 0x1e272e;
-			y++;
-		}
-		x++;
 	}
 }
 
@@ -53,14 +33,16 @@ void circle(t_struct *data)
 		i = 0;
 		while (i <= two_pi)
 		{
-			ft_draw(data, MINI * ((cos(i) * get_radius) + data->x), MINI * ((sin(i) * get_radius) + data->y), 0xfcba03);
+			ft_draw(data, MINI * ((cos(i) * get_radius) + data->x),
+			MINI * ((sin(i) * get_radius) + data->y), 0xfcba03);
 			i += 0.1;
 		}
 		get_radius -= 0.1;
 	}
 }
 
-void fill_square(int square_x, int square_y, int tile_size, int tile_color, t_struct *data)
+void fill_square(int square_x, int square_y,
+int tile_size, int tile_color, t_struct *data)
 {
 	int i;
 	int j;
@@ -74,8 +56,8 @@ void fill_square(int square_x, int square_y, int tile_size, int tile_color, t_st
 			ft_draw(data, i * MINI, j * MINI, tile_color);
 	}
 }
-/*
-int render_map(t_struct *data)
+
+int render_map(t_struct *data, int m)
 {
 	int i;
 	int j;
@@ -89,13 +71,18 @@ int render_map(t_struct *data)
 	square_y = 0;
 	square_color = 0;
 
-	while (i < NUM_ROWS)
+	while (i < 14)
 	{
-		while (j < NUM_COLS)
+		while (j < 28)
 		{
+			m = data->map[i][j];
 			square_x = j * SQUARE_SIZE;
 			square_y = i * SQUARE_SIZE;
-			square_color = map[i][j] != 0 ? 0x2ecc71 : 0xecf0f1;
+			square_color = data->map[i][j] != 0 ? 0x2ecc71 : 0xecf0f1;
+			if (m == 'N' || m == 'W' || m == 'E' || m == 'S')
+				square_color = 0xecf0f1;
+			if (m == 2)
+				square_color = 0XFF00FF;
 			fill_square(square_x - 1, square_y - 1, SQUARE_SIZE, square_color, data);
 			j++;
 		}
@@ -104,22 +91,11 @@ int render_map(t_struct *data)
 	}
 	return (TRUE);
 }
-*/
-void render_all_rays(t_struct *data)
-{
-	int i;
-
-	i = 0;
-	while (i < NUM_RAYS)
-	{
-		line(data, data->x * MINI, data->y * MINI, rays[i]->wall_h_x * MINI, rays[i]->wall_h_y * MINI);
-		i++;
-	}
-}
 
 void mini_map(t_struct *data)
 {
+	int m;
+	render_map(data, m);
 	circle(data);
-	cast_rays(data);
-	move_player(data);
+	draw_line(data);
 }

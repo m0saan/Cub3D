@@ -82,7 +82,7 @@ void	ft_ljodran(t_struct *data, int y)
 	? (TEX_WIDTH * TEX_HEIGHT - 1)
 	: ((TEX_WIDTH * data->txt_offset_y) + data->txt_offset_x);
 	index = index <= 0 ? 0 : index;
-	ft_draw(data, data->i_wall_index, y, (int)which_text[index]);
+	ft_draw(data, data->i_wall_index, y, data->t ? (int)which_text[index] : 0xffffff);
 }
 		
 
@@ -111,6 +111,7 @@ void	render_walls(t_struct *data)
 		while (floor++ < data->w_height - 1)
 			ft_draw(data, data->i_wall_index, floor, creatergb(data->f_red, data->c_green, data->c_blue));
 	}
+	set_up_sprite(data);
 }
 
 void	cast_rays(t_struct *data)
@@ -129,5 +130,4 @@ void	cast_rays(t_struct *data)
 		ray_angle += FOV_ANGLE / data->w_width;
 		ray_id++;
 	}
-	//set_up_sprite(data);
 }

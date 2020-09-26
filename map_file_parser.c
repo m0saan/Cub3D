@@ -90,7 +90,6 @@ void	get_sprite_path(t_struct *data, char *buff)
 		i++;
 		data->pos++;
 	}
-	printf("sprite_path %s\n", data->sp);
 	data->get_to_map += 1;
 }
 

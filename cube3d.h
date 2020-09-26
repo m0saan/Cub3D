@@ -17,22 +17,23 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# include <mlx.h>
+# include "libs/OpenGL/mlx.h"
 # include <fcntl.h>
 
 # define PI 3.14159265359
-# define TWO_PI (2 * PI)
+# define TWO_PI  2 * PI
 # define DEG(x) x * 180 / M_PI
+# define RAD(x) x * M_PI / 180
 
 # define TRUE 1
 # define FALSE 0
-# define MINI 0.3
+# define MINI 0.2
 
 # define SQUARE_SIZE 64
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
-# define FOV_ANGLE (60 * (PI / 180))
+#define FOV_ANGLE  60 * (PI / 180)
 
 # define MAX_INT 2147483647
 # define BUFFER_SIZE 90
@@ -65,10 +66,18 @@ typedef struct		s_ray
 }					t_ray;
 
 t_ray				*g_rays;
+t_sprite			*g_sprite;
 uint32_t			g_buff[TEX_WIDTH * TEX_HEIGHT + 1];
 
 typedef struct		s_struct
 {
+	int				reset;
+	int				shift;
+	int				m;
+	int				h;
+	int				t;
+	int				orientation;
+	int				*buff;
 	int				bpp;
 	int				size_line;
 	int				endian;
@@ -192,7 +201,7 @@ char				**ft_split(const char *ss, char c);
 void				render_player(t_struct *data);
 void				initialize_1(t_struct *data);
 void				initialize_2(t_struct *data);
-int					render_map(t_struct *data);
+int					render_map(t_struct *data, int m);
 void				fill_square(int square_x, int square_y, int tile_size,
 int square_color, t_struct *data);
 int					key_hook(int keycode, void *param);
@@ -257,7 +266,10 @@ void				get_sprite_path(t_struct *data, char *buff);
 int					screw_this_norminette(t_struct *data, char *buff);
 char				*ft_strnstr(const char *haystack,
 const char *needle, size_t len);
-int initialize_sprite(t_struct *data);
-void	set_up_sprite(t_struct *data);
-
+void	initialize_sprite(t_struct *data);
+void set_up_sprite(t_struct *data);
+void draw_sprites(t_struct *data, float x_off, float y_off, int index);
+void	help_text(t_struct *data);
+void	init_player(t_struct *data);
+void	set_up_player(t_struct *data, int e);
 #endif
