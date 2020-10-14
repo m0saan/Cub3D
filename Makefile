@@ -22,6 +22,8 @@ all: $(NAME)
 $(NAME):
 	@$(CC) $(DEBUG) $(LDLIBS) $(SRC) -o $(NAME);
 
+build:
+	@./Cub3D map.cub
 clean:
 	@rm -rf *.o
 	@echo "Makefile : Cleaning .o files..."
