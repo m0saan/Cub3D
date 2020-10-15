@@ -20,6 +20,11 @@
 #include "../libs/OpenGL/mlx.h"
 #include <fcntl.h>
 
+#define GREEN 0x2ecc71
+#define WHITE 0xecf0f1
+#define PLAYER 0xecf0f1
+#define SPRITE 0XFF00FF
+
 #define PI 3.14159265359
 #define TWO_PI 2 * PI
 #define DEG(x) x * 180 / M_PI
@@ -188,6 +193,8 @@ typedef struct s_struct
 	int i;
 	int j;
 } t_struct;
+
+int *g_lines_length;
 
 int get_next_line(int fd, char **line);
 void free_d_shit(char **to_free);
