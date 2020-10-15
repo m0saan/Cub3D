@@ -80,10 +80,10 @@ void initialize_sprite(t_struct *data)
 	i_spt = 0;
 	if (!(data->sprite = (t_sprite *)malloc(sizeof(t_sprite) * (data->count_spt))))
 		return;
-	while (i < 14)
+	while (i < data->n_lines)
 	{
 		j = 0;
-		while (j < 28)
+		while (j < data->map[i][j])
 		{
 			if (data->map[i][j] == 2)
 			{
