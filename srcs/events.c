@@ -65,14 +65,13 @@ void init_player(t_struct *data)
 	static int count = 0;
 	data->x = (data->j + 0.5) * SQUARE_SIZE;
 	data->y = (data->i + 0.5) * SQUARE_SIZE;
-	data->orientation = data->map[data->i][data->j];
 	count++;
 	set_up_player(data, count);
 }
 
-void set_up_player(t_struct *data, int e)
+void set_up_player(t_struct *data, int player)
 {
-	if (e != 1)
+	if (player != 1)
 	{
 		write(1, "Player error!\n", 14);
 		exit(0);
