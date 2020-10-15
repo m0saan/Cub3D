@@ -108,10 +108,8 @@ int fill_out_map(t_struct *data, char *buff)
             }
             data->map[i][j] = (buff[data->pos] == ' ') ? ' ' : ft_atoi(&buff[data->pos]);
             data->pos += 1;
-            //printf("%d", data->map[i][j]);
             j++;
         }
-        printf("\n");
         data->pos += 1;
     }
     //return (!(check_boudded_map(data)) ? 0 : 1);
