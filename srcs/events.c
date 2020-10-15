@@ -14,10 +14,6 @@
 
 int key_pressed(int keycode, t_struct *data)
 {
-	if (keycode == 15)
-		data->reset = data->reset == 0 ? 1 : 0;
-	if (keycode == 257)
-		data->shift = data->shift == 0 ? 1 : 0;
 	if (keycode == 46)
 		data->m = data->m == 0 ? 1 : 0;
 	if (keycode == 4)
@@ -39,10 +35,6 @@ int key_pressed(int keycode, t_struct *data)
 
 int key_released(int keycode, t_struct *data)
 {
-	if (keycode == 15)
-		data->reset = data->reset == 1 ? 0 : 1;
-	if (keycode == 257)
-		data->shift = data->shift == 1 ? 0 : 1;
 	if (keycode == 126)
 		data->walk_direction = 0;
 	if (keycode == 125)

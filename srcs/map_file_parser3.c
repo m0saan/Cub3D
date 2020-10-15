@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-char		*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char *ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t i;
 	size_t j;
@@ -34,7 +34,7 @@ char		*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (0);
 }
 
-void		get_western_texture_path(t_struct *data, char *buff)
+void get_western_texture_path(t_struct *data, char *buff)
 {
 	int i;
 
@@ -50,7 +50,7 @@ void		get_western_texture_path(t_struct *data, char *buff)
 	data->get_to_map += 1;
 }
 
-void		get_easter_texture_path(t_struct *data, char *buff)
+void get_easter_texture_path(t_struct *data, char *buff)
 {
 	int i;
 
@@ -66,7 +66,7 @@ void		get_easter_texture_path(t_struct *data, char *buff)
 	data->get_to_map += 1;
 }
 
-int			screw_this_norminette(t_struct *data, char *buff)
+int screw_this_norminette(t_struct *data, char *buff)
 {
 	if (!(fill_out_map(data, buff)))
 	{
@@ -77,7 +77,7 @@ int			screw_this_norminette(t_struct *data, char *buff)
 	return (0);
 }
 
-u_int32_t	creatergb(int r, int g, int b)
+u_int32_t creatergb(int r, int g, int b)
 {
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }

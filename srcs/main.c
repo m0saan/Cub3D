@@ -12,23 +12,8 @@
 
 #include "../include/cube3d.h"
 
-void printMap(t_struct *data)
-{
-    int i, j;
-    for (i = 0; i <= data->n_lines; i++)
-    {
-        for (j = 0; j < g_lines_length[i]; j++)
-        {
-            printf("%c", data->map[i][j]);
-        }
-        //printf("j === %zu\n", j);
-        printf("\n");
-    }
-    //printf("i === %zu\n", i);
-}
-
 void horizontal_ray_intersection(float ray_angle, t_struct *data,
-                                 int *found_horiz_wall_hit, char *horz_wall_content)
+                                 int *found_horiz_wall_hit)
 {
     calculate_horz_ray_intercept(data, ray_angle);
     while (data->horiz_touch_x >= 0 && data->horiz_touch_y >= 0)
@@ -50,8 +35,7 @@ void horizontal_ray_intersection(float ray_angle, t_struct *data,
     }
 }
 
-void vertical_ray_intersection(float ray_angle, t_struct *data,
-                               int *found_vert_wall_hit, char *vert_wall_content)
+void vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_wall_hit)
 {
     calculate_vert_ray_intercept(data, ray_angle);
     while (data->vert_touch_x >= 0 && data->vert_touch_y >= 0)
@@ -73,15 +57,38 @@ void vertical_ray_intersection(float ray_angle, t_struct *data,
     }
 }
 
+static int valid_indeces(t_struct *data, int x, int y)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+
+    if (y > data->n_lines)
+        return FALSE;
+    while (i < data->n_lines)
+    {
+        if (x > g_lines_length[i])
+            return FALSE;
+        i++;
+    }
+    return TRUE;
+}
+
 int if_wall(float x, float y, t_struct *data)
 {
     int map_index_x;
     int map_index_y;
 
-    if ((x < 0 || x > data->m_width) || (y < 0 || y > data->m_height))
-        return (TRUE);
     map_index_x = floor((x / SQUARE_SIZE));
     map_index_y = floor((y / SQUARE_SIZE));
+
+    if (!valid_indeces(data, map_index_x, map_index_y))
+        return TRUE;
+    if ((y < 0 || y > data->m_height) || (map_index_y > data->n_lines))
+        return (TRUE);
+
     return (data->map[map_index_y][map_index_x] == ' ' || data->map[map_index_y][map_index_x] == '1');
 }
 
@@ -99,7 +106,7 @@ int initialize_window(t_struct *data)
     if ((data->img_data = mlx_get_data_addr(data->img_ptr,
                                             &data->bpp, &data->size_line, &data->endian)) == NULL)
         return (TRUE);
-    //initialize_sprite(data);
+    initialize_sprite(data);
     mlx_hook(data->win_ptr, 3, 0, key_released, data);
     mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
     mlx_loop_hook(data->mlx_ptr, update, data);
@@ -120,7 +127,6 @@ int main(int ac, char *av[])
     if (parse(data, av))
         return (1);
     g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
-    printMap(data);
     if (initialize_window(data))
         return (TRUE);
     free(data);

@@ -14,7 +14,6 @@
 
 void initialize_1(t_struct *data)
 {
-	data->m_width = data->l_length * SQUARE_SIZE;
 	data->m_height = data->n_lines * SQUARE_SIZE;
 	data->bpp = 0;
 	data->endian = 0;
@@ -61,8 +60,8 @@ void initialize_2(t_struct *data)
 	data->distance_to_projection_plane = 0;
 	data->wall_height = 0;
 	data->count_spt = 0;
-	data->m = 1;
-	data->h = 1;
+	data->m = 0;
+	data->h = 0;
 }
 
 float limit_angle(float angle)

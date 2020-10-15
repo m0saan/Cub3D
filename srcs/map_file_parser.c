@@ -39,7 +39,7 @@ int read_map(t_struct *data, char *buff)
 	return (0);
 }
 
-int check_textures_f_c_s_availibility(t_struct *data, char *buff)
+int check_textures_f_c_s_availibility(char *buff)
 {
 	size_t i;
 	size_t len;
@@ -104,7 +104,7 @@ int parse(t_struct *data, char **av)
 		write(1, "No such file!\n", 14);
 		return (1);
 	}
-	if (check_textures_f_c_s_availibility(data, (char *)buff))
+	if (check_textures_f_c_s_availibility((char *)buff))
 		return (1);
 	if (read_map(data, (char *)buff))
 		return (1);

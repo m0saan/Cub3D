@@ -66,7 +66,6 @@ typedef struct s_ray
 	int is_ray_facing_down;
 	int is_ray_facing_right;
 	int is_ray_facing_left;
-	int wall_h_content;
 	int was_hit_vertical;
 } t_ray;
 
@@ -76,8 +75,6 @@ uint32_t g_buff[TEX_WIDTH * TEX_HEIGHT + 1];
 
 typedef struct s_struct
 {
-	int reset;
-	int shift;
 	int m;
 	int h;
 	int t;
@@ -148,7 +145,6 @@ typedef struct s_struct
 	float horiz_touch_x;
 	float horiz_touch_y;
 
-	int m_width;
 	int m_height;
 
 	float x_horz_to_check;
@@ -227,20 +223,19 @@ float limit_angle(float angle);
 float distance_between_points(float x1, float y1,
 							  float x2, float y2);
 void horizontal_ray_intersection(float ray_angle, t_struct *data,
-								 int *found_horiz_wall_hit, char *horz_wall_content);
+								 int *found_horiz_wall_hit);
 void vertical_ray_intersection(float ray_angle, t_struct *data,
-							   int *found_vert_wall_hit, char *vert_wall_content);
+							   int *found_vert_wall_hit);
 void get_smalest_distance(t_struct *data,
 						  int found_horiz_wall_hit, int found_vert_wall_hit);
 void cast_single_ray(int ray_id, float ray_angle,
 					 t_struct *data);
-void fill_out_ray(int ray_id, t_struct *data,
-				  int vert_wall_content, int horz_wall_content);
+void fill_out_ray(int ray_id, t_struct *data);
 void render_all_rays(t_struct *data);
 void cast_rays(t_struct *data);
 void render_firt_time(t_struct *data);
 void mini_map(t_struct *data);
-int update(t_struct *data, uint32_t *buff);
+int update(t_struct *data);
 int ft_close(void *param);
 int key_pressed(int keycode, t_struct *data);
 int key_released(int keycode, t_struct *data);
@@ -270,8 +265,7 @@ void get_ceilling_values(t_struct *data, char *buff);
 void get_north_texture_path(t_struct *data, char *buff);
 void get_south_texture_path(t_struct *data, char *buff);
 int skip_number(const char *str);
-int check_textures_f_c_s_availibility(t_struct *data,
-									  char *buff);
+int check_textures_f_c_s_availibility(char *buff);
 void get_sprite_path(t_struct *data, char *buff);
 int screw_this_norminette(t_struct *data, char *buff);
 char *ft_strnstr(const char *haystack,

@@ -4,15 +4,13 @@ static void sort_sprites(t_struct *data);
 
 void draw_sprites(t_struct *data, float x_off, float y_off, int index)
 {
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 	size_t size;
-	int color;
 
 	i = 0;
 	j = 0;
 	int id = 0;
-	int id2;
 	size = data->sprite[index].size;
 	while (i++ < size)
 	{

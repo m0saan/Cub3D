@@ -81,7 +81,7 @@ int render_map(t_struct *data, int m)
 			square_color = m != 0 ? GREEN : WHITE;
 			if (m == 'N' || m == 'W' || m == 'E' || m == 'S')
 				square_color = PLAYER;
-			else if (m == 2)
+			if (m == 2)
 				square_color = SPRITE;
 			fill_square(square_x - 1, square_y - 1, SQUARE_SIZE, square_color, data);
 			j++;
@@ -94,7 +94,7 @@ int render_map(t_struct *data, int m)
 
 void mini_map(t_struct *data)
 {
-	int m;
+	int m = 0;
 	render_map(data, m);
 	circle(data);
 	draw_line(data);

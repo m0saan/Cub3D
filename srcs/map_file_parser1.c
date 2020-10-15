@@ -80,8 +80,6 @@ int fill_out_map(t_struct *data, char *buff)
 {
     int i;
     int j;
-    int item;
-    int **tmp;
 
     i = -1;
     data->n_lines = count_lines(&buff[data->pos]);

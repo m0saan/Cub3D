@@ -21,7 +21,7 @@ void render_firt_time(t_struct *data)
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
 
-int update(t_struct *data, uint32_t *buff)
+int update(t_struct *data)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
@@ -32,12 +32,10 @@ int update(t_struct *data, uint32_t *buff)
 											&data->size_line, &data->endian)) == NULL)
 		return (TRUE);
 	cast_rays(data);
-	move_player(data);
 	render_walls(data);
-	// if (data->reset)
-	// 	init_player(data);
-	if (data->m)
-		mini_map(data);
+	move_player(data);
+	// if (data->m)
+	// 	mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	if (data->h)
 		help_text(data);
@@ -48,9 +46,9 @@ int move_player(t_struct *data)
 {
 	data->rotation_angle += data->turn_direction * data->turn_speed;
 	data->move_step = data->walk_direction * data->walk_speed;
-	data->move_step += data->shift ? 10 : 0;
 	data->updated_player_x = data->x + cos(data->rotation_angle) * data->move_step;
 	data->updated_player_y = data->y + sin(data->rotation_angle) * data->move_step;
+
 	if (!if_wall(data->updated_player_x, data->updated_player_y, data))
 	{
 		data->x = data->updated_player_x;

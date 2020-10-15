@@ -15,16 +15,18 @@
 void get_smalest_distance(t_struct *data, int found_horiz_wall_hit,
 						  int found_vert_wall_hit)
 {
-	data->horz_hit_distance = found_horiz_wall_hit ? distance_between_points(data->x, data->y,
-																			 data->save_horiz_wall_hit_x, data->save_horiz_wall_hit_y)
-												   : MAX_INT;
-	data->vert_hit_distance = found_vert_wall_hit ? distance_between_points(data->x, data->y,
-																			data->save_vert_wall_hit_x, data->save_vert_wall_hit_y)
-												  : MAX_INT;
+	data->horz_hit_distance = found_horiz_wall_hit
+								  ? distance_between_points(data->x, data->y, data->save_horiz_wall_hit_x,
+															data->save_horiz_wall_hit_y)
+								  : MAX_INT;
+
+	data->vert_hit_distance = found_vert_wall_hit
+								  ? distance_between_points(data->x, data->y, data->save_vert_wall_hit_x,
+															data->save_vert_wall_hit_y)
+								  : MAX_INT;
 }
 
-void fill_out_ray(int ray_id, t_struct *data, int vert_wall_content,
-				  int horz_wall_content)
+void fill_out_ray(int ray_id, t_struct *data)
 {
 	int i;
 
@@ -34,7 +36,6 @@ void fill_out_ray(int ray_id, t_struct *data, int vert_wall_content,
 		g_rays[ray_id].distance = data->vert_hit_distance;
 		g_rays[ray_id].wall_h_x = data->save_vert_wall_hit_x;
 		g_rays[ray_id].wall_h_y = data->save_vert_wall_hit_y;
-		g_rays[ray_id].wall_h_content = vert_wall_content;
 		g_rays[ray_id].was_hit_vertical = TRUE;
 	}
 	else
@@ -42,7 +43,6 @@ void fill_out_ray(int ray_id, t_struct *data, int vert_wall_content,
 		g_rays[ray_id].distance = data->horz_hit_distance;
 		g_rays[ray_id].wall_h_x = data->save_horiz_wall_hit_x;
 		g_rays[ray_id].wall_h_y = data->save_horiz_wall_hit_y;
-		g_rays[ray_id].wall_h_content = horz_wall_content;
 		g_rays[ray_id].was_hit_vertical = FALSE;
 	}
 	i++;
@@ -57,13 +57,9 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 {
 	int found_horiz_wall_hit;
 	int found_vert_wall_hit;
-	char vert_wall_content;
-	char horz_wall_content;
 
 	found_horiz_wall_hit = FALSE;
 	found_vert_wall_hit = FALSE;
-	horz_wall_content = 0;
-	vert_wall_content = 0;
 	ray_angle = limit_angle(ray_angle);
 	data->ray_angle = ray_angle;
 	data->is_ray_facing_down = ray_angle > 0 && ray_angle < PI;
@@ -71,11 +67,11 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 	data->is_ray_facing_right = ray_angle < 0.5 * PI || ray_angle > 1.5 * PI;
 	data->is_ray_facing_left = !(data->is_ray_facing_right);
 	horizontal_ray_intersection(ray_angle, data,
-								&found_horiz_wall_hit, &horz_wall_content);
+								&found_horiz_wall_hit);
 	vertical_ray_intersection(ray_angle, data,
-							  &found_vert_wall_hit, &vert_wall_content);
+							  &found_vert_wall_hit);
 	get_smalest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
-	fill_out_ray(ray_id, data, vert_wall_content, horz_wall_content);
+	fill_out_ray(ray_id, data);
 }
 
 void calculate_vert_ray_intercept(t_struct *data, float ray_angle)
