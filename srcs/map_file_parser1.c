@@ -86,11 +86,12 @@ int fill_out_map(t_struct *data, char *buff)
     i = -1;
     data->n_lines = count_lines(&buff[data->pos]);
     g_lines_length = (int *)malloc((data->n_lines + 1) * sizeof(int));
+    data->map = (char **)malloc((data->n_lines + 1) * sizeof(char *));
     while (buff[data->pos] != '\0' && i++ < data->n_lines)
     {
         data->l_length = line_length(&buff[data->pos]);
         g_lines_length[i] = data->l_length;
-        data->map[i] = (int *)malloc(sizeof(int) * data->l_length);
+        data->map[i] = (char *)malloc(sizeof(char) * data->l_length);
         buff[data->pos] == '\n' ? (data->pos += 1) : data->pos;
         j = 0;
         while (j < data->l_length && buff[data->pos] != '\n')
@@ -106,7 +107,7 @@ int fill_out_map(t_struct *data, char *buff)
                 data->pos += 1;
                 continue;
             }
-            data->map[i][j] = (buff[data->pos] == ' ') ? ' ' : ft_atoi(&buff[data->pos]);
+            data->map[i][j] = buff[data->pos];
             data->pos += 1;
             j++;
         }

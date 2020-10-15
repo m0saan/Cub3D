@@ -24,7 +24,7 @@ $(NAME):
 	@$(CC) $(DEBUG) $(LDLIBS) $(OPTIMAZATION) $(SRC) -o $(NAME) $(ADDRESS_SANITIZER);
 
 build:
-	@./Cub3D map.cub
+	@./Cub3D map2.cub
 	
 clean:
 	@rm -rf *.o
