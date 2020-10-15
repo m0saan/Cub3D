@@ -65,6 +65,7 @@ int check_boudded_map(t_struct *data)
     }
     return (1);
 }
+
 int is_not_valid_element(t_struct *data, char *buff)
 {
     return buff[data->pos] != '1' && buff[data->pos] != '0' && buff[data->pos] != '2' && buff[data->pos] != 'N' && buff[data->pos] != 'W' && buff[data->pos] != 'E' && buff[data->pos] != 'S' && buff[data->pos] != ' ';
@@ -77,7 +78,6 @@ int is_player(t_struct *data, char *buff)
 
 int fill_out_map(t_struct *data, char *buff)
 {
-    printf("I was Here\n");
     int i;
     int j;
     int item;
@@ -85,13 +85,15 @@ int fill_out_map(t_struct *data, char *buff)
 
     i = -1;
     data->n_lines = count_lines(&buff[data->pos]);
-    while (buff[data->pos] != '\0' && i++ < data->n_lines - 1)
+    g_lines_length = (int *)malloc((data->n_lines + 1) * sizeof(int));
+    while (buff[data->pos] != '\0' && i++ < data->n_lines)
     {
         data->l_length = line_length(&buff[data->pos]);
+        g_lines_length[i] = data->l_length;
         data->map[i] = (int *)malloc(sizeof(int) * data->l_length);
         buff[data->pos] == '\n' ? (data->pos += 1) : data->pos;
-        j = -1;
-        while (j++ < data->l_length && buff[data->pos] != '\n')
+        j = 0;
+        while (j < data->l_length && buff[data->pos] != '\n')
         {
             if (is_not_valid_element(data, buff))
                 return (1);
@@ -99,17 +101,21 @@ int fill_out_map(t_struct *data, char *buff)
             {
                 data->i = i;
                 data->j = j;
+                data->map[i][j++] = data->orientation = buff[data->pos];
                 init_player(data);
+                data->pos += 1;
+                continue;
             }
-            data->map[i][j] = ft_atoi(&buff[data->pos]);
-            printf("%d", data->map[i][j]);
+            data->map[i][j] = (buff[data->pos] == ' ') ? ' ' : ft_atoi(&buff[data->pos]);
             data->pos += 1;
+            //printf("%d", data->map[i][j]);
+            j++;
         }
         printf("\n");
         data->pos += 1;
     }
     //return (!(check_boudded_map(data)) ? 0 : 1);
-    return 0;
+    return 1;
 }
 
 void initialize_file_struct(t_struct *data)

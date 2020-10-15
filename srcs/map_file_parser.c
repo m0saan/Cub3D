@@ -104,8 +104,8 @@ int parse(t_struct *data, char **av)
 		write(1, "No such file!\n", 14);
 		return (1);
 	}
-	//if (check_textures_f_c_s_availibility(data, (char *)buff))
-	//	return (1);
+	if (check_textures_f_c_s_availibility(data, (char *)buff))
+		return (1);
 	if (read_map(data, (char *)buff))
 		return (1);
 	if (check_read_vaues(data))
