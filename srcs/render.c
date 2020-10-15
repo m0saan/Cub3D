@@ -34,8 +34,8 @@ int update(t_struct *data, uint32_t *buff)
 	cast_rays(data);
 	move_player(data);
 	render_walls(data);
-	//if (data->reset)
-	//	init_player(data);
+	// if (data->reset)
+	// 	init_player(data);
 	if (data->m)
 		mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
