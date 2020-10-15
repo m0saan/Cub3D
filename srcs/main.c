@@ -12,6 +12,21 @@
 
 #include "../include/cube3d.h"
 
+void printMap(t_struct *data)
+{
+    size_t i, j;
+    for (i = 0; i <= data->n_lines; i++)
+    {
+        for (j = 0; j < g_lines_length[i]; j++)
+        {
+            printf("%d", data->map[i][j]);
+        }
+        //printf("j === %zu\n", j);
+        printf("\n");
+    }
+    //printf("i === %zu\n", i);
+}
+
 void horizontal_ray_intersection(float ray_angle, t_struct *data,
                                  int *found_horiz_wall_hit, int *horz_wall_content)
 {
@@ -71,7 +86,7 @@ int if_wall(float x, float y, t_struct *data)
         return (TRUE);
     map_index_x = floor((x / SQUARE_SIZE));
     map_index_y = floor((y / SQUARE_SIZE));
-    return (data->map[map_index_y][map_index_x] == 1);
+    return (data->map[map_index_y][map_index_x] == ' ' || data->map[map_index_y][map_index_x] == 1);
 }
 
 int initialize_window(t_struct *data)
@@ -88,7 +103,7 @@ int initialize_window(t_struct *data)
     if ((data->img_data = mlx_get_data_addr(data->img_ptr,
                                             &data->bpp, &data->size_line, &data->endian)) == NULL)
         return (TRUE);
-    initialize_sprite(data);
+    //initialize_sprite(data);
     mlx_hook(data->win_ptr, 3, 0, key_released, data);
     mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
     mlx_loop_hook(data->mlx_ptr, update, data);
@@ -109,6 +124,7 @@ int main(int ac, char *av[])
     if (parse(data, av))
         return (1);
     g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
+    printMap(data);
     if (initialize_window(data))
         return (TRUE);
     free(data);
