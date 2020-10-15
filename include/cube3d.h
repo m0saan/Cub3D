@@ -183,7 +183,7 @@ typedef struct s_struct
 	char we[25];
 	char ea[25];
 	char sp[25];
-	int **map;
+	char **map;
 	int locate_player_x;
 	int locate_player_y;
 
@@ -227,9 +227,9 @@ float limit_angle(float angle);
 float distance_between_points(float x1, float y1,
 							  float x2, float y2);
 void horizontal_ray_intersection(float ray_angle, t_struct *data,
-								 int *found_horiz_wall_hit, int *horz_wall_content);
+								 int *found_horiz_wall_hit, char *horz_wall_content);
 void vertical_ray_intersection(float ray_angle, t_struct *data,
-							   int *found_vert_wall_hit, int *vert_wall_content);
+							   int *found_vert_wall_hit, char *vert_wall_content);
 void get_smalest_distance(t_struct *data,
 						  int found_horiz_wall_hit, int found_vert_wall_hit);
 void cast_single_ray(int ray_id, float ray_angle,
