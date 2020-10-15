@@ -14,12 +14,12 @@
 
 void printMap(t_struct *data)
 {
-    size_t i, j;
+    int i, j;
     for (i = 0; i <= data->n_lines; i++)
     {
         for (j = 0; j < g_lines_length[i]; j++)
         {
-            printf("%d", data->map[i][j]);
+            printf("%c", data->map[i][j]);
         }
         //printf("j === %zu\n", j);
         printf("\n");
@@ -28,15 +28,13 @@ void printMap(t_struct *data)
 }
 
 void horizontal_ray_intersection(float ray_angle, t_struct *data,
-                                 int *found_horiz_wall_hit, int *horz_wall_content)
+                                 int *found_horiz_wall_hit, char *horz_wall_content)
 {
     calculate_horz_ray_intercept(data, ray_angle);
-    while (data->horiz_touch_x >= 0 && data->horiz_touch_x <= data->m_width &&
-           data->horiz_touch_y >= 0 && data->horiz_touch_y <= data->m_height)
+    while (data->horiz_touch_x >= 0 && data->horiz_touch_y >= 0)
     {
         data->x_horz_to_check = data->horiz_touch_x;
         data->y_horz_to_check = data->horiz_touch_y + (data->is_ray_facing_up ? -1 : 0);
-        *horz_wall_content = data->map[(int)floor(data->y_horz_to_check / SQUARE_SIZE)][(int)floor(data->x_horz_to_check / SQUARE_SIZE)];
         if (if_wall(data->x_horz_to_check, data->y_horz_to_check, data))
         {
             data->save_horiz_wall_hit_x = data->horiz_touch_x;
@@ -53,15 +51,13 @@ void horizontal_ray_intersection(float ray_angle, t_struct *data,
 }
 
 void vertical_ray_intersection(float ray_angle, t_struct *data,
-                               int *found_vert_wall_hit, int *vert_wall_content)
+                               int *found_vert_wall_hit, char *vert_wall_content)
 {
     calculate_vert_ray_intercept(data, ray_angle);
-    while (data->vert_touch_x >= 0 && data->vert_touch_x <= data->m_width &&
-           data->vert_touch_y >= 0 && data->vert_touch_y <= data->m_height)
+    while (data->vert_touch_x >= 0 && data->vert_touch_y >= 0)
     {
         data->x_vert_to_check = data->vert_touch_x + (data->is_ray_facing_left ? -1 : 0);
         data->y_vert_to_check = data->vert_touch_y;
-        vert_wall_content = &(data->map[(int)floor(data->y_vert_to_check / SQUARE_SIZE)][(int)floor(data->x_vert_to_check / SQUARE_SIZE)]);
         if (if_wall(data->x_vert_to_check, data->y_vert_to_check, data))
         {
             data->save_vert_wall_hit_x = data->vert_touch_x;
@@ -86,7 +82,7 @@ int if_wall(float x, float y, t_struct *data)
         return (TRUE);
     map_index_x = floor((x / SQUARE_SIZE));
     map_index_y = floor((y / SQUARE_SIZE));
-    return (data->map[map_index_y][map_index_x] == ' ' || data->map[map_index_y][map_index_x] == 1);
+    return (data->map[map_index_y][map_index_x] == ' ' || data->map[map_index_y][map_index_x] == '1');
 }
 
 int initialize_window(t_struct *data)
