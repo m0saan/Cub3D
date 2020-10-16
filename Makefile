@@ -21,7 +21,7 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 all: $(NAME)
 
 $(NAME):
-	@$(CC) $(DEBUG) $(CFLAGS) $(LDLIBS) $(OPTIMAZATION) $(SRC) -o $(NAME) $(ADDRESS_SANITIZER);
+	@$(CC) $(DEBUG) $(LDLIBS) $(OPTIMAZATION) $(SRC) -o $(NAME) $(ADDRESS_SANITIZER);
 
 build:
 	@./Cub3D map2.cub
