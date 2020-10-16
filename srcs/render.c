@@ -23,19 +23,11 @@ void render_firt_time(t_struct *data)
 
 int update(t_struct *data)
 {
-	// mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	// if ((data->img_ptr = mlx_new_image(data->mlx_ptr,
-	// 								   data->w_width, data->w_height)) == NULL)
-	// 	return (TRUE);
-	// if ((data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
-	// 										&data->size_line, &data->endian)) == NULL)
-	// 	return (TRUE);
 	cast_rays(data);
 	render_walls(data);
 	move_player(data);
-	// if (data->m)
-	// 	mini_map(data);
+	if (data->m)
+		mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	if (data->h)
 		help_text(data);
@@ -49,7 +41,13 @@ int move_player(t_struct *data)
 	data->updated_player_x = data->x + cos(data->rotation_angle) * data->move_step;
 	data->updated_player_y = data->y + sin(data->rotation_angle) * data->move_step;
 
-	if (!if_wall(data->updated_player_x, data->updated_player_y, data))
+	int x = calculate_index(data->updated_player_x);
+	int y = calculate_index(data->updated_player_y);
+
+	if (!valid_indeces(data, x, y))
+		return FALSE;
+
+	if (!if_wall(data->updated_player_x, data->updated_player_y, data) && !is_sprite(data->map[y][x]))
 	{
 		data->x = data->updated_player_x;
 		data->y = data->updated_player_y;
