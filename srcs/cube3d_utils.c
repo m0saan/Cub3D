@@ -59,7 +59,6 @@ void initialize_2(t_struct *data)
 	data->bottom_pixel = 0;
 	data->distance_to_projection_plane = 0;
 	data->wall_height = 0;
-	data->count_spt = 0;
 	data->m = 0;
 	data->h = 0;
 }
@@ -85,4 +84,24 @@ void ft_draw(t_struct *data, int x, int y, int color)
 
 	dst = data->img_data + (y * data->size_line + x * (data->bpp / 8));
 	*(u_int32_t *)dst = color;
+}
+
+int is_not_valid_element(t_struct *data, char *buff)
+{
+	return buff[data->pos] != '1' && buff[data->pos] != '0' && buff[data->pos] != '2' && buff[data->pos] != 'N' && buff[data->pos] != 'W' && buff[data->pos] != 'E' && buff[data->pos] != 'S' && buff[data->pos] != ' ';
+}
+
+int is_player(t_struct *data, char *buff)
+{
+	return buff[data->pos] == 'N' || buff[data->pos] == 'W' || buff[data->pos] == 'E' || buff[data->pos] == 'S';
+}
+
+int is_sprite(char c)
+{
+	return c == '2';
+}
+
+int calculate_index(float value)
+{
+	return floor((value / SQUARE_SIZE));
 }
