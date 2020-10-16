@@ -23,9 +23,11 @@ void draw_sprites(t_struct *data, float x_off, float y_off, int index)
 		{
 			if (y_off + j < 0 || y_off + j > data->w_height)
 				continue;
-			id = SQUARE_SIZE * (SQUARE_SIZE * j / size) + (SQUARE_SIZE * i / size);
-			id = id >= (4096) ? (4095) : id;
-			if (!(data->img_data_texture_sprite[id] == 0x000000))
+			id = SPRITE_SIZE * (SPRITE_SIZE * j / size) + (SPRITE_SIZE * i / size);
+			id = id >= (SPRITE_SIZE * SPRITE_SIZE) ? (SPRITE_SIZE * SPRITE_SIZE - 1) : id;
+			//printf("j ==== %lu\n", SPRITE_SIZE * j / size);
+			//printf("i ==== %lu\n", SPRITE_SIZE * i / size);
+			if (!(data->img_data_texture_sprite[id] == BLACK))
 				ft_draw(data, x_off + i, y_off + j, data->img_data_texture_sprite[id]);
 		}
 	}
@@ -61,7 +63,7 @@ void set_up_sprite(t_struct *data)
 		else
 			data->sprite[i_spt].size = (data->w_width / data->sprite[i_spt].dis) * SQUARE_SIZE;
 		data->sprite[i_spt].y_off = data->w_height / 2 - data->sprite[i_spt].size / 2;
-		data->sprite[i_spt].x_off = ((DEG(spt_angle) - DEG(data->rotation_angle)) * data->w_width) / SQUARE_SIZE + ((data->w_width / 2) - (data->sprite[i_spt].size / 2));
+		data->sprite[i_spt].x_off = ((DEG(spt_angle) - DEG(data->rotation_angle)) * data->w_width) / SPRITE_SIZE + ((data->w_width / 2) - (data->sprite[i_spt].size / 2));
 		draw_sprites(data, data->sprite[i_spt].x_off, data->sprite[i_spt].y_off, i_spt);
 		i_spt++;
 	}
