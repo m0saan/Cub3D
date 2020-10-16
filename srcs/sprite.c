@@ -23,7 +23,7 @@ void draw_sprites(t_struct *data, float x_off, float y_off, int index)
 		{
 			if (y_off + j < 0 || y_off + j > data->w_height)
 				continue;
-			id = 64 * (64 * j / size) + (64 * i / size);
+			id = SQUARE_SIZE * (SQUARE_SIZE * j / size) + (SQUARE_SIZE * i / size);
 			id = id >= (4096) ? (4095) : id;
 			if (!(data->img_data_texture_sprite[id] == 0x000000))
 				ft_draw(data, x_off + i, y_off + j, data->img_data_texture_sprite[id]);
@@ -46,7 +46,7 @@ void set_up_sprite(t_struct *data)
 		i++;
 	}
 
-	sort_sprites(data);
+	//sort_sprites(data);
 	while (i_spt < data->count_spt)
 	{
 		data->sprite[i_spt].dis = distance_between_points(data->x, data->y,
@@ -61,7 +61,7 @@ void set_up_sprite(t_struct *data)
 		else
 			data->sprite[i_spt].size = (data->w_width / data->sprite[i_spt].dis) * SQUARE_SIZE;
 		data->sprite[i_spt].y_off = data->w_height / 2 - data->sprite[i_spt].size / 2;
-		data->sprite[i_spt].x_off = ((DEG(spt_angle) - DEG(data->rotation_angle)) * data->w_width) / 60 + ((data->w_width / 2) - (data->sprite[i_spt].size / 2));
+		data->sprite[i_spt].x_off = ((DEG(spt_angle) - DEG(data->rotation_angle)) * data->w_width) / SQUARE_SIZE + ((data->w_width / 2) - (data->sprite[i_spt].size / 2));
 		draw_sprites(data, data->sprite[i_spt].x_off, data->sprite[i_spt].y_off, i_spt);
 		i_spt++;
 	}
@@ -81,9 +81,9 @@ void initialize_sprite(t_struct *data)
 	while (i < data->n_lines)
 	{
 		j = 0;
-		while (j < data->map[i][j])
+		while (j < g_lines_length[i])
 		{
-			if (data->map[i][j] == 2)
+			if (data->map[i][j] == '2')
 			{
 				data->sprite[i_spt].x = (j + 0.5f) * SQUARE_SIZE;
 				data->sprite[i_spt].y = (i + 0.5f) * SQUARE_SIZE;
