@@ -35,10 +35,10 @@
 #define FALSE 0
 #define MINI 0.2
 
-#define SQUARE_SIZE 128
+#define SQUARE_SIZE 512
 #define TEX_WIDTH SQUARE_SIZE
 #define TEX_HEIGHT SQUARE_SIZE
-#define SPRITE_SIZE 64
+#define SPRITE_SIZE 128
 
 #define FOV_ANGLE 60 * (PI / 180)
 
@@ -278,8 +278,10 @@ void draw_sprites(t_struct *data, float x_off, float y_off, int index);
 void help_text(t_struct *data);
 void init_player(t_struct *data);
 void set_up_player(t_struct *data, int e);
-int is_sptite(char c);
+int is_sprite(char c);
+int is_player(t_struct *data, char *buff);
 int calculate_index(float value);
+int is_not_valid_element(t_struct *data, char *buff);
 int valid_indeces(t_struct *data, int x, int y);
 
 #endif
