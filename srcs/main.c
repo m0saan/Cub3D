@@ -59,20 +59,10 @@ void vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_
 
 static int valid_indeces(t_struct *data, int x, int y)
 {
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-
-    if (y > data->n_lines)
+    if (y >= data->n_lines || y < 0)
         return FALSE;
-    while (i < data->n_lines)
-    {
-        if (x > g_lines_length[i])
-            return FALSE;
-        i++;
-    }
+    if (x >= g_lines_length[y] || x < 0)
+        return FALSE;
     return TRUE;
 }
 
@@ -88,6 +78,9 @@ int if_wall(float x, float y, t_struct *data)
         return TRUE;
     if ((y < 0 || y > data->m_height) || (map_index_y > data->n_lines))
         return (TRUE);
+
+    //printf("x === %d\n", map_index_x);
+    //printf("y === %d\n", map_index_y);
 
     return (data->map[map_index_y][map_index_x] == ' ' || data->map[map_index_y][map_index_x] == '1');
 }
