@@ -9,8 +9,8 @@ OBJ_NAME = $(SRC_NAMES:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c99
-DEBUG = -g
-OPTIMAZATION = -Ofast
+DEBUG = -g3
+OPT = -Ofast
 LDLIBS = -lm -framework OpenGL -framework AppKit libmlx.a
 ADDRESS_SANITIZER = -fsanitize=address
 
@@ -21,7 +21,7 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 all: $(NAME)
 
 $(NAME):
-	@$(CC) $(DEBUG) $(LDLIBS) $(OPTIMAZATION) $(SRC) -o $(NAME) $(ADDRESS_SANITIZER);
+	@$(CC) $(DEBUG) $(LDLIBS) $(OPT) $(SRC) -o $(NAME) $(ADDRESS_SANITIZER);
 
 build:
 	@./Cub3D map2.cub
