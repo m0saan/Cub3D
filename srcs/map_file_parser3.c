@@ -71,10 +71,9 @@ int screw_this_norminette(t_struct *data, char *buff)
 	if (!(fill_out_map(data, buff)))
 	{
 		write(1, MAP_ERR, 18);
-		return (1);
+		return (FALSE);
 	}
-
-	return (0);
+	return (TRUE);
 }
 
 u_int32_t creatergb(int r, int g, int b)

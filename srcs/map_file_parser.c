@@ -33,10 +33,10 @@ int read_map(t_struct *data, char *buff)
 		else if (buff[data->pos] == 'S' && buff[data->pos + 1] == ' ')
 			get_sprite_path(data, buff);
 		else if ((buff[data->pos] == '1' || buff[data->pos] == ' ') && data->get_to_map == 8)
-			return (screw_this_norminette(data, buff)) ? 1 : 0;
+			return (screw_this_norminette(data, buff));
 		data->pos++;
 	}
-	return (0);
+	return (TRUE);
 }
 
 int check_textures_f_c_s_availibility(char *buff)
@@ -49,14 +49,14 @@ int check_textures_f_c_s_availibility(char *buff)
 	if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len)) || !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
 	{
 		write(1, "Texture error!\n", 15);
-		return (1);
+		return (FALSE);
 	}
 	if (!(ft_strchr((char *)buff, 'R')) || !(ft_strchr((char *)buff, 'F')) || !(ft_strchr((char *)buff, 'C')) || !(ft_strchr((char *)buff, 'S')))
 	{
 		write(1, "Error : valuable informations are not involved!\n", 48);
-		return (1);
+		return (FALSE);
 	}
-	return (0);
+	return (TRUE);
 }
 
 int check_read_vaues(t_struct *data)
@@ -64,14 +64,14 @@ int check_read_vaues(t_struct *data)
 	if (data->w_height == 0 || data->w_width == 0)
 	{
 		write(1, "Error : missing width or height\n", 32);
-		return (1);
+		return (FALSE);
 	}
 	if (data->no[0] == 0 || data->so[0] == 0 || data->we[0] == 0 || data->we[0] == 0)
 	{
 		write(1, "Error : wrong textute path\n", 27);
-		return (1);
+		return (FALSE);
 	}
-	return (0);
+	return (TRUE);
 }
 
 void get_sprite_path(t_struct *data, char *buff)
@@ -104,11 +104,11 @@ int parse(t_struct *data, char **av)
 		write(1, "No such file!\n", 14);
 		return (1);
 	}
-	if (check_textures_f_c_s_availibility((char *)buff))
-		return (1);
-	if (read_map(data, (char *)buff))
-		return (1);
-	if (check_read_vaues(data))
-		return (1);
-	return (0);
+	if (!check_textures_f_c_s_availibility((char *)buff))
+		return (FALSE);
+	if (!read_map(data, (char *)buff))
+		return (FALSE);
+	if (!check_read_vaues(data))
+		return (FALSE);
+	return (TRUE);
 }

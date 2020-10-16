@@ -38,34 +38,6 @@ int line_length(char *line)
     return (i);
 }
 
-int check_boudded_map(t_struct *data)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while (i < 14)
-    {
-        j = 0;
-        while (j < 29)
-        {
-            if (data->map[i][j] == 78)
-            {
-                data->x = i * SQUARE_SIZE;
-                data->y = j * SQUARE_SIZE;
-            }
-            if (data->map[i][0] != 1 || data->map[i][data->l_length - 1] != 1)
-                return (0);
-            if (data->map[0][j] != 1 || data->map[data->n_lines - 1][j] != 1)
-                return (0);
-            j++;
-        }
-        i++;
-    }
-    return (1);
-}
-
 int fill_out_map(t_struct *data, char *buff)
 {
     int i;
@@ -104,8 +76,7 @@ int fill_out_map(t_struct *data, char *buff)
         }
         data->pos += 1;
     }
-    //return (!(check_boudded_map(data)) ? 0 : 1);
-    return 1;
+    return (TRUE);
 }
 
 void initialize_file_struct(t_struct *data)
