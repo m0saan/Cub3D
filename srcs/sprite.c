@@ -7,6 +7,7 @@ void draw_sprites(t_struct *data, float x_off, float y_off, int index)
 	size_t i;
 	size_t j;
 	size_t size;
+	const int e = SPRITE_SIZE * SPRITE_SIZE;
 
 	i = 0;
 	j = 0;
@@ -24,10 +25,8 @@ void draw_sprites(t_struct *data, float x_off, float y_off, int index)
 			if (y_off + j < 0 || y_off + j > data->w_height)
 				continue;
 			id = SPRITE_SIZE * (SPRITE_SIZE * j / size) + (SPRITE_SIZE * i / size);
-			id = id >= (SPRITE_SIZE * SPRITE_SIZE) ? (SPRITE_SIZE * SPRITE_SIZE - 1) : id;
-			//printf("j ==== %lu\n", SPRITE_SIZE * j / size);
-			//printf("i ==== %lu\n", SPRITE_SIZE * i / size);
-			if (!(data->img_data_texture_sprite[id] == BLACK))
+			id = id >= (e) ? (e - 1) : id;
+			if (!(data->img_data_texture_sprite[id] == 0x980088))
 				ft_draw(data, x_off + i, y_off + j, data->img_data_texture_sprite[id]);
 		}
 	}
