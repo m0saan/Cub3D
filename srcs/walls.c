@@ -12,6 +12,11 @@
 
 #include "../include/cube3d.h"
 
+static int is_not_valid_xpm(t_struct *data)
+{
+	return !data->xpm_ptr1 || !data->xpm_ptr2 || !data->xpm_ptr3 || !data->xpm_ptr4 || !data->sprite_xpm;
+}
+
 void texture_from_file(t_struct *data)
 {
 	int w;
@@ -22,7 +27,7 @@ void texture_from_file(t_struct *data)
 	data->xpm_ptr3 = mlx_xpm_file_to_image(data->mlx_ptr, data->we, &w, &h);
 	data->xpm_ptr4 = mlx_xpm_file_to_image(data->mlx_ptr, data->ea, &w, &h);
 	data->sprite_xpm = mlx_xpm_file_to_image(data->mlx_ptr, data->sp, &w, &h);
-	if (!data->xpm_ptr1 || !data->xpm_ptr2 || !data->xpm_ptr3 || !data->xpm_ptr4)
+	if (is_not_valid_xpm(data))
 	{
 		write(1, "Error : wrong texture path!\n", 28);
 		(ft_close(data));
