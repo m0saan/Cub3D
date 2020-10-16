@@ -66,22 +66,13 @@ int check_boudded_map(t_struct *data)
     return (1);
 }
 
-int is_not_valid_element(t_struct *data, char *buff)
-{
-    return buff[data->pos] != '1' && buff[data->pos] != '0' && buff[data->pos] != '2' && buff[data->pos] != 'N' && buff[data->pos] != 'W' && buff[data->pos] != 'E' && buff[data->pos] != 'S' && buff[data->pos] != ' ';
-}
-
-int is_player(t_struct *data, char *buff)
-{
-    return buff[data->pos] == 'N' || buff[data->pos] == 'W' || buff[data->pos] == 'E' || buff[data->pos] == 'S';
-}
-
 int fill_out_map(t_struct *data, char *buff)
 {
     int i;
     int j;
 
     i = -1;
+    data->count_spt = 0;
     data->n_lines = count_lines(&buff[data->pos]);
     g_lines_length = (int *)malloc((data->n_lines + 1) * sizeof(int));
     data->map = (char **)malloc((data->n_lines + 1) * sizeof(char *));
@@ -106,6 +97,8 @@ int fill_out_map(t_struct *data, char *buff)
                 continue;
             }
             data->map[i][j] = buff[data->pos];
+            if (is_sprite(data->map[i][j]))
+                data->count_spt++;
             data->pos += 1;
             j++;
         }
