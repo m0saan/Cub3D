@@ -31,8 +31,8 @@ void initialize_1(t_struct *data)
 	data->turn_direction = 0;
 	data->walk_direction = 0;
 	data->rotation_angle = PI / 2;
-	data->walk_speed = 25;
-	data->turn_speed = 10 * (PI / 180);
+	data->walk_speed = 65;
+	data->turn_speed = 8 * (PI / 180);
 	data->which_radius = 0;
 	initialize_2(data);
 }

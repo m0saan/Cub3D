@@ -71,7 +71,7 @@ int render_map(t_struct *data, int m)
 	square_y = 0;
 	square_color = 0;
 
-	while (i <= data->n_lines)
+	while (i < data->n_lines)
 	{
 		while (j < g_lines_length[i])
 		{
