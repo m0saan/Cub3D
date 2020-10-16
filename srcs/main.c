@@ -114,7 +114,7 @@ int main(int ac, char *av[])
         return (1);
     }
     data = malloc(sizeof(t_struct));
-    if (parse(data, av))
+    if (!parse(data, av))
         return (1);
     g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
     if (initialize_window(data))
