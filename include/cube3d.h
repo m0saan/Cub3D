@@ -20,6 +20,7 @@
 #include "../libs/OpenGL/mlx.h"
 #include <fcntl.h>
 
+#define BLACK 0x000000
 #define GREEN 0x2ecc71
 #define WHITE 0xecf0f1
 #define PLAYER 0xecf0f1
@@ -34,9 +35,10 @@
 #define FALSE 0
 #define MINI 0.2
 
-#define SQUARE_SIZE 64
-#define TEX_WIDTH 64
-#define TEX_HEIGHT 64
+#define SQUARE_SIZE 128
+#define TEX_WIDTH SQUARE_SIZE
+#define TEX_HEIGHT SQUARE_SIZE
+#define SPRITE_SIZE 64
 
 #define FOV_ANGLE 60 * (PI / 180)
 
@@ -276,4 +278,8 @@ void draw_sprites(t_struct *data, float x_off, float y_off, int index);
 void help_text(t_struct *data);
 void init_player(t_struct *data);
 void set_up_player(t_struct *data, int e);
+int is_sptite(char c);
+int calculate_index(float value);
+int valid_indeces(t_struct *data, int x, int y);
+
 #endif
