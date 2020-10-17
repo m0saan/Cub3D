@@ -93,7 +93,7 @@ int parse(t_struct *data, char **av)
 {
 	int fd;
 	int len;
-	len = 1024;
+	len = 4096;
 	char *buff[len];
 
 	ft_memset(buff, 0, len);
