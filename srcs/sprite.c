@@ -47,7 +47,7 @@ void set_up_sprite(t_struct *data)
 		i++;
 	}
 
-	//sort_sprites(data);
+	sort_sprites(data);
 	while (i_spt < data->count_spt)
 	{
 		data->sprite[i_spt].dis = distance_between_points(data->x, data->y,
@@ -106,7 +106,7 @@ static void sort_sprites(t_struct *data)
 	while (i < data->count_spt)
 	{
 		j = 0;
-		while (j < data->count_spt - i)
+		while (j < data->count_spt - i && j + 1 < data->count_spt)
 		{
 			if (data->sprite[j].dis < data->sprite[j + 1].dis)
 			{
