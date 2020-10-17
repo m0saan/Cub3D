@@ -46,6 +46,36 @@
 #define BUFFER_SIZE 90
 #define MAP_ERR "error : Map error\n"
 
+typedef	struct	s_screen{
+    int32_t			width;
+    int32_t			height;
+    uint16_t		bit_count;
+    int				width_in_bytes;
+    uint32_t		bi_size;
+    uint32_t		image_size;
+    uint32_t		bf_off_bits;
+    uint32_t		file_size;
+    uint16_t		biplanes;
+    unsigned char	header[54];
+    unsigned char	*buf;
+    int				fd;
+    int				row;
+    int				col;
+}				t_screen;
+
+typedef struct	s_bitmap
+{
+    unsigned int	file_size;
+    unsigned int	pd_offset;
+    unsigned int	header_size;
+    unsigned int	image_width;
+    unsigned int	image_height;
+    unsigned int	image_size;
+    unsigned short	planes;
+    unsigned short	bpp;
+    int				width_in_bytes;
+}				t_bitmap;
+
 typedef struct s_sprite
 {
 	int *buff;
@@ -190,6 +220,8 @@ typedef struct s_struct
 
 	int i;
 	int j;
+
+	t_screen screen;
 } t_struct;
 
 int *g_lines_length;
