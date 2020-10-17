@@ -22,9 +22,9 @@
 
 #define BLACK 0x000000
 #define GREEN 0x2ecc71
-#define WHITE 0xecf0f1
-#define PLAYER 0xecf0f1
-#define SPRITE 0XFF00FF
+#define YELLOW 0xecf001
+#define PLAYER_COLOR 0xe000f1
+#define SPRITE_COLOR 0xFF00FF
 
 #define PI 3.14159265359
 #define TWO_PI 2 * PI
@@ -33,9 +33,9 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MINI 0.2
+#define MINI 0.1
 
-#define SQUARE_SIZE 512
+#define SQUARE_SIZE 64
 #define TEX_WIDTH SQUARE_SIZE
 #define TEX_HEIGHT SQUARE_SIZE
 #define SPRITE_SIZE 64
