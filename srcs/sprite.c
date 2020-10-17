@@ -26,9 +26,10 @@ void draw_sprites(t_struct *data, float x_off, float y_off, int index)
 				continue;
 			id = SPRITE_SIZE * (SPRITE_SIZE * j / size) + (SPRITE_SIZE * i / size);
 			id = id >= (e) ? (e - 1) : id;
-			if (!(data->img_data_texture_sprite[id] == BLACK))
-				ft_draw(data, x_off + i, y_off + j, data->img_data_texture_sprite[id]);
-		}
+            if (data->img_data_texture_sprite[id] == BLACK)
+                continue;
+            ft_draw(data, x_off + i, y_off + j, data->img_data_texture_sprite[id]);
+        }
 	}
 }
 

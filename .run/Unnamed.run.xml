@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Unnamed" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" singleton="false" nameIsGenerated="true">
+    <makefile filename="$PROJECT_DIR$/Makefile" target="all $(NAME) build clean fclean re" workingDirectory="$PROJECT_DIR$/srcs" arguments="">
+      <envs />
+    </makefile>
+    <method v="2" />
+  </configuration>
+</component>
