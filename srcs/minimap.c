@@ -71,22 +71,22 @@ int render_map(t_struct *data, int m)
 	square_y = 0;
 	square_color = 0;
 
-	while (i < data->n_lines)
+	while (i <= data->n_lines)
 	{
+		j = 0;
 		while (j < g_lines_length[i])
 		{
 			m = data->map[i][j];
 			square_x = j * SQUARE_SIZE;
 			square_y = i * SQUARE_SIZE;
-			square_color = m != 0 ? GREEN : WHITE;
+			square_color = m == '0' ? YELLOW : GREEN;
 			if (m == 'N' || m == 'W' || m == 'E' || m == 'S')
-				square_color = PLAYER;
-			if (m == 2)
-				square_color = SPRITE;
+				square_color = PLAYER_COLOR;
+			if (m == '2')
+				square_color = SPRITE_COLOR;
 			fill_square(square_x - 1, square_y - 1, SQUARE_SIZE, square_color, data);
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 	return (TRUE);
