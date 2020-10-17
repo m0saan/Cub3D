@@ -77,6 +77,8 @@ void initialize_sprite(t_struct *data)
 	i = 0;
 	j = 0;
 	i_spt = 0;
+	if (data->count_spt == 0)
+		return;
 	if (!(data->sprite = (t_sprite *)malloc(sizeof(t_sprite) * (data->count_spt))))
 		return;
 	while (i < data->n_lines)
