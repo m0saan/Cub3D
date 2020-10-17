@@ -7,4 +7,5 @@ textures
 .idea
 textures
 Makefile
-map2.cub map.cub
+map2.cub
+map.cub
