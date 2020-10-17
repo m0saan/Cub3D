@@ -88,7 +88,10 @@ void ft_draw(t_struct *data, int x, int y, int color)
 
 int is_not_valid_element(t_struct *data, char *buff)
 {
-	return buff[data->pos] != '1' && buff[data->pos] != '0' && buff[data->pos] != '2' && buff[data->pos] != 'N' && buff[data->pos] != 'W' && buff[data->pos] != 'E' && buff[data->pos] != 'S' && buff[data->pos] != ' ';
+	return buff[data->pos] != '1' && buff[data->pos] != '0'
+	&& buff[data->pos] != '2' && buff[data->pos] != 'N'
+	&& buff[data->pos] != 'W' && buff[data->pos] != 'E'
+	&& buff[data->pos] != 'S' && buff[data->pos] != ' ';
 }
 
 int is_player(t_struct *data, char *buff)

@@ -41,11 +41,9 @@ int read_map(t_struct *data, char *buff)
 
 int check_textures_f_c_s_availibility(char *buff)
 {
-	size_t i;
-	size_t len;
+    size_t len;
 
-	i = 0;
-	len = ft_strlen(buff);
+    len = ft_strlen(buff);
 	if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len)) || !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
 	{
 		write(1, "Texture error!\n", 15);

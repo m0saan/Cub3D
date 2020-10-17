@@ -35,7 +35,7 @@
 #define FALSE 0
 #define MINI 0.1
 
-#define SQUARE_SIZE 64
+#define SQUARE_SIZE 512
 #define TEX_WIDTH SQUARE_SIZE
 #define TEX_HEIGHT SQUARE_SIZE
 #define SPRITE_SIZE 64
