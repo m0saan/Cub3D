@@ -10,8 +10,9 @@ OBJ_NAME = $(SRC_NAMES:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c11
 DEBUG = -g3
-OPTIMAZATION = -Ofast
-LDLIBS = -lm -framework OpenGL -framework AppKit libmlx.a -fsanitize=address
+OPT = -Ofast
+LD_LIBS = -lm -framework OpenGL -framework AppKit libmlx.a -fsanitize=address
+LIB_FT = libft.a
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAMES))
 OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
@@ -20,14 +21,14 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 all: $(NAME)
 
 $(NAME):
-	@$(CC) $(DEBUG) $(LDLIBS) $(SRC) -o $(NAME);
+	@$(CC) $(LIB_FT) $(DEBUG) $(LD_LIBS) $(SRC) -o $(NAME) $(OPT);
 
 clean:
 	@rm -rf *.o
 	@echo "Makefile : Cleaning .o files..."
 
 build:
-	@./Cub3D map.cub
+	@./Cub3D "map.cub"
 
 fclean: clean
 	@rm -rf $(NAME)
