@@ -1,5 +1,4 @@
 
-
 #include "../include/cube3d.h"
 
 typedef struct s_rgb
@@ -27,9 +26,7 @@ int screen(t_struct *data)
     const char *file_name = "screenshot.bmp";
     const int LEN = 54;
     unsigned char header[LEN];
-    int i;
 
-    i = 0;
     ft_memset(header, 0, LEN);
     screen_init(data, header);
     data->screen.buf = malloc((data->screen.image_size));
@@ -39,7 +36,7 @@ int screen(t_struct *data)
     {
         data->screen.col = 0;
         while (data->screen.col++ < data->screen.width)
-            scrn_data(data, x);
+            screen_data(data, x);
         x++;
     }
     data->screen.fd = open(file_name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
@@ -50,7 +47,7 @@ int screen(t_struct *data)
     return (0);
 }
 
-void scrn_data(t_struct *data, int x)
+void screen_data(t_struct *data, int x)
 {
     g_rgb = color_converter(data->img_data[data->screen.row *
                                                data->screen.width +
@@ -75,13 +72,13 @@ void screen_init(t_struct *data, unsigned char *header)
     data->screen.bf_off_bits = 54;
     data->screen.file_size = 54 + data->screen.image_size;
     data->screen.biplanes = 1;
-    ft_memcpy(header, "BM", 2);
-    ft_memcpy(header + 2, &(data->screen.file_size), 4);
-    ft_memcpy(header + 10, &(data->screen.bf_off_bits), 4);
-    ft_memcpy(header + 14, &(data->screen.bi_size), 4);
-    ft_memcpy(header + 18, &(data->screen.width), 4);
-    ft_memcpy(header + 22, &(data->screen.height), 4);
-    ft_memcpy(header + 26, &(data->screen.biplanes), 2);
-    ft_memcpy(header + 28, &(data->screen.bit_count), 2);
-    ft_memcpy(header + 34, &(data->screen.image_size), 4);
+    ft_mem_cpy(header, "BM", 2);
+    ft_mem_cpy(header + 2, &(data->screen.file_size), 4);
+    ft_mem_cpy(header + 10, &(data->screen.bf_off_bits), 4);
+    ft_mem_cpy(header + 14, &(data->screen.bi_size), 4);
+    ft_mem_cpy(header + 18, &(data->screen.width), 4);
+    ft_mem_cpy(header + 22, &(data->screen.height), 4);
+    ft_mem_cpy(header + 26, &(data->screen.biplanes), 2);
+    ft_mem_cpy(header + 28, &(data->screen.bit_count), 2);
+    ft_mem_cpy(header + 34, &(data->screen.image_size), 4);
 }
