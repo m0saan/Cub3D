@@ -47,7 +47,7 @@ void texture_from_file(t_struct *data)
 void calculate_wall_projection(t_struct *data)
 {
 	data->corrected_dsitance = g_rays[data->i_wall_index].distance *
-							   cos(g_rays[data->i_wall_index].ray_angle - data->rotation_angle);
+							   cosf(g_rays[data->i_wall_index].ray_angle - data->rotation_angle);
 	data->distance_to_projection_plane = (data->w_width * 0.5) / tan(FOV_ANGLE / 2);
 	data->wall_height = (SQUARE_SIZE / data->corrected_dsitance) *
 						data->distance_to_projection_plane;
@@ -96,12 +96,12 @@ void render_walls(t_struct *data)
 		data->txt_offset_x = (g_rays[data->i_wall_index].was_hit_vertical)
 								 ? ((int)g_rays[data->i_wall_index].wall_h_y % SQUARE_SIZE)
 								 : ((int)g_rays[data->i_wall_index].wall_h_x % SQUARE_SIZE);
-		while (ceilling++ < data->top_pixel)
+		while (ceilling++ < (int) data->top_pixel)
 			ft_draw(data, data->i_wall_index, ceilling,
 					create_rgb(data->c_red, data->c_green, data->c_blue));
 		while (y++ < data->bottom_pixel - 1)
-			ft_ljodran(data, y);
-		floor = data->bottom_pixel;
+			ft_ljodran(data, (int)y);
+		floor = (int) data->bottom_pixel;
 		while (floor++ < data->w_height - 1)
 			ft_draw(data, data->i_wall_index, floor, create_rgb(data->f_red, data->c_green, data->c_blue));
 	}
