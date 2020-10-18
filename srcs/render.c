@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:16 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/18 11:51:27 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 14:36:44 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int update(t_struct *data)
 {
 	cast_rays(data);
 	render_walls(data);
-	if (g_screenshot){
-	    screen(data);
-	    exit(1);
-	}
 	move_player(data);
 	if (data->m)
 		mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+    if (g_screenshot){
+        screen(data);
+        exit(1);
+    }
 	if (data->h)
 		help_text(data);
 	return (FALSE);
@@ -31,10 +31,10 @@ int update(t_struct *data)
 
 int move_player(t_struct *data)
 {
-	data->rotation_angle += data->turn_direction * data->turn_speed;
-	data->move_step = data->walk_direction * data->walk_speed;
-	data->updated_player_x = data->x + cos(data->rotation_angle) * data->move_step;
-	data->updated_player_y = data->y + sin(data->rotation_angle) * data->move_step;
+	data->rotation_angle += (float ) data->turn_direction * data->turn_speed;
+	data->move_step = (float ) data->walk_direction * data->walk_speed;
+	data->updated_player_x = data->x + cosf(data->rotation_angle) * data->move_step;
+	data->updated_player_y = data->y + sinf(data->rotation_angle) * data->move_step;
 
 	int x = calculate_index(data->updated_player_x);
 	int y = calculate_index(data->updated_player_y);
