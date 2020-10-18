@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/18 11:51:27 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 12:46:05 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,12 @@ int are_valid_args(int ac, char **av){
         return (TRUE);
     }
 
-    else if (ac == 3 && strcmp(av[2], "--save")) {
-        g_screenshot = TRUE;
-        printf("%d\n", g_screenshot);
-        return (TRUE);
+    else if (ac == 3 && !strcmp(av[2], "--save")) {
+            g_screenshot = TRUE;
+            printf("%d\n", g_screenshot);
+            return (TRUE);
     }
+    printf("BMP error");
     return (FALSE);
 }
 
