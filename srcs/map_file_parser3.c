@@ -75,8 +75,3 @@ int screw_this_norminette(t_struct *data, char *buff)
 	}
 	return (TRUE);
 }
-
-u_int32_t creatergb(int r, int g, int b)
-{
-	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-}
