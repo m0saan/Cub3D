@@ -34,7 +34,7 @@ char *ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (0);
 }
 
-void get_western_texture_path(t_struct *data, char *buff)
+void get_western_texture_path(t_struct *data, const char *buff)
 {
 	int i;
 
@@ -50,7 +50,7 @@ void get_western_texture_path(t_struct *data, char *buff)
 	data->get_to_map += 1;
 }
 
-void get_easter_texture_path(t_struct *data, char *buff)
+void get_easter_texture_path(t_struct *data, const char *buff)
 {
 	int i;
 

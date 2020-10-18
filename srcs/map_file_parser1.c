@@ -6,13 +6,13 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:29:13 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/24 18:29:15 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 12:20:20 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-int count_lines(char *buff)
+int count_lines(const char *buff)
 {
     int i;
     int num_lines;
@@ -28,7 +28,7 @@ int count_lines(char *buff)
     return (num_lines);
 }
 
-int line_length(char *line)
+int line_length(const char *line)
 {
     int i;
 
@@ -63,7 +63,7 @@ int fill_out_map(t_struct *data, char *buff)
             {
                 data->i = i;
                 data->j = j;
-                data->map[i][j++] = data->orientation = buff[data->pos];
+                data->map[i][j++] = data->orientation = (unsigned char)buff[data->pos];
                 init_player(data);
                 data->pos += 1;
                 continue;

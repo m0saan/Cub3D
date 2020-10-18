@@ -43,7 +43,7 @@ void	get_ceilling_values(t_struct *data, char *buff)
 	data->get_to_map += 1;
 }
 
-void	get_north_texture_path(t_struct *data, char *buff)
+void	get_north_texture_path(t_struct *data, const char *buff)
 {
 	int i;
 
@@ -59,7 +59,7 @@ void	get_north_texture_path(t_struct *data, char *buff)
 	data->get_to_map += 1;
 }
 
-void	get_south_texture_path(t_struct *data, char *buff)
+void	get_south_texture_path(t_struct *data, const char *buff)
 {
 	int i;
 
@@ -74,3 +74,6 @@ void	get_south_texture_path(t_struct *data, char *buff)
 	}
 	data->get_to_map += 1;
 }
+
+
+// *SAN_SYMBOLIZER_PATH environment variable to point to the llvm-symbolizer
