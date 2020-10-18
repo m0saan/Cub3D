@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/14 20:23:27 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 11:51:27 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void vertical_ray_intersection(float ray_angle, t_struct *data, int *found_vert_
     }
 }
 
-int valid_indeces(t_struct *data, int x, int y)
+int valid_indices(t_struct *data, int x, int y)
 {
     if (y >= data->n_lines || y < 0)
         return FALSE;
@@ -74,7 +74,7 @@ int if_wall(float x, float y, t_struct *data)
     map_index_x = calculate_index(x);
     map_index_y = calculate_index(y);
 
-    if (!valid_indeces(data, map_index_x, map_index_y))
+    if (!valid_indices(data, map_index_x, map_index_y))
         return TRUE;
     if ((y < 0 || y > data->m_height) || (map_index_y > data->n_lines))
         return (TRUE);
@@ -104,21 +104,28 @@ int initialize_window(t_struct *data)
     return (FALSE);
 }
 
+int are_valid_args(int ac, char **av){
+    if (ac < 2) {
+        write(1, "No map included!\n", 17);
+        exit(1);
+    }
+    else if (ac == 2 && strstr(av[1], ".cub")){
+        return (TRUE);
+    }
+
+    else if (ac == 3 && strcmp(av[2], "--save")) {
+        g_screenshot = TRUE;
+        printf("%d\n", g_screenshot);
+        return (TRUE);
+    }
+    return (FALSE);
+}
+
 int main(int ac, char *av[])
 {
+    if (!are_valid_args(ac, av))
+        return (TRUE);
     t_struct *data;
-
-    if (ac == 2)
-    {
-        write(1, "No map included!\n", 17);
-        return (1);
-    }
-
-    else if (ac == 3)
-    {
-        screen(data);
-        return 0;
-    }
     data = malloc(sizeof(t_struct));
     if (!parse(data, av))
         return (1);

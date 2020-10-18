@@ -6,25 +6,20 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:16 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/15 14:54:18 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 11:51:27 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-void render_firt_time(t_struct *data)
-{
-	cast_rays(data);
-	render_walls(data);
-	move_player(data);
-	help_text(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-}
-
 int update(t_struct *data)
 {
 	cast_rays(data);
 	render_walls(data);
+	if (g_screenshot){
+	    screen(data);
+	    exit(1);
+	}
 	move_player(data);
 	if (data->m)
 		mini_map(data);
@@ -44,7 +39,7 @@ int move_player(t_struct *data)
 	int x = calculate_index(data->updated_player_x);
 	int y = calculate_index(data->updated_player_y);
 
-	if (!valid_indeces(data, x, y))
+	if (!valid_indices(data, x, y))
 		return FALSE;
 
 	if (!if_wall(data->updated_player_x, data->updated_player_y, data) && !is_sprite(data->map[y][x]))
