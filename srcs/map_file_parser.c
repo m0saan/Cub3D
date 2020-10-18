@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:27:32 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/24 18:27:36 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 11:51:27 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int check_textures_f_c_s_availibility(char *buff)
 	return (TRUE);
 }
 
-int check_read_vaues(t_struct *data)
+int check_read_values(t_struct *data)
 {
 	if (data->w_height == 0 || data->w_width == 0)
 	{
@@ -66,7 +66,7 @@ int check_read_vaues(t_struct *data)
 	}
 	if (data->no[0] == 0 || data->so[0] == 0 || data->we[0] == 0 || data->we[0] == 0)
 	{
-		write(1, "Error : wrong textute path\n", 27);
+		write(1, "Error : wrong texture path\n", 27);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -106,7 +106,7 @@ int parse(t_struct *data, char **av)
 		return (FALSE);
 	if (!read_map(data, (char *)buff))
 		return (FALSE);
-	if (!check_read_vaues(data))
+	if (!check_read_values(data))
 		return (FALSE);
 	return (TRUE);
 }
