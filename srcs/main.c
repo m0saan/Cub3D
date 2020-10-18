@@ -108,10 +108,16 @@ int main(int ac, char *av[])
 {
     t_struct *data;
 
-    if (ac != 2)
+    if (ac == 2)
     {
         write(1, "No map included!\n", 17);
         return (1);
+    }
+
+    else if (ac == 3)
+    {
+        screen(data);
+        return 0;
     }
     data = malloc(sizeof(t_struct));
     if (!parse(data, av))
