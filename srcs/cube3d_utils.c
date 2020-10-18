@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:55:00 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/15 14:55:02 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 10:38:56 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,12 @@ int calculate_index(float value)
 	return floor((value / SQUARE_SIZE));
 }
 
-void			*ft_memcpy(void *dest, const void *src, size_t n)
+u_int32_t create_rgb(int r, int g, int b)
+{
+    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+}
+
+void			*ft_mem_cpy(void *dest, const void *src, size_t n)
 {
     char			*ndest;
     const char		*nsrc;
