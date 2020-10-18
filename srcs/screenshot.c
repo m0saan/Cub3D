@@ -1,22 +1,15 @@
 
 #include "../include/cube3d.h"
 
-typedef struct s_rgb
+t_rgb *rgb;
+
+t_rgb *color_converter(int hex_value)
 {
-    int r;
-    int g;
-    int b;
-} t_rgb;
+    t_rgb *rgb_color = malloc(sizeof(t_rgb));
 
-struct s_rgb g_rgb;
-
-struct s_rgb color_converter(int hex_value)
-{
-    t_rgb rgb_color;
-
-    rgb_color.r = ((hex_value >> 16) & 0xFF);
-    rgb_color.g = ((hex_value >> 8) & 0xFF);
-    rgb_color.b = ((hex_value)&0xFF);
+    rgb_color->r = ((hex_value >> 16) & 0xFF);
+    rgb_color->g = ((hex_value >> 8) & 0xFF);
+    rgb_color->b = ((hex_value)&0xFF);
     return (rgb_color);
 }
 
@@ -35,8 +28,11 @@ int screen(t_struct *data)
     while (data->screen.row-- >= 0)
     {
         data->screen.col = 0;
-        while (data->screen.col++ < data->screen.width)
+        while (data->screen.col < data->screen.width - 1) {
             screen_data(data, x);
+            //printf("%d\n", data->screen.col);
+            data->screen.col++;
+        }
         x++;
     }
     data->screen.fd = open(file_name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
@@ -49,18 +45,18 @@ int screen(t_struct *data)
 
 void screen_data(t_struct *data, int x)
 {
-    g_rgb = color_converter(data->img_data[data->screen.row *
-                                               data->screen.width +
-                                           data->screen.col]);
-    data->screen.buf[x * data->screen.width_in_bytes + data->screen.col * 3 + 0] = g_rgb.b;
-    data->screen.buf[x * data->screen.width_in_bytes + data->screen.col * 3 + 1] = g_rgb.g;
-    data->screen.buf[x * data->screen.width_in_bytes + data->screen.col * 3 + 2] = g_rgb.r;
+    int index = data->screen.row * data->screen.width + data->screen.col;
+    index = index < 0 ? index * (-1) : index;
+    rgb = color_converter(data->img_data[index]);
+    data->screen.buf[x * data->screen.width_in_bytes + data->screen.col * 3 + 0] = rgb->b;
+    data->screen.buf[x * data->screen.width_in_bytes + data->screen.col * 3 + 1] = rgb->g;
+    data->screen.buf[x * data->screen.width_in_bytes + data->screen.col * 3 + 2] = rgb->r;
 }
 
 void screen_init(t_struct *data, unsigned char *header)
 {
     data->screen.width = (int32_t)data->w_width;
-    data->screen.height = (int32_t)data->m_height;
+    data->screen.height = (int32_t)data->w_height;
     data->screen.bit_count = 24;
     data->screen.width_in_bytes = ((data->screen.width *
                                         data->screen.bit_count +
