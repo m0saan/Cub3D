@@ -33,11 +33,11 @@ void circle(t_struct *data)
 		i = 0;
 		while (i <= two_pi)
 		{
-			ft_draw(data, MINI * ((cos(i) * get_radius) + data->x),
-					MINI * ((sin(i) * get_radius) + data->y), 0xfcba03);
-			i += 0.1;
+			ft_draw(data, MINI * ((cosf(i) * get_radius) + data->x),
+					MINI * ((sinf(i) * get_radius) + data->y), 0xfcba03);
+			i += 0.1F;
 		}
-		get_radius -= 0.1;
+		get_radius -= 0.1F;
 	}
 }
 

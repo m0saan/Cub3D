@@ -76,13 +76,13 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 
 void calculate_vert_ray_intercept(t_struct *data, float ray_angle)
 {
-	data->x_intercept = floor(data->x / SQUARE_SIZE) * SQUARE_SIZE;
+	data->x_intercept = floorf(data->x / SQUARE_SIZE) * SQUARE_SIZE;
 	data->x_intercept += data->is_ray_facing_right ? SQUARE_SIZE : 0;
 	data->y_intercept = data->y + (data->x_intercept - data->x) *
-									  tan(ray_angle);
+									  tanf(ray_angle);
 	data->dx = SQUARE_SIZE;
 	data->dx *= data->is_ray_facing_left ? -1 : 1;
-	data->dy = SQUARE_SIZE * tan(ray_angle);
+	data->dy = SQUARE_SIZE * tanf(ray_angle);
 	data->dy *= (data->is_ray_facing_up && data->dy > 0) ? -1 : 1;
 	data->dy *= (data->is_ray_facing_down && data->dy < 0) ? -1 : 1;
 	data->vert_touch_x = data->x_intercept;
@@ -91,13 +91,13 @@ void calculate_vert_ray_intercept(t_struct *data, float ray_angle)
 
 void calculate_horz_ray_intercept(t_struct *data, float ray_angle)
 {
-	data->y_intercept = floor(data->y / SQUARE_SIZE) * SQUARE_SIZE;
+	data->y_intercept = floorf(data->y / SQUARE_SIZE) * SQUARE_SIZE;
 	data->y_intercept += data->is_ray_facing_down ? SQUARE_SIZE : 0;
 	data->x_intercept = data->x + (data->y_intercept - data->y) /
-									  tan(ray_angle);
+									  tanf(ray_angle);
 	data->dy = SQUARE_SIZE;
 	data->dy *= data->is_ray_facing_up ? -1 : 1;
-	data->dx = SQUARE_SIZE / tan(ray_angle);
+	data->dx = SQUARE_SIZE / tanf(ray_angle);
 	data->dx *= (data->is_ray_facing_left && data->dx > 0) ? -1 : 1;
 	data->dx *= (data->is_ray_facing_right && data->dx < 0) ? -1 : 1;
 	data->horiz_touch_x = data->x_intercept;

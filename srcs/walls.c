@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:01 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/15 14:54:05 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 12:15:16 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void calculate_wall_projection(t_struct *data)
 {
 	data->corrected_dsitance = g_rays[data->i_wall_index].distance *
 							   cosf(g_rays[data->i_wall_index].ray_angle - data->rotation_angle);
-	data->distance_to_projection_plane = (data->w_width * 0.5) / tan(FOV_ANGLE / 2);
+	data->distance_to_projection_plane = ((float )data->w_width / 2) / tanf(FOV_ANGLE / 2);
 	data->wall_height = (SQUARE_SIZE / data->corrected_dsitance) *
 						data->distance_to_projection_plane;
-	data->top_pixel = (data->w_height / 2) - (data->wall_height / 2);
+	data->top_pixel = ((float )data->w_height / 2) - (data->wall_height / 2);
 	data->top_pixel = data->top_pixel < 0 ? 0 : data->top_pixel;
-	data->bottom_pixel = (data->w_height / 2) + (data->wall_height / 2);
-	data->bottom_pixel = data->bottom_pixel > data->w_height
-							 ? data->w_height
+	data->bottom_pixel = ((float )data->w_height / 2) + (data->wall_height / 2);
+	data->bottom_pixel = data->bottom_pixel > (float )data->w_height
+							 ? (float )data->w_height
 							 : data->bottom_pixel;
 }
 
@@ -64,7 +64,7 @@ void ft_ljodran(t_struct *data, int y)
 	int *which_text;
 	int index;
 
-	data->txt_offset_y = (y + (int)(data->wall_height / 2) - (data->w_height / 2)) * ((float)TEX_WIDTH / (int)data->wall_height);
+	data->txt_offset_y = (y + (int)(data->wall_height / 2) - (data->w_height / 2)) * ((float)TEX_WIDTH / data->wall_height);
 	if (!g_rays[data->i_wall_index].was_hit_vertical && g_rays[data->i_wall_index].is_ray_facing_down)
 		which_text = data->img_data_texture1;
 	else if (!g_rays[data->i_wall_index].was_hit_vertical && g_rays[data->i_wall_index].is_ray_facing_up)
@@ -121,7 +121,7 @@ void cast_rays(t_struct *data)
 	{
 		cast_single_ray(ray_id, ray_angle, data);
 		i++;
-		ray_angle += FOV_ANGLE / data->w_width;
+		ray_angle += FOV_ANGLE / (float )data->w_width;
 		ray_id++;
 	}
 }
