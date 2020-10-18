@@ -5,6 +5,5 @@ textures
 .vscode/
 .DS_Store
 .idea
-Makefile
 map2.cub
 map.cub
