@@ -108,3 +108,22 @@ int calculate_index(float value)
 {
 	return floor((value / SQUARE_SIZE));
 }
+
+void			*ft_memcpy(void *dest, const void *src, size_t n)
+{
+    char			*ndest;
+    const char		*nsrc;
+    unsigned int	i;
+
+    i = 0;
+    ndest = (char*)dest;
+    nsrc = (const char*)src;
+    if (!(dest || src))
+        return ((char*)NULL);
+    while (i < (unsigned int)n)
+    {
+        ndest[i] = nsrc[i];
+        i++;
+    }
+    return ((char*)dest);
+}
