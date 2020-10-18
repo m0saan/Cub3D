@@ -6,19 +6,21 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/02 18:43:11 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 10:36:45 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 #define CUBE3D_H
 
+#include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <fcntl.h>
 #include "../libs/OpenGL/mlx.h"
+#include "../libft/libft.h"
 
 #define BLACK 0x000000
 #define GREEN 0x2ecc71
@@ -76,6 +78,7 @@ typedef struct	s_bitmap
     int				width_in_bytes;
 }				t_bitmap;
 
+
 typedef struct s_sprite
 {
 	int *buff;
@@ -104,6 +107,7 @@ typedef struct s_ray
 t_ray *g_rays;
 t_sprite *g_sprite;
 uint32_t g_buff[TEX_WIDTH * TEX_HEIGHT + 1];
+int g_screenshot;
 
 typedef struct s_struct
 {
@@ -226,18 +230,8 @@ typedef struct s_struct
 
 int *g_lines_length;
 
-int get_next_line(int fd, char **line);
-void free_d_shit(char **to_free);
-char *ft_strjoin(char *s1, char *s2);
-char *ft_strdup(const char *s1);
-char *ft_substr(char *s, unsigned int start, size_t len);
-size_t ft_strlen(const char *s);
-int gnl_get_index(char *stack);
-void gnl_verify_line(char **line, char **stack, char **heap);
-int gnl_read_line(char **line, char **stack,
-				  char **heap, int byte, int fd);
-int ft_atoi(const char *s);
-char **ft_split(const char *ss, char c);
+
+uint32_t create_rgb(int r, int g, int b);
 void render_player(t_struct *data);
 void initialize_1(t_struct *data);
 void initialize_2(t_struct *data);
@@ -260,14 +254,14 @@ void horizontal_ray_intersection(float ray_angle, t_struct *data,
 								 int *found_horiz_wall_hit);
 void vertical_ray_intersection(float ray_angle, t_struct *data,
 							   int *found_vert_wall_hit);
-void get_smalest_distance(t_struct *data,
-						  int found_horiz_wall_hit, int found_vert_wall_hit);
+void get_smallest_distance(t_struct *data,
+                           int found_horiz_wall_hit, int found_vert_wall_hit);
 void cast_single_ray(int ray_id, float ray_angle,
 					 t_struct *data);
 void fill_out_ray(int ray_id, t_struct *data);
 void render_all_rays(t_struct *data);
 void cast_rays(t_struct *data);
-void render_firt_time(t_struct *data);
+void render_first_time(t_struct *data);
 void mini_map(t_struct *data);
 int update(t_struct *data);
 int ft_close(void *param);
@@ -284,12 +278,8 @@ int parse(t_struct *data, char **av);
 void initialize_file_struct(t_struct *data);
 int read_map(t_struct *data, char *buff);
 int fill_out_map(t_struct *data, char *buff);
-int check_boudded_map(t_struct *data);
 int line_length(char *line);
 int count_lines(char *buff);
-void *ft_memset(void *b, int c, size_t len);
-uint32_t creatergb(int r, int g, int b);
-char *ft_strchr(const char *s, int c);
 void render_sprite(t_struct *data);
 void get_western_texture_path(t_struct *data, char *buff);
 void get_easter_texture_path(t_struct *data, char *buff);
@@ -302,8 +292,6 @@ int skip_number(const char *str);
 int check_textures_f_c_s_availibility(char *buff);
 void get_sprite_path(t_struct *data, char *buff);
 int screw_this_norminette(t_struct *data, char *buff);
-char *ft_strnstr(const char *haystack,
-				 const char *needle, size_t len);
 void initialize_sprite(t_struct *data);
 void set_up_sprite(t_struct *data);
 void draw_sprites(t_struct *data, float x_off, float y_off, int index);
@@ -314,11 +302,10 @@ int is_sprite(char c);
 int is_player(t_struct *data, char *buff);
 int calculate_index(float value);
 int is_not_valid_element(t_struct *data, char *buff);
-int valid_indeces(t_struct *data, int x, int y);
-struct	s_rgb	color_converter(int hex_value);
-int     screen(t_struct *data);
-void    scrn_data(t_struct *data, int x);
-void	screen_init(t_struct *data, unsigned char *header);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+int valid_indices(t_struct *data, int x, int y);
+int screen(t_struct *data);
+void screen_data(t_struct *data, int x);
+void screen_init(t_struct *data, unsigned char *header);
+void *ft_mem_cpy(void *dest, const void *src, size_t n);
 
 #endif
