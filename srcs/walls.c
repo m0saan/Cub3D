@@ -98,12 +98,12 @@ void render_walls(t_struct *data)
 								 : ((int)g_rays[data->i_wall_index].wall_h_x % SQUARE_SIZE);
 		while (ceilling++ < data->top_pixel)
 			ft_draw(data, data->i_wall_index, ceilling,
-					creatergb(data->c_red, data->c_green, data->c_blue));
+					create_rgb(data->c_red, data->c_green, data->c_blue));
 		while (y++ < data->bottom_pixel - 1)
 			ft_ljodran(data, y);
 		floor = data->bottom_pixel;
 		while (floor++ < data->w_height - 1)
-			ft_draw(data, data->i_wall_index, floor, creatergb(data->f_red, data->c_green, data->c_blue));
+			ft_draw(data, data->i_wall_index, floor, create_rgb(data->f_red, data->c_green, data->c_blue));
 	}
 	set_up_sprite(data);
 }
