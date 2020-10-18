@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/18 10:36:45 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/18 12:32:34 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,32 @@
 #define PLAYER_COLOR 0xe000f1
 #define SPRITE_COLOR 0xFF00FF
 
-#define PI 3.14159265359
+#define PI 3.14159265359F
 #define TWO_PI 2 * PI
 #define DEG(x) x * 180 / M_PI
 #define RAD(x) x *M_PI / 180
 
 #define TRUE 1
 #define FALSE 0
-#define MINI 0.1
+#define MINI 0.1F
 
 #define SQUARE_SIZE 512
 #define TEX_WIDTH SQUARE_SIZE
 #define TEX_HEIGHT SQUARE_SIZE
 #define SPRITE_SIZE 64
 
-#define FOV_ANGLE 60 * (PI / 180)
+#define FOV_ANGLE (60 * (PI / 180))
 
 #define MAX_INT 2147483647
-#define BUFFER_SIZE 90
 #define MAP_ERR "error : Map error\n"
+
+typedef struct s_rgb
+{
+    int r;
+    int g;
+    int b;
+}               t_rgb;
+
 
 typedef	struct	s_screen{
     int32_t			width;
@@ -278,16 +285,16 @@ int parse(t_struct *data, char **av);
 void initialize_file_struct(t_struct *data);
 int read_map(t_struct *data, char *buff);
 int fill_out_map(t_struct *data, char *buff);
-int line_length(char *line);
-int count_lines(char *buff);
+int line_length(const char *line);
+int count_lines(const char *buff);
 void render_sprite(t_struct *data);
-void get_western_texture_path(t_struct *data, char *buff);
-void get_easter_texture_path(t_struct *data, char *buff);
+void get_western_texture_path(t_struct *data, const char *buff);
+void get_easter_texture_path(t_struct *data, const char *buff);
 void get_resolution_values(t_struct *data, char *buff);
 void get_floor_values(t_struct *data, char *buff);
 void get_ceilling_values(t_struct *data, char *buff);
-void get_north_texture_path(t_struct *data, char *buff);
-void get_south_texture_path(t_struct *data, char *buff);
+void get_north_texture_path(t_struct *data, const char *buff);
+void get_south_texture_path(t_struct *data, const char *buff);
 int skip_number(const char *str);
 int check_textures_f_c_s_availibility(char *buff);
 void get_sprite_path(t_struct *data, char *buff);
@@ -299,9 +306,9 @@ void help_text(t_struct *data);
 void init_player(t_struct *data);
 void set_up_player(t_struct *data, int e);
 int is_sprite(char c);
-int is_player(t_struct *data, char *buff);
+int is_player(t_struct *data, const char *buff);
 int calculate_index(float value);
-int is_not_valid_element(t_struct *data, char *buff);
+int is_not_valid_element(t_struct *data, const char *buff);
 int valid_indices(t_struct *data, int x, int y);
 int screen(t_struct *data);
 void screen_data(t_struct *data, int x);
