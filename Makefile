@@ -9,7 +9,7 @@ OBJ_NAME = $(SRC_NAMES:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c11
-DEBUG = -g
+DEBUG = -g3
 OPTIMAZATION = -Ofast
 LDLIBS = -lm -framework OpenGL -framework AppKit libmlx.a -fsanitize=address
 
