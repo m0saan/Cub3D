@@ -17,8 +17,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "../libs/OpenGL/mlx.h"
 #include <fcntl.h>
+#include "../libs/OpenGL/mlx.h"
 
 #define BLACK 0x000000
 #define GREEN 0x2ecc71
@@ -315,5 +315,10 @@ int is_player(t_struct *data, char *buff);
 int calculate_index(float value);
 int is_not_valid_element(t_struct *data, char *buff);
 int valid_indeces(t_struct *data, int x, int y);
+struct	s_rgb	color_converter(int hex_value);
+int     screen(t_struct *data);
+void    scrn_data(t_struct *data, int x);
+void	screen_init(t_struct *data, unsigned char *header);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 #endif
