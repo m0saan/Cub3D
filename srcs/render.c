@@ -14,18 +14,15 @@
 
 int update(t_struct *data)
 {
+
 	cast_rays(data);
 	render_walls(data);
 	move_player(data);
-	if (data->m)
-		mini_map(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-    if (g_screenshot){
+    if (g_screenshot) {
         screen(data);
-        exit(1);
+        ft_close(data);
     }
-	if (data->h)
-		help_text(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (FALSE);
 }
 
