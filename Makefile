@@ -21,7 +21,7 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 all: $(NAME)
 
 $(NAME):
-	@$(CC) $(LIB_FT) $(DEBUG) $(LD_LIBS) $(SRC) -o $(NAME) $(OPT);
+	@$(CC) $(CFLAGS) $(LIB_FT) $(DEBUG) $(LD_LIBS) $(SRC) -o $(NAME) $(OPT);
 
 clean:
 	@rm -rf *.o
