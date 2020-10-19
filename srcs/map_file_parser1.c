@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:29:13 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/18 12:20:20 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/19 22:44:40 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int fill_out_map(t_struct *data, char *buff)
     data->n_lines = count_lines(&buff[data->pos]);
     g_lines_length = (int *)malloc((data->n_lines + 1) * sizeof(int));
     data->map = (char **)malloc((data->n_lines + 1) * sizeof(char *));
-    while (buff[data->pos] != '\0' && i++ < data->n_lines)
+    while (buff[data->pos] != '\0' && i++ < data->n_lines - 1)
     {
         data->l_length = line_length(&buff[data->pos]);
         g_lines_length[i] = data->l_length;
@@ -65,7 +65,7 @@ int fill_out_map(t_struct *data, char *buff)
                 data->j = j;
                 init_player(data);
             }
-            if (is_sprite(data->map[i][j]))
+            else if (is_sprite(data->map[i][j]))
                 data->count_spt++;
             data->pos += 1;
         }
