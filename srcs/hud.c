@@ -1,15 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   hud.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tglandai <tglandai@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/22 20:32:00 by tglandai          #+#    #+#             */
-/*   Updated: 2017/01/01 16:56:35 by tglandai         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+/*
 #include "../include/cube3d.h"
 
 void	help_text(t_struct *data)
@@ -26,3 +15,4 @@ void	help_text(t_struct *data)
 	mlx_string_put(data->mlx_ptr, data->win_ptr, data->m ? 400 : 10, 120,
 			0X000000, "Press ESC to quit.");
 }
+*/
