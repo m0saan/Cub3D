@@ -70,8 +70,4 @@ void screen_init(t_struct *data, unsigned char *header)
     ft_mem_cpy(header + 26, &(data->bitmap.biplanes), 2);
     ft_mem_cpy(header + 28, &(data->bitmap.bit_count), 2);
     ft_mem_cpy(header + 34, &(data->bitmap.image_size), 4);
-
-    for (int i = 0; i < 54; ++i) {
-        printf("%u\n", header[i]);
-    }
 }
