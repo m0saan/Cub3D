@@ -12,7 +12,7 @@
 
 #include "../include/cube3d.h"
 
-void initialize_1(t_struct *data)
+void set_up_data(t_struct *data)
 {
 	data->m_height = data->n_lines * SQUARE_SIZE;
 	data->bpp = 0;
@@ -25,19 +25,15 @@ void initialize_1(t_struct *data)
 	data->move_step = 0;
 	data->updated_player_x = 0;
 	data->updated_player_y = 0;
-	data->radius = 10;
-	data->width = 6;
-	data->height = 6;
 	data->turn_direction = 0;
 	data->walk_direction = 0;
 	data->rotation_angle = PI / 2;
 	data->walk_speed = 75;
 	data->turn_speed = 8 * (PI / 180);
-	data->which_radius = 0;
-	initialize_2(data);
+    init_ray_cast_data(data);
 }
 
-void initialize_2(t_struct *data)
+void init_ray_cast_data(t_struct *data)
 {
 	data->is_ray_facing_down = 0;
 	data->is_ray_facing_up = 0;
@@ -59,17 +55,14 @@ void initialize_2(t_struct *data)
 	data->bottom_pixel = 0;
 	data->distance_to_projection_plane = 0;
 	data->wall_height = 0;
-	data->m = 0;
-	data->h = 0;
+    initialize_sprite(data);
 }
 
 float limit_angle(float angle)
 {
 	angle = remainderf(angle, TWO_PI);
 	if (angle < 0)
-	{
 		angle = TWO_PI + angle;
-	}
 	return (angle);
 }
 
@@ -82,6 +75,7 @@ void ft_draw(t_struct *data, int x, int y, int color)
 {
 	char *dst;
 
+    data->img_data_bmp[y * data->w_width + x] = (u_int32_t)color;
 	dst = data->img_data + (y * data->size_line + x * (data->bpp / 8));
 	*(u_int32_t *)dst = color;
 }
@@ -96,7 +90,8 @@ int is_not_valid_element(t_struct *data, const char *buff)
 
 int is_player(t_struct *data, const char *buff)
 {
-	return buff[data->pos] == 'N' || buff[data->pos] == 'W' || buff[data->pos] == 'E' || buff[data->pos] == 'S';
+	return buff[data->pos] == 'N' || buff[data->pos] == 'W'
+	|| buff[data->pos] == 'E' || buff[data->pos] == 'S';
 }
 
 int is_sprite(char c)
@@ -106,7 +101,7 @@ int is_sprite(char c)
 
 int calculate_index(float value)
 {
-	return floor((value / SQUARE_SIZE));
+	return floorf((value / SQUARE_SIZE));
 }
 
 u_int32_t create_rgb(int r, int g, int b)
@@ -131,4 +126,25 @@ void			*ft_mem_cpy(void *dest, const void *src, size_t n)
         i++;
     }
     return ((char*)dest);
+}
+
+int		destruct(t_struct *data)
+{
+    int i;
+
+    i = 0;
+    free(data->no);
+    free(data->so);
+    free(data->ea);
+    free(data->we);
+    free(data->sprite);
+    while (i < data->n_lines)
+    {
+        free(data->map[i]);
+        i++;
+    }
+    free(data->map);
+    free(data);
+    free(g_rays);
+    exit(1);
 }
