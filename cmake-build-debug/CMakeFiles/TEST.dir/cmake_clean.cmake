@@ -7,7 +7,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/TEST.dir/srcs/map_file_parser1.c.o"
   "CMakeFiles/TEST.dir/srcs/map_file_parser2.c.o"
   "CMakeFiles/TEST.dir/srcs/map_file_parser3.c.o"
-  "CMakeFiles/TEST.dir/srcs/minimap.c.o"
   "CMakeFiles/TEST.dir/srcs/ray_casting.c.o"
   "CMakeFiles/TEST.dir/srcs/render.c.o"
   "CMakeFiles/TEST.dir/srcs/screenshot.c.o"

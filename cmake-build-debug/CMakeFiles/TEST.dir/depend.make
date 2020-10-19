@@ -41,11 +41,6 @@ CMakeFiles/TEST.dir/srcs/map_file_parser3.c.o: ../libft/libft.h
 CMakeFiles/TEST.dir/srcs/map_file_parser3.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/map_file_parser3.c.o: ../srcs/map_file_parser3.c
 
-CMakeFiles/TEST.dir/srcs/minimap.c.o: ../include/cube3d.h
-CMakeFiles/TEST.dir/srcs/minimap.c.o: ../libft/libft.h
-CMakeFiles/TEST.dir/srcs/minimap.c.o: ../libs/OpenGL/mlx.h
-CMakeFiles/TEST.dir/srcs/minimap.c.o: ../srcs/minimap.c
-
 CMakeFiles/TEST.dir/srcs/ray_casting.c.o: ../include/cube3d.h
 CMakeFiles/TEST.dir/srcs/ray_casting.c.o: ../libft/libft.h
 CMakeFiles/TEST.dir/srcs/ray_casting.c.o: ../libs/OpenGL/mlx.h
