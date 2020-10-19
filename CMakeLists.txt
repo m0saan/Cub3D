@@ -15,7 +15,6 @@ add_executable(TEST srcs/main.c
         srcs/render.c
         srcs/utils.c
         srcs/map_file_parser1.c
-        srcs/minimap.c
         srcs/screenshot.c
         srcs/walls.c)
 
