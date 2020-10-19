@@ -1,11 +1,8 @@
 Cub3D
 Cub3D.dSYM
 libs/
-textures
 .vscode/
 .DS_Store
 .idea
 map2.cub
 map.cub
-libs
-img
