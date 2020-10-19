@@ -23,3 +23,9 @@ int			skip_number(const char *str)
 		i++;
 	return (i);
 }
+
+void	error(char *str)
+{
+    write(1, str, ft_strlen(str));
+    exit(EXIT_FAILURE);
+}
