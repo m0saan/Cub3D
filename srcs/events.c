@@ -14,10 +14,6 @@
 
 int key_pressed(int keycode, t_struct *data)
 {
-	if (keycode == 46)
-		data->m = data->m == 0 ? 1 : 0;
-	if (keycode == 4)
-		data->h = data->h == 0 ? 1 : 0;
 	if (keycode == 17)
 		data->t = data->t == 0 ? 1 : 0;
 	if (keycode == 53)
@@ -68,6 +64,7 @@ void set_up_player(t_struct *data, int player)
 		write(1, "Player error!\n", 14);
 		exit(0);
 	}
+	data->orientation = data->map[data->i][data->j];
 	if (data->orientation == 'N')
 		data->rotation_angle = RAD(270);
 	else if (data->orientation == 'W')
