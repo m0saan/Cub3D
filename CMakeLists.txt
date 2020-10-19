@@ -16,7 +16,8 @@ add_executable(TEST srcs/main.c
         srcs/utils.c
         srcs/map_file_parser1.c
         srcs/screenshot.c
-        srcs/walls.c)
+        srcs/walls.c
+        srcs/intersection.c)
 
 target_link_libraries(TEST ${CMAKE_SOURCE_DIR}/libmlx.a ${CMAKE_SOURCE_DIR}/libft.a)
 
