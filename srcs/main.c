@@ -76,49 +76,47 @@ int if_wall(float x, float y, t_struct *data)
 
     if (!valid_indices(data, map_index_x, map_index_y))
         return TRUE;
-    if ((y < 0 || y > data->m_height) || (map_index_y > data->n_lines))
+    if (((int)y < 0 || (int)y > data->m_height) || (map_index_y > data->n_lines))
         return (TRUE);
 
     return (data->map[map_index_y][map_index_x] == ' ' || data->map[map_index_y][map_index_x] == '1');
 }
+int set_up_window(t_struct *data){
+    if ((data->mlx_ptr = mlx_init()) == NULL)
+        return (FALSE);
+    if ((data->win_ptr = mlx_new_window(data->mlx_ptr, data->w_width, data->w_height, "Cube3d")) == NULL)
+        return (FALSE);
+    if ((data->img_ptr = mlx_new_image(data->mlx_ptr,data->w_width, data->w_height)) == NULL)
+        return (FALSE);
+    if ((data->img_data = mlx_get_data_addr(data->img_ptr,&data->bpp,&data->size_line, &data->endian)) == NULL)
+        return (FALSE);
+    data->img_data_bmp = (int*) mlx_get_data_addr(data->img_ptr,&data->bpp,&data->size_line, &data->endian);
+    return (TRUE);
+}
 
 int initialize_window(t_struct *data)
 {
-    initialize_1(data);
-    if ((data->mlx_ptr = mlx_init()) == NULL)
-        return (TRUE);
-    if ((data->win_ptr = mlx_new_window(data->mlx_ptr,
-                                        data->w_width, data->w_height, "Cube3d")) == NULL)
-        return (TRUE);
-    if ((data->img_ptr = mlx_new_image(data->mlx_ptr,
-                                       data->w_width, data->w_height)) == NULL)
-        return (TRUE);
-    if ((data->img_data = mlx_get_data_addr(data->img_ptr,
-                                            &data->bpp, &data->size_line, &data->endian)) == NULL)
-        return (TRUE);
-    initialize_sprite(data);
+    set_up_data(data);
+    if (!(set_up_window(data)))
+        return (FALSE);
+    update(data);
     mlx_hook(data->win_ptr, 3, 0, key_released, data);
     mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
+    mlx_hook(data->win_ptr, 17, 0L, destruct, data);
     mlx_loop_hook(data->mlx_ptr, update, data);
     mlx_loop(data->mlx_ptr);
-    return (FALSE);
+    return (TRUE);
 }
 
 int are_valid_args(int ac, char **av){
-    if (ac < 2) {
-        write(1, "No map included!\n", 17);
-        exit(1);
-    }
-    else if (ac == 2 && strstr(av[1], ".cub")){
+    if (ac < 2)
+        error("No map included!\n");
+    else if (ac == 2 && strstr(av[1], ".cub"))
         return (TRUE);
-    }
-
     else if (ac == 3 && !strcmp(av[2], "--save")) {
             g_screenshot = TRUE;
-            printf("%d\n", g_screenshot);
             return (TRUE);
     }
-    printf("BMP error");
     return (FALSE);
 }
 
@@ -131,7 +129,7 @@ int main(int ac, char *av[])
     if (!parse(data, av))
         return (1);
     g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
-    if (initialize_window(data))
+    if (!initialize_window(data))
         return (TRUE);
     free(data);
     return (FALSE);
