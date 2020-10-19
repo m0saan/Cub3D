@@ -6,13 +6,13 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:55:00 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/18 10:38:56 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 00:22:57 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-void set_up_data(t_struct *data)
+void	set_up_data(t_struct *data)
 {
 	data->m_height = data->n_lines * SQUARE_SIZE;
 	data->bpp = 0;
@@ -30,10 +30,10 @@ void set_up_data(t_struct *data)
 	data->rotation_angle = PI / 2;
 	data->walk_speed = 75;
 	data->turn_speed = 8 * (PI / 180);
-    init_ray_cast_data(data);
+	init_ray_cast_data(data);
 }
 
-void init_ray_cast_data(t_struct *data)
+void	init_ray_cast_data(t_struct *data)
 {
 	data->is_ray_facing_down = 0;
 	data->is_ray_facing_up = 0;
@@ -55,96 +55,89 @@ void init_ray_cast_data(t_struct *data)
 	data->bottom_pixel = 0;
 	data->distance_to_projection_plane = 0;
 	data->wall_height = 0;
-    initialize_sprite(data);
+	initialize_sprite(data);
 }
 
-float limit_angle(float angle)
+int		is_not_valid_element(t_struct *data, const char *buff)
 {
-	angle = remainderf(angle, TWO_PI);
-	if (angle < 0)
-		angle = TWO_PI + angle;
-	return (angle);
+	return (buff[data->pos] != '1' && buff[data->pos] != '0'
+		&& buff[data->pos] != '2' && buff[data->pos] != 'N'
+		&& buff[data->pos] != 'W' && buff[data->pos] != 'E'
+		&& buff[data->pos] != 'S' && buff[data->pos] != ' ');
 }
 
-float distance_between_points(float x1, float y1, float x2, float y2)
+int		is_player(t_struct *data, const char *buff)
 {
-	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+	return (buff[data->pos] == 'N' || buff[data->pos] == 'W'
+		|| buff[data->pos] == 'E' || buff[data->pos] == 'S');
 }
 
-void ft_draw(t_struct *data, int x, int y, int color)
+int		is_sprite(char c)
 {
-	char *dst;
-
-    data->img_data_bmp[y * data->w_width + x] = (u_int32_t)color;
-	dst = data->img_data + (y * data->size_line + x * (data->bpp / 8));
-	*(u_int32_t *)dst = color;
+	return (c == '2');
 }
 
-int is_not_valid_element(t_struct *data, const char *buff)
+void	*ft_mem_cpy(void *dest, const void *src, size_t n)
 {
-	return buff[data->pos] != '1' && buff[data->pos] != '0'
-	&& buff[data->pos] != '2' && buff[data->pos] != 'N'
-	&& buff[data->pos] != 'W' && buff[data->pos] != 'E'
-	&& buff[data->pos] != 'S' && buff[data->pos] != ' ';
-}
+	char			*ndest;
+	const char		*nsrc;
+	unsigned int	i;
 
-int is_player(t_struct *data, const char *buff)
-{
-	return buff[data->pos] == 'N' || buff[data->pos] == 'W'
-	|| buff[data->pos] == 'E' || buff[data->pos] == 'S';
-}
-
-int is_sprite(char c)
-{
-	return c == '2';
-}
-
-int calculate_index(float value)
-{
-	return floorf((value / SQUARE_SIZE));
-}
-
-u_int32_t create_rgb(int r, int g, int b)
-{
-    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-}
-
-void			*ft_mem_cpy(void *dest, const void *src, size_t n)
-{
-    char			*ndest;
-    const char		*nsrc;
-    unsigned int	i;
-
-    i = 0;
-    ndest = (char*)dest;
-    nsrc = (const char*)src;
-    if (!(dest || src))
-        return ((char*)NULL);
-    while (i < (unsigned int)n)
-    {
-        ndest[i] = nsrc[i];
-        i++;
-    }
-    return ((char*)dest);
+	i = 0;
+	ndest = (char*)dest;
+	nsrc = (const char*)src;
+	if (!(dest || src))
+		return ((char*)NULL);
+	while (i < (unsigned int)n)
+	{
+		ndest[i] = nsrc[i];
+		i++;
+	}
+	return ((char*)dest);
 }
 
 int		destruct(t_struct *data)
 {
-    int i;
+	int i;
 
-    i = 0;
-    free(data->no);
-    free(data->so);
-    free(data->ea);
-    free(data->we);
-    free(data->sprite);
-    while (i < data->n_lines)
-    {
-        free(data->map[i]);
-        i++;
-    }
-    free(data->map);
-    free(data);
-    free(g_rays);
-    exit(1);
+	i = 0;
+	free(data->no);
+	free(data->so);
+	free(data->ea);
+	free(data->we);
+	free(data->sprite);
+	while (i < data->n_lines)
+	{
+		free(data->map[i]);
+		i++;
+	}
+	free(data->map);
+	free(data);
+	free(g_rays);
+	exit(1);
+}
+
+int		valid_indices(t_struct *data, int x, int y)
+{
+	if (y >= data->n_lines || y < 0)
+		return (FALSE);
+	if (x >= g_lines_length[y] || x < 0)
+		return (FALSE);
+	return (TRUE);
+}
+
+int		if_wall(float x, float y, t_struct *data)
+{
+	int map_index_x;
+	int map_index_y;
+
+	map_index_x = calculate_index(x);
+	map_index_y = calculate_index(y);
+	if (!valid_indices(data, map_index_x, map_index_y))
+		return (TRUE);
+	if (((int)y < 0 || (int)y > data->m_height)
+			|| (map_index_y > data->n_lines))
+		return (TRUE);
+	return (data->map[map_index_y][map_index_x] == ' '
+			|| data->map[map_index_y][map_index_x] == '1');
 }

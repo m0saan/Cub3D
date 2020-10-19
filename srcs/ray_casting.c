@@ -6,27 +6,26 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:09 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/18 09:35:03 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 00:11:47 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-void get_smalest_distance(t_struct *data, int found_horiz_wall_hit,
-						  int found_vert_wall_hit)
+void	get_smallest_distance(t_struct *data, int found_horiz_wall_hit,
+		int found_vert_wall_hit)
 {
 	data->horz_hit_distance = found_horiz_wall_hit
-								  ? distance_between_points(data->x, data->y, data->save_horiz_wall_hit_x,
-															data->save_horiz_wall_hit_y)
-								  : (float) MAX_INT;
-
+		? distance_between_points(data->x, data->y, data->save_horiz_wall_hit_x,
+				data->save_horiz_wall_hit_y)
+		: (float)MAX_INT;
 	data->vert_hit_distance = found_vert_wall_hit
-								  ? distance_between_points(data->x, data->y, data->save_vert_wall_hit_x,
-															data->save_vert_wall_hit_y)
-								  : (float) MAX_INT;
+		? distance_between_points(data->x, data->y, data->save_vert_wall_hit_x,
+				data->save_vert_wall_hit_y)
+		: (float)MAX_INT;
 }
 
-void fill_out_ray(int ray_id, t_struct *data)
+void	fill_out_ray(int ray_id, t_struct *data)
 {
 	int i;
 
@@ -53,7 +52,7 @@ void fill_out_ray(int ray_id, t_struct *data)
 	g_rays[ray_id].is_ray_facing_right = data->is_ray_facing_right;
 }
 
-void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
+void	cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 {
 	int found_horiz_wall_hit;
 	int found_vert_wall_hit;
@@ -67,39 +66,24 @@ void cast_single_ray(int ray_id, float ray_angle, t_struct *data)
 	data->is_ray_facing_right = ray_angle < 0.5 * PI || ray_angle > 1.5 * PI;
 	data->is_ray_facing_left = !(data->is_ray_facing_right);
 	horizontal_ray_intersection(ray_angle, data,
-								&found_horiz_wall_hit);
+			&found_horiz_wall_hit);
 	vertical_ray_intersection(ray_angle, data,
-							  &found_vert_wall_hit);
-	get_smalest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
+			&found_vert_wall_hit);
+	get_smallest_distance(data, found_horiz_wall_hit, found_vert_wall_hit);
 	fill_out_ray(ray_id, data);
 }
 
-void calculate_vert_ray_intercept(t_struct *data, float ray_angle)
+void	cast_rays(t_struct *data)
 {
-	data->x_intercept = floorf(data->x / SQUARE_SIZE) * SQUARE_SIZE;
-	data->x_intercept += data->is_ray_facing_right ? SQUARE_SIZE : 0;
-	data->y_intercept = data->y + (data->x_intercept - data->x) *
-									  tanf(ray_angle);
-	data->dx = SQUARE_SIZE;
-	data->dx *= data->is_ray_facing_left ? -1 : 1;
-	data->dy = SQUARE_SIZE * tanf(ray_angle);
-	data->dy *= (data->is_ray_facing_up && data->dy > 0) ? -1 : 1;
-	data->dy *= (data->is_ray_facing_down && data->dy < 0) ? -1 : 1;
-	data->vert_touch_x = data->x_intercept;
-	data->vert_touch_y = data->y_intercept;
-}
+	int		ray_id;
+	float	ray_angle;
 
-void calculate_horz_ray_intercept(t_struct *data, float ray_angle)
-{
-	data->y_intercept = floorf(data->y / SQUARE_SIZE) * SQUARE_SIZE;
-	data->y_intercept += data->is_ray_facing_down ? SQUARE_SIZE : 0;
-	data->x_intercept = data->x + (data->y_intercept - data->y) /
-									  tanf(ray_angle);
-	data->dy = SQUARE_SIZE;
-	data->dy *= data->is_ray_facing_up ? -1 : 1;
-	data->dx = SQUARE_SIZE / tanf(ray_angle);
-	data->dx *= (data->is_ray_facing_left && data->dx > 0) ? -1 : 1;
-	data->dx *= (data->is_ray_facing_right && data->dx < 0) ? -1 : 1;
-	data->horiz_touch_x = data->x_intercept;
-	data->horiz_touch_y = data->y_intercept;
+	ray_id = 0;
+	ray_angle = data->rotation_angle - (FOV_ANGLE / 2);
+	while (ray_id < data->w_width)
+	{
+		cast_single_ray(ray_id, ray_angle, data);
+		ray_angle += FOV_ANGLE / (float)data->w_width;
+		ray_id++;
+	}
 }

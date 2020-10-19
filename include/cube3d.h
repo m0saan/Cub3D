@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/18 12:32:34 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/19 23:36:39 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,10 +222,6 @@ int key_pressed(int keycode, t_struct *data);
 int key_released(int keycode, t_struct *data);
 void texture_from_file(t_struct *data);
 void render_walls(t_struct *data);
-void calculate_vert_ray_intercept(t_struct *data,
-								  float ray_angle);
-void calculate_horz_ray_intercept(t_struct *data,
-								  float ray_angle);
 int parse(t_struct *data, char **av);
 void initialize_file_struct(t_struct *data);
 int read_map(t_struct *data, char *buff);
@@ -259,4 +255,14 @@ void screen_init(t_struct *data, unsigned char *header);
 void *ft_mem_cpy(void *dest, const void *src, size_t n);
 int		destruct(t_struct *data);
 void	error(char *str);
+t_rgb *color_converter(int hex_value);
+float calculate_y_offset(const t_struct *data, int y);
+int calculate_x_offset(const t_struct *data);
+void draw_ceilling(t_struct *data, int ceilling);
+void draw_floor(t_struct *data, int floor);
+void draw_walls(t_struct *data, float y);
+int *which_texture(const t_struct *data);
+void ft_ljodran(t_struct *data, int y);
+int normalize_index(int index);
+int get_color_index(t_struct *data);
 #endif

@@ -6,12 +6,13 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:15:05 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/26 16:15:10 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 00:09:59 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-char *ft_strnstr(const char *haystack, const char *needle, size_t len)
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t i;
 	size_t j;
@@ -34,7 +35,7 @@ char *ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (0);
 }
 
-void get_western_texture_path(t_struct *data, const char *buff)
+void	get_western_texture_path(t_struct *data, const char *buff)
 {
 	int i;
 
@@ -50,7 +51,7 @@ void get_western_texture_path(t_struct *data, const char *buff)
 	data->get_to_map += 1;
 }
 
-void get_easter_texture_path(t_struct *data, const char *buff)
+void	get_easter_texture_path(t_struct *data, const char *buff)
 {
 	int i;
 
@@ -66,10 +67,10 @@ void get_easter_texture_path(t_struct *data, const char *buff)
 	data->get_to_map += 1;
 }
 
-int screw_this_norminette(t_struct *data, char *buff)
+int		screw_this_norminette(t_struct *data, char *buff)
 {
-    data->count_spt = 0;
+	data->count_spt = 0;
 	if (!(fill_out_map(data, buff)))
-	    error("error : Map error\n");
+		error("error : Map error\n");
 	return (TRUE);
 }

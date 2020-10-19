@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:27:32 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 00:07:12 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 00:16:32 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	get_sprite_path(t_struct *data, char *buff)
 int		parse(t_struct *data, char **av)
 {
 	int			fd;
-	const int	len = 409;
+	const int	len = 4096;
 	char		*buff[len];
 
 	ft_memset(buff, 0, len);
