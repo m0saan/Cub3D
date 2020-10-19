@@ -44,31 +44,22 @@ int check_textures_f_c_s_availibility(char *buff)
     size_t len;
 
     len = ft_strlen(buff);
-	if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len)) || !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
-	{
-		write(1, "Texture error!\n", 15);
-		return (FALSE);
-	}
-	if (!(ft_strchr((char *)buff, 'R')) || !(ft_strchr((char *)buff, 'F')) || !(ft_strchr((char *)buff, 'C')) || !(ft_strchr((char *)buff, 'S')))
-	{
-		write(1, "Error : valuable informations are not involved!\n", 48);
-		return (FALSE);
-	}
+	if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len))
+	|| !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
+	    error("Texture error!\n");
+	if (!(ft_strchr((char *)buff, 'R')) || !(ft_strchr((char *)buff, 'F'))
+	|| !(ft_strchr((char *)buff, 'C')) || !(ft_strchr((char *)buff, 'S')))
+	    error("Error : valuable informations are not involved!\n");
 	return (TRUE);
 }
 
 int check_read_values(t_struct *data)
 {
 	if (data->w_height == 0 || data->w_width == 0)
-	{
-		write(1, "Error : missing width or height\n", 32);
-		return (FALSE);
-	}
-	if (data->no[0] == 0 || data->so[0] == 0 || data->we[0] == 0 || data->we[0] == 0)
-	{
-		write(1, "Error : wrong texture path\n", 27);
-		return (FALSE);
-	}
+	    error("Error : missing width or height\n");
+	if (data->no[0] == 0 || data->so[0] == 0
+	|| data->we[0] == 0 || data->we[0] == 0)
+	    error("Error : wrong texture path\n");
 	return (TRUE);
 }
 
@@ -98,10 +89,7 @@ int parse(t_struct *data, char **av)
 	initialize_file_struct(data);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || read(fd, buff, len) < 0)
-	{
-		write(1, "No such file!\n", 14);
-		return (1);
-	}
+	    error("No such file!\n");
 	if (!check_textures_f_c_s_availibility((char *)buff))
 		return (FALSE);
 	if (!read_map(data, (char *)buff))

@@ -74,6 +74,3 @@ void	get_south_texture_path(t_struct *data, const char *buff)
 	}
 	data->get_to_map += 1;
 }
-
-
-// *SAN_SYMBOLIZER_PATH environment variable to point to the llvm-symbolizer

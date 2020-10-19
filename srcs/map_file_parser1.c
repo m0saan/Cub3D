@@ -44,7 +44,6 @@ int fill_out_map(t_struct *data, char *buff)
     int j;
 
     i = -1;
-    data->count_spt = 0;
     data->n_lines = count_lines(&buff[data->pos]);
     g_lines_length = (int *)malloc((data->n_lines + 1) * sizeof(int));
     data->map = (char **)malloc((data->n_lines + 1) * sizeof(char *));
@@ -54,25 +53,21 @@ int fill_out_map(t_struct *data, char *buff)
         g_lines_length[i] = data->l_length;
         data->map[i] = (char *)malloc(sizeof(char) * data->l_length);
         buff[data->pos] == '\n' ? (data->pos += 1) : data->pos;
-        j = 0;
-        while (j < data->l_length && buff[data->pos] != '\n')
+        j = -1;
+        while (j++ < data->l_length && buff[data->pos] != '\n')
         {
+            data->map[i][j] = buff[data->pos];
             if (is_not_valid_element(data, buff))
-                return (1);
+                error("Invalid map element");
             if (is_player(data, buff))
             {
                 data->i = i;
                 data->j = j;
-                data->map[i][j++] = data->orientation = (unsigned char)buff[data->pos];
                 init_player(data);
-                data->pos += 1;
-                continue;
             }
-            data->map[i][j] = buff[data->pos];
             if (is_sprite(data->map[i][j]))
                 data->count_spt++;
             data->pos += 1;
-            j++;
         }
         data->pos += 1;
     }
@@ -83,18 +78,15 @@ void initialize_file_struct(t_struct *data)
 {
     data->pos = 0;
     data->get_to_map = 0;
-    data->width = 0;
-    data->height = 0;
     data->f_red = 0;
     data->f_green = 0;
     data->f_blue = 0;
     data->c_red = 0;
     data->c_green = 0;
     data->c_blue = 0;
-    data->map = malloc(sizeof(int) * 30);
-    ft_memset(data->no, 0, 25);
-    ft_memset(data->so, 0, 25);
-    ft_memset(data->ea, 0, 25);
-    ft_memset(data->we, 0, 25);
-    ft_memset(data->sp, 0, 25);
+    ft_memset(data->no, 0, 15);
+    ft_memset(data->so, 0, 15);
+    ft_memset(data->ea, 0, 15);
+    ft_memset(data->we, 0, 15);
+    ft_memset(data->sp, 0, 15);
 }
