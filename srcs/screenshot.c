@@ -67,13 +67,13 @@ void	screen_init(t_struct *data, unsigned char *header)
 	data->bitmap.bf_off_bits = 54;
 	data->bitmap.file_size = 54 + data->bitmap.image_size;
 	data->bitmap.biplanes = 1;
-	ft_mem_cpy(header, "BM", 2);
-	ft_mem_cpy(header + 2, &(data->bitmap.file_size), 4);
-	ft_mem_cpy(header + 10, &(data->bitmap.bf_off_bits), 4);
-	ft_mem_cpy(header + 14, &(data->bitmap.bi_size), 4);
-	ft_mem_cpy(header + 18, &(data->w_width), 4);
-	ft_mem_cpy(header + 22, &(data->w_height), 4);
-	ft_mem_cpy(header + 26, &(data->bitmap.biplanes), 2);
-	ft_mem_cpy(header + 28, &(data->bitmap.bit_count), 2);
-	ft_mem_cpy(header + 34, &(data->bitmap.image_size), 4);
+	ft_memcpy(header, "BM", 2);
+	ft_memcpy(header + 2, &(data->bitmap.file_size), 4);
+	ft_memcpy(header + 10, &(data->bitmap.bf_off_bits), 4);
+	ft_memcpy(header + 14, &(data->bitmap.bi_size), 4);
+	ft_memcpy(header + 18, &(data->w_width), 4);
+	ft_memcpy(header + 22, &(data->w_height), 4);
+	ft_memcpy(header + 26, &(data->bitmap.biplanes), 2);
+	ft_memcpy(header + 28, &(data->bitmap.bit_count), 2);
+	ft_memcpy(header + 34, &(data->bitmap.image_size), 4);
 }
