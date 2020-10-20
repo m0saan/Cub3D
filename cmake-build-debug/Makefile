@@ -68,10 +68,10 @@ RM = /goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/moboustt/Desktop/cursus/Cubb
+CMAKE_SOURCE_DIR = /Users/moboustt/Desktop/VVVVV
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/moboustt/Desktop/cursus/Cubb/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/moboustt/Desktop/VVVVV/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/cursus/Cubb/cmake-build-debug/CMakeFiles /Users/moboustt/Desktop/cursus/Cubb/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/cursus/Cubb/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -197,32 +197,59 @@ srcs/events.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/events.c.s
 .PHONY : srcs/events.c.s
 
-srcs/hud.o: srcs/hud.c.o
+srcs/init_data.o: srcs/init_data.c.o
 
-.PHONY : srcs/hud.o
+.PHONY : srcs/init_data.o
 
 # target to build an object file
-srcs/hud.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/hud.c.o
-.PHONY : srcs/hud.c.o
+srcs/init_data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/init_data.c.o
+.PHONY : srcs/init_data.c.o
 
-srcs/hud.i: srcs/hud.c.i
+srcs/init_data.i: srcs/init_data.c.i
 
-.PHONY : srcs/hud.i
+.PHONY : srcs/init_data.i
 
 # target to preprocess a source file
-srcs/hud.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/hud.c.i
-.PHONY : srcs/hud.c.i
+srcs/init_data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/init_data.c.i
+.PHONY : srcs/init_data.c.i
 
-srcs/hud.s: srcs/hud.c.s
+srcs/init_data.s: srcs/init_data.c.s
 
-.PHONY : srcs/hud.s
+.PHONY : srcs/init_data.s
 
 # target to generate assembly for a file
-srcs/hud.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/hud.c.s
-.PHONY : srcs/hud.c.s
+srcs/init_data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/init_data.c.s
+.PHONY : srcs/init_data.c.s
+
+srcs/intersection.o: srcs/intersection.c.o
+
+.PHONY : srcs/intersection.o
+
+# target to build an object file
+srcs/intersection.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/intersection.c.o
+.PHONY : srcs/intersection.c.o
+
+srcs/intersection.i: srcs/intersection.c.i
+
+.PHONY : srcs/intersection.i
+
+# target to preprocess a source file
+srcs/intersection.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/intersection.c.i
+.PHONY : srcs/intersection.c.i
+
+srcs/intersection.s: srcs/intersection.c.s
+
+.PHONY : srcs/intersection.s
+
+# target to generate assembly for a file
+srcs/intersection.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/intersection.c.s
+.PHONY : srcs/intersection.c.s
 
 srcs/main.o: srcs/main.c.o
 
@@ -467,6 +494,60 @@ srcs/sprite.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/sprite.c.s
 .PHONY : srcs/sprite.c.s
 
+srcs/sprite_utils.o: srcs/sprite_utils.c.o
+
+.PHONY : srcs/sprite_utils.o
+
+# target to build an object file
+srcs/sprite_utils.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/sprite_utils.c.o
+.PHONY : srcs/sprite_utils.c.o
+
+srcs/sprite_utils.i: srcs/sprite_utils.c.i
+
+.PHONY : srcs/sprite_utils.i
+
+# target to preprocess a source file
+srcs/sprite_utils.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/sprite_utils.c.i
+.PHONY : srcs/sprite_utils.c.i
+
+srcs/sprite_utils.s: srcs/sprite_utils.c.s
+
+.PHONY : srcs/sprite_utils.s
+
+# target to generate assembly for a file
+srcs/sprite_utils.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/sprite_utils.c.s
+.PHONY : srcs/sprite_utils.c.s
+
+srcs/sprite_utils2.o: srcs/sprite_utils2.c.o
+
+.PHONY : srcs/sprite_utils2.o
+
+# target to build an object file
+srcs/sprite_utils2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/sprite_utils2.c.o
+.PHONY : srcs/sprite_utils2.c.o
+
+srcs/sprite_utils2.i: srcs/sprite_utils2.c.i
+
+.PHONY : srcs/sprite_utils2.i
+
+# target to preprocess a source file
+srcs/sprite_utils2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/sprite_utils2.c.i
+.PHONY : srcs/sprite_utils2.c.i
+
+srcs/sprite_utils2.s: srcs/sprite_utils2.c.s
+
+.PHONY : srcs/sprite_utils2.s
+
+# target to generate assembly for a file
+srcs/sprite_utils2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/sprite_utils2.c.s
+.PHONY : srcs/sprite_utils2.c.s
+
 srcs/utils.o: srcs/utils.c.o
 
 .PHONY : srcs/utils.o
@@ -493,6 +574,33 @@ srcs/utils.s: srcs/utils.c.s
 srcs/utils.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/utils.c.s
 .PHONY : srcs/utils.c.s
+
+srcs/wall_utils.o: srcs/wall_utils.c.o
+
+.PHONY : srcs/wall_utils.o
+
+# target to build an object file
+srcs/wall_utils.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/wall_utils.c.o
+.PHONY : srcs/wall_utils.c.o
+
+srcs/wall_utils.i: srcs/wall_utils.c.i
+
+.PHONY : srcs/wall_utils.i
+
+# target to preprocess a source file
+srcs/wall_utils.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/wall_utils.c.i
+.PHONY : srcs/wall_utils.c.i
+
+srcs/wall_utils.s: srcs/wall_utils.c.s
+
+.PHONY : srcs/wall_utils.s
+
+# target to generate assembly for a file
+srcs/wall_utils.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/wall_utils.c.s
+.PHONY : srcs/wall_utils.c.s
 
 srcs/walls.o: srcs/walls.c.o
 
@@ -536,9 +644,12 @@ help:
 	@echo "... srcs/events.o"
 	@echo "... srcs/events.i"
 	@echo "... srcs/events.s"
-	@echo "... srcs/hud.o"
-	@echo "... srcs/hud.i"
-	@echo "... srcs/hud.s"
+	@echo "... srcs/init_data.o"
+	@echo "... srcs/init_data.i"
+	@echo "... srcs/init_data.s"
+	@echo "... srcs/intersection.o"
+	@echo "... srcs/intersection.i"
+	@echo "... srcs/intersection.s"
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"
@@ -566,9 +677,18 @@ help:
 	@echo "... srcs/sprite.o"
 	@echo "... srcs/sprite.i"
 	@echo "... srcs/sprite.s"
+	@echo "... srcs/sprite_utils.o"
+	@echo "... srcs/sprite_utils.i"
+	@echo "... srcs/sprite_utils.s"
+	@echo "... srcs/sprite_utils2.o"
+	@echo "... srcs/sprite_utils2.i"
+	@echo "... srcs/sprite_utils2.s"
 	@echo "... srcs/utils.o"
 	@echo "... srcs/utils.i"
 	@echo "... srcs/utils.s"
+	@echo "... srcs/wall_utils.o"
+	@echo "... srcs/wall_utils.i"
+	@echo "... srcs/wall_utils.s"
 	@echo "... srcs/walls.o"
 	@echo "... srcs/walls.i"
 	@echo "... srcs/walls.s"

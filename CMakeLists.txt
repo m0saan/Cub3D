@@ -5,7 +5,6 @@ set(CMAKE_C_STANDARD 99)
 
 add_executable(TEST srcs/main.c
         srcs/ray_casting.c
-        srcs/hud.c
         srcs/cube3d_utils.c
         srcs/map_file_parser2.c
         srcs/sprite.c
@@ -17,7 +16,11 @@ add_executable(TEST srcs/main.c
         srcs/map_file_parser1.c
         srcs/screenshot.c
         srcs/walls.c
-        srcs/intersection.c)
+        srcs/intersection.c
+        srcs/sprite_utils.c
+        srcs/sprite_utils2.c
+        srcs/wall_utils.c
+        srcs/init_data.c)
 
 target_link_libraries(TEST ${CMAKE_SOURCE_DIR}/libmlx.a ${CMAKE_SOURCE_DIR}/libft.a)
 

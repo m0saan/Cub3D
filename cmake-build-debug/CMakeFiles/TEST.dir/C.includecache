@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/moboustt/Desktop/VVVVV/include/cube3d.h
+string.h
+-
+unistd.h
+-
+stdlib.h
+-
+errno.h
+-
+stdio.h
+-
+math.h
+-
+fcntl.h
+-
+../libs/OpenGL/mlx.h
+/Users/moboustt/Desktop/VVVVV/libs/OpenGL/mlx.h
+../libft/libft.h
+/Users/moboustt/Desktop/VVVVV/libft/libft.h
+
+/Users/moboustt/Desktop/VVVVV/libft/libft.h
+unistd.h
+-
+string.h
+-
+stdlib.h
+-
+
+/Users/moboustt/Desktop/VVVVV/libs/OpenGL/mlx.h
+
+/Users/moboustt/Desktop/VVVVV/srcs/screenshot.c
+../include/cube3d.h
+/Users/moboustt/Desktop/VVVVV/include/cube3d.h
+
