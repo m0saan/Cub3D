@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 11:24:35 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:25:29 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,4 +263,13 @@ int				*which_texture(const t_struct *data);
 void			ft_ljodran(t_struct *data, int y);
 int				normalize_index(int index);
 int				get_color_index(t_struct *data);
+void			set_sprite_coordinates(t_struct *data, int *i_spt, int i, int j);
+void			set_sprite_distance(t_struct *data, int *i);
+float			calc_sprite_y_offset(t_struct *data, int i_spt);
+float			calc_sprite_x_offset(t_struct *data, int i_spt, float spt_angle);
+void			swap(t_struct *data, int j);
+void			bubble_sort(t_struct *data);
+int				get_color_id(int i, int j, int size);
+void			normalize_sprite_angle(t_struct *data, float *spt_angle);
+void			normalize_sprite_size(t_struct *data, int *i_spt);
 #endif
