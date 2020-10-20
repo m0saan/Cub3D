@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:01 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 09:58:14 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:37:05 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int	is_not_valid_xpm(t_struct *data)
 {
-	return !data->xpm_ptr1 || !data->xpm_ptr2 || !data->xpm_ptr3 || !data->xpm_ptr4 || !data->sprite_xpm;
+	return (!data->xpm_ptr1 || !data->xpm_ptr2
+		|| !data->xpm_ptr3 || !data->xpm_ptr4 || !data->sprite_xpm);
 }
 
 void		texture_from_file(t_struct *data)
@@ -45,14 +46,15 @@ void		calculate_wall_projection(t_struct *data)
 {
 	data->corrected_dsitance = g_rays[data->i_wall_index].distance *
 		cosf(g_rays[data->i_wall_index].ray_angle - data->rotation_angle);
-	data->distance_to_projection_plane = ((float )data->w_width / 2) / tanf(FOV_ANGLE / 2);
+	data->distance_to_projection_plane = ((float)data->w_width / 2)
+		/ tanf(FOV_ANGLE / 2);
 	data->wall_height = (SQUARE_SIZE / data->corrected_dsitance) *
 		data->distance_to_projection_plane;
-	data->top_pixel = ((float )data->w_height / 2) - (data->wall_height / 2);
+	data->top_pixel = ((float)data->w_height / 2) - (data->wall_height / 2);
 	data->top_pixel = data->top_pixel < 0 ? 0 : data->top_pixel;
-	data->bottom_pixel = ((float )data->w_height / 2) + (data->wall_height / 2);
-	data->bottom_pixel = data->bottom_pixel > (float )data->w_height
-		? (float )data->w_height
+	data->bottom_pixel = ((float)data->w_height / 2) + (data->wall_height / 2);
+	data->bottom_pixel = data->bottom_pixel > (float)data->w_height
+		? (float)data->w_height
 		: data->bottom_pixel;
 }
 
@@ -64,14 +66,15 @@ void		ft_ljodran(t_struct *data, int y)
 	data->txt_offset_y = (int)calculate_y_offset(data, y);
 	which_text = which_texture(data);
 	index = normalize_index(get_color_index(data));
-	ft_draw(data, data->i_wall_index, y, data->t ? (int)which_text[index] : 0xffffff);
+	ft_draw(data, data->i_wall_index, y, data->t
+			? (int)which_text[index] : 0xffffff);
 }
 
 void		render_walls(t_struct *data)
 {
-	int ceilling;
-	int floor;
-	float y;
+	int		ceilling;
+	int		floor;
+	float	y;
 
 	data->i_wall_index = 0;
 	texture_from_file(data);
@@ -83,16 +86,15 @@ void		render_walls(t_struct *data)
 		calculate_wall_projection(data);
 		draw_ceilling(data, ceilling);
 		draw_walls(data, y);
-		floor = (int) data->bottom_pixel;
+		floor = (int)data->bottom_pixel;
 		draw_floor(data, floor);
 	}
 	set_up_sprite(data);
 }
 
-
-
-int		calculate_x_offset(const t_struct *data) {
-	return (g_rays[data->i_wall_index].was_hit_vertical)
+int			calculate_x_offset(const t_struct *data)
+{
+	return ((g_rays[data->i_wall_index].was_hit_vertical)
 		? ((int)g_rays[data->i_wall_index].wall_h_y % SQUARE_SIZE)
-		: ((int)g_rays[data->i_wall_index].wall_h_x % SQUARE_SIZE);
+		: ((int)g_rays[data->i_wall_index].wall_h_x % SQUARE_SIZE));
 }

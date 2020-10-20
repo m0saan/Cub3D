@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/20 12:29:23 by moboustt          #+#    #+#             */
+/*   Updated: 2020/10/20 12:33:06 by moboustt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
@@ -8,29 +19,36 @@ int		get_color_index(t_struct *data)
 
 int		normalize_index(int index)
 {
-	static const int TEX_SPACE = TEX_HEIGHT * TEX_WIDTH;
+	static const int tex_space = TEX_HEIGHT * TEX_WIDTH;
+
 	index = index <= 0 ? 0 : index;
-	return index >= (TEX_SPACE) ? (TEX_SPACE - 1) : index;
+	return (index >= (tex_space) ? (tex_space - 1) : index);
 }
 
 int		*which_texture(const t_struct *data)
 {
-	if (!g_rays[data->i_wall_index].was_hit_vertical && g_rays[data->i_wall_index].is_ray_facing_down)
-		return data->img_tex1;
-	else if (!g_rays[data->i_wall_index].was_hit_vertical && g_rays[data->i_wall_index].is_ray_facing_up)
-		return  data->img_tex2;
-	else if ((g_rays[data->i_wall_index].was_hit_vertical) && g_rays[data->i_wall_index].is_ray_facing_left)
-		return  data->img_tex3;
-	else if ((g_rays[data->i_wall_index].was_hit_vertical) && g_rays[data->i_wall_index].is_ray_facing_right)
-		return  data->img_tex4;
-	return 0;
+	if (!g_rays[data->i_wall_index].was_hit_vertical
+			&& g_rays[data->i_wall_index].is_ray_facing_down)
+		return (data->img_tex1);
+	else if (!g_rays[data->i_wall_index].was_hit_vertical
+			&& g_rays[data->i_wall_index].is_ray_facing_up)
+		return (data->img_tex2);
+	else if ((g_rays[data->i_wall_index].was_hit_vertical)
+			&& g_rays[data->i_wall_index].is_ray_facing_left)
+		return (data->img_tex3);
+	else if ((g_rays[data->i_wall_index].was_hit_vertical)
+			&& g_rays[data->i_wall_index].is_ray_facing_right)
+		return (data->img_tex4);
+	return (0);
 }
 
 float	calculate_y_offset(const t_struct *data, int y)
 {
 	const float wall_height_by_tow = data->wall_height * 0.5F;
 	const float win_height_by_tow = data->w_height * 0.5F;
-	return ((float)y + (wall_height_by_tow) - (win_height_by_tow)) * ((float)TEX_WIDTH / data->wall_height);
+
+	return (((float)y + (wall_height_by_tow) - (win_height_by_tow))
+		* ((float)TEX_WIDTH / data->wall_height));
 }
 
 void	draw_walls(t_struct *data, float y)
@@ -46,9 +64,9 @@ void	draw_floor(t_struct *data, int floor)
 				create_rgb(data->f_red, data->c_green, data->c_blue));
 }
 
-void draw_ceilling(t_struct *data, int ceilling)
+void	draw_ceilling(t_struct *data, int ceilling)
 {
-	while (ceilling++ < (int) data->top_pixel)
+	while (ceilling++ < (int)data->top_pixel)
 		ft_draw(data, data->i_wall_index, ceilling,
 				create_rgb(data->c_red, data->c_green, data->c_blue));
 }
