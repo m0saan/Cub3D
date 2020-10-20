@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 14:20:04 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:52:36 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct	s_ray
 t_ray			*g_rays;
 int				g_screenshot;
 int				*g_lines_length;
+t_rgb			*g_rgb;
 
 typedef struct	s_struct
 {
@@ -223,7 +224,7 @@ void			render_walls(t_struct *data);
 int				parse(t_struct *data, char **av);
 void			initialize_file_struct(t_struct *data);
 int				read_map(t_struct *data, char *buff);
-int				fill_out_map(t_struct *data, char *buff);
+void			fill_out_map(t_struct *data, char *buff);
 int				line_length(const char *line);
 int				count_lines(const char *buff);
 void			get_western_texture_path(t_struct *data, const char *buff);
@@ -264,10 +265,12 @@ int				*which_texture(const t_struct *data);
 void			ft_ljodran(t_struct *data, int y);
 int				normalize_index(int index);
 int				get_color_index(t_struct *data);
-void			set_sprite_coordinates(t_struct *data, int *i_spt, int i, int j);
+void			set_sprite_coordinates(t_struct *data, int *i_spt,
+				int i, int j);
 void			set_sprite_distance(t_struct *data, int *i);
 float			calc_sprite_y_offset(t_struct *data, int i_spt);
-float			calc_sprite_x_offset(t_struct *data, int i_spt, float spt_angle);
+float			calc_sprite_x_offset(t_struct *data, int i_spt,
+				float spt_angle);
 void			swap(t_struct *data, int j);
 void			bubble_sort(t_struct *data);
 int				get_color_id(int i, int j, int size);
