@@ -70,7 +70,6 @@ void	get_easter_texture_path(t_struct *data, const char *buff)
 int		screw_this_norminette(t_struct *data, char *buff)
 {
 	data->count_spt = 0;
-	if (!(fill_out_map(data, buff)))
-		error("error : Map error\n");
+	fill_out_map(data, buff);
 	return (TRUE);
 }
