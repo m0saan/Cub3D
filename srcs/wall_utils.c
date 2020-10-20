@@ -6,24 +6,11 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 12:29:23 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 12:33:06 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:22:48 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-
-int		get_color_index(t_struct *data)
-{
-	return ((TEX_WIDTH * data->txt_offset_y) + data->txt_offset_x);
-}
-
-int		normalize_index(int index)
-{
-	static const int tex_space = TEX_HEIGHT * TEX_WIDTH;
-
-	index = index <= 0 ? 0 : index;
-	return (index >= (tex_space) ? (tex_space - 1) : index);
-}
 
 int		*which_texture(const t_struct *data)
 {

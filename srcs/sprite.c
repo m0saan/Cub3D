@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:26:10 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 12:17:00 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:18:12 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	set_up_sprite(t_struct *data)
 		normalize_sprite_angle(data, &spt_angle);
 		normalize_sprite_size(data, &i_spt);
 		data->sprite[i_spt].y_off = calc_sprite_y_offset(data, i_spt);
-		data->sprite[i_spt].x_off = calc_sprite_x_offset(data, i_spt, spt_angle);
+		data->sprite[i_spt].x_off = calc_sprite_x_offset(data, i_spt,
+				spt_angle);
 		draw_sprites(data, data->sprite[i_spt].x_off,
 				data->sprite[i_spt].y_off, i_spt);
 		i_spt++;

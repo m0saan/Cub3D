@@ -6,17 +6,11 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:01 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 12:37:05 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:18:53 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-
-static int	is_not_valid_xpm(t_struct *data)
-{
-	return (!data->xpm_ptr1 || !data->xpm_ptr2
-		|| !data->xpm_ptr3 || !data->xpm_ptr4 || !data->sprite_xpm);
-}
 
 void		texture_from_file(t_struct *data)
 {

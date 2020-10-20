@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 00:56:28 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 12:27:58 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:24:29 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,17 @@ float	distance_between_points(float x1, float y1, float x2, float y2)
 int		calculate_index(float value)
 {
 	return (floorf((value / SQUARE_SIZE)));
+}
+
+int		get_color_index(t_struct *data)
+{
+	return ((TEX_WIDTH * data->txt_offset_y) + data->txt_offset_x);
+}
+
+int		normalize_index(int index)
+{
+	static const int tex_space = TEX_HEIGHT * TEX_WIDTH;
+
+	index = index <= 0 ? 0 : index;
+	return (index >= (tex_space) ? (tex_space - 1) : index);
 }

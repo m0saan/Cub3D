@@ -6,25 +6,11 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:16 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 00:15:49 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:21:55 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-
-int			update(t_struct *data)
-{
-	cast_rays(data);
-	render_walls(data);
-	move_player(data);
-	if (g_screenshot)
-	{
-		screen(data);
-		ft_close(data);
-	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-	return (FALSE);
-}
 
 int			move_player(t_struct *data)
 {

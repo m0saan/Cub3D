@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 12:25:29 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:20:04 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ typedef struct	s_struct
 	t_bitmap	bitmap;
 }				t_struct;
 
+int				set_up_window(t_struct *data);
 uint32_t		create_rgb(int r, int g, int b);
 void			set_up_data(t_struct *data);
 void			init_ray_cast_data(t_struct *data);
@@ -248,7 +249,7 @@ int				calculate_index(float value);
 int				is_not_valid_element(t_struct *data, const char *buff);
 int				valid_indices(t_struct *data, int x, int y);
 int				screen(t_struct *data);
-void			screen_data(t_struct *data, int x, int index);
+void			screen_data(t_struct *data, int x);
 void			screen_init(t_struct *data, unsigned char *header);
 void			*ft_mem_cpy(void *dest, const void *src, size_t n);
 int				destruct(t_struct *data);
@@ -272,4 +273,6 @@ void			bubble_sort(t_struct *data);
 int				get_color_id(int i, int j, int size);
 void			normalize_sprite_angle(t_struct *data, float *spt_angle);
 void			normalize_sprite_size(t_struct *data, int *i_spt);
+int				is_not_valid_xpm(t_struct *data);
+
 #endif

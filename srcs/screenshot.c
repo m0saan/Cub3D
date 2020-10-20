@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:24:37 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 00:27:14 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:17:37 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ t_rgb	*rgb;
 int		screen(t_struct *data)
 {
 	int				x;
-	int				index;
 	const char		*file_name = "screenshot.bmp";
-	const int		LEN = 54;
-	unsigned char	header[LEN];
+	const int		len = 54;
+	unsigned char	header[len];
 
-	ft_memset(header, 0, LEN);
+	ft_memset(header, 0, len);
 	screen_init(data, header);
 	data->bitmap.buf = malloc((data->bitmap.image_size));
 	x = 0;
@@ -31,23 +30,23 @@ int		screen(t_struct *data)
 	{
 		data->bitmap.col = 0;
 		while (data->bitmap.col++ < data->w_width - 1)
-		{
-			index = data->bitmap.row * data->w_width + data->bitmap.col;
-			index = index < 0 ? index * (-1) : index;
-			screen_data(data, x, index);
-		}
+			screen_data(data, x);
 		x++;
 	}
 	data->bitmap.fd = open(file_name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-	write(data->bitmap.fd, header, LEN);
+	write(data->bitmap.fd, header, len);
 	write(data->bitmap.fd, (char *)data->bitmap.buf, data->bitmap.image_size);
 	close(data->bitmap.fd);
 	free(data->bitmap.buf);
 	return (0);
 }
 
-void	screen_data(t_struct *data, int x, int index)
+void	screen_data(t_struct *data, int x)
 {
+	int index;
+
+	index = data->bitmap.row * data->w_width + data->bitmap.col;
+	index = index < 0 ? index * (-1) : index;
 	rgb = color_converter((uint32_t)data->img_data_bmp[index]);
 	data->bitmap.buf[x * data->bitmap.width_in_bytes
 		+ data->bitmap.col * 3 + 0] = rgb->b;
