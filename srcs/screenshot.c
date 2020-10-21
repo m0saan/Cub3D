@@ -6,13 +6,13 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:24:37 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 10:11:10 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/21 14:25:33 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-t_rgb	*rgb;
+t_rgb	*g_rgb;
 
 int		screen(t_struct *data)
 {
@@ -47,14 +47,14 @@ void	screen_data(t_struct *data, int x)
 
 	index = data->bitmap.row * data->w_width + data->bitmap.col;
 	index = index < 0 ? index * (-1) : index;
-	rgb = color_converter((uint32_t)data->img_data_bmp[index]);
+	g_rgb = color_converter((uint32_t)data->img_data_bmp[index]);
 	data->bitmap.buf[x * data->bitmap.width_in_bytes
-		+ data->bitmap.col * 3 + 0] = rgb->b;
+		+ data->bitmap.col * 3 + 0] = g_rgb->b;
 	data->bitmap.buf[x * data->bitmap.width_in_bytes
-		+ data->bitmap.col * 3 + 1] = rgb->g;
+		+ data->bitmap.col * 3 + 1] = g_rgb->g;
 	data->bitmap.buf[x * data->bitmap.width_in_bytes
-		+ data->bitmap.col * 3 + 2] = rgb->r;
-	free(rgb);
+		+ data->bitmap.col * 3 + 2] = g_rgb->r;
+	free(g_rgb);
 }
 
 void	screen_init(t_struct *data, unsigned char *header)

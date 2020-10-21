@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:26:10 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 11:16:07 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/21 14:25:58 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	initialize_sprite(t_struct *data)
 	i = -1;
 	i_spt = 0;
 	if (data->count_spt <= 0)
-		error("sprite error") ;
+		error("sprite error");
 	if (!(data->sprite = (t_sprite *)malloc(sizeof(t_sprite)
 					* (data->count_spt))))
 		return ;
