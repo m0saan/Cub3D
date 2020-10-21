@@ -54,12 +54,12 @@ typedef struct	s_rgb
 typedef struct	s_bitmap
 {
 	uint16_t	bit_count;
-	int			width_in_bytes;
+	int			width_bytes;
 	uint32_t	bi_size;
 	uint32_t	image_size;
 	uint32_t	bf_off_bits;
 	uint32_t	file_size;
-	uint16_t	biplanes;
+	uint16_t	color_planes;
 	uc			*buf;
 	int			fd;
 	int			row;
@@ -277,5 +277,9 @@ int				get_color_id(int i, int j, int size);
 void			normalize_sprite_angle(t_struct *data, float *spt_angle);
 void			normalize_sprite_size(t_struct *data, int *i_spt);
 int				is_not_valid_xpm(t_struct *data);
+int             value_at(int i, int j, t_struct *data);
+int             check_element(t_struct *data, int i, int j);
+void            check_map(t_struct *data);
+
 
 #endif
