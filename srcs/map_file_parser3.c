@@ -6,33 +6,21 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:15:05 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 00:09:59 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:46:54 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
-{
-	size_t i;
-	size_t j;
+int is_valid_texture(t_struct *data, const char *buff) {
+    int flag;
 
-	j = 0;
-	i = 0;
-	if (*needle == '\0')
-		return ((char *)haystack);
-	while (i < len && haystack[i] != '\0')
-	{
-		while (haystack[i + j] == needle[j] && i + j < len)
-		{
-			if (needle[j + 1] == '\0')
-				return ((char *)(haystack + i));
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (0);
+    flag = 0;
+    while (buff[data->pos] != '.' && buff[data->pos + 1] != '/' && ++flag) {
+        if (buff[data->pos] == '\n') error("Invalid texture alignment\n");
+        (data->pos)++;
+    }
+    return flag;
 }
 
 void	get_western_texture_path(t_struct *data, const char *buff)
@@ -40,8 +28,8 @@ void	get_western_texture_path(t_struct *data, const char *buff)
 	int i;
 
 	i = 0;
-	while (buff[(data->pos)] != '.' && buff[(data->pos) + 1] != '/')
-		(data->pos)++;
+    if (is_valid_texture(data, buff) != 3)
+	    error("Invalid texture path!\n");
 	while (buff[(data->pos)] != '\n')
 	{
 		data->we[i] = buff[(data->pos)];
@@ -56,8 +44,8 @@ void	get_easter_texture_path(t_struct *data, const char *buff)
 	int i;
 
 	i = 0;
-	while (buff[(data->pos)] != '.' && buff[(data->pos) + 1] != '/')
-		(data->pos)++;
+    if (is_valid_texture(data, buff) != 3)
+        error("Invalid texture path!\n");
 	while (buff[(data->pos)] != '\n')
 	{
 		data->ea[i] = buff[(data->pos)];

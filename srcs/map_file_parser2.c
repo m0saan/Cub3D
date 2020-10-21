@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:33:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/02/24 18:33:34 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:37:51 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	get_ceilling_values(t_struct *data, char *buff)
 
 void	get_north_texture_path(t_struct *data, const char *buff)
 {
-	int i;
+    int i;
 
-	i = 0;
-	while (buff[data->pos] != '.' && buff[data->pos + 1] != '/')
-		data->pos++;
+    i = 0;
+    if (is_valid_texture(data, buff) != 3)
+        error("Invalid texture path!\n");
 	while (buff[data->pos] != '\n')
 	{
 		data->no[i] = buff[data->pos];
@@ -61,11 +61,11 @@ void	get_north_texture_path(t_struct *data, const char *buff)
 
 void	get_south_texture_path(t_struct *data, const char *buff)
 {
-	int i;
+    int i;
 
-	i = 0;
-	while (buff[data->pos] != '.' && buff[data->pos + 1] != '/')
-		data->pos++;
+    i = 0;
+    if (is_valid_texture(data, buff) != 3)
+        error("Invalid texture path!\n");
 	while (buff[data->pos] != '\n')
 	{
 		data->so[i] = buff[data->pos];

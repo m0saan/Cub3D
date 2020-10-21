@@ -6,11 +6,23 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:27:32 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 00:16:32 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:01:13 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
+int is_negative(int v)
+{
+    return v < 0;
+}
+
+void check_floor_ceilling_values(t_struct *data)
+{
+    if (is_negative(data->f_red) || is_negative(data->f_green) || is_negative(data->f_blue))
+        error("color values cannot be negative\n");
+    if (is_negative(data->c_red) || is_negative(data->c_green) || is_negative(data->c_blue))
+        error("color values cannot be negative\n");
+}
 
 int		read_map(t_struct *data, char *buff)
 {
@@ -60,18 +72,24 @@ int		check_read_values(t_struct *data)
 {
 	if (data->w_height == 0 || data->w_width == 0)
 		error("Error : missing width or height\n");
-	if (data->no[0] == 0 || data->so[0] == 0
-			|| data->we[0] == 0 || data->we[0] == 0)
+	if (data->w_height < 0 || data->w_width < 0)
+        error("Error : width or height cannot be negative\n");
+    if (!data->no[0] || !data->so[0]
+			|| !data->we[0] || !data->we[0])
 		error("Error : wrong texture path\n");
+    check_floor_ceilling_values(data);
 	return (TRUE);
 }
 
 void	get_sprite_path(t_struct *data, char *buff)
 {
-	int i;
+    int i;
 
-	i = 0;
-	data->pos += 2;
+    i = 0;
+    if (is_valid_texture(data, buff) != 2)
+        error("Invalid texture path!\n");
+
+    data->pos += 2;
 	while (buff[data->pos] != '\n')
 	{
 		data->sp[i] = buff[data->pos];

@@ -6,29 +6,26 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:29:13 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 14:49:31 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/21 10:55:44 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-static void		insert_and_check_element(t_struct *data,
-		const char *buff, int i, int j)
-{
-	data->map[i][j] = buff[data->pos];
-	if (is_not_valid_element(data, buff))
-		error("Invalid map element");
-	if (is_player(data, buff))
-	{
-		data->i = i;
-		data->j = j;
-		init_player(data);
-	}
-	else if (is_sprite(data->map[i][j]))
-		data->count_spt++;
+static void insert_and_check_element(t_struct *data, const char *buff, int i, int j) {
+    data->map[i][j] = buff[data->pos];
+    if (is_not_valid_element(data, buff))
+        error("Invalid map element");
+    if (is_player(data, buff))
+    {
+        data->i = i;
+        data->j = j;
+        init_player(data);
+    }
+    else if (is_sprite(data->map[i][j]))
+        data->count_spt++;
 }
-
-int				count_lines(const char *buff)
+int		count_lines(const char *buff)
 {
 	int i;
 	int num_lines;
@@ -41,10 +38,10 @@ int				count_lines(const char *buff)
 			num_lines += 1;
 		i++;
 	}
-	return (num_lines);
+	return (num_lines + 1);
 }
 
-int				line_length(const char *line)
+int		line_length(const char *line)
 {
 	int i;
 
@@ -54,33 +51,33 @@ int				line_length(const char *line)
 	return (i);
 }
 
-void			fill_out_map(t_struct *data, char *buff)
+void		fill_out_map(t_struct *data, char *buff)
 {
 	int i;
 	int j;
 
 	i = -1;
 	data->n_lines = count_lines(&buff[data->pos]);
-	g_lines_length = (int *)malloc((data->n_lines + 1) * sizeof(int));
-	data->map = (char **)malloc((data->n_lines + 1) * sizeof(char *));
-	while (buff[data->pos] != '\0' && i++ < data->n_lines - 1)
+	g_lines_length = (int *)malloc((data->n_lines) * sizeof(int));
+	data->map = (char **)malloc((data->n_lines) * sizeof(char *));
+	while (buff[data->pos] != '\0' && ++i < data->n_lines)
 	{
-		data->l_length = line_length(&buff[data->pos]);
+        data->l_length = line_length(&buff[data->pos]);
 		g_lines_length[i] = data->l_length;
 		data->map[i] = (char *)malloc(sizeof(char) * data->l_length);
 		buff[data->pos] == '\n' ? (data->pos += 1) : data->pos;
 		j = -1;
-		while (j++ < data->l_length && buff[data->pos] != '\n')
+		while (++j < data->l_length && buff[data->pos] != '\n')
 		{
-			insert_and_check_element(data, buff, i, j);
-			data->pos += 1;
+            insert_and_check_element(data, buff, i, j);
+            data->pos += 1;
 		}
 		data->pos += 1;
 	}
 	check_map(data);
 }
 
-void			initialize_file_struct(t_struct *data)
+void	initialize_file_struct(t_struct *data)
 {
 	data->pos = 0;
 	data->get_to_map = 0;
