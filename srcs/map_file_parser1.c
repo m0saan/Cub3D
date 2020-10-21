@@ -77,6 +77,7 @@ void			fill_out_map(t_struct *data, char *buff)
 		}
 		data->pos += 1;
 	}
+	check_map(data);
 }
 
 void			initialize_file_struct(t_struct *data)
