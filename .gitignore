@@ -26,7 +26,6 @@ map.cub
 *.pch
 
 # Libraries
-*.lib
 *.la
 *.lo
 

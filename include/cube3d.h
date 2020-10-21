@@ -278,4 +278,5 @@ int             value_at(int i, int j, t_struct *data);
 int             check_element(t_struct *data, int i, int j);
 void            check_map(t_struct *data);
 int             is_valid_texture(t_struct *data, const char *buff);
+int             is_negative(int v);
 #endif
