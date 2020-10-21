@@ -46,11 +46,11 @@ void	screen_data(t_struct *data, int x)
 	index = data->bitmap.row * data->w_width + data->bitmap.col;
 	index = index < 0 ? index * (-1) : index;
 	g_rgb = color_converter((uint32_t)data->img_data_bmp[index]);
-	data->bitmap.buf[x * data->bitmap.width_in_bytes
+	data->bitmap.buf[x * data->bitmap.width_bytes
 		+ data->bitmap.col * 3 + 0] = g_rgb->b;
-	data->bitmap.buf[x * data->bitmap.width_in_bytes
+	data->bitmap.buf[x * data->bitmap.width_bytes
 		+ data->bitmap.col * 3 + 1] = g_rgb->g;
-	data->bitmap.buf[x * data->bitmap.width_in_bytes
+	data->bitmap.buf[x * data->bitmap.width_bytes
 		+ data->bitmap.col * 3 + 2] = g_rgb->r;
 	free(g_rgb);
 }
@@ -58,20 +58,19 @@ void	screen_data(t_struct *data, int x)
 void	screen_init(t_struct *data, unsigned char *header)
 {
 	data->bitmap.bit_count = 24;
-	data->bitmap.width_in_bytes = ((data->w_width *
-				data->bitmap.bit_count + 31) / 32) * 4;
-	data->bitmap.image_size = data->bitmap.width_in_bytes * data->w_height;
+	data->bitmap.width_bytes = ((data->w_width * data->bitmap.bit_count + 31) / 32) * 4;
+	data->bitmap.image_size = data->bitmap.width_bytes * data->w_height;
 	data->bitmap.bi_size = 40;
 	data->bitmap.bf_off_bits = 54;
 	data->bitmap.file_size = 54 + data->bitmap.image_size;
-	data->bitmap.biplanes = 1;
+	data->bitmap.color_planes = 1;
 	ft_memcpy(header, "BM", 2);
 	ft_memcpy(header + 2, &(data->bitmap.file_size), 4);
 	ft_memcpy(header + 10, &(data->bitmap.bf_off_bits), 4);
 	ft_memcpy(header + 14, &(data->bitmap.bi_size), 4);
 	ft_memcpy(header + 18, &(data->w_width), 4);
 	ft_memcpy(header + 22, &(data->w_height), 4);
-	ft_memcpy(header + 26, &(data->bitmap.biplanes), 2);
+	ft_memcpy(header + 26, &(data->bitmap.color_planes), 2);
 	ft_memcpy(header + 28, &(data->bitmap.bit_count), 2);
 	ft_memcpy(header + 34, &(data->bitmap.image_size), 4);
 }
