@@ -6,14 +6,15 @@ set(CMAKE_C_STANDARD 99)
 add_executable(TEST srcs/main.c
         srcs/ray_casting.c
         srcs/cube3d_utils.c
-        srcs/map_file_parser2.c
         srcs/sprite.c
         srcs/events.c
         srcs/map_file_parser.c
-        srcs/map_file_parser3.c
+        srcs/parse_textures.c
+        srcs/parse_map.c
+        srcs/parse_floor_ceilling_resolution.c
+        srcs/map_file_parser_utils.c
         srcs/render.c
         srcs/utils.c
-        srcs/map_file_parser1.c
         srcs/screenshot.c
         srcs/walls.c
         srcs/intersection.c

@@ -68,10 +68,10 @@ RM = /goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/moboustt/Desktop/VVVVV
+CMAKE_SOURCE_DIR = /Users/moboustt/Desktop/CURSUS/VV
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/moboustt/Desktop/VVVVV/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/moboustt/Desktop/CURSUS/VV/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/CURSUS/VV/cmake-build-debug/CMakeFiles /Users/moboustt/Desktop/CURSUS/VV/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/CURSUS/VV/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -332,86 +332,113 @@ srcs/map_file_parser.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser.c.s
 .PHONY : srcs/map_file_parser.c.s
 
-srcs/map_file_parser1.o: srcs/map_file_parser1.c.o
+srcs/map_file_parser_utils.o: srcs/map_file_parser_utils.c.o
 
-.PHONY : srcs/map_file_parser1.o
-
-# target to build an object file
-srcs/map_file_parser1.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser1.c.o
-.PHONY : srcs/map_file_parser1.c.o
-
-srcs/map_file_parser1.i: srcs/map_file_parser1.c.i
-
-.PHONY : srcs/map_file_parser1.i
-
-# target to preprocess a source file
-srcs/map_file_parser1.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser1.c.i
-.PHONY : srcs/map_file_parser1.c.i
-
-srcs/map_file_parser1.s: srcs/map_file_parser1.c.s
-
-.PHONY : srcs/map_file_parser1.s
-
-# target to generate assembly for a file
-srcs/map_file_parser1.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser1.c.s
-.PHONY : srcs/map_file_parser1.c.s
-
-srcs/map_file_parser2.o: srcs/map_file_parser2.c.o
-
-.PHONY : srcs/map_file_parser2.o
+.PHONY : srcs/map_file_parser_utils.o
 
 # target to build an object file
-srcs/map_file_parser2.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser2.c.o
-.PHONY : srcs/map_file_parser2.c.o
+srcs/map_file_parser_utils.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser_utils.c.o
+.PHONY : srcs/map_file_parser_utils.c.o
 
-srcs/map_file_parser2.i: srcs/map_file_parser2.c.i
+srcs/map_file_parser_utils.i: srcs/map_file_parser_utils.c.i
 
-.PHONY : srcs/map_file_parser2.i
+.PHONY : srcs/map_file_parser_utils.i
 
 # target to preprocess a source file
-srcs/map_file_parser2.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser2.c.i
-.PHONY : srcs/map_file_parser2.c.i
+srcs/map_file_parser_utils.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser_utils.c.i
+.PHONY : srcs/map_file_parser_utils.c.i
 
-srcs/map_file_parser2.s: srcs/map_file_parser2.c.s
+srcs/map_file_parser_utils.s: srcs/map_file_parser_utils.c.s
 
-.PHONY : srcs/map_file_parser2.s
+.PHONY : srcs/map_file_parser_utils.s
 
 # target to generate assembly for a file
-srcs/map_file_parser2.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser2.c.s
-.PHONY : srcs/map_file_parser2.c.s
+srcs/map_file_parser_utils.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser_utils.c.s
+.PHONY : srcs/map_file_parser_utils.c.s
 
-srcs/map_file_parser3.o: srcs/map_file_parser3.c.o
+srcs/parse_floor_ceilling_resolution.o: srcs/parse_floor_ceilling_resolution.c.o
 
-.PHONY : srcs/map_file_parser3.o
+.PHONY : srcs/parse_floor_ceilling_resolution.o
 
 # target to build an object file
-srcs/map_file_parser3.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser3.c.o
-.PHONY : srcs/map_file_parser3.c.o
+srcs/parse_floor_ceilling_resolution.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_floor_ceilling_resolution.c.o
+.PHONY : srcs/parse_floor_ceilling_resolution.c.o
 
-srcs/map_file_parser3.i: srcs/map_file_parser3.c.i
+srcs/parse_floor_ceilling_resolution.i: srcs/parse_floor_ceilling_resolution.c.i
 
-.PHONY : srcs/map_file_parser3.i
+.PHONY : srcs/parse_floor_ceilling_resolution.i
 
 # target to preprocess a source file
-srcs/map_file_parser3.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser3.c.i
-.PHONY : srcs/map_file_parser3.c.i
+srcs/parse_floor_ceilling_resolution.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_floor_ceilling_resolution.c.i
+.PHONY : srcs/parse_floor_ceilling_resolution.c.i
 
-srcs/map_file_parser3.s: srcs/map_file_parser3.c.s
+srcs/parse_floor_ceilling_resolution.s: srcs/parse_floor_ceilling_resolution.c.s
 
-.PHONY : srcs/map_file_parser3.s
+.PHONY : srcs/parse_floor_ceilling_resolution.s
 
 # target to generate assembly for a file
-srcs/map_file_parser3.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser3.c.s
-.PHONY : srcs/map_file_parser3.c.s
+srcs/parse_floor_ceilling_resolution.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_floor_ceilling_resolution.c.s
+.PHONY : srcs/parse_floor_ceilling_resolution.c.s
+
+srcs/parse_map.o: srcs/parse_map.c.o
+
+.PHONY : srcs/parse_map.o
+
+# target to build an object file
+srcs/parse_map.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_map.c.o
+.PHONY : srcs/parse_map.c.o
+
+srcs/parse_map.i: srcs/parse_map.c.i
+
+.PHONY : srcs/parse_map.i
+
+# target to preprocess a source file
+srcs/parse_map.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_map.c.i
+.PHONY : srcs/parse_map.c.i
+
+srcs/parse_map.s: srcs/parse_map.c.s
+
+.PHONY : srcs/parse_map.s
+
+# target to generate assembly for a file
+srcs/parse_map.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_map.c.s
+.PHONY : srcs/parse_map.c.s
+
+srcs/parse_textures.o: srcs/parse_textures.c.o
+
+.PHONY : srcs/parse_textures.o
+
+# target to build an object file
+srcs/parse_textures.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_textures.c.o
+.PHONY : srcs/parse_textures.c.o
+
+srcs/parse_textures.i: srcs/parse_textures.c.i
+
+.PHONY : srcs/parse_textures.i
+
+# target to preprocess a source file
+srcs/parse_textures.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_textures.c.i
+.PHONY : srcs/parse_textures.c.i
+
+srcs/parse_textures.s: srcs/parse_textures.c.s
+
+.PHONY : srcs/parse_textures.s
+
+# target to generate assembly for a file
+srcs/parse_textures.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/parse_textures.c.s
+.PHONY : srcs/parse_textures.c.s
 
 srcs/ray_casting.o: srcs/ray_casting.c.o
 
@@ -713,15 +740,18 @@ help:
 	@echo "... srcs/map_file_parser.o"
 	@echo "... srcs/map_file_parser.i"
 	@echo "... srcs/map_file_parser.s"
-	@echo "... srcs/map_file_parser1.o"
-	@echo "... srcs/map_file_parser1.i"
-	@echo "... srcs/map_file_parser1.s"
-	@echo "... srcs/map_file_parser2.o"
-	@echo "... srcs/map_file_parser2.i"
-	@echo "... srcs/map_file_parser2.s"
-	@echo "... srcs/map_file_parser3.o"
-	@echo "... srcs/map_file_parser3.i"
-	@echo "... srcs/map_file_parser3.s"
+	@echo "... srcs/map_file_parser_utils.o"
+	@echo "... srcs/map_file_parser_utils.i"
+	@echo "... srcs/map_file_parser_utils.s"
+	@echo "... srcs/parse_floor_ceilling_resolution.o"
+	@echo "... srcs/parse_floor_ceilling_resolution.i"
+	@echo "... srcs/parse_floor_ceilling_resolution.s"
+	@echo "... srcs/parse_map.o"
+	@echo "... srcs/parse_map.i"
+	@echo "... srcs/parse_map.s"
+	@echo "... srcs/parse_textures.o"
+	@echo "... srcs/parse_textures.i"
+	@echo "... srcs/parse_textures.s"
 	@echo "... srcs/ray_casting.o"
 	@echo "... srcs/ray_casting.i"
 	@echo "... srcs/ray_casting.s"
