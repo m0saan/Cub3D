@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/moboustt/Desktop/VVVVV
+CMAKE_SOURCE_DIR = /Users/moboustt/Desktop/cursus/Cub
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/moboustt/Desktop/VVVVV/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/moboustt/Desktop/cursus/Cub/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /Users/moboustt/Desktop/VVVVV/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -90,7 +90,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/cursus/Cub/cmake-build-debug/CMakeFiles /Users/moboustt/Desktop/cursus/Cub/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/cursus/Cub/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -277,6 +277,33 @@ srcs/main.s: srcs/main.c.s
 srcs/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/main.c.s
 .PHONY : srcs/main.c.s
+
+srcs/map_error_handling.o: srcs/map_error_handling.c.o
+
+.PHONY : srcs/map_error_handling.o
+
+# target to build an object file
+srcs/map_error_handling.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_error_handling.c.o
+.PHONY : srcs/map_error_handling.c.o
+
+srcs/map_error_handling.i: srcs/map_error_handling.c.i
+
+.PHONY : srcs/map_error_handling.i
+
+# target to preprocess a source file
+srcs/map_error_handling.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_error_handling.c.i
+.PHONY : srcs/map_error_handling.c.i
+
+srcs/map_error_handling.s: srcs/map_error_handling.c.s
+
+.PHONY : srcs/map_error_handling.s
+
+# target to generate assembly for a file
+srcs/map_error_handling.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_error_handling.c.s
+.PHONY : srcs/map_error_handling.c.s
 
 srcs/map_file_parser.o: srcs/map_file_parser.c.o
 
@@ -575,6 +602,33 @@ srcs/utils.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/utils.c.s
 .PHONY : srcs/utils.c.s
 
+srcs/utils2.o: srcs/utils2.c.o
+
+.PHONY : srcs/utils2.o
+
+# target to build an object file
+srcs/utils2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/utils2.c.o
+.PHONY : srcs/utils2.c.o
+
+srcs/utils2.i: srcs/utils2.c.i
+
+.PHONY : srcs/utils2.i
+
+# target to preprocess a source file
+srcs/utils2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/utils2.c.i
+.PHONY : srcs/utils2.c.i
+
+srcs/utils2.s: srcs/utils2.c.s
+
+.PHONY : srcs/utils2.s
+
+# target to generate assembly for a file
+srcs/utils2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/utils2.c.s
+.PHONY : srcs/utils2.c.s
+
 srcs/wall_utils.o: srcs/wall_utils.c.o
 
 .PHONY : srcs/wall_utils.o
@@ -653,6 +707,9 @@ help:
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"
+	@echo "... srcs/map_error_handling.o"
+	@echo "... srcs/map_error_handling.i"
+	@echo "... srcs/map_error_handling.s"
 	@echo "... srcs/map_file_parser.o"
 	@echo "... srcs/map_file_parser.i"
 	@echo "... srcs/map_file_parser.s"
@@ -686,6 +743,9 @@ help:
 	@echo "... srcs/utils.o"
 	@echo "... srcs/utils.i"
 	@echo "... srcs/utils.s"
+	@echo "... srcs/utils2.o"
+	@echo "... srcs/utils2.i"
+	@echo "... srcs/utils2.s"
 	@echo "... srcs/wall_utils.o"
 	@echo "... srcs/wall_utils.i"
 	@echo "... srcs/wall_utils.s"

@@ -20,7 +20,9 @@ add_executable(TEST srcs/main.c
         srcs/sprite_utils.c
         srcs/sprite_utils2.c
         srcs/wall_utils.c
-        srcs/init_data.c)
+        srcs/init_data.c
+        srcs/utils2.c
+        srcs/map_error_handling.c)
 
 target_link_libraries(TEST ${CMAKE_SOURCE_DIR}/libmlx.a ${CMAKE_SOURCE_DIR}/libft.a)
 
