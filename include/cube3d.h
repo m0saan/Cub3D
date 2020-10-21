@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/20 14:52:36 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/21 10:13:50 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ typedef struct	s_rgb
 typedef struct	s_bitmap
 {
 	uint16_t	bit_count;
-	int			width_bytes;
+	int			width_in_bytes;
 	uint32_t	bi_size;
 	uint32_t	image_size;
 	uint32_t	bf_off_bits;
 	uint32_t	file_size;
-	uint16_t	color_planes;
+	uint16_t	biplanes;
 	uc			*buf;
 	int			fd;
 	int			row;
@@ -92,7 +92,6 @@ typedef struct	s_ray
 t_ray			*g_rays;
 int				g_screenshot;
 int				*g_lines_length;
-t_rgb			*g_rgb;
 
 typedef struct	s_struct
 {
@@ -265,12 +264,10 @@ int				*which_texture(const t_struct *data);
 void			ft_ljodran(t_struct *data, int y);
 int				normalize_index(int index);
 int				get_color_index(t_struct *data);
-void			set_sprite_coordinates(t_struct *data, int *i_spt,
-				int i, int j);
+void			set_sprite_coordinates(t_struct *data, int *i_spt, int i, int j);
 void			set_sprite_distance(t_struct *data, int *i);
 float			calc_sprite_y_offset(t_struct *data, int i_spt);
-float			calc_sprite_x_offset(t_struct *data, int i_spt,
-				float spt_angle);
+float			calc_sprite_x_offset(t_struct *data, int i_spt, float spt_angle);
 void			swap(t_struct *data, int j);
 void			bubble_sort(t_struct *data);
 int				get_color_id(int i, int j, int size);
@@ -280,6 +277,5 @@ int				is_not_valid_xpm(t_struct *data);
 int             value_at(int i, int j, t_struct *data);
 int             check_element(t_struct *data, int i, int j);
 void            check_map(t_struct *data);
-
-
+int             is_valid_texture(t_struct *data, const char *buff);
 #endif
