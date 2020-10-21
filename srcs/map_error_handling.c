@@ -1,8 +1,6 @@
 #include "../include/cube3d.h"
 
 int value_at(int i, int j, t_struct *data){
-    printf("i === %d\n", i);
-    printf("j === %d\n", j);
     if (valid_indices(data, j, i))
         return data->map[i][j];
     return ' ';
@@ -17,7 +15,6 @@ int check_element(t_struct *data, int i, int j){
         z = -1;
         while (z <= 1){
             if (value_at(i + x, j + z, data) == ' ') {
-                printf("%d\n%d\n",i,j);
                 return (FALSE);
             }
             z++;
@@ -36,7 +33,7 @@ void check_map(t_struct *data){
         j = -1;
         while (++j < g_lines_length[i]){
             if (!(data->map[i][j] == '1' || data->map[i][j] == ' ') && !check_element(data, i, j)) {
-                ft_close(data);
+                error("Tle3 Tshlel!\n");
             }
         }
     }
