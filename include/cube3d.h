@@ -53,12 +53,12 @@ typedef struct	s_rgb
 
 typedef struct	s_bitmap
 {
-	uint16_t	bit_count;
-	int			width_in_bytes;
-	uint32_t	bi_size;
+	uint16_t	bit_per_pxl;
+	int			width_in_pxl;
+	uint32_t	info_header_size;
 	uint32_t	image_size;
-	uint32_t	bf_off_bits;
-	uint32_t	file_size;
+	uint32_t	bf_off_bits; // Offset to start of Pixel Data
+    uint32_t	file_size;
 	uint16_t	biplanes;
 	uc			*buf;
 	int			fd;
@@ -185,6 +185,7 @@ typedef struct	s_struct
 	char		ea[15];
 	char		sp[15];
 	char		**map;
+	int         is_multi_player;
 
 	t_sprite	*sprite;
 	int			count_spt;
