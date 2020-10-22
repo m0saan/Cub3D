@@ -34,6 +34,7 @@ int		is_negative(int v)
 int		screw_this_norminette(t_struct *data, char *buff)
 {
 	data->count_spt = 0;
+	data->is_multi_player = FALSE;
 	fill_out_map(data, buff);
 	return (TRUE);
 }
