@@ -28,7 +28,10 @@ clean:
 	@echo "Makefile : Cleaning .o files..."
 
 build:
-	@./Cub3D "map.cub" "--save"
+	@./Cub3D "maps/map.cub"
+
+save:
+	@./Cub3D "maps/map.cub" "--save"
 
 fclean: clean
 	@rm -rf $(NAME)
