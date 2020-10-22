@@ -82,8 +82,8 @@ int		check_read_values(t_struct *data)
 int		parse(t_struct *data, char **av)
 {
 	int			fd;
-	const int	len = 4096;
-	char		*buff[len];
+	const int	len = 10000;
+	char		buff[len];
 
 	ft_memset(buff, 0, len);
 	initialize_file_struct(data);
