@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/moboustt/Desktop/Cube3d/include/cube3d.h
+/Users/moboustt/Desktop/VV/include/cube3d.h
 string.h
 -
 unistd.h
@@ -22,11 +22,11 @@ math.h
 fcntl.h
 -
 ../libs/OpenGL/mlx.h
-/Users/moboustt/Desktop/Cube3d/libs/OpenGL/mlx.h
+/Users/moboustt/Desktop/VV/libs/OpenGL/mlx.h
 ../libft/libft.h
-/Users/moboustt/Desktop/Cube3d/libft/libft.h
+/Users/moboustt/Desktop/VV/libft/libft.h
 
-/Users/moboustt/Desktop/Cube3d/libft/libft.h
+/Users/moboustt/Desktop/VV/libft/libft.h
 unistd.h
 -
 string.h
@@ -34,9 +34,9 @@ string.h
 stdlib.h
 -
 
-/Users/moboustt/Desktop/Cube3d/libs/OpenGL/mlx.h
+/Users/moboustt/Desktop/VV/libs/OpenGL/mlx.h
 
-/Users/moboustt/Desktop/Cube3d/srcs/map_file_parser.c
+/Users/moboustt/Desktop/VV/srcs/parse_floor_ceilling_resolution.c
 ../include/cube3d.h
-/Users/moboustt/Desktop/Cube3d/include/cube3d.h
+/Users/moboustt/Desktop/VV/include/cube3d.h
 
