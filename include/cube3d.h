@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 10:13:50 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/22 14:48:18 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define SQUARE_SIZE 512
+# define SQUARE_SIZE 1080
 # define TEX_WIDTH SQUARE_SIZE
 # define TEX_HEIGHT SQUARE_SIZE
 # define SPRITE_SIZE 64
@@ -57,8 +57,8 @@ typedef struct	s_bitmap
 	int			width_in_pxl;
 	uint32_t	info_header_size;
 	uint32_t	image_size;
-	uint32_t	bf_off_bits; // Offset to start of Pixel Data
-    uint32_t	file_size;
+	uint32_t	bf_off_bits;
+	uint32_t	file_size;
 	uint16_t	biplanes;
 	uc			*buf;
 	int			fd;
@@ -185,14 +185,12 @@ typedef struct	s_struct
 	char		ea[15];
 	char		sp[15];
 	char		**map;
+	int			i_player;
+	int			j_player;
 	int         is_multi_player;
 
-	t_sprite	*sprite;
 	int			count_spt;
-
-	int			i;
-	int			j;
-
+	t_sprite	*sprite;
 	t_bitmap	bitmap;
 }				t_struct;
 
