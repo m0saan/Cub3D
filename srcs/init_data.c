@@ -63,8 +63,8 @@ void	init_player(t_struct *data)
 	static int count;
 
 	count = 0;
-	data->x = (data->j + 0.5) * SQUARE_SIZE;
-	data->y = (data->i + 0.5) * SQUARE_SIZE;
+	data->x = (data->j_player + 0.5) * SQUARE_SIZE;
+	data->y = (data->i_player + 0.5) * SQUARE_SIZE;
 	count++;
 	set_up_player(data, count);
 }
@@ -76,7 +76,7 @@ void	set_up_player(t_struct *data, int player)
 		write(1, "Player error!\n", 14);
 		exit(0);
 	}
-	data->orientation = data->map[data->i][data->j];
+	data->orientation = data->map[data->i_player][data->j_player];
 	if (data->orientation == 'N')
 		data->rotation_angle = RAD(270);
 	else if (data->orientation == 'W')
