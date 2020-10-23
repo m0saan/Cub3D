@@ -6,14 +6,14 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:26:10 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 14:25:58 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/23 10:02:02 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
 void	draw_sprites(t_struct *data, float x_off,
-		float y_off, int index)
+                     float y_off, int index)
 {
 	size_t		i;
 	size_t		j;
@@ -24,21 +24,31 @@ void	draw_sprites(t_struct *data, float x_off,
 	size = data->sprite[index].size;
 	while (i++ < size)
 	{
-		if (x_off + i < 0 || x_off + i > (float)data->w_width)
+		if (not_valid_x_offset(data, x_off, i))
 			continue;
-		if (g_rays[(int)(x_off + i)].distance <= data->sprite[index].dis)
+		if (not_valid_distance(data, x_off, index, i))
 			continue;
 		j = 0;
 		while (j++ < size)
 		{
-			if (y_off + j < 0 || y_off + j > (float)data->w_height)
+			if (not_valid_y_offset(data, y_off, j))
 				continue;
 			id = get_color_id(i, j, size);
-			if (data->img_data_texture_sprite[id] != BLACK)
+			if (is_valid_color(data, id))
 				ft_draw(data, x_off + i, y_off + j,
-						data->img_data_texture_sprite[id]);
+						data->sprite_tex_data[id]);
 		}
 	}
+}
+
+int not_valid_y_offset(const t_struct *data, float y_off, size_t j)
+{
+    return y_off + j < 0 || y_off + j > (float)data->w_height;
+}
+
+int not_valid_x_offset(const t_struct *data, float x_off, size_t i)
+{
+    return x_off + i < 0 || x_off + i > (float)data->w_width;
 }
 
 void	set_up_sprite(t_struct *data)
