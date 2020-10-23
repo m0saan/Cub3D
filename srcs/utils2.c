@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:54:58 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/23 10:00:13 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/23 10:34:54 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int		skip_number(const char *str)
 
 void	error(char *str)
 {
-    write(1, str, ft_strlen(str));
+	write(1, str, ft_strlen(str));
 	exit(EXIT_FAILURE);
 }
 
-int     is_valid_color(const t_struct *data, int id)
+int		is_valid_color(const t_struct *data, int id)
 {
-    return data->sprite_tex_data[id] != BLACK;
+	return (data->sprite_tex_data[id] != BLACK);
 }

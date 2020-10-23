@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:29:13 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/22 17:43:08 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/23 10:36:38 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	insert_and_check_element(t_struct *data,
 {
 	data->map[i][j] = buff[data->pos];
 	if (is_not_valid_element(data, buff))
-        error("Invalid map element");
+		error("Invalid map element");
 	if (is_player(data, buff))
 	{
-	    if (data->is_multi_player)
-	        error("Too many players provided!\n");
+		if (data->is_multi_player)
+			error("Too many players provided!\n");
 		data->i_player = i;
 		data->j_player = j;
 		init_player(data);

@@ -6,63 +6,61 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:33:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/22 17:43:08 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/23 10:37:14 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-static int    check_colors_alignment(t_struct *data, char *buff)
+static int	check_colors_alignment(t_struct *data, char *buff)
 {
-    while (buff[data->pos] != ',')
-    {
-        if (!ft_isdigit(buff[data->pos]))
-            error("Ceilling identifier values misalignment!\n");
-        data->pos++;
-    }
-    return buff[data->pos] == ',' && ft_isdigit(buff[data->pos + 1]);
+	while (buff[data->pos] != ',')
+	{
+		if (!ft_isdigit(buff[data->pos]))
+			error("Ceilling identifier values misalignment!\n");
+		data->pos++;
+	}
+	return (buff[data->pos] == ',' && ft_isdigit(buff[data->pos + 1]));
 }
 
-void	get_resolution_values(t_struct *data, char *buff)
+void		get_resolution_values(t_struct *data, char *buff)
 {
-
 	data->pos++;
-    if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
-        error("Resolution identifier misalignment!\n");
+	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
+		error("Resolution identifier misalignment!\n");
 	data->w_width = ft_atoi(&buff[data->pos++]);
 	data->pos += skip_number(&buff[data->pos]);
 	data->w_height = ft_atoi(&buff[data->pos]);
 	data->get_to_map += 1;
 }
 
-void	get_floor_values(t_struct *data, char *buff)
+void		get_floor_values(t_struct *data, char *buff)
 {
 	data->pos++;
-    if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
-        error("Floor identifier misalignment!\n");
+	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
+		error("Floor identifier misalignment!\n");
 	data->f_red = ft_atoi(&buff[data->pos++]);
-    if (!check_colors_alignment(data, buff))
-        error("Floor identifier values misalignment!\n");
-    data->f_green = ft_atoi(&buff[data->pos + 1]);
-    if (!check_colors_alignment(data, buff + 1))
-        error("Floor identifier values misalignment!\n");
-    data->f_blue = ft_atoi(&buff[data->pos + 2]);
+	if (!check_colors_alignment(data, buff))
+		error("Floor identifier values misalignment!\n");
+	data->f_green = ft_atoi(&buff[data->pos + 1]);
+	if (!check_colors_alignment(data, buff + 1))
+		error("Floor identifier values misalignment!\n");
+	data->f_blue = ft_atoi(&buff[data->pos + 2]);
 	data->get_to_map += 1;
 }
 
-void	get_ceilling_values(t_struct *data, char *buff)
+void		get_ceilling_values(t_struct *data, char *buff)
 {
-
-    data->pos += 1;
-    if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
-        error("Ceilling identifier misalignment!\n");
+	data->pos += 1;
+	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
+		error("Ceilling identifier misalignment!\n");
 	data->c_red = ft_atoi(&buff[data->pos]);
 	if (!check_colors_alignment(data, buff))
-        error("Ceilling identifier values misalignment!\n");
-    data->c_green = ft_atoi(&buff[data->pos + 1]);
-    if (!check_colors_alignment(data, buff + 1))
-        error("Ceilling identifier values misalignment!\n");
+		error("Ceilling identifier values misalignment!\n");
+	data->c_green = ft_atoi(&buff[data->pos + 1]);
+	if (!check_colors_alignment(data, buff + 1))
+		error("Ceilling identifier values misalignment!\n");
 	data->c_blue = ft_atoi(&buff[data->pos + 2]);
-	data->pos +=2;
+	data->pos += 2;
 	data->get_to_map += 1;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   map_file_parser.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 18:27:32 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/22 18:59:02 by moboustt         ###   ########.fr       */
+/*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
+/*   Updated: 2020/10/23 10:34:28 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void	check_floor_ceilling_values(t_struct *data)
 {
-    const int max_color_value = 255;
-    if (is_negative(data->f_red) || is_negative(data->f_green)
-        || is_negative(data->f_blue))
-        error("color values cannot be negative\n");
-    if (data->f_red > max_color_value || data->f_green > max_color_value
-        || data->f_blue > max_color_value)
-        error("color values cannot exceed the value 255\n");
-    if (is_negative(data->c_red) || is_negative(data->c_green)
+	const int max_color_value = 255;
+
+	if (is_negative(data->f_red) || is_negative(data->f_green)
+			|| is_negative(data->f_blue))
+		error("color values cannot be negative\n");
+	if (data->f_red > max_color_value || data->f_green > max_color_value
+			|| data->f_blue > max_color_value)
+		error("color values cannot exceed the value 255\n");
+	if (is_negative(data->c_red) || is_negative(data->c_green)
 			|| is_negative(data->c_blue))
 		error("color values cannot be negative\n");
-    if (data->c_red > max_color_value || data->c_green > max_color_value
-        || data->c_blue > max_color_value)
-        error("color values cannot exceed the value 255\n");
-
+	if (data->c_red > max_color_value || data->c_green > max_color_value
+			|| data->c_blue > max_color_value)
+		error("color values cannot exceed the value 255\n");
 }
 
 int		read_map(t_struct *data, char *buff)

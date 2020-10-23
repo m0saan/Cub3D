@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:01 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 10:11:10 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/23 10:35:44 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		texture_from_file(t_struct *data)
 	data->img_tex4 = (int *)mlx_get_data_addr(data->xpm_ptr4,
 			&data->bpp_text, &data->size_line_text, &data->endian_text);
 	data->sprite_tex_data = (int *)mlx_get_data_addr(data->sprite_xpm,
-                                                     &data->bpp_text, &data->size_line_text, &data->endian_text);
+			&data->bpp_text, &data->size_line_text, &data->endian_text);
 }
 
 void		calculate_wall_projection(t_struct *data)
@@ -89,6 +89,6 @@ void		render_walls(t_struct *data)
 int			calculate_x_offset(const t_struct *data)
 {
 	return ((g_rays[data->i_wall_index].was_hit_vertical)
-		? ((int)g_rays[data->i_wall_index].wall_h_y % SQUARE_SIZE)
-		: ((int)g_rays[data->i_wall_index].wall_h_x % SQUARE_SIZE));
+			? ((int)g_rays[data->i_wall_index].wall_h_y % SQUARE_SIZE)
+			: ((int)g_rays[data->i_wall_index].wall_h_x % SQUARE_SIZE));
 }

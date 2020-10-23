@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:24:37 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/22 17:43:08 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/23 10:30:26 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ void	screen_data(t_struct *data, int x)
 
 void	screen_init(t_struct *data, unsigned char *header)
 {
-    // Insert colors into bmp buffer
-    // copy memory infos to bmp header.
 	data->bitmap.bit_per_pxl = 24;
 	data->bitmap.width_in_pxl = ((data->w_width *
-                                  data->bitmap.bit_per_pxl + 31) / 32) * 4;
+				data->bitmap.bit_per_pxl + 31) / 32) * 4;
 	data->bitmap.image_size = data->bitmap.width_in_pxl * data->w_height;
 	data->bitmap.info_header_size = 40;
 	data->bitmap.bf_off_bits = 54;
@@ -77,9 +75,4 @@ void	screen_init(t_struct *data, unsigned char *header)
 	ft_memcpy(header + 22, &(data->w_height), 4);
 	ft_memcpy(header + 26, &(data->bitmap.biplanes), 2);
 	ft_memcpy(header + 28, &(data->bitmap.bit_per_pxl), 2);
-    //667754236940000054000400001287005640024000000000000000000000000000
-    //667754236940000054000400001287005640010240000000000000000000000000
-    for (int i = 0; i < 54; ++i) {
-        printf("%u", header[i]);
-    }
 }
