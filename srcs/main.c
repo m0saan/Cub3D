@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 14:52:28 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/22 17:36:39 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,6 @@ int		main(int ac, char *av[])
 	data = malloc(sizeof(t_struct));
 	if (!parse(data, av))
 		return (1);
-	printf("c_r %d\n", data->c_red);
-	printf("c_g %d\n", data->c_green);
-	printf("c_b %d\n", data->c_blue);
-	printf("-------------------------\n");
-    printf("f_r %d\n", data->f_red);
-    printf("f_g %d\n", data->f_green);
-    printf("f_b %d\n", data->f_blue);
 	g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
 	if (!initialize_window(data))
 		return (TRUE);
