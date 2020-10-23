@@ -32,8 +32,8 @@ void		texture_from_file(t_struct *data)
 			&data->bpp_text, &data->size_line_text, &data->endian_text);
 	data->img_tex4 = (int *)mlx_get_data_addr(data->xpm_ptr4,
 			&data->bpp_text, &data->size_line_text, &data->endian_text);
-	data->img_data_texture_sprite = (int *)mlx_get_data_addr(data->sprite_xpm,
-			&data->bpp_text, &data->size_line_text, &data->endian_text);
+	data->sprite_tex_data = (int *)mlx_get_data_addr(data->sprite_xpm,
+                                                     &data->bpp_text, &data->size_line_text, &data->endian_text);
 }
 
 void		calculate_wall_projection(t_struct *data)
