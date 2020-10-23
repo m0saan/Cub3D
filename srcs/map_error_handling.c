@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:08:45 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 14:11:09 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/22 17:43:08 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	check_map(t_struct *data)
 		{
 			if (!(data->map[i][j] == '1' || data->map[i][j] == ' ')
 					&& !check_element(data, i, j))
-				error("Tle3 Tshlel!\n");
+                error("\e[0;31m Tle3 Tshlel!\n");
 		}
 	}
 }
