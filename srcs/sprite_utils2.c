@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 12:19:53 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 10:11:10 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/23 09:59:30 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,9 @@ float	calc_sprite_x_offset(t_struct *data, int i_spt, float spt_angle)
 	return (((DEG(spt_angle) - DEG(data->rotation_angle)) * data->w_width)
 		/ SPRITE_SIZE + (((float)data->w_width / 2)
 		- (data->sprite[i_spt].size / 2)));
+}
+
+int not_valid_distance(const t_struct *data, float x_off, int index, size_t i)
+{
+    return g_rays[(int)(x_off + i)].distance <= data->sprite[index].dis;
 }
