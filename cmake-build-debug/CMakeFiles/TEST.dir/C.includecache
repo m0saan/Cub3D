@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /Users/moboustt/Desktop/VV/include/cube3d.h
-string.h
--
 unistd.h
 -
 stdlib.h
@@ -36,7 +34,9 @@ stdlib.h
 
 /Users/moboustt/Desktop/VV/libs/OpenGL/mlx.h
 
-/Users/moboustt/Desktop/VV/srcs/parse_floor_ceilling_resolution.c
+/Users/moboustt/Desktop/VV/srcs/sprite.c
+stdbool.h
+-
 ../include/cube3d.h
 /Users/moboustt/Desktop/VV/include/cube3d.h
 
