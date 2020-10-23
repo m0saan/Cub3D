@@ -6,14 +6,13 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/22 14:48:18 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/23 09:59:30 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
@@ -33,7 +32,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define SQUARE_SIZE 1080
+# define SQUARE_SIZE 512
 # define TEX_WIDTH SQUARE_SIZE
 # define TEX_HEIGHT SQUARE_SIZE
 # define SPRITE_SIZE 64
@@ -165,7 +164,7 @@ typedef struct	s_struct
 	float		y_vert_to_check;
 
 	void		*sprite_xpm;
-	int			*img_data_texture_sprite;
+	int			*sprite_tex_data;
 
 	int			n_lines;
 	int			l_length;
@@ -278,4 +277,8 @@ int             check_element(t_struct *data, int i, int j);
 void            check_map(t_struct *data);
 int             is_valid_texture(t_struct *data, const char *buff);
 int             is_negative(int v);
+int             is_valid_color(const t_struct *data, int id);
+int             not_valid_x_offset(const t_struct *data, float x_off, size_t i);
+int             not_valid_distance(const t_struct *data, float x_off, int index, size_t i);
+int             not_valid_y_offset(const t_struct *data, float y_off, size_t j);
 #endif
