@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:27:32 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 14:24:04 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/22 18:59:02 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 void	check_floor_ceilling_values(t_struct *data)
 {
-	if (is_negative(data->f_red) || is_negative(data->f_green)
-			|| is_negative(data->f_blue))
-		error("color values cannot be negative\n");
-	if (is_negative(data->c_red) || is_negative(data->c_green)
+    const int max_color_value = 255;
+    if (is_negative(data->f_red) || is_negative(data->f_green)
+        || is_negative(data->f_blue))
+        error("color values cannot be negative\n");
+    if (data->f_red > max_color_value || data->f_green > max_color_value
+        || data->f_blue > max_color_value)
+        error("color values cannot exceed the value 255\n");
+    if (is_negative(data->c_red) || is_negative(data->c_green)
 			|| is_negative(data->c_blue))
 		error("color values cannot be negative\n");
+    if (data->c_red > max_color_value || data->c_green > max_color_value
+        || data->c_blue > max_color_value)
+        error("color values cannot exceed the value 255\n");
+
 }
 
 int		read_map(t_struct *data, char *buff)
@@ -82,7 +90,7 @@ int		check_read_values(t_struct *data)
 int		parse(t_struct *data, char **av)
 {
 	int			fd;
-	const int	len = 10000;
+	const int	len = 12000;
 	char		buff[len];
 
 	ft_memset(buff, 0, len);
