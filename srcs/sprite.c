@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 void	draw_sprites(t_struct *data, float x_off,
 		float y_off, int index)

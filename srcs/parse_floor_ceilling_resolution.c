@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 static int	check_colors_alignment(t_struct *data, char *buff)
 {

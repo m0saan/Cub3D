@@ -6,11 +6,11 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:09:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 10:11:10 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:01:15 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 void	set_up_data(t_struct *data)
 {
@@ -27,7 +27,7 @@ void	set_up_data(t_struct *data)
 	data->updated_player_y = 0;
 	data->turn_direction = 0;
 	data->walk_direction = 0;
-	data->walk_speed = 75;
+	data->walk_speed = 85;
 	data->turn_speed = 8 * (PI / 180);
 	init_ray_cast_data(data);
 }
@@ -71,11 +71,9 @@ void	init_player(t_struct *data)
 void	set_up_player(t_struct *data, int player)
 {
 	if (player != 1)
-	{
-		write(1, "Player error!\n", 14);
-		exit(0);
-	}
-	data->orientation = data->map[data->i_player][data->j_player];
+		error("Player error!\n");
+	data->orientation = (unsigned char)data->map[data->i_player]
+		[data->j_player];
 	if (data->orientation == 'N')
 		data->rotation_angle = RAD(270);
 	else if (data->orientation == 'W')

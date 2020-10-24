@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 void	set_sprite_coordinates(t_struct *data, int *i_spt, int i, int j)
 {

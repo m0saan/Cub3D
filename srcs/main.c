@@ -6,11 +6,11 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/22 17:36:39 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/24 13:59:35 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 int		update(t_struct *data)
 {
@@ -44,9 +44,9 @@ int		are_valid_args(int ac, char **av)
 {
 	if (ac < 2)
 		error("No map included!\n");
-	else if (ac == 2 && strstr(av[1], ".cub"))
+	else if (ac == 2 && ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 		return (TRUE);
-	else if (ac == 3 && !strcmp(av[2], "--save"))
+	else if (ac == 3 && !ft_strncmp(av[2], "--save", ft_strlen(av[2])))
 	{
 		g_screenshot = TRUE;
 		return (TRUE);
@@ -59,7 +59,7 @@ int		main(int ac, char *av[])
 	t_struct *data;
 
 	if (!are_valid_args(ac, av))
-		return (TRUE);
+		error("something went wrong\n");
 	data = malloc(sizeof(t_struct));
 	if (!parse(data, av))
 		return (1);

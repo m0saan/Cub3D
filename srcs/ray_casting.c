@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 void	get_smallest_distance(t_struct *data, int found_horiz_wall_hit,
 		int found_vert_wall_hit)

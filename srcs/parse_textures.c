@@ -6,11 +6,11 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:18:42 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 14:20:17 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/24 10:36:26 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 void	get_western_texture_path(t_struct *data, const char *buff)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 static void	insert_and_check_element(t_struct *data,
 		const char *buff, int i, int j)

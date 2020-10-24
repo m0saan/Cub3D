@@ -6,11 +6,11 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/23 10:34:28 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:00:15 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 void	check_floor_ceilling_values(t_struct *data)
 {
@@ -103,7 +103,7 @@ int		parse(t_struct *data, char **av)
 	if (!read_map(data, (char *)buff))
 		return (FALSE);
 	if (!data->is_multi_player)
-	    error("Nod awa Nod!\n");
+		error("Nod awa Nod!\n");
 	if (!check_read_values(data))
 		return (FALSE);
 	return (TRUE);
