@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
-# include <stdio.h>
+#include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 # include "../libs/OpenGL/mlx.h"
