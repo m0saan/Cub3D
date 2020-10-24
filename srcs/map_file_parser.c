@@ -102,6 +102,8 @@ int		parse(t_struct *data, char **av)
 		return (FALSE);
 	if (!read_map(data, (char *)buff))
 		return (FALSE);
+	if (!data->is_multi_player)
+	    error("Nod awa Nod!\n");
 	if (!check_read_values(data))
 		return (FALSE);
 	return (TRUE);
