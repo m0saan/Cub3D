@@ -19,7 +19,7 @@ void	get_western_texture_path(t_struct *data, const char *buff)
 	i = 0;
 	if (is_valid_texture(data, buff) != 3)
 		error("Invalid texture path!\n");
-	while (buff[(data->pos)] != '\n')
+	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
 	{
 		data->we[i] = buff[(data->pos)];
 		i++;
@@ -35,7 +35,7 @@ void	get_easter_texture_path(t_struct *data, const char *buff)
 	i = 0;
 	if (is_valid_texture(data, buff) != 3)
 		error("Invalid texture path!\n");
-	while (buff[(data->pos)] != '\n')
+	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
 	{
 		data->ea[i] = buff[(data->pos)];
 		i++;
@@ -51,7 +51,7 @@ void	get_north_texture_path(t_struct *data, const char *buff)
 	i = 0;
 	if (is_valid_texture(data, buff) != 3)
 		error("Invalid texture path!\n");
-	while (buff[data->pos] != '\n')
+	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
 	{
 		data->no[i] = buff[data->pos];
 		i++;
@@ -67,7 +67,7 @@ void	get_south_texture_path(t_struct *data, const char *buff)
 	i = 0;
 	if (is_valid_texture(data, buff) != 3)
 		error("Invalid texture path!\n");
-	while (buff[data->pos] != '\n')
+	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
 	{
 		data->so[i] = buff[data->pos];
 		i++;
@@ -84,7 +84,7 @@ void	get_sprite_path(t_struct *data, char *buff)
 	if (is_valid_texture(data, buff) != 2)
 		error("Invalid texture path!\n");
 	data->pos += 2;
-	while (buff[data->pos] != '\n')
+	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
 	{
 		data->sp[i] = buff[data->pos];
 		i++;
