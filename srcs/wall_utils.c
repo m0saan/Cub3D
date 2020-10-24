@@ -16,10 +16,10 @@ int		*which_texture(const t_struct *data)
 {
 	if (!g_rays[data->i_wall_index].was_hit_vertical
 			&& g_rays[data->i_wall_index].is_ray_facing_down)
-		return (data->img_tex1);
+		return (data->img_tex2);
 	else if (!g_rays[data->i_wall_index].was_hit_vertical
 			&& g_rays[data->i_wall_index].is_ray_facing_up)
-		return (data->img_tex2);
+		return (data->img_tex1);
 	else if ((g_rays[data->i_wall_index].was_hit_vertical)
 			&& g_rays[data->i_wall_index].is_ray_facing_left)
 		return (data->img_tex3);
