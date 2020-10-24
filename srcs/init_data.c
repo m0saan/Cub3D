@@ -27,7 +27,6 @@ void	set_up_data(t_struct *data)
 	data->updated_player_y = 0;
 	data->turn_direction = 0;
 	data->walk_direction = 0;
-	data->rotation_angle = PI / 2;
 	data->walk_speed = 75;
 	data->turn_speed = 8 * (PI / 180);
 	init_ray_cast_data(data);
