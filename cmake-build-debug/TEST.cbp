@@ -8,140 +8,140 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/moboustt/Desktop/VVV/cmake-build-debug"/>
+				<Option working_dir="/Users/moboustt/Desktop/VVVVVV/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/moboustt/Desktop/VVV/cmake-build-debug"/>
+				<Option working_dir="/Users/moboustt/Desktop/VVVVVV/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/moboustt/Desktop/VVV/cmake-build-debug"/>
+				<Option working_dir="/Users/moboustt/Desktop/VVVVVV/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="TEST">
-				<Option output="/Users/moboustt/Desktop/VVV/cmake-build-debug/TEST" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/moboustt/Desktop/VVV/cmake-build-debug"/>
+				<Option output="/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/TEST" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/moboustt/Desktop/VVVVVV/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 TEST"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 TEST"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="TEST/fast">
-				<Option output="/Users/moboustt/Desktop/VVV/cmake-build-debug/TEST" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/moboustt/Desktop/VVV/cmake-build-debug"/>
+				<Option output="/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/TEST" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/moboustt/Desktop/VVVVVV/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 TEST/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 TEST/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/moboustt/Desktop/VVVVVV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/cube3d_utils.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/cube3d_utils.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/events.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/events.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/init_data.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/init_data.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/intersection.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/intersection.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/main.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/main.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/map_error_handling.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/map_error_handling.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/map_file_parser.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/map_file_parser.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/map_file_parser_utils.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/map_file_parser_utils.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/parse_floor_ceilling_resolution.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/parse_floor_ceilling_resolution.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/parse_map.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/parse_map.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/parse_textures.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/parse_textures.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/ray_casting.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/ray_casting.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/render.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/render.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/screenshot.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/screenshot.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/sprite.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/sprite.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/sprite_utils.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/sprite_utils.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/sprite_utils2.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/sprite_utils2.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/utils.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/utils.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/utils2.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/utils2.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/wall_utils.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/wall_utils.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/srcs/walls.c">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/srcs/walls.c">
 			<Option target="TEST"/>
 		</Unit>
-		<Unit filename="/Users/moboustt/Desktop/VVV/CMakeLists.txt">
+		<Unit filename="/Users/moboustt/Desktop/VVVVVV/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

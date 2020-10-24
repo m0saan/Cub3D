@@ -10,6 +10,7 @@ CMakeFiles/TEST.dir/srcs/events.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/events.c.o: ../srcs/events.c
 
 CMakeFiles/TEST.dir/srcs/init_data.c.o: ../include/cube3d.h
+CMakeFiles/TEST.dir/srcs/init_data.c.o: ../libft/libft.h
 CMakeFiles/TEST.dir/srcs/init_data.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/init_data.c.o: ../srcs/init_data.c
 
@@ -18,6 +19,7 @@ CMakeFiles/TEST.dir/srcs/intersection.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/intersection.c.o: ../srcs/intersection.c
 
 CMakeFiles/TEST.dir/srcs/main.c.o: ../include/cube3d.h
+CMakeFiles/TEST.dir/srcs/main.c.o: ../libft/libft.h
 CMakeFiles/TEST.dir/srcs/main.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/main.c.o: ../srcs/main.c
 
@@ -26,6 +28,7 @@ CMakeFiles/TEST.dir/srcs/map_error_handling.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/map_error_handling.c.o: ../srcs/map_error_handling.c
 
 CMakeFiles/TEST.dir/srcs/map_file_parser.c.o: ../include/cube3d.h
+CMakeFiles/TEST.dir/srcs/map_file_parser.c.o: ../libft/libft.h
 CMakeFiles/TEST.dir/srcs/map_file_parser.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/map_file_parser.c.o: ../srcs/map_file_parser.c
 
@@ -78,6 +81,7 @@ CMakeFiles/TEST.dir/srcs/utils2.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/utils2.c.o: ../srcs/utils2.c
 
 CMakeFiles/TEST.dir/srcs/wall_utils.c.o: ../include/cube3d.h
+CMakeFiles/TEST.dir/srcs/wall_utils.c.o: ../libft/libft.h
 CMakeFiles/TEST.dir/srcs/wall_utils.c.o: ../libs/OpenGL/mlx.h
 CMakeFiles/TEST.dir/srcs/wall_utils.c.o: ../srcs/wall_utils.c
 
