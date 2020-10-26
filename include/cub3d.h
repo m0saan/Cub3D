@@ -188,8 +188,16 @@ typedef struct			s_struct
 	int					count_spt;
 	t_sprite			*sprite;
 	t_bitmap			bitmap;
+
+    int     reset;
+    int     shift;
+    int     m;
+    int     h;
+    int     mu;
+    int start;
 }						t_struct;
 
+void	change_song(t_struct *data, int song_num);
 int						set_up_window(t_struct *data);
 uint32_t				create_rgb(int r, int g, int b);
 void					set_up_data(t_struct *data);
@@ -243,7 +251,7 @@ void					set_up_sprite(t_struct *data);
 void					draw_sprites(t_struct *data, float x_off, float y_off,
 						int index);
 void					init_player(t_struct *data);
-void					set_up_player(t_struct *data, int e);
+void					set_up_player(t_struct *data);
 int						is_sprite(char c);
 int						is_player(t_struct *data, const char *buff);
 int						calculate_index(float value);
@@ -252,7 +260,6 @@ int						valid_indices(t_struct *data, int x, int y);
 int						screen(t_struct *data);
 void					screen_data(t_struct *data, int x);
 void					screen_init(t_struct *data, unsigned char *header);
-void					*ft_mem_cpy(void *dest, const void *src, size_t n);
 int						destruct(t_struct *data);
 void					error(char *str);
 t_rgb					*color_converter(int hex_value);
@@ -290,4 +297,6 @@ int						not_valid_distance(const t_struct *data, float x_off,
 						int index, size_t i);
 int						not_valid_y_offset(const t_struct *data,
 						float y_off, size_t j);
+void	                help_text(t_struct *data);
+
 #endif
