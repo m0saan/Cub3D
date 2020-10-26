@@ -12,17 +12,41 @@
 
 #include "../include/cub3d.h"
 
+void start(t_struct *data){
+    int w, h;
+    int* buff = mlx_xpm_file_to_image(data->mlx_ptr, "img/start/start.xpm", &w, &h);
+    int i = 0, j = 0;
+    while (i < h){
+        while (j < w){
+            int index = data->w_width * i + j;
+            ft_draw(data, j, i, buff[index]);
+            j++;
+        }
+        i++;
+    }
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+}
+
 int		update(t_struct *data)
 {
-	cast_rays(data);
-	render_walls(data);
-	move_player(data);
-	if (g_screenshot)
-	{
-		screen(data);
-		ft_close(data);
-	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+    if (!data->start)
+        start(data);
+    else {
+        cast_rays(data);
+        render_walls(data);
+        move_player(data);
+        if (g_screenshot) {
+            screen(data);
+            ft_close(data);
+        }
+        if (data->reset)
+            init_player(data);
+        //if (data->m)
+        //    mini_map(data);
+        mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+        if (data->h)
+            help_text(data);
+    }
 	return (FALSE);
 }
 
@@ -31,7 +55,7 @@ int		initialize_window(t_struct *data)
 	set_up_data(data);
 	if (!(set_up_window(data)))
 		return (FALSE);
-	update(data);
+    update(data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
 	mlx_hook(data->win_ptr, 17, 0L, destruct, data);
@@ -64,8 +88,9 @@ int		main(int ac, char *av[])
 	if (!parse(data, av))
 		return (1);
 	g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
-	if (!initialize_window(data))
+    system("afplay songs/song1.mp3&");
+    if (!initialize_window(data))
 		return (TRUE);
 	free(data);
-	return (FALSE);
+    return (FALSE);
 }
