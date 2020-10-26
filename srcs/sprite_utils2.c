@@ -36,8 +36,9 @@ float	calc_sprite_y_offset(t_struct *data, int i_spt)
 
 float	calc_sprite_x_offset(t_struct *data, int i_spt, float spt_angle)
 {
-	return (((DEG(spt_angle) - DEG(data->rotation_angle)) * data->w_width)
-			/ SPRITE_SIZE + (((float)data->w_width / 2)
+    int w_width = data->w_width - 300;
+	return (((DEG(spt_angle) - DEG(data->rotation_angle)) * w_width)
+			/ SPRITE_SIZE + (((float)w_width / 2)
 				- (data->sprite[i_spt].size / 2)));
 }
 
