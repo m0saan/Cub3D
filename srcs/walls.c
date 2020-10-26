@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:01 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 13:33:18 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/26 13:39:36 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		render_walls(t_struct *data)
 	int		floor;
 	float	y;
 
-	data->i_wall_index = 0;
+	data->i_wall_index = 300;
 	texture_from_file(data);
 	while (data->i_wall_index++ < data->w_width - 1)
 	{
