@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/21 10:11:10 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/26 13:30:19 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int key_pressed(int keycode, t_struct *data)
 {
-    if (keycode >= 18 && keycode <= 20) {
-        change_song(data, keycode - 17);
+    if (keycode >= 18 && keycode <= 21) {
         data->mu = 2;
+        change_song(data, keycode - 17);
     }
     if (keycode == 36)
         data->start = 1;

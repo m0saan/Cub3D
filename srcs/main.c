@@ -6,30 +6,22 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/24 13:59:35 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/26 13:20:40 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 void start(t_struct *data){
+
     int w, h;
-    int* buff = mlx_xpm_file_to_image(data->mlx_ptr, "img/start/start.xpm", &w, &h);
-    int i = 0, j = 0;
-    while (i < h){
-        while (j < w){
-            int index = data->w_width * i + j;
-            ft_draw(data, j, i, buff[index]);
-            j++;
-        }
-        i++;
-    }
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+    char *splash_xpm = mlx_xpm_file_to_image(data->mlx_ptr, "img/start/start.xpm", &w, &h);
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, splash_xpm, 0, 0);
 }
 
 int		update(t_struct *data)
 {
-    if (!data->start)
+    if (!data->start && !g_screenshot)
         start(data);
     else {
         cast_rays(data);

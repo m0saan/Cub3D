@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:09:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/24 14:01:15 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/26 10:40:39 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int		set_up_window(t_struct *data)
 					&data->size_line, &data->endian)) == NULL)
 		return (FALSE);
 	data->img_data_bmp = (int *)mlx_get_data_addr(data->img_ptr, &data->bpp,
+			&data->size_line, &data->endian);
+	data->splash_img = (int *)mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->size_line, &data->endian);
 	return (TRUE);
 }

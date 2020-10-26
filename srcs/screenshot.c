@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:24:37 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/23 10:30:26 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/26 11:20:22 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int		screen(t_struct *data)
 			screen_data(data, x);
 		x++;
 	}
-	data->bitmap.fd = open(file_name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+	data->bitmap.fd = open(file_name, O_WRONLY | O_CREAT);
 	write(data->bitmap.fd, header, len);
-	write(data->bitmap.fd, (char *)data->bitmap.buf, data->bitmap.image_size);
+	write(data->bitmap.fd, data->bitmap.buf, data->bitmap.image_size);
 	close(data->bitmap.fd);
 	free(data->bitmap.buf);
 	return (0);
