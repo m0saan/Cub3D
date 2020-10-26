@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 13:20:40 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/26 13:50:46 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ int		update(t_struct *data)
         mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
         if (data->h)
             help_text(data);
+    }
+    for (int i = 0; i < 300; ++i) {
+        for (int j = 0; j < data->w_height; ++j)
+            ft_draw(data, i, j, 0x89F1E3);
     }
 	return (FALSE);
 }
