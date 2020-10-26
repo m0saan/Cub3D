@@ -61,6 +61,6 @@ void		get_ceilling_values(t_struct *data, char *buff)
 	if (!check_colors_alignment(data, buff + 1))
 		error("Ceilling identifier values misalignment!\n");
 	data->c_blue = ft_atoi(&buff[data->pos + 2]);
-	data->pos += 2;
+	data->pos += 3;
 	data->get_to_map += 1;
 }

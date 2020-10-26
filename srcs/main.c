@@ -12,11 +12,40 @@
 
 #include "../include/cub3d.h"
 
-void start(t_struct *data){
+void    init_splash_screen(t_struct *data)
+{
+    data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
+                                                "img/start/start.xpm", &data->splsh.w, &data->splsh.h);
+    data->splsh.splsh_data = (int *)mlx_get_data_addr(data->splsh.spl_xpm, &data->bpp, &data->size_line, &data->endian);
+    data->splsh.vratio = (float)data->splsh.h / data->w_height;
+    data->splsh.hratio = (float)data->splsh.w / data->w_width;
+}
 
-    int w, h;
-    char *splash_xpm = mlx_xpm_file_to_image(data->mlx_ptr, "img/start/start.xpm", &w, &h);
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, splash_xpm, 0, 0);
+void update_rendering_hud(t_struct *data)
+{
+    int x;
+    int y;
+    int rx;
+    int ry;
+
+    y = 0;
+    ry = 0;
+    while (y < data->w_height && ry < data->splsh.h)
+    {
+        x = 0;
+        rx = 0;
+        while (x < data->w_width && rx < data->splsh.w)
+        {
+            int index = (ry * data->splsh.w) + rx;
+            ft_draw(data, x, y, data->splsh.splsh_data[index]);
+            rx = ++x * (int)data->splsh.hratio;
+        }
+        ry = ++y * (int)data->splsh.vratio;
+    }
+}
+
+void start(t_struct *data){
+    update_rendering_hud(data);
 }
 
 int		update(t_struct *data)
@@ -35,13 +64,14 @@ int		update(t_struct *data)
             init_player(data);
         //if (data->m)
         //    mini_map(data);
+    }
         mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
         if (data->h)
             help_text(data);
-    }
+    //mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, xpm, 0, 0);
     for (int i = 0; i < 300; ++i) {
         for (int j = 0; j < data->w_height; ++j)
-            ft_draw(data, i, j, 0x89F1E3);
+            ft_draw(data, i, j, UI_B);
     }
 	return (FALSE);
 }
@@ -52,6 +82,7 @@ int		initialize_window(t_struct *data)
 	if (!(set_up_window(data)))
 		return (FALSE);
     update(data);
+    init_splash_screen(data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
 	mlx_hook(data->win_ptr, 17, 0L, destruct, data);
@@ -85,6 +116,8 @@ int		main(int ac, char *av[])
 		return (1);
 	g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
     system("afplay songs/song1.mp3&");
+    printf("width == %d\n", data->w_width);
+    printf("height == %d\n", data->w_height);
     if (!initialize_window(data))
 		return (TRUE);
 	free(data);

@@ -99,7 +99,5 @@ int		set_up_window(t_struct *data)
 		return (FALSE);
 	data->img_data_bmp = (int *)mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->size_line, &data->endian);
-	data->splash_img = (int *)mlx_get_data_addr(data->img_ptr, &data->bpp,
-			&data->size_line, &data->endian);
 	return (TRUE);
 }

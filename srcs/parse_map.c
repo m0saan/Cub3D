@@ -16,8 +16,11 @@ static void	insert_and_check_element(t_struct *data,
 		const char *buff, int i, int j)
 {
 	data->map[i][j] = buff[data->pos];
-	if (is_not_valid_element(data, buff))
-		error("Invalid map element");
+	if (is_not_valid_element(data, buff)) {
+	    printf("elem : %c\n", i);
+	    printf("position : %d\n", data->pos);
+        error("Invalid map element");
+    }
 	if (is_player(data, buff))
 	{
 		if (data->is_multi_player)
