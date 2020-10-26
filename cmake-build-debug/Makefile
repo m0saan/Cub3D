@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/moboustt/Desktop/CURSUS/Cube3d
+CMAKE_SOURCE_DIR = /Users/moboustt/Desktop/VVVVV
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/moboustt/Desktop/CURSUS/Cube3d/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/moboustt/Desktop/VVVVV/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /Users/moboustt/Desktop/CURSUS/Cube3d/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -90,7 +90,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/goinfre/moboustt/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/CURSUS/Cube3d/cmake-build-debug/CMakeFiles /Users/moboustt/Desktop/CURSUS/Cube3d/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/CURSUS/Cube3d/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/moboustt/Desktop/VVVVV/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -196,6 +196,33 @@ srcs/events.s: srcs/events.c.s
 srcs/events.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/events.c.s
 .PHONY : srcs/events.c.s
+
+srcs/hud.o: srcs/hud.c.o
+
+.PHONY : srcs/hud.o
+
+# target to build an object file
+srcs/hud.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/hud.c.o
+.PHONY : srcs/hud.c.o
+
+srcs/hud.i: srcs/hud.c.i
+
+.PHONY : srcs/hud.i
+
+# target to preprocess a source file
+srcs/hud.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/hud.c.i
+.PHONY : srcs/hud.c.i
+
+srcs/hud.s: srcs/hud.c.s
+
+.PHONY : srcs/hud.s
+
+# target to generate assembly for a file
+srcs/hud.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/hud.c.s
+.PHONY : srcs/hud.c.s
 
 srcs/init_data.o: srcs/init_data.c.o
 
@@ -358,6 +385,33 @@ srcs/map_file_parser_utils.s: srcs/map_file_parser_utils.c.s
 srcs/map_file_parser_utils.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/map_file_parser_utils.c.s
 .PHONY : srcs/map_file_parser_utils.c.s
+
+srcs/misc.o: srcs/misc.c.o
+
+.PHONY : srcs/misc.o
+
+# target to build an object file
+srcs/misc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/misc.c.o
+.PHONY : srcs/misc.c.o
+
+srcs/misc.i: srcs/misc.c.i
+
+.PHONY : srcs/misc.i
+
+# target to preprocess a source file
+srcs/misc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/misc.c.i
+.PHONY : srcs/misc.c.i
+
+srcs/misc.s: srcs/misc.c.s
+
+.PHONY : srcs/misc.s
+
+# target to generate assembly for a file
+srcs/misc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST.dir/build.make CMakeFiles/TEST.dir/srcs/misc.c.s
+.PHONY : srcs/misc.c.s
 
 srcs/parse_floor_ceilling_resolution.o: srcs/parse_floor_ceilling_resolution.c.o
 
@@ -725,6 +779,9 @@ help:
 	@echo "... srcs/events.o"
 	@echo "... srcs/events.i"
 	@echo "... srcs/events.s"
+	@echo "... srcs/hud.o"
+	@echo "... srcs/hud.i"
+	@echo "... srcs/hud.s"
 	@echo "... srcs/init_data.o"
 	@echo "... srcs/init_data.i"
 	@echo "... srcs/init_data.s"
@@ -743,6 +800,9 @@ help:
 	@echo "... srcs/map_file_parser_utils.o"
 	@echo "... srcs/map_file_parser_utils.i"
 	@echo "... srcs/map_file_parser_utils.s"
+	@echo "... srcs/misc.o"
+	@echo "... srcs/misc.i"
+	@echo "... srcs/misc.s"
 	@echo "... srcs/parse_floor_ceilling_resolution.o"
 	@echo "... srcs/parse_floor_ceilling_resolution.i"
 	@echo "... srcs/parse_floor_ceilling_resolution.s"
