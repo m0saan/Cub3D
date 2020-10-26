@@ -23,6 +23,20 @@
 # include "../libft/libft.h"
 
 # define BLACK 0x000000
+# define UI_B 0x2686D9
+# define UI_T 0xAB7C49
+# define UI_F 0xB58752
+# define BG_CLR 0x353535
+# define BG_MAP 0x2F2F2F
+# define TX_CLR 0x453A2E
+# define MM_CLR 0x3d3d3d
+
+# define WALL_T 0x0D3558
+# define WALL_B 0x0B2D4B
+# define WALL_N 0x174F80
+# define WALL_E 0x1B5C96
+# define WALL_S 0x14446e
+# define WALL_W 0x804d17
 
 # define PI 3.14159265359F
 # define TWO_PI 2 * PI
@@ -41,6 +55,14 @@
 
 # define MAX_INT 2147483647
 
+typedef struct splash{
+    int *spl_xpm;
+    int w;
+    int h;
+    float vratio;
+    float hratio;
+    int *splsh_data;
+}               t_splash;
 typedef struct			s_rgb
 {
 	int					r;
@@ -188,6 +210,7 @@ typedef struct			s_struct
 	int					count_spt;
 	t_sprite			*sprite;
 	t_bitmap			bitmap;
+	t_splash            splsh;
 
     int     reset;
     int     shift;
@@ -195,7 +218,6 @@ typedef struct			s_struct
     int     h;
     int     mu;
     int start;
-    int *splash_img;
 }						t_struct;
 
 void	change_song(t_struct *data, int song_num);
@@ -299,5 +321,6 @@ int						not_valid_distance(const t_struct *data, float x_off,
 int						not_valid_y_offset(const t_struct *data,
 						float y_off, size_t j);
 void	                help_text(t_struct *data);
+void                    set_up_splash(t_struct *data);
 
 #endif
