@@ -12,34 +12,54 @@
 
 #include "../include/cub3d.h"
 
-int		key_pressed(int keycode, t_struct *data)
+int key_pressed(int keycode, t_struct *data)
 {
-	if (keycode == 17)
-		data->t = data->t == 0 ? 1 : 0;
-	if (keycode == 53)
-		ft_close(data);
-	if (keycode == 126)
-		data->walk_direction = 1;
-	if (keycode == 125)
-		data->walk_direction = -1;
-	if (keycode == 124)
-		data->turn_direction = 1;
-	if (keycode == 123)
-		data->turn_direction = -1;
-	return (TRUE);
+    if (keycode >= 18 && keycode <= 20) {
+        change_song(data, keycode - 17);
+        data->mu = 2;
+    }
+    if (keycode == 36)
+        data->start = 1;
+    if (keycode == 15)
+        data->reset = data->reset == 0 ? 1 : 0;
+    if (keycode == 257)
+        data->shift = data->shift == 0 ? 1 : 0;
+    if (keycode == 46)
+        data->m = data->m == 0 ? 1 : 0;
+    if (keycode == 4)
+        data->h = data->h == 0 ? 1 : 0;
+    if (keycode == 17)
+        data->t = data->t == 0 ? 1 : 0;
+    if (keycode == 53) {
+        system("killall afplay 2&>/dev/null >/dev/null");
+        ft_close(data);
+    }
+    if (keycode == 126)
+        data->walk_direction = 1;
+    if (keycode == 125)
+        data->walk_direction = -1;
+    if (keycode == 124)
+        data->turn_direction = 1;
+    if (keycode == 123)
+        data->turn_direction = -1;
+    return (TRUE);
 }
 
-int		key_released(int keycode, t_struct *data)
+int key_released(int keycode, t_struct *data)
 {
-	if (keycode == 126)
-		data->walk_direction = 0;
-	if (keycode == 125)
-		data->walk_direction = 0;
-	if (keycode == 124)
-		data->turn_direction = 0;
-	if (keycode == 123)
-		data->turn_direction = 0;
-	return (TRUE);
+    if (keycode == 15)
+        data->reset = data->reset == 1 ? 0 : 1;
+    if (keycode == 257)
+        data->shift = data->shift == 1 ? 0 : 1;
+    if (keycode == 126)
+        data->walk_direction = 0;
+    if (keycode == 125)
+        data->walk_direction = 0;
+    if (keycode == 124)
+        data->turn_direction = 0;
+    if (keycode == 123)
+        data->turn_direction = 0;
+    return (TRUE);
 }
 
 int		ft_close(void *param)
