@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/moboustt/Desktop/CURSUS/Cube3d/include/cub3d.h
+/Users/moboustt/Desktop/VV/include/cub3d.h
 unistd.h
 -
 stdlib.h
@@ -20,11 +20,11 @@ math.h
 fcntl.h
 -
 ../libs/OpenGL/mlx.h
-/Users/moboustt/Desktop/CURSUS/Cube3d/libs/OpenGL/mlx.h
+/Users/moboustt/Desktop/VV/libs/OpenGL/mlx.h
 ../libft/libft.h
-/Users/moboustt/Desktop/CURSUS/Cube3d/libft/libft.h
+/Users/moboustt/Desktop/VV/libft/libft.h
 
-/Users/moboustt/Desktop/CURSUS/Cube3d/libft/libft.h
+/Users/moboustt/Desktop/VV/libft/libft.h
 unistd.h
 -
 string.h
@@ -32,9 +32,9 @@ string.h
 stdlib.h
 -
 
-/Users/moboustt/Desktop/CURSUS/Cube3d/libs/OpenGL/mlx.h
+/Users/moboustt/Desktop/VV/libs/OpenGL/mlx.h
 
-/Users/moboustt/Desktop/CURSUS/Cube3d/srcs/sprite.c
+/Users/moboustt/Desktop/VV/srcs/main.c
 ../include/cub3d.h
-/Users/moboustt/Desktop/CURSUS/Cube3d/include/cub3d.h
+/Users/moboustt/Desktop/VV/include/cub3d.h
 
