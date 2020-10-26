@@ -31,7 +31,7 @@ void	set_up_data(t_struct *data)
 	data->turn_speed = 8 * (PI / 180);
     data->reset = 0;
     data->shift = 0;
-    data->m = 1;
+    data->m = 0;
     data->h = 1;
     data->start = 0;
 	init_ray_cast_data(data);
