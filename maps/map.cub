@@ -1,5 +1,5 @@
-R 1920 1080
-NO ./img/1.xpm
+R 2000 1080
+NO ./img/2.xpm
 SO ./img/2.xpm
 WE ./img/3.xpm
 EA ./img/4.xpm
