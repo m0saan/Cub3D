@@ -6,22 +6,56 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 13:50:46 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/26 20:12:14 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void    init_splash_screen(t_struct *data)
+void    setup_ui_bar(t_struct *data)
+{
+    data->ui.ui_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
+                                                "img/ui/1.xpm", &data->ui.w, &data->ui.h);
+    data->ui.img_data = (int *)mlx_get_data_addr(data->ui.ui_xpm, &data->ui.bpp, &data->ui.sl, &data->ui.end);
+    data->ui.vratio = (float)data->ui.h / (float)data->w_height;
+    data->ui.hratio = (float)data->ui.w / (float)300;
+}
+
+void render_ui_bar(t_struct *data){
+    int x;
+    int y;
+    int rx;
+    int ry;
+
+    y = 0;
+    ry = 0;
+    setup_ui_bar(data);
+    while (y < data->w_height && ry < data->ui.h)
+    {
+        x = 0;
+        rx = 0;
+        while (x < 300 && rx < data->ui.w)
+        {
+            int index = (ry * data->ui.w) + rx;
+            int color = data->ui.img_data[index];
+            ft_draw(data, x, y, color);
+            rx = ++x * data->ui.hratio;
+        }
+        ry = ++y * data->ui.vratio;
+    }
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+}
+
+void    setup_splash_screen(t_struct *data)
 {
     data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
                                                 "img/start/start.xpm", &data->splsh.w, &data->splsh.h);
-    data->splsh.splsh_data = (int *)mlx_get_data_addr(data->splsh.spl_xpm, &data->bpp, &data->size_line, &data->endian);
-    data->splsh.vratio = (float)data->splsh.h / data->w_height;
-    data->splsh.hratio = (float)data->splsh.w / data->w_width;
+    data->splsh.img_data = (int *)mlx_get_data_addr(data->splsh.spl_xpm, &data->splsh.bpp, &data->splsh.sl, &data->splsh.end);
+    data->splsh.vratio = (float)data->splsh.h / (float)data->w_height;
+    data->splsh.hratio = (float)data->splsh.w / (float)data->w_width;
 }
 
-void update_rendering_hud(t_struct *data)
+void render_splash_screen(t_struct *data)
 {
     int x;
     int y;
@@ -30,6 +64,7 @@ void update_rendering_hud(t_struct *data)
 
     y = 0;
     ry = 0;
+    setup_splash_screen(data);
     while (y < data->w_height && ry < data->splsh.h)
     {
         x = 0;
@@ -37,21 +72,19 @@ void update_rendering_hud(t_struct *data)
         while (x < data->w_width && rx < data->splsh.w)
         {
             int index = (ry * data->splsh.w) + rx;
-            ft_draw(data, x, y, data->splsh.splsh_data[index]);
-            rx = ++x * (int)data->splsh.hratio;
+            int color = data->splsh.img_data[index];
+            ft_draw(data, x, y, color);
+            rx = ++x * data->splsh.hratio;
         }
-        ry = ++y * (int)data->splsh.vratio;
+        ry = ++y * data->splsh.vratio;
     }
 }
 
-void start(t_struct *data){
-    update_rendering_hud(data);
-}
 
 int		update(t_struct *data)
 {
-    if (!data->start && !g_screenshot)
-        start(data);
+    if (data->start && !g_screenshot)
+        render_splash_screen(data);
     else {
         cast_rays(data);
         render_walls(data);
@@ -62,18 +95,15 @@ int		update(t_struct *data)
         }
         if (data->reset)
             init_player(data);
-        //if (data->m)
-        //    mini_map(data);
-    }
-        mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
         if (data->h)
             help_text(data);
-    //mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, xpm, 0, 0);
-    for (int i = 0; i < 300; ++i) {
-        for (int j = 0; j < data->w_height; ++j)
-            ft_draw(data, i, j, UI_B);
+        mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
     }
-	return (FALSE);
+    render_ui_bar(data);
+    if (data->m)
+        mini_map(data);
+
+    return (FALSE);
 }
 
 int		initialize_window(t_struct *data)
@@ -82,7 +112,6 @@ int		initialize_window(t_struct *data)
 	if (!(set_up_window(data)))
 		return (FALSE);
     update(data);
-    init_splash_screen(data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
 	mlx_hook(data->win_ptr, 17, 0L, destruct, data);
