@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 10:40:40 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/26 20:17:57 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define WALL_S 0x14446e
 # define WALL_W 0x804d17
 
+#define MINI 0.3
+
 # define PI 3.14159265359F
 # define TWO_PI 2 * PI
 # define DEG(x) x * 180 / M_PI
@@ -55,13 +57,28 @@
 
 # define MAX_INT 2147483647
 
+typedef struct s_ui{
+    int *ui_xpm;
+    int w;
+    int h;
+    float vratio;
+    float hratio;
+    int *img_data;
+    int bpp;
+    int sl;
+    int end;
+} t_ui;
+
 typedef struct splash{
     int *spl_xpm;
     int w;
     int h;
     float vratio;
     float hratio;
-    int *splsh_data;
+    int *img_data;
+    int bpp;
+    int sl;
+    int end;
 }               t_splash;
 typedef struct			s_rgb
 {
@@ -211,6 +228,7 @@ typedef struct			s_struct
 	t_sprite			*sprite;
 	t_bitmap			bitmap;
 	t_splash            splsh;
+	t_ui                ui;
 
     int     reset;
     int     shift;
@@ -220,6 +238,7 @@ typedef struct			s_struct
     int start;
 }						t_struct;
 
+void mini_map(t_struct *data);
 void	change_song(t_struct *data, int song_num);
 int						set_up_window(t_struct *data);
 uint32_t				create_rgb(int r, int g, int b);
