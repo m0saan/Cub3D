@@ -25,7 +25,8 @@ add_executable(TEST srcs/main.c
         srcs/utils2.c
         srcs/map_error_handling.c
         srcs/hud.c
-        srcs/misc.c)
+        srcs/misc.c
+        srcs/minimap.c)
 
 target_link_libraries(TEST ${CMAKE_SOURCE_DIR}/libmlx.a ${CMAKE_SOURCE_DIR}/libft.a)
 
