@@ -29,6 +29,11 @@ void	set_up_data(t_struct *data)
 	data->walk_direction = 0;
 	data->walk_speed = 85;
 	data->turn_speed = 8 * (PI / 180);
+    data->reset = 0;
+    data->shift = 0;
+    data->m = 1;
+    data->h = 1;
+    data->start = 0;
 	init_ray_cast_data(data);
 }
 
@@ -59,19 +64,14 @@ void	init_ray_cast_data(t_struct *data)
 
 void	init_player(t_struct *data)
 {
-	static int count;
 
-	count = 0;
 	data->x = (data->j_player + 0.5) * SQUARE_SIZE;
 	data->y = (data->i_player + 0.5) * SQUARE_SIZE;
-	count++;
-	set_up_player(data, count);
+	set_up_player(data);
 }
 
-void	set_up_player(t_struct *data, int player)
+void	set_up_player(t_struct *data)
 {
-	if (player != 1)
-		error("Player error!\n");
 	data->orientation = (unsigned char)data->map[data->i_player]
 		[data->j_player];
 	if (data->orientation == 'N')
