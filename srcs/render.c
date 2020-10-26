@@ -19,6 +19,7 @@ int			move_player(t_struct *data)
 
 	data->rotation_angle += (float)data->turn_direction * data->turn_speed;
 	data->move_step = (float)data->walk_direction * data->walk_speed;
+    data->move_step += data->shift ? (data->move_step * 0.5F) : 0;
 	data->updated_player_x = data->x + cosf(data->rotation_angle)
 		* data->move_step;
 	data->updated_player_y = data->y + sinf(data->rotation_angle)
