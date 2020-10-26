@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/TEST.dir/srcs/map_error_handling.c.o"
   "CMakeFiles/TEST.dir/srcs/map_file_parser.c.o"
   "CMakeFiles/TEST.dir/srcs/map_file_parser_utils.c.o"
+  "CMakeFiles/TEST.dir/srcs/minimap.c.o"
   "CMakeFiles/TEST.dir/srcs/misc.c.o"
   "CMakeFiles/TEST.dir/srcs/parse_floor_ceilling_resolution.c.o"
   "CMakeFiles/TEST.dir/srcs/parse_map.c.o"
