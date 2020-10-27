@@ -131,7 +131,7 @@ int						*g_lines_length;
 
 typedef struct			s_struct
 {
-    int flag;
+    int left;
 	int					t;
 	int					orientation;
 	int					bpp;
