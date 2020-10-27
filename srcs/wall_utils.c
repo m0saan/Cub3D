@@ -48,7 +48,7 @@ void	draw_floor(t_struct *data, int floor)
 {
 	while (floor++ < data->w_height - 1)
 		ft_draw(data, data->i_wall_index, floor,
-				create_rgb(data->f_red, data->c_green, data->c_blue));
+				create_rgb(data->f_red, data->f_green, data->f_blue));
 }
 
 void	draw_ceilling(t_struct *data, int ceilling)
