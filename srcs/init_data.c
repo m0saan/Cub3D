@@ -34,6 +34,7 @@ void	set_up_data(t_struct *data)
     data->m = 0;
     data->h = 1;
     data->start = 0;
+    data->left = 0;
     init_ray_cast_data(data);
 }
 

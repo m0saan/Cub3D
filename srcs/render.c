@@ -12,24 +12,21 @@
 
 #include "../include/cub3d.h"
 
-int			move_player(t_struct *data)
+int move_player(t_struct *data)
 {
 	int x;
 	int y;
 
 	data->rotation_angle += (float)data->turn_direction * data->turn_speed;
 	data->move_step = (float)data->walk_direction * data->walk_speed;
-    data->move_step += data->shift ? (data->move_step * 0.5F) : 0;
-	data->updated_player_x = data->x + cosf(data->rotation_angle)
-		* data->move_step;
-	data->updated_player_y = data->y + sinf(data->rotation_angle)
-		* data->move_step;
+	data->move_step += data->shift ? (data->move_step * 0.5F) : 0;
+	data->updated_player_x = data->x + cosf(data->rotation_angle + data->left) * data->move_step;
+	data->updated_player_y = data->y + sinf(data->rotation_angle + data->left) * data->move_step;
 	x = calculate_index(data->updated_player_x);
 	y = calculate_index(data->updated_player_y);
 	if (!valid_indices(data, x, y))
 		return (FALSE);
-	if (!if_wall(data->updated_player_x, data->updated_player_y, data)
-			&& !is_sprite(data->map[y][x]))
+	if (!if_wall(data->updated_player_x, data->updated_player_y, data) && !is_sprite(data->map[y][x]))
 	{
 		data->x = data->updated_player_x;
 		data->y = data->updated_player_y;
@@ -37,7 +34,7 @@ int			move_player(t_struct *data)
 	return (TRUE);
 }
 
-void		ft_draw(t_struct *data, int x, int y, int color)
+void ft_draw(t_struct *data, int x, int y, int color)
 {
 	char *dst;
 
@@ -46,7 +43,7 @@ void		ft_draw(t_struct *data, int x, int y, int color)
 	*(u_int32_t *)dst = color;
 }
 
-t_rgb		*color_converter(int hex_value)
+t_rgb *color_converter(int hex_value)
 {
 	t_rgb *rgb_color;
 
@@ -57,7 +54,7 @@ t_rgb		*color_converter(int hex_value)
 	return (rgb_color);
 }
 
-u_int32_t	create_rgb(int r, int g, int b)
+u_int32_t create_rgb(int r, int g, int b)
 {
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
