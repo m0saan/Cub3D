@@ -1,4 +1,4 @@
-## Cube3d
+## Cub3d
 
 ### Description
 
@@ -13,3 +13,14 @@ windows, colors, events, fill shapes etc.
 
 Mac OS X Mojave(10.14.6) or higher
 
+
+**Installation and launch:**
+* `git clone https://github.com/MoBoustta/Cub3d.git`
+* `cd Cub3D`
+* `make`
+* `./Cub3D maps/map.cub`
+
+**Keys:**
+* `Arrows - moving`
+* `Shift + Arrows - sprint`
+* `1->4 - mute music`
