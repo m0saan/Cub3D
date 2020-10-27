@@ -25,7 +25,7 @@ Mac OS X Mojave(10.14.6) or higher
 * `Shift + Arrows - sprint`
 * `1->4 - mute music`
 
-![picture](assets/4.png)
+[![Watch the video](https://imgur.com/a/ySpvFB0)]
  
 ![picture](assets/1.png)
 
