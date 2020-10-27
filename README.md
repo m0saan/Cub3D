@@ -24,3 +24,11 @@ Mac OS X Mojave(10.14.6) or higher
 * `Arrows - moving`
 * `Shift + Arrows - sprint`
 * `1->4 - mute music`
+
+![picture](assets/4.png)
+ 
+![picture](assets/1.png)
+
+![picture](assets/2.png)
+
+![picture](assets/3.png)
