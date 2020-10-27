@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 20:17:57 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/27 14:45:38 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # define TX_CLR 0x453A2E
 # define MM_CLR 0x3d3d3d
 
-# define WALL_T 0x0D3558
-# define WALL_B 0x0B2D4B
+# define YELLOW 0xFFFF00
+# define GREEN 0x0B2D4B
 # define WALL_N 0x174F80
-# define WALL_E 0x1B5C96
-# define WALL_S 0x14446e
+# define PLAYER_COLOR 0x1B5C96
+# define SPRITE_COLOR 0x14446e
 # define WALL_W 0x804d17
 
 #define MINI 0.3
@@ -131,6 +131,7 @@ int						*g_lines_length;
 
 typedef struct			s_struct
 {
+    int flag;
 	int					t;
 	int					orientation;
 	int					bpp;

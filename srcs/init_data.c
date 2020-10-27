@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:09:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 10:40:39 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/27 17:10:58 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_up_data(t_struct *data)
     data->m = 0;
     data->h = 1;
     data->start = 0;
-	init_ray_cast_data(data);
+    init_ray_cast_data(data);
 }
 
 void	init_ray_cast_data(t_struct *data)
