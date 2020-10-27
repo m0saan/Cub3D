@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 20:12:14 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/10/27 17:28:25 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    setup_ui_bar(t_struct *data)
 {
     data->ui.ui_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
-                                                "img/ui/1.xpm", &data->ui.w, &data->ui.h);
+                                                "img/ui/ui.xpm", &data->ui.w, &data->ui.h);
     data->ui.img_data = (int *)mlx_get_data_addr(data->ui.ui_xpm, &data->ui.bpp, &data->ui.sl, &data->ui.end);
     data->ui.vratio = (float)data->ui.h / (float)data->w_height;
     data->ui.hratio = (float)data->ui.w / (float)300;
@@ -46,16 +46,15 @@ void render_ui_bar(t_struct *data){
     mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
 
-void    setup_splash_screen(t_struct *data)
+void    setup_splash_screen(t_struct *data, char *splash_screen)
 {
-    data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
-                                                "img/start/start.xpm", &data->splsh.w, &data->splsh.h);
+    data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr, splash_screen, &data->splsh.w, &data->splsh.h);
     data->splsh.img_data = (int *)mlx_get_data_addr(data->splsh.spl_xpm, &data->splsh.bpp, &data->splsh.sl, &data->splsh.end);
     data->splsh.vratio = (float)data->splsh.h / (float)data->w_height;
     data->splsh.hratio = (float)data->splsh.w / (float)data->w_width;
 }
 
-void render_splash_screen(t_struct *data)
+void render_splash_screen(t_struct *data, char *splash_screen)
 {
     int x;
     int y;
@@ -64,7 +63,7 @@ void render_splash_screen(t_struct *data)
 
     y = 0;
     ry = 0;
-    setup_splash_screen(data);
+    setup_splash_screen(data, splash_screen);
     while (y < data->w_height && ry < data->splsh.h)
     {
         x = 0;
@@ -78,13 +77,14 @@ void render_splash_screen(t_struct *data)
         }
         ry = ++y * data->splsh.vratio;
     }
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
 
 
 int		update(t_struct *data)
 {
-    if (data->start && !g_screenshot)
-        render_splash_screen(data);
+    if (!data->start && !g_screenshot)
+        render_splash_screen(data, "img/start/start.xpm");
     else {
         cast_rays(data);
         render_walls(data);
@@ -97,12 +97,9 @@ int		update(t_struct *data)
             init_player(data);
         if (data->h)
             help_text(data);
+        render_ui_bar(data);
         mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
     }
-    render_ui_bar(data);
-    if (data->m)
-        mini_map(data);
-
     return (FALSE);
 }
 
@@ -145,8 +142,6 @@ int		main(int ac, char *av[])
 		return (1);
 	g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
     system("afplay songs/song1.mp3&");
-    printf("width == %d\n", data->w_width);
-    printf("height == %d\n", data->w_height);
     if (!initialize_window(data))
 		return (TRUE);
 	free(data);
