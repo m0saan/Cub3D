@@ -15,15 +15,22 @@ Mac OS X Mojave(10.14.6) or higher
 
 
 **Installation and launch:**
+
 * `git clone https://github.com/MoBoustta/Cub3d.git`
 * `cd Cub3D`
 * `make`
 * `./Cub3D maps/map.cub`
 
 **Keys:**
+
 * `Arrows - moving`
 * `Shift + Arrows - sprint`
 * `1->4 - mute music`
+* `T - Show/Hide textures`
+
+**Note:**
+
+You can get a screenshot of the game in bmp format by providing a third argument "--save"
 
 [![Watch the video](https://imgur.com/a/ySpvFB0)]
  
