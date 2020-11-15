@@ -61,8 +61,8 @@ typedef struct s_ui{
     int *ui_xpm;
     int w;
     int h;
-    float vratio;
-    float hratio;
+    float v_ratio;
+    float h_ratio;
     int *img_data;
     int bpp;
     int sl;
@@ -131,7 +131,7 @@ int						*g_lines_length;
 
 typedef struct			s_struct
 {
-    int left;
+    float left;
 	int					t;
 	int					orientation;
 	int					bpp;
@@ -221,6 +221,14 @@ typedef struct			s_struct
 	char				we[15];
 	char				ea[15];
 	char				sp[15];
+	int                 found_r;
+	int                 found_f;
+	int                 found_c;
+	int                 found_no;
+	int                 found_so;
+	int                 found_ea;
+	int                 found_we;
+	int                 found_sp;
 	char				**map;
 	int					i_player;
 	int					j_player;
