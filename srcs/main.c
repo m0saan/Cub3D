@@ -17,8 +17,8 @@ void    setup_ui_bar(t_struct *data)
     data->ui.ui_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
                                                 "img/ui/ui.xpm", &data->ui.w, &data->ui.h);
     data->ui.img_data = (int *)mlx_get_data_addr(data->ui.ui_xpm, &data->ui.bpp, &data->ui.sl, &data->ui.end);
-    data->ui.vratio = (float)data->ui.h / (float)data->w_height;
-    data->ui.hratio = (float)data->ui.w / (float)300;
+    data->ui.v_ratio = (float)data->ui.h / (float)data->w_height;
+    data->ui.h_ratio = (float)data->ui.w / (float)300;
 }
 
 void render_ui_bar(t_struct *data){
@@ -39,9 +39,9 @@ void render_ui_bar(t_struct *data){
             int index = (ry * data->ui.w) + rx;
             int color = data->ui.img_data[index];
             ft_draw(data, x, y, color);
-            rx = ++x * data->ui.hratio;
+            rx = ++x * data->ui.h_ratio;
         }
-        ry = ++y * data->ui.vratio;
+        ry = ++y * data->ui.v_ratio;
     }
     mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
