@@ -91,6 +91,7 @@ int		update(t_struct *data)
         move_player(data);
         if (g_screenshot) {
             screen(data);
+            destruct(data);
             ft_close(data);
         }
         if (data->reset)
