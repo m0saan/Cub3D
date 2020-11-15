@@ -25,6 +25,8 @@ static int	check_colors_alignment(t_struct *data, char *buff)
 
 void		get_resolution_values(t_struct *data, char *buff)
 {
+    if (data->found_r)
+        error("duplicate resolution symbol\n");
 	data->pos++;
 	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
 		error("Resolution identifier misalignment!\n");
@@ -32,10 +34,13 @@ void		get_resolution_values(t_struct *data, char *buff)
 	data->pos += skip_number(&buff[data->pos]);
 	data->w_height = ft_atoi(&buff[data->pos]);
 	data->get_to_map += 1;
+	data->found_r = 1;
 }
 
 void		get_floor_values(t_struct *data, char *buff)
 {
+    if (data->found_f)
+        error("duplicate floor symbol\n");
 	data->pos++;
 	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
 		error("Floor identifier misalignment!\n");
@@ -47,10 +52,13 @@ void		get_floor_values(t_struct *data, char *buff)
 		error("Floor identifier values misalignment!\n");
 	data->f_blue = ft_atoi(&buff[data->pos + 2]);
 	data->get_to_map += 1;
+	data->found_f = 1;
 }
 
 void		get_ceilling_values(t_struct *data, char *buff)
 {
+    if (data->found_c)
+        error("duplicate ceilling symbol\n");
 	data->pos += 1;
 	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
 		error("Ceilling identifier misalignment!\n");
@@ -63,4 +71,5 @@ void		get_ceilling_values(t_struct *data, char *buff)
 	data->c_blue = ft_atoi(&buff[data->pos + 2]);
 	data->pos += 3;
 	data->get_to_map += 1;
+	data->found_c = 1;
 }

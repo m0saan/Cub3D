@@ -96,6 +96,14 @@ void		initialize_file_struct(t_struct *data)
 	data->c_red = 0;
 	data->c_green = 0;
 	data->c_blue = 0;
+    data->found_we = 0;
+    data->found_ea = 0;
+    data->found_so = 0;
+    data->found_no = 0;
+    data->found_sp = 0;
+    data->found_r = 0;
+    data->found_c = 0;
+    data->found_f = 0;
 	ft_memset(data->no, 0, 15);
 	ft_memset(data->so, 0, 15);
 	ft_memset(data->ea, 0, 15);

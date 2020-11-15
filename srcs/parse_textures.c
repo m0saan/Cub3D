@@ -17,6 +17,8 @@ void	get_western_texture_path(t_struct *data, const char *buff)
 	int i;
 
 	i = 0;
+    if (data->found_we)
+        error("duplicate west texture symbol\n");
 	if (is_valid_texture(data, buff) != 3)
 		error("Invalid texture path!\n");
 	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
@@ -26,6 +28,7 @@ void	get_western_texture_path(t_struct *data, const char *buff)
 		(data->pos)++;
 	}
 	data->get_to_map += 1;
+	data->found_we = 1;
 }
 
 void	get_easter_texture_path(t_struct *data, const char *buff)
@@ -33,6 +36,8 @@ void	get_easter_texture_path(t_struct *data, const char *buff)
 	int i;
 
 	i = 0;
+    if (data->found_ea)
+        error("duplicate east texture symbol\n");
 	if (is_valid_texture(data, buff) != 3)
 		error("Invalid texture path!\n");
 	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
@@ -42,6 +47,7 @@ void	get_easter_texture_path(t_struct *data, const char *buff)
 		(data->pos)++;
 	}
 	data->get_to_map += 1;
+    data->found_ea = 1;
 }
 
 void	get_north_texture_path(t_struct *data, const char *buff)
@@ -49,6 +55,8 @@ void	get_north_texture_path(t_struct *data, const char *buff)
 	int i;
 
 	i = 0;
+    if (data->found_no)
+        error("duplicate north texture symbol\n");
 	if (is_valid_texture(data, buff) != 3)
 		error("Invalid texture path!\n");
 	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
@@ -58,6 +66,7 @@ void	get_north_texture_path(t_struct *data, const char *buff)
 		data->pos++;
 	}
 	data->get_to_map += 1;
+    data->found_no = 1;
 }
 
 void	get_south_texture_path(t_struct *data, const char *buff)
@@ -65,6 +74,8 @@ void	get_south_texture_path(t_struct *data, const char *buff)
 	int i;
 
 	i = 0;
+    if (data->found_so)
+        error("duplicate south texture symbol\n");
 	if (is_valid_texture(data, buff) != 3)
 		error("Invalid texture path!\n");
 	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
@@ -74,6 +85,7 @@ void	get_south_texture_path(t_struct *data, const char *buff)
 		data->pos++;
 	}
 	data->get_to_map += 1;
+    data->found_so = 1;
 }
 
 void	get_sprite_path(t_struct *data, char *buff)
@@ -81,6 +93,8 @@ void	get_sprite_path(t_struct *data, char *buff)
 	int i;
 
 	i = 0;
+    if (data->found_sp)
+        error("duplicate sprite texture symbol\n");
 	if (is_valid_texture(data, buff) != 2)
 		error("Invalid texture path!\n");
 	data->pos += 2;
@@ -91,4 +105,5 @@ void	get_sprite_path(t_struct *data, char *buff)
 		data->pos++;
 	}
 	data->get_to_map += 1;
+    data->found_sp = 1;
 }
