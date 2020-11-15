@@ -44,7 +44,6 @@ int		screen(t_struct *data)
 void	screen_data(t_struct *data, int x)
 {
 	int index;
-
 	index = data->bitmap.row * data->w_width + data->bitmap.col;
 	index = index < 0 ? index * (-1) : index;
 	g_rgb = color_converter((uint32_t)data->img_data_bmp[index]);
