@@ -58,3 +58,4 @@ Module.symvers
 Mkfile.old
 dkms.conf
 screenshot.bmp
+cmake-build-debug
