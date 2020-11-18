@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/27 14:45:38 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/18 10:05:17 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,10 +244,8 @@ typedef struct			s_struct
     int     m;
     int     h;
     int     mu;
-    int start;
 }						t_struct;
 
-void mini_map(t_struct *data);
 void	change_song(t_struct *data, int song_num);
 int						set_up_window(t_struct *data);
 uint32_t				create_rgb(int r, int g, int b);
@@ -349,6 +347,8 @@ int						not_valid_distance(const t_struct *data, float x_off,
 int						not_valid_y_offset(const t_struct *data,
 						float y_off, size_t j);
 void	                help_text(t_struct *data);
-void                    set_up_splash(t_struct *data);
+void render_ui_bar(t_struct *data);
+void render_splash_screen(t_struct *data, char *splash_screen);
+
 
 #endif
