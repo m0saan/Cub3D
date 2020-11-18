@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 18:33:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 10:40:39 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/18 10:27:17 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	check_colors_alignment(t_struct *data, char *buff)
 
 void		get_resolution_values(t_struct *data, char *buff)
 {
-    if (data->found_r)
-        error("duplicate resolution symbol\n");
+	if (data->found_r)
+		error("duplicate resolution symbol\n");
 	data->pos++;
 	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
 		error("Resolution identifier misalignment!\n");
@@ -39,8 +39,8 @@ void		get_resolution_values(t_struct *data, char *buff)
 
 void		get_floor_values(t_struct *data, char *buff)
 {
-    if (data->found_f)
-        error("duplicate floor symbol\n");
+	if (data->found_f)
+		error("duplicate floor symbol\n");
 	data->pos++;
 	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
 		error("Floor identifier misalignment!\n");
@@ -57,8 +57,8 @@ void		get_floor_values(t_struct *data, char *buff)
 
 void		get_ceilling_values(t_struct *data, char *buff)
 {
-    if (data->found_c)
-        error("duplicate ceilling symbol\n");
+	if (data->found_c)
+		error("duplicate ceilling symbol\n");
 	data->pos += 1;
 	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
 		error("Ceilling identifier misalignment!\n");

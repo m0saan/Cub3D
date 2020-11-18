@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:24:37 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 11:20:22 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/18 10:45:45 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		screen(t_struct *data)
 void	screen_data(t_struct *data, int x)
 {
 	int index;
+
 	index = data->bitmap.row * data->w_width + data->bitmap.col;
 	index = index < 0 ? index * (-1) : index;
 	g_rgb = color_converter((uint32_t)data->img_data_bmp[index]);

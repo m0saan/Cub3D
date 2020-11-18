@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 12:19:53 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 10:40:39 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/18 10:45:11 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ void	set_sprite_distance(t_struct *data, int *i)
 
 float	calc_sprite_y_offset(t_struct *data, int i_spt)
 {
-	return (float)data->w_height / 2 - data->sprite[i_spt].size / 2;
+	return ((float)data->w_height / 2 - data->sprite[i_spt].size / 2);
 }
 
 float	calc_sprite_x_offset(t_struct *data, int i_spt, float spt_angle)
 {
-    int w_width = data->w_width;
+	int w_width;
+
+	w_width = data->w_width;
 	return (((DEG(spt_angle) - DEG(data->rotation_angle)) * w_width)
 			/ SPRITE_SIZE + (((float)w_width / 2)
 				- (data->sprite[i_spt].size / 2)));
