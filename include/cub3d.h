@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 01:10:12 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/18 10:05:17 by moboustt         ###   ########.fr       */
+/*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
+/*   Updated: 2020/11/18 10:57:30 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
-#include <stdio.h>
+# include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 # include "../libs/OpenGL/mlx.h"
@@ -26,19 +26,6 @@
 # define UI_B 0x2686D9
 # define UI_T 0xAB7C49
 # define UI_F 0xB58752
-# define BG_CLR 0x353535
-# define BG_MAP 0x2F2F2F
-# define TX_CLR 0x453A2E
-# define MM_CLR 0x3d3d3d
-
-# define YELLOW 0xFFFF00
-# define GREEN 0x0B2D4B
-# define WALL_N 0x174F80
-# define PLAYER_COLOR 0x1B5C96
-# define SPRITE_COLOR 0x14446e
-# define WALL_W 0x804d17
-
-#define MINI 0.3
 
 # define PI 3.14159265359F
 # define TWO_PI 2 * PI
@@ -57,29 +44,32 @@
 
 # define MAX_INT 2147483647
 
-typedef struct s_ui{
-    int *ui_xpm;
-    int w;
-    int h;
-    float v_ratio;
-    float h_ratio;
-    int *img_data;
-    int bpp;
-    int sl;
-    int end;
-} t_ui;
+typedef struct			s_ui
+{
+	int					*ui_xpm;
+	int					w;
+	int					h;
+	float				v_ratio;
+	float				h_ratio;
+	int					*img_data;
+	int					bpp;
+	int					sl;
+	int					end;
+}						t_ui;
 
-typedef struct splash{
-    int *spl_xpm;
-    int w;
-    int h;
-    float vratio;
-    float hratio;
-    int *img_data;
-    int bpp;
-    int sl;
-    int end;
-}               t_splash;
+typedef struct			s_splash
+{
+	int					*spl_xpm;
+	int					w;
+	int					h;
+	float				vratio;
+	float				hratio;
+	int					*img_data;
+	int					bpp;
+	int					sl;
+	int					end;
+}						t_splash;
+
 typedef struct			s_rgb
 {
 	int					r;
@@ -131,7 +121,7 @@ int						*g_lines_length;
 
 typedef struct			s_struct
 {
-    float left;
+	float				left;
 	int					t;
 	int					orientation;
 	int					bpp;
@@ -221,14 +211,14 @@ typedef struct			s_struct
 	char				we[15];
 	char				ea[15];
 	char				sp[15];
-	int                 found_r;
-	int                 found_f;
-	int                 found_c;
-	int                 found_no;
-	int                 found_so;
-	int                 found_ea;
-	int                 found_we;
-	int                 found_sp;
+	int					found_r;
+	int					found_f;
+	int					found_c;
+	int					found_no;
+	int					found_so;
+	int					found_ea;
+	int					found_we;
+	int					found_sp;
 	char				**map;
 	int					i_player;
 	int					j_player;
@@ -236,17 +226,17 @@ typedef struct			s_struct
 	int					count_spt;
 	t_sprite			*sprite;
 	t_bitmap			bitmap;
-	t_splash            splsh;
-	t_ui                ui;
+	t_splash			splsh;
+	t_ui				ui;
 
-    int     reset;
-    int     shift;
-    int     m;
-    int     h;
-    int     mu;
+	int					reset;
+	int					shift;
+	int					m;
+	int					h;
+	int					mu;
 }						t_struct;
 
-void	change_song(t_struct *data, int song_num);
+void					change_song(t_struct *data, int song_num);
 int						set_up_window(t_struct *data);
 uint32_t				create_rgb(int r, int g, int b);
 void					set_up_data(t_struct *data);
@@ -257,15 +247,15 @@ void					ft_draw(t_struct *data, int x, int y, int color);
 int						if_wall(float x, float y, t_struct *data);
 float					limit_angle(float angle);
 float					distance_between_points(float x1, float y1,
-						float x2, float y2);
+		float x2, float y2);
 void					horizontal_ray_intersection(float ray_angle,
 		t_struct *data,
-						int *found_horiz_wall_hit);
+		int *found_horiz_wall_hit);
 void					vertical_ray_intersection(float ray_angle,
 		t_struct *data,
-						int *found_vert_wall_hit);
+		int *found_vert_wall_hit);
 void					cast_single_ray(int ray_id, float ray_angle,
-						t_struct *data);
+		t_struct *data);
 void					fill_out_ray(int ray_id, t_struct *data);
 void					cast_rays(t_struct *data);
 int						update(t_struct *data);
@@ -298,7 +288,7 @@ int						screw_this_norminette(t_struct *data, char *buff);
 void					initialize_sprite(t_struct *data);
 void					set_up_sprite(t_struct *data);
 void					draw_sprites(t_struct *data, float x_off, float y_off,
-						int index);
+		int index);
 void					init_player(t_struct *data);
 void					set_up_player(t_struct *data);
 int						is_sprite(char c);
@@ -322,16 +312,16 @@ void					ft_ljodran(t_struct *data, int y);
 int						normalize_index(int index);
 int						get_color_index(t_struct *data);
 void					set_sprite_coordinates(t_struct *data, int *i_spt,
-						int i, int j);
+		int i, int j);
 void					set_sprite_distance(t_struct *data, int *i);
 float					calc_sprite_y_offset(t_struct *data, int i_spt);
 float					calc_sprite_x_offset(t_struct *data, int i_spt,
-						float spt_angle);
+		float spt_angle);
 void					swap(t_struct *data, int j);
 void					bubble_sort(t_struct *data);
 int						get_color_id(int i, int j, int size);
 void					normalize_sprite_angle(t_struct *data,
-						float *spt_angle);
+		float *spt_angle);
 void					normalize_sprite_size(t_struct *data, int *i_spt);
 int						is_not_valid_xpm(t_struct *data);
 int						value_at(int i, int j, t_struct *data);
@@ -341,14 +331,14 @@ int						is_valid_texture(t_struct *data, const char *buff);
 int						is_negative(int v);
 int						is_valid_color(const t_struct *data, int id);
 int						not_valid_x_offset(const t_struct *data,
-						float x_off, size_t i);
+		float x_off, size_t i);
 int						not_valid_distance(const t_struct *data, float x_off,
-						int index, size_t i);
+		int index, size_t i);
 int						not_valid_y_offset(const t_struct *data,
-						float y_off, size_t j);
-void	                help_text(t_struct *data);
-void render_ui_bar(t_struct *data);
-void render_splash_screen(t_struct *data, char *splash_screen);
-
+		float y_off, size_t j);
+void					help_text(t_struct *data);
+void					render_ui_bar(t_struct *data);
+void					render_splash_screen(t_struct *data,
+		char *splash_screen);
 
 #endif
