@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/18 12:54:52 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/18 13:01:01 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,5 +341,7 @@ void					help_text(t_struct *data);
 void					render_ui_bar(t_struct *data);
 void					render_splash_screen(t_struct *data,
 		char *splash_screen);
+int	destruct(t_struct *data);
+int	ft_close(void *param);
 
 #endif
