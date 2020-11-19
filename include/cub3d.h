@@ -20,6 +20,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include "../libs/OpenGL/mlx.h"
+# include "libft.h"
 
 # define BLACK 0x000000
 
