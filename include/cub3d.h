@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/18 13:01:01 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/19 14:00:35 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include "../libs/OpenGL/mlx.h"
-# include "../libft/libft.h"
 
 # define BLACK 0x000000
-# define UI_B 0x2686D9
-# define UI_T 0xAB7C49
-# define UI_F 0xB58752
 
 # define PI 3.14159265359F
 # define TWO_PI 2 * PI
