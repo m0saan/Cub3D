@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/18 13:01:01 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/19 09:57:23 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int key_pressed(int keycode, t_struct *data)
         data->left = M_PI * 0.5F;
         data->walk_direction = 1;
     }
-    if (keycode == 13)
+    if (keycode == 13 || keycode == 126)
         data->walk_direction = 1;
-    if (keycode == 1)
+    if (keycode == 1 || keycode == 125)
         data->walk_direction = -1;
     if (keycode == 124)
         data->turn_direction = 1;
@@ -70,9 +70,9 @@ int key_released(int keycode, t_struct *data)
         data->reset = data->reset == 1 ? 0 : 1;
     if (keycode == 257)
         data->shift = data->shift == 1 ? 0 : 1;
-    if (keycode == 13)
+    if (keycode == 13 || keycode == 126)
         data->walk_direction = 0;
-    if (keycode == 1)
+    if (keycode == 1 || keycode == 125)
         data->walk_direction = 0;
     if (keycode == 124)
         data->turn_direction = 0;
