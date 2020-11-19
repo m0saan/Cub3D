@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:09:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/18 12:50:40 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/19 22:18:57 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	set_up_data(t_struct *data)
 	data->walk_direction = 0;
 	data->walk_speed = 85;
 	data->turn_speed = 8 * (PI / 180);
-    data->reset = 0;
-    data->shift = 0;
-    data->m = 0;
-    data->h = 1;
-    data->left = 0;
-    data->start = 0;
-    init_ray_cast_data(data);
+	data->reset = 0;
+	data->shift = 0;
+	data->m = 0;
+	data->h = 1;
+	data->left = 0;
+	data->start = 0;
+	init_ray_cast_data(data);
 }
 
 void	init_ray_cast_data(t_struct *data)
@@ -65,7 +65,6 @@ void	init_ray_cast_data(t_struct *data)
 
 void	init_player(t_struct *data)
 {
-
 	data->x = (data->j_player + 0.5) * SQUARE_SIZE;
 	data->y = (data->i_player + 0.5) * SQUARE_SIZE;
 	set_up_player(data);
