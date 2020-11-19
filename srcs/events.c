@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/19 09:57:23 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/19 09:57:54 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int hud_key_pressed(int keycode, t_struct *data)
         data->t = data->t == 0 ? 1 : 0;
     if (keycode == 53)
     {
-        system("killall afplay 2&>/dev/null >/dev/null");
+        system("killall afplay 2&>/dev/null");
         destruct(data);
         ft_close(data);
     }
