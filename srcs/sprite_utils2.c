@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 12:19:53 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/20 22:40:45 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ float	calc_sprite_x_offset(t_struct *data, int i_spt, float spt_angle)
 
 	w_width = data->w_width;
 	return (((DEG(spt_angle) - DEG(data->rotation_angle)) * w_width)
-			/ SPRITE_SIZE + (((float)w_width / 2)
+			/ 60 + (((float)w_width / 2)
 				- (data->sprite[i_spt].size / 2)));
 }
 
