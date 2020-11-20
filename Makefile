@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: moboustt <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/11/20 01:32:34 by moboustt          #+#    #+#              #
+#    Updated: 2020/11/20 01:44:18 by moboustt         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # -*- This is a MakeFile -*- #
 
 NAME = Cub3D
@@ -14,7 +26,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c11
 DEBUG = -g3
 OPT = -Ofast
-LD_LIBS = -lm -framework OpenGL -framework AppKit libmlx.a libft.a
+LD_LIBS = -lm -framework OpenGL -framework AppKit libs/lib*.a
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAMES))
 OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
@@ -30,6 +42,7 @@ $(NAME): $(OBJ)
 $(OBJ):
 	@echo "Compiling..."
 	@ $(CC) -c $(CFLAGS) $(DEBUG) $(SRC) $(OPT)
+	@ mkdir -p objs
 	@ mv *.o $(OBJ_PATH)
 
 clean:
