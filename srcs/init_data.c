@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:09:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/19 22:42:58 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	set_up_data(t_struct *data)
 	data->turn_direction = 0;
 	data->walk_direction = 0;
 	data->walk_speed = 85;
-	data->turn_speed = 8 * (PI / 180);
+	data->turn_speed = 4 * (PI / 180);
 	data->reset = 0;
 	data->shift = 0;
 	data->m = 0;
-	data->h = 1;
+	data->t = 1;
 	data->left = 0;
 	data->start = 0;
 	init_ray_cast_data(data);
@@ -89,7 +89,7 @@ int		set_up_window(t_struct *data)
 	if ((data->mlx_ptr = mlx_init()) == NULL)
 		return (FALSE);
 	if ((data->win_ptr = mlx_new_window(data->mlx_ptr,
-					data->w_width, data->w_height, "Cube3d")) == NULL)
+					data->w_width, data->w_height, "Cub3d")) == NULL)
 		return (FALSE);
 	if ((data->img_ptr = mlx_new_image(data->mlx_ptr,
 					data->w_width, data->w_height)) == NULL)

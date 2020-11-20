@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:29:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/18 10:36:08 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/20 14:06:56 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ void	change_song(t_struct *data, int song_num)
 
 void	setup_ui_bar(t_struct *data)
 {
-	data->ui.ui_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
-			"img/ui/ui.xpm", &data->ui.w, &data->ui.h);
-	data->ui.img_data = (int *)mlx_get_data_addr(data->ui.ui_xpm,
-			&data->ui.bpp, &data->ui.sl, &data->ui.end);
+    if ((data->ui.ui_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/ui/ui.xpm", &data->ui.w, &data->ui.h)) == NULL)
+        error("Error detected");
+	if ((data->ui.img_data = (int *)mlx_get_data_addr(data->ui.ui_xpm,
+			&data->ui.bpp, &data->ui.sl, &data->ui.end)) == NULL)
+        error("Error detected");
 	data->ui.v_ratio = (float)data->ui.h / (float)data->w_height;
-	data->ui.h_ratio = (float)data->ui.w / (float)300;
+	data->ui.h_ratio = (float)data->ui.w / (float)data->ui_bar_size;
 }
 
 void	render_ui_bar(t_struct *data)
@@ -50,7 +52,7 @@ void	render_ui_bar(t_struct *data)
 	{
 		x = 0;
 		rx = 0;
-		while (x < 300 && rx < data->ui.w)
+		while (x < data->ui_bar_size && rx < data->ui.w)
 		{
 			ft_draw(data, x, y, data->ui.img_data[(ry * data->ui.w) + rx]);
 			rx = ++x * data->ui.h_ratio;
@@ -62,10 +64,12 @@ void	render_ui_bar(t_struct *data)
 
 void	setup_splash_screen(t_struct *data, char *splash_screen)
 {
-	data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr, splash_screen,
-			&data->splsh.w, &data->splsh.h);
-	data->splsh.img_data = (int *)mlx_get_data_addr(data->splsh.spl_xpm,
-			&data->splsh.bpp, &data->splsh.sl, &data->splsh.end);
+	if ((data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr, splash_screen,
+			&data->splsh.w, &data->splsh.h)) == NULL)
+        error("Error detected");
+	if ((data->splsh.img_data = (int *)mlx_get_data_addr(data->splsh.spl_xpm,
+			&data->splsh.bpp, &data->splsh.sl, &data->splsh.end)) == NULL)
+        error("Error detected");
 	data->splsh.vratio = (float)data->splsh.h / (float)data->w_height;
 	data->splsh.hratio = (float)data->splsh.w / (float)data->w_width;
 }

@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/10/26 10:40:39 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ int		check_textures_f_c_s_availibility(char *buff)
 
 int		check_read_values(t_struct *data)
 {
+	if (data->w_height > 2880)
+		data->w_height = 2880 / 2;
+	if (data->w_width > 5120)
+		data->w_width = 5120 / 2;
 	if (data->w_height == 0 || data->w_width == 0)
 		error("Error : missing width or height\n");
 	if (data->w_height < 0 || data->w_width < 0)
@@ -96,7 +100,7 @@ int		parse(t_struct *data, char **av)
 	ft_memset(buff, 0, len);
 	initialize_file_struct(data);
 	fd = open(av[1], O_RDONLY);
-	if (fd < 0 || read(fd, buff, len) < 0)
+	if (fd < 0 || read(fd, buff, len) <= 0)
 		error("No such file!\n");
 	if (!check_textures_f_c_s_availibility((char *)buff))
 		return (FALSE);
@@ -106,5 +110,6 @@ int		parse(t_struct *data, char **av)
 		error("Nod awa Nod!\n");
 	if (!check_read_values(data))
 		return (FALSE);
+	data->ui_bar_size = (15 * data->w_width) / 100;
 	return (TRUE);
 }

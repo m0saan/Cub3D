@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_file_parser1.c                                 :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 18:29:13 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/18 12:50:29 by moboustt         ###   ########.fr       */
+/*   Created: 2020/11/20 01:11:33 by moboustt          #+#    #+#             */
+/*   Updated: 2020/11/20 13:54:40 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ static void	insert_and_check_element(t_struct *data,
 {
 	data->map[i][j] = buff[data->pos];
 	if (is_not_valid_element(data, buff))
-	{
-		printf("elem : %c\n", i);
-		printf("position : %d\n", data->pos);
 		error("Invalid map element");
-	}
 	if (is_player(data, buff))
 	{
 		if (data->is_multi_player)
@@ -111,3 +107,9 @@ void		initialize_file_struct(t_struct *data)
 	ft_memset(data->we, 0, 15);
 	ft_memset(data->sp, 0, 15);
 }
+
+
+/*
+ * 100 -----> 1920
+ * 30 ------>
+ */
