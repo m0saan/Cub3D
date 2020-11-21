@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/21 00:20:29 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:46:00 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ typedef struct			s_struct
 	int					h;
 	int					mu;
 	int					start;
-	int                 ui_bar_size;
+	int					ui_bar_size;
 }						t_struct;
 
 void					change_song(t_struct *data, int song_num);

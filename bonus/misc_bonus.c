@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:29:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 14:06:56 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:45:14 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	change_song(t_struct *data, int song_num)
 
 void	setup_ui_bar(t_struct *data)
 {
-    if ((data->ui.ui_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
-			"img/ui/ui.xpm", &data->ui.w, &data->ui.h)) == NULL)
-        error("Error detected");
+	if ((data->ui.ui_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
+					"img/ui/ui.xpm", &data->ui.w, &data->ui.h)) == NULL)
+		error("Error detected");
 	if ((data->ui.img_data = (int *)mlx_get_data_addr(data->ui.ui_xpm,
-			&data->ui.bpp, &data->ui.sl, &data->ui.end)) == NULL)
-        error("Error detected");
+					&data->ui.bpp, &data->ui.sl, &data->ui.end)) == NULL)
+		error("Error detected");
 	data->ui.v_ratio = (float)data->ui.h / (float)data->w_height;
 	data->ui.h_ratio = (float)data->ui.w / (float)data->ui_bar_size;
 }
@@ -64,12 +64,13 @@ void	render_ui_bar(t_struct *data)
 
 void	setup_splash_screen(t_struct *data, char *splash_screen)
 {
-	if ((data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr, splash_screen,
-			&data->splsh.w, &data->splsh.h)) == NULL)
-        error("Error detected");
+	if ((data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
+					splash_screen, &data->splsh.w, &data->splsh.h)) == NULL)
+		error("Error detected");
 	if ((data->splsh.img_data = (int *)mlx_get_data_addr(data->splsh.spl_xpm,
-			&data->splsh.bpp, &data->splsh.sl, &data->splsh.end)) == NULL)
-        error("Error detected");
+					&data->splsh.bpp, &data->splsh.sl,
+					&data->splsh.end)) == NULL)
+		error("Error detected");
 	data->splsh.vratio = (float)data->splsh.h / (float)data->w_height;
 	data->splsh.hratio = (float)data->splsh.w / (float)data->w_width;
 }

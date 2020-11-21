@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:33 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 13:54:40 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:44:02 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,3 @@ void		initialize_file_struct(t_struct *data)
 	ft_memset(data->we, 0, 25);
 	ft_memset(data->sp, 0, 25);
 }
-
-
-/*
- * 100 -----> 1920
- * 30 ------>
- */

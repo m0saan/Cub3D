@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 23:32:27 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:43:32 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int		update(t_struct *data)
 {
-		cast_rays(data);
-		render_walls(data);
-		move_player(data);
-		if (g_screenshot)
-		{
-			screen(data);
-			destruct(data);
-			ft_close(data);
-		}
-		if (data->reset)
-			init_player(data);
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-				data->img_ptr, 0, 0);
+	cast_rays(data);
+	render_walls(data);
+	move_player(data);
+	if (g_screenshot)
+	{
+		screen(data);
+		destruct(data);
+		ft_close(data);
+	}
+	if (data->reset)
+		init_player(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->img_ptr, 0, 0);
 	return (FALSE);
 }
 
