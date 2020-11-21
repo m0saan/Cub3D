@@ -76,10 +76,10 @@ int		check_textures_f_c_s_availibility(char *buff)
 
 int		check_read_values(t_struct *data)
 {
-	if (data->w_height > 2880)
-		data->w_height = 2880 / 2;
-	if (data->w_width > 5120)
-		data->w_width = 5120 / 2;
+	if (data->w_height > 1800)
+		data->w_height = 1800;
+	if (data->w_width > 3200)
+		data->w_width = 3200;
 	if (data->w_height == 0 || data->w_width == 0)
 		error("Error : missing width or height\n");
 	if (data->w_height < 0 || data->w_width < 0)
