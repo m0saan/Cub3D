@@ -6,13 +6,19 @@
 #    By: moboustt <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 01:32:34 by moboustt          #+#    #+#              #
-#    Updated: 2020/11/21 16:21:30 by moboustt         ###   ########.fr        #
+#    Updated: 2020/11/21 16:44:00 by moboustt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # -*- This is a MakeFile -*- #
 
 NAME = Cub3D
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -std=c11
+DEBUG = -g3
+OPT = -Ofast
+LD_LIBS = -lm -framework OpenGL -framework AppKit libs/lib*.a -fsanitize=address
 
 SRC_PATH = srcs
 SRC_NAMES = cube3d_utils.c map_file_parser_utils.c sprite.c destruct.c sprite_utils.c events.c \
@@ -28,32 +34,20 @@ BONUS_NAMES = walls_bonus.c wall_utils_bonus.c destruct_bonus.c events_bonus.c m
 			sprite_bonus.c sprite_utils2_bonus.c sprite_utils_bonus.c
 
 OBJ_PATH = objs
-OBJ_NAME = $(SRC_NAMES:.c=.o)
-
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11
-DEBUG = -g3
-OPT = -Ofast
-LD_LIBS = -lm -framework OpenGL -framework AppKit libs/lib*.a -fsanitize=address
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAMES))
-OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 BONUS_SRCS = $(addprefix $(SRC_PATH)/, $(SRC_BONUS_NAMES))
 BONUS__ = $(addprefix $(BONUS_PATH)/, $(BONUS_NAMES))
 
-all: $(NAME)
+all: fclean $(NAME)
 
 $(NAME): $(SRC)
 	@ $(CC) $(CFLAGS) $(SRC) $(OPT) -o $(NAME) $(LD_LIBS)
 
-bonus: $(BB)
-
-$(BB): $(BONUS_SRCS) $(BONUS__)
+bonus: fclean
 	@  $(CC) $(CFLAGS) $(BONUS_SRCS) $(BONUS__) $(OPT) -o $(NAME) $(LD_LIBS)
 
 clean:
-	@ rm -rf $(OBJ_PATH)/*.o
-	@echo "Makefile : Cleaning .o files..."
 
 build:
 	@./Cub3D "maps/map.cub"
