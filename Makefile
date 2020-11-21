@@ -6,18 +6,26 @@
 #    By: moboustt <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 01:32:34 by moboustt          #+#    #+#              #
-#    Updated: 2020/11/20 01:44:18 by moboustt         ###   ########.fr        #
+#    Updated: 2020/11/21 16:21:30 by moboustt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # -*- This is a MakeFile -*- #
 
 NAME = Cub3D
+
 SRC_PATH = srcs
-SRC_NAMES = cube3d_utils.c map_file_parser_utils.c sprite.c destruct.c misc.c sprite_utils.c events.c \
-parse_floor_ceilling_resolution.c sprite_utils2.c init_data.c parse_map.c utils.c intersection.c \
-parse_textures.c utils2.c main.c ray_casting.c wall_utils.c map_error_handling.c render.c \
-walls.c map_file_parser.c screenshot.c
+SRC_NAMES = cube3d_utils.c map_file_parser_utils.c sprite.c destruct.c sprite_utils.c events.c \
+			parse_floor_ceilling_resolution.c sprite_utils2.c init_data.c parse_map.c utils.c \
+			intersection.c parse_textures.c utils2.c main.c ray_casting.c wall_utils.c \
+			map_error_handling.c render.c walls.c map_file_parser.c screenshot.c
+
+SRC_BONUS_NAMES = cube3d_utils.c map_file_parser_utils.c parse_floor_ceilling_resolution.c init_data.c\
+                  intersection.c parse_textures.c utils2.c parse_map.c utils.c ray_casting.c \
+                  			map_error_handling.c render.c map_file_parser.c screenshot.c
+BONUS_PATH = bonus
+BONUS_NAMES = walls_bonus.c wall_utils_bonus.c destruct_bonus.c events_bonus.c main_bonus.c misc_bonus.c \
+			sprite_bonus.c sprite_utils2_bonus.c sprite_utils_bonus.c
 
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAMES:.c=.o)
@@ -26,24 +34,22 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c11
 DEBUG = -g3
 OPT = -Ofast
-LD_LIBS = -lm -framework OpenGL -framework AppKit libs/lib*.a
+LD_LIBS = -lm -framework OpenGL -framework AppKit libs/lib*.a -fsanitize=address
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAMES))
 OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
-
+BONUS_SRCS = $(addprefix $(SRC_PATH)/, $(SRC_BONUS_NAMES))
+BONUS__ = $(addprefix $(BONUS_PATH)/, $(BONUS_NAMES))
 
 all: $(NAME)
-	 @echo "Build successful!"
 
-$(NAME): $(OBJ)
-	@echo "linking..."
-	@ $(CC) $(OBJ) -o $(NAME) $(LD_LIBS)
+$(NAME): $(SRC)
+	@ $(CC) $(CFLAGS) $(SRC) $(OPT) -o $(NAME) $(LD_LIBS)
 
-$(OBJ):
-	@echo "Compiling..."
-	@ $(CC) -c $(CFLAGS) $(DEBUG) $(SRC) $(OPT)
-	@ mkdir -p objs
-	@ mv *.o $(OBJ_PATH)
+bonus: $(BB)
+
+$(BB): $(BONUS_SRCS) $(BONUS__)
+	@  $(CC) $(CFLAGS) $(BONUS_SRCS) $(BONUS__) $(OPT) -o $(NAME) $(LD_LIBS)
 
 clean:
 	@ rm -rf $(OBJ_PATH)/*.o
