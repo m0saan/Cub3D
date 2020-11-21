@@ -101,11 +101,11 @@ void		initialize_file_struct(t_struct *data)
 	data->found_r = 0;
 	data->found_c = 0;
 	data->found_f = 0;
-	ft_memset(data->no, 0, 15);
-	ft_memset(data->so, 0, 15);
-	ft_memset(data->ea, 0, 15);
-	ft_memset(data->we, 0, 15);
-	ft_memset(data->sp, 0, 15);
+	ft_memset(data->no, 0, 25);
+	ft_memset(data->so, 0, 25);
+	ft_memset(data->ea, 0, 25);
+	ft_memset(data->we, 0, 25);
+	ft_memset(data->sp, 0, 25);
 }
 
 
