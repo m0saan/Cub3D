@@ -48,7 +48,7 @@ int		not_valid_y_offset(const t_struct *data, float y_off, size_t j)
 
 int		not_valid_x_offset(const t_struct *data, float x_off, size_t i)
 {
-	return (x_off + i < data->ui_bar_size || x_off + i > (float)data->w_width);
+	return (x_off + i < 0 || x_off + i > (float)data->w_width);
 }
 
 void	set_up_sprite(t_struct *data)

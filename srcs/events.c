@@ -14,11 +14,6 @@
 
 int	hud_key_pressed(int keycode, t_struct *data)
 {
-	if (keycode >= 18 && keycode <= 21)
-	{
-		data->mu = 2;
-		change_song(data, keycode - 17);
-	}
 	if (keycode == 15)
 		data->reset = data->reset == 0 ? 1 : 0;
 	if (keycode == 257)
@@ -31,7 +26,6 @@ int	hud_key_pressed(int keycode, t_struct *data)
 		data->t = data->t == 0 ? 1 : 0;
 	if (keycode == 53)
 	{
-		system("killall afplay 2&>/dev/null");
 		destruct(data);
 		ft_close(data);
 	}
@@ -41,8 +35,6 @@ int	hud_key_pressed(int keycode, t_struct *data)
 int	key_pressed(int keycode, t_struct *data)
 {
 	hud_key_pressed(keycode, data);
-	if (keycode == 36)
-		data->start = TRUE;
 	if (keycode == 0)
 	{
 		data->left = (M_PI * 0.5F) * (-1);

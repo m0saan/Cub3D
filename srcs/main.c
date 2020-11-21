@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/20 23:32:27 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int		update(t_struct *data)
 {
-	if (!g_screenshot && !data->start)
-		render_splash_screen(data, "img/start/start.xpm");
-	else
-	{
 		cast_rays(data);
 		render_walls(data);
 		move_player(data);
@@ -29,10 +25,8 @@ int		update(t_struct *data)
 		}
 		if (data->reset)
 			init_player(data);
-		render_ui_bar(data);
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 				data->img_ptr, 0, 0);
-	}
 	return (FALSE);
 }
 
@@ -41,7 +35,6 @@ int		initialize_window(t_struct *data)
 	set_up_data(data);
 	if (!(set_up_window(data)))
 		return (FALSE);
-	update(data);
 	texture_from_file(data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
@@ -76,7 +69,6 @@ int		main(int ac, char *av[])
 	if (!parse(data, av))
 		return (1);
 	g_rays = (t_ray *)malloc(sizeof(t_ray) * data->w_width);
-	system("afplay songs/song1.mp3&");
 	if (!initialize_window(data))
 		return (TRUE);
 	free(data);

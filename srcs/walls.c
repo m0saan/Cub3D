@@ -70,7 +70,7 @@ void		render_walls(t_struct *data)
 	int		floor;
 	float	y;
 
-	data->i_wall_index = g_screenshot ? 0 : data->ui_bar_size;
+	data->i_wall_index = 0;
 	if (g_screenshot)
 		texture_from_file(data);
 	while (data->i_wall_index++ < data->w_width - 1)

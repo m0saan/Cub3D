@@ -27,7 +27,6 @@ int		skip_number(const char *str)
 void	error(char *str)
 {
 	write(1, str, ft_strlen(str));
-	system("killall afplay");
 	exit(EXIT_FAILURE);
 }
 
