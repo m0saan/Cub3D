@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:09:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:07:21 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	set_up_data(t_struct *data)
 	data->t = 1;
 	data->left = 0;
 	data->start = 0;
+	data->ui.is_setup = 0;
+	data->splsh.is_setup = 0;
 	init_ray_cast_data(data);
 }
 

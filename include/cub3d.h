@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/21 17:46:00 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/22 12:59:02 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct			s_ui
 	int					bpp;
 	int					sl;
 	int					end;
+	int                 is_setup;
 }						t_ui;
 
 typedef struct			s_splash
@@ -65,6 +66,7 @@ typedef struct			s_splash
 	int					bpp;
 	int					sl;
 	int					end;
+	int is_setup;
 }						t_splash;
 
 typedef struct			s_rgb

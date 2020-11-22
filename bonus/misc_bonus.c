@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:29:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/21 17:45:14 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:08:15 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	change_song(t_struct *data, int song_num)
 
 void	setup_ui_bar(t_struct *data)
 {
+	data->ui.is_setup = 1;
 	if ((data->ui.ui_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
 					"img/ui/ui.xpm", &data->ui.w, &data->ui.h)) == NULL)
 		error("Error detected");
@@ -47,7 +48,8 @@ void	render_ui_bar(t_struct *data)
 
 	y = 0;
 	ry = 0;
-	setup_ui_bar(data);
+	if (!data->ui.is_setup)
+		setup_ui_bar(data);
 	while (y < data->w_height && ry < data->ui.h)
 	{
 		x = 0;
@@ -64,6 +66,7 @@ void	render_ui_bar(t_struct *data)
 
 void	setup_splash_screen(t_struct *data, char *splash_screen)
 {
+	data->splsh.is_setup = 1;
 	if ((data->splsh.spl_xpm = mlx_xpm_file_to_image(data->mlx_ptr,
 					splash_screen, &data->splsh.w, &data->splsh.h)) == NULL)
 		error("Error detected");
@@ -84,7 +87,8 @@ void	render_splash_screen(t_struct *data, char *splash_screen)
 
 	y = 0;
 	ry = 0;
-	setup_splash_screen(data, splash_screen);
+	if (!data->splsh.is_setup)
+		setup_splash_screen(data, splash_screen);
 	while (y < data->w_height && ry < data->splsh.h)
 	{
 		x = 0;
