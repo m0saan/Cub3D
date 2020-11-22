@@ -32,5 +32,5 @@ void	error(char *str)
 
 int		is_valid_color(const t_struct *data, int id)
 {
-	return (data->sprite_tex_data[id] != BLACK);
+	return (data->sprite_tex_data[id] != data->sprite_tex_data[0]);
 }
