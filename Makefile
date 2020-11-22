@@ -6,7 +6,7 @@
 #    By: moboustt <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 01:32:34 by moboustt          #+#    #+#              #
-#    Updated: 2020/11/21 16:44:00 by moboustt         ###   ########.fr        #
+#    Updated: 2020/11/22 12:52:46 by moboustt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c11
 DEBUG = -g3
 OPT = -Ofast
-LD_LIBS = -lm -framework OpenGL -framework AppKit libs/lib*.a -fsanitize=address
-
+LD_LIBS = -lm -framework OpenGL -framework AppKit libs/lib*.a
 SRC_PATH = srcs
 SRC_NAMES = cube3d_utils.c map_file_parser_utils.c sprite.c destruct.c sprite_utils.c events.c \
 			parse_floor_ceilling_resolution.c sprite_utils2.c init_data.c parse_map.c utils.c \
