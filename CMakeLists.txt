@@ -26,6 +26,6 @@ add_executable(TEST srcs/main.c
         srcs/map_error_handling.c
         srcs/destruct.c)
 
-target_link_libraries(TEST ${CMAKE_SOURCE_DIR}/libmlx.a ${CMAKE_SOURCE_DIR}/libft.a)
+target_link_libraries(TEST ${CMAKE_SOURCE_DIR}/libs/libmlx.a ${CMAKE_SOURCE_DIR}/libs/libft.a)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Ofast -fsanitize=address -lm -framework OpenGL -framework AppKit")
