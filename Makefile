@@ -6,7 +6,7 @@
 #    By: moboustt <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 01:32:34 by moboustt          #+#    #+#              #
-#    Updated: 2020/11/23 09:42:40 by moboustt         ###   ########.fr        #
+#    Updated: 2020/11/23 12:28:03 by moboustt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,28 +27,28 @@ BONUS_PATH = bonus
 BONUS_NAMES = walls_bonus.c wall_utils_bonus.c destruct_bonus.c events_bonus.c main_bonus.c misc_bonus.c \
 			sprite_bonus.c sprite_utils2_bonus.c sprite_utils_bonus.c
 
-OBJ_PATH = objs
-OBJ_NAME = $(SRC_NAMES:.c=.o)
+LIBFT_PATH = libft
+LIBFT = $(LIBFT_PATH)/libft.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c11
 DEBUG = -g3
 OPT = -Ofast
-LD_LIBS = -lm -framework OpenGL -framework AppKit libs/lib*.a
+LD_LIBS = -lm -framework OpenGL -framework AppKit libs/libmlx.a
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAMES))
-OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 BONUS_SRCS = $(addprefix $(SRC_PATH)/, $(SRC_BONUS_NAMES))
 BONUS__ = $(addprefix $(BONUS_PATH)/, $(BONUS_NAMES))
 
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@ $(CC) $(CFLAGS) $(SRC) $(OPT) -o $(NAME) $(LD_LIBS)
+	@ make -C $(LIBFT_PATH)
+	@ $(CC) $(CFLAGS) $(SRC) $(OPT) -o $(NAME) $(LD_LIBS) $(LIBFT)
 
 bonus: fclean $(BONUS_SRCS) $(BONUS__)
-	@  $(CC) $(CFLAGS) $(BONUS_SRCS) $(BONUS__) $(OPT) -o $(NAME) $(LD_LIBS)
-
+	@ make -C $(LIBFT_PATH)
+	@  $(CC) $(CFLAGS) $(BONUS_SRCS) $(BONUS__) $(OPT) -o $(NAME) $(LD_LIBS) $(LIBFT)
 
 build:
 	@./Cub3D "maps/map.cub"
@@ -56,9 +56,15 @@ build:
 save:
 	@./Cub3D "maps/map.cub" "--save"
 
+norm:
+	@ norminette primary
+	@ norminette bonus
+	@ norminette include
+
 clean:
 
 fclean: clean
 	@ rm -rf $(NAME)
+	@ make fclean -C $(LIBFT_PATH)
 
 re: fclean all
