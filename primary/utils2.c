@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:54:58 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/21 01:33:52 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:49:31 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		skip_number(const char *str)
 void	error(char *str)
 {
 	write(1, str, ft_strlen(str));
+    system("killall afplay 2&>/dev/null >/dev/null");
 	exit(EXIT_FAILURE);
 }
 
