@@ -14,7 +14,7 @@
 
 NAME = Cub3D
 
-SRC_PATH = srcs
+SRC_PATH = primary
 SRC_NAMES = cube3d_utils.c map_file_parser_utils.c sprite.c destruct.c sprite_utils.c events.c \
 			parse_floor_ceilling_resolution.c sprite_utils2.c init_data.c parse_map.c utils.c \
 			intersection.c parse_textures.c utils2.c main.c ray_casting.c wall_utils.c \

@@ -3,28 +3,28 @@ project(TEST C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(TEST srcs/main.c
-        srcs/ray_casting.c
-        srcs/cube3d_utils.c
-        srcs/sprite.c
-        srcs/events.c
-        srcs/map_file_parser.c
-        srcs/parse_textures.c
-        srcs/parse_map.c
-        srcs/parse_floor_ceilling_resolution.c
-        srcs/map_file_parser_utils.c
-        srcs/render.c
-        srcs/utils.c
-        srcs/screenshot.c
-        srcs/walls.c
-        srcs/intersection.c
-        srcs/sprite_utils.c
-        srcs/sprite_utils2.c
-        srcs/wall_utils.c
-        srcs/init_data.c
-        srcs/utils2.c
-        srcs/map_error_handling.c
-        srcs/destruct.c)
+add_executable(TEST primary/main.c
+        primary/ray_casting.c
+        primary/cube3d_utils.c
+        primary/sprite.c
+        primary/events.c
+        primary/map_file_parser.c
+        primary/parse_textures.c
+        primary/parse_map.c
+        primary/parse_floor_ceilling_resolution.c
+        primary/map_file_parser_utils.c
+        primary/render.c
+        primary/utils.c
+        primary/screenshot.c
+        primary/walls.c
+        primary/intersection.c
+        primary/sprite_utils.c
+        primary/sprite_utils2.c
+        primary/wall_utils.c
+        primary/init_data.c
+        primary/utils2.c
+        primary/map_error_handling.c
+        primary/destruct.c)
 
 target_link_libraries(TEST ${CMAKE_SOURCE_DIR}/libs/libmlx.a ${CMAKE_SOURCE_DIR}/libs/libft.a)
 
