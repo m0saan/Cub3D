@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 10:20:27 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 10:22:04 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		read_map(t_struct *data, char *buff)
 			get_western_texture_path(data, buff);
 		else if (buff[data->pos] == 'E' && buff[data->pos + 1] == 'A')
 			get_easter_texture_path(data, buff);
-		else if (buff[data->pos] == 'S' && buff[data->pos + 1] == ' ')
+		else if (buff[data->pos] == 'S')
 			get_sprite_path(data, buff);
 		else if ((buff[data->pos] == '1' || buff[data->pos] == ' ')
 				&& data->get_to_map == 8)
