@@ -67,15 +67,15 @@ void	get_floor_values(t_struct *data, char *buff)
 		error("duplicate floor symbol\n");
 	skip_spaces(data, buff);
 	data->f_red = ft_atoi(&buff[data->pos]);
-	data->pos += intLen(data->f_red);
+	data->pos += int_len(data->f_red);
 	if (!skip_spaces_til_comma(data, buff))
 		error("PPPPPPPP");
 	data->f_green = ft_atoi(&buff[data->pos]);
-	data->pos += intLen(data->f_green);
+	data->pos += int_len(data->f_green);
 	if (!skip_spaces_til_comma(data, buff))
 		error("PPPPPPPP");
 	data->f_blue = ft_atoi(&buff[data->pos]);
-	data->pos += intLen(data->f_blue);
+	data->pos += int_len(data->f_blue);
 	data->get_to_map += 1;
 	data->found_f = 1;
 }
@@ -87,15 +87,15 @@ void	get_ceilling_values(t_struct *data, char *buff)
 	data->pos += 1;
 	skip_spaces(data, buff);
 	data->c_red = ft_atoi(&buff[data->pos]);
-	data->pos += intLen(data->c_red);
+	data->pos += int_len(data->c_red);
 	if (!skip_spaces_til_comma(data, buff))
 		error("PPPPPPPP");
 	data->c_green = ft_atoi(&buff[data->pos]);
-	data->pos += intLen(data->c_green);
+	data->pos += int_len(data->c_green);
 	if (!skip_spaces_til_comma(data, buff))
 		error("PPPPPPPP");
 	data->c_blue = ft_atoi(&buff[data->pos]);
-	data->pos += intLen(data->c_blue);
+	data->pos += int_len(data->c_blue);
 	data->get_to_map += 1;
 	data->found_c = 1;
 }
