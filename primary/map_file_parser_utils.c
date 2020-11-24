@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:07 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 09:45:36 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 int		is_valid_texture(t_struct *data, const char *buff)
 {
-	int flag;
-
-	flag = 0;
-	while (buff[data->pos] != '.' && buff[data->pos + 1] != '/' && ++flag)
+	if (buff[data->pos] != ' ')
+		return (TRUE);
+	while (buff[data->pos] != '.' && buff[data->pos + 1] != '/')
 	{
+		if (buff[data->pos] != ' ')
+			error("Invalid separator\n");
 		if (buff[data->pos] == '\n')
 			error("Invalid texture alignment\n");
 		(data->pos)++;
 	}
-	return (flag);
+	return (buff[data->pos] != '.' && buff[data->pos + 1] != '/');
 }
 
 int		is_negative(int v)
