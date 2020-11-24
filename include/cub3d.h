@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 10:09:42 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 11:11:26 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
-# include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 # include "../libs/OpenGL/mlx.h"
 # include "libft.h"
-
-# define BLACK 0x000000
 
 # define PI 3.14159265359F
 # define TWO_PI 2 * PI
