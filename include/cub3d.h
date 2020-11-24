@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/23 09:49:29 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 09:46:30 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,8 +298,9 @@ int						calculate_index(float value);
 int						is_not_valid_element(t_struct *data, const char *buff);
 int						valid_indices(t_struct *data, int x, int y);
 int						screen(t_struct *data);
-void					screen_data(t_struct *data, int x);
-void					screen_init(t_struct *data, unsigned char *header);
+void					capture_window_data(t_struct *data, int x);
+void					set_up_bmp_header(t_struct *data,
+		unsigned char *header);
 int						destruct(t_struct *data);
 void					error(char *str);
 t_rgb					*color_converter(int hex_value);
