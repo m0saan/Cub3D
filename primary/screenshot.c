@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:24:37 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 09:11:01 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 09:45:59 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		screen(t_struct *data)
 	unsigned char	header[len];
 
 	ft_memset(header, 0, len);
-    set_up_bmp_header(data, header);
+	set_up_bmp_header(data, header);
 	data->bitmap.buf = malloc((data->bitmap.image_size));
 	x = 0;
 	data->bitmap.row = data->w_height - 1;
@@ -30,7 +30,7 @@ int		screen(t_struct *data)
 	{
 		data->bitmap.col = 0;
 		while (data->bitmap.col++ < data->w_width - 1)
-            capture_window_data(data, x);
+			capture_window_data(data, x);
 		x++;
 	}
 	data->bitmap.fd = open(file_name, O_WRONLY | O_CREAT);
@@ -67,7 +67,6 @@ void	set_up_bmp_header(t_struct *data, unsigned char *header)
 	data->bitmap.bf_off_bits = 54;
 	data->bitmap.file_size = 54 + data->bitmap.image_size;
 	data->bitmap.biplanes = 1;
-
 	ft_memcpy(header, "BM", 2);
 	ft_memcpy(header + 2, &(data->bitmap.file_size), 4);
 	ft_memcpy(header + 10, &(data->bitmap.bf_off_bits), 4);
