@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 14:54:01 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 10:03:38 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		ft_ljodran(t_struct *data, int y)
 	which_text = which_texture(data);
 	index = normalize_index(get_color_index(data));
 	ft_draw(data, data->i_wall_index, y, data->t
-			? (int)which_text[index] : 0xffffff);
+			? (int)which_text[index] : 0x2d5d83);
 }
 
 void		render_walls(t_struct *data)
