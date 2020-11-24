@@ -6,7 +6,7 @@
 #    By: moboustt <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 01:32:34 by moboustt          #+#    #+#              #
-#    Updated: 2020/11/23 12:28:03 by moboustt         ###   ########.fr        #
+#    Updated: 2020/11/24 10:05:22 by moboustt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ SRC_NAMES = cube3d_utils.c map_file_parser_utils.c sprite.c destruct.c sprite_ut
 
 SRC_BONUS_NAMES = cube3d_utils.c map_file_parser_utils.c parse_floor_ceilling_resolution.c init_data.c\
                   intersection.c parse_textures.c utils2.c parse_map.c utils.c ray_casting.c \
-                  			map_error_handling.c render.c map_file_parser.c screenshot.c
+                  			map_error_handling.c render.c map_file_parser.c screenshot.c wall_utils.c
 BONUS_PATH = bonus
-BONUS_NAMES = walls_bonus.c wall_utils_bonus.c destruct_bonus.c events_bonus.c main_bonus.c misc_bonus.c \
+BONUS_NAMES = walls_bonus.c destruct_bonus.c events_bonus.c main_bonus.c misc_bonus.c \
 			sprite_bonus.c sprite_utils2_bonus.c sprite_utils_bonus.c
 
 LIBFT_PATH = libft
@@ -33,7 +33,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c11
 DEBUG = -g3
-OPT = -Ofast
+OPT = -Ofast -O3
 LD_LIBS = -lm -framework OpenGL -framework AppKit libs/libmlx.a
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAMES))
