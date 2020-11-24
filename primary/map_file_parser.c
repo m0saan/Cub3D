@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 10:20:27 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,6 @@ int		check_read_values(t_struct *data)
 		error("Error : missing width or height\n");
 	if (data->w_height < 0 || data->w_width < 0)
 		error("Error : width or height cannot be negative\n");
-	if (!data->no[0] || !data->so[0]
-			|| !data->we[0] || !data->we[0])
-		error("Error : wrong texture path\n");
 	check_floor_ceilling_values(data);
 	return (TRUE);
 }
@@ -107,7 +104,7 @@ int		parse(t_struct *data, char **av)
 	if (!read_map(data, (char *)buff))
 		return (FALSE);
 	if (!data->is_multi_player)
-		error("Nod awa Nod!\n");
+		error("\e[0;31m Nod awa Nod!\n");
 	if (!check_read_values(data))
 		return (FALSE);
 	data->ui_bar_size = (15 * data->w_width) / 100;
