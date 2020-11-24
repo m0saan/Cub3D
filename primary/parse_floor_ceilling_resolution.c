@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:23 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 11:11:02 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 12:14:29 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ void	get_resolution_values(t_struct *data, char *buff)
 	if (data->found_r)
 		error("duplicate resolution symbol\n");
 	data->pos++;
-	if (buff[data->pos] != ' ' || !ft_isdigit(buff[++data->pos]))
-		error("Resolution identifier misalignment!\n");
+	if (buff[data->pos] != ' ')
+		error("Resolution identifier misalignment\n");
+	skip_spaces(data, buff);
 	data->w_width = ft_atoi(&buff[data->pos++]);
 	data->pos += skip_number(&buff[data->pos]);
 	data->w_height = ft_atoi(&buff[data->pos]);
