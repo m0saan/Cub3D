@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:23 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 09:43:51 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 11:11:02 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		skip_spaces_til_comma(t_struct *data, char *buff)
 		if (ft_isdigit(buff[data->pos + 1]))
 			return (TRUE);
 		if (buff[data->pos] != ' ')
-			error("Invalid separator\n");
+			error("Error in color values\n");
 		data->pos++;
 	}
 	data->pos++;
@@ -44,7 +44,7 @@ int		skip_spaces_til_comma(t_struct *data, char *buff)
 		return (TRUE);
 	else if (buff[data->pos] == ' ' || buff[data->pos + 1] == ' ')
 		skip_spaces(data, buff);
-	return (TRUE);
+	return (ft_isdigit(buff[data->pos]));
 }
 
 void	get_resolution_values(t_struct *data, char *buff)
@@ -65,19 +65,23 @@ void	get_floor_values(t_struct *data, char *buff)
 {
 	if (data->found_f)
 		error("duplicate floor symbol\n");
+	if (buff[data->pos + 1] != ' ')
+		error("Floor identifier misalignment\n");
 	skip_spaces(data, buff);
 	data->f_red = ft_atoi(&buff[data->pos]);
 	data->pos += int_len(data->f_red);
 	if (!skip_spaces_til_comma(data, buff))
-		error("PPPPPPPP");
+		error("Error in color values");
 	data->f_green = ft_atoi(&buff[data->pos]);
 	data->pos += int_len(data->f_green);
 	if (!skip_spaces_til_comma(data, buff))
-		error("PPPPPPPP");
+		error("Error in color values");
 	data->f_blue = ft_atoi(&buff[data->pos]);
 	data->pos += int_len(data->f_blue);
 	data->get_to_map += 1;
 	data->found_f = 1;
+	if (!data->f_red || !data->f_green || !data->f_blue)
+		error("missing color");
 }
 
 void	get_ceilling_values(t_struct *data, char *buff)
@@ -85,17 +89,21 @@ void	get_ceilling_values(t_struct *data, char *buff)
 	if (data->found_c)
 		error("duplicate ceilling symbol\n");
 	data->pos += 1;
+	if (buff[data->pos] != ' ')
+		error("Ceilling identifier misalignment\n");
 	skip_spaces(data, buff);
 	data->c_red = ft_atoi(&buff[data->pos]);
 	data->pos += int_len(data->c_red);
 	if (!skip_spaces_til_comma(data, buff))
-		error("PPPPPPPP");
+		error("Error in color values");
 	data->c_green = ft_atoi(&buff[data->pos]);
 	data->pos += int_len(data->c_green);
 	if (!skip_spaces_til_comma(data, buff))
-		error("PPPPPPPP");
+		error("Error in color values");
 	data->c_blue = ft_atoi(&buff[data->pos]);
 	data->pos += int_len(data->c_blue);
 	data->get_to_map += 1;
 	data->found_c = 1;
+	if (!data->c_red || !data->c_green || !data->c_blue)
+		error("missing color");
 }
