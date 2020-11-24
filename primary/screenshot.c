@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:24:37 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 13:50:57 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 09:11:01 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		screen(t_struct *data)
 	unsigned char	header[len];
 
 	ft_memset(header, 0, len);
-	screen_init(data, header);
+    set_up_bmp_header(data, header);
 	data->bitmap.buf = malloc((data->bitmap.image_size));
 	x = 0;
 	data->bitmap.row = data->w_height - 1;
@@ -30,7 +30,7 @@ int		screen(t_struct *data)
 	{
 		data->bitmap.col = 0;
 		while (data->bitmap.col++ < data->w_width - 1)
-			screen_data(data, x);
+            capture_window_data(data, x);
 		x++;
 	}
 	data->bitmap.fd = open(file_name, O_WRONLY | O_CREAT);
@@ -41,7 +41,7 @@ int		screen(t_struct *data)
 	return (0);
 }
 
-void	screen_data(t_struct *data, int x)
+void	capture_window_data(t_struct *data, int x)
 {
 	int index;
 
@@ -57,7 +57,7 @@ void	screen_data(t_struct *data, int x)
 	free(g_rgb);
 }
 
-void	screen_init(t_struct *data, unsigned char *header)
+void	set_up_bmp_header(t_struct *data, unsigned char *header)
 {
 	data->bitmap.bit_per_pxl = 24;
 	data->bitmap.width_in_pxl = ((data->w_width *
@@ -67,6 +67,7 @@ void	screen_init(t_struct *data, unsigned char *header)
 	data->bitmap.bf_off_bits = 54;
 	data->bitmap.file_size = 54 + data->bitmap.image_size;
 	data->bitmap.biplanes = 1;
+
 	ft_memcpy(header, "BM", 2);
 	ft_memcpy(header + 2, &(data->bitmap.file_size), 4);
 	ft_memcpy(header + 10, &(data->bitmap.bf_off_bits), 4);
