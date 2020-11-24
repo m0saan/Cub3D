@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 09:46:30 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 10:09:42 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,5 +344,5 @@ void					render_splash_screen(t_struct *data,
 		char *splash_screen);
 int						destruct(t_struct *data);
 int						ft_close(void *param);
-
+int						int_len(int x);
 #endif
