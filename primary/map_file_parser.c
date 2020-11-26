@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/26 13:49:15 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:55:58 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int		read_map(t_struct *data, char *buff)
 {
 	while (buff[data->pos])
 	{
-		not_valid_element(data, buff);
 		if (buff[data->pos] == 'R')
 			get_resolution_values(data, buff);
 		else if (buff[data->pos] == 'F')
@@ -54,6 +53,7 @@ int		read_map(t_struct *data, char *buff)
 		else if ((buff[data->pos] == '1' || buff[data->pos] == ' ')
 				&& data->get_to_map == 8)
 			return (screw_this_norminette(data, buff));
+		not_valid_element(data, buff);
 		data->pos++;
 	}
 	return (TRUE);
