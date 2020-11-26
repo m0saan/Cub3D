@@ -18,16 +18,16 @@ void	check_floor_ceilling_values(t_struct *data)
 
 	if (is_negative(data->f_red) || is_negative(data->f_green)
 			|| is_negative(data->f_blue))
-		error("color values cannot be negative\n");
+		error("\e[0;31m color values cannot be negative\n");
 	if (data->f_red > max_color_value || data->f_green > max_color_value
 			|| data->f_blue > max_color_value)
-		error("color values cannot exceed the value 255\n");
+		error("\e[0;31m color values cannot exceed the value 255\n");
 	if (is_negative(data->c_red) || is_negative(data->c_green)
 			|| is_negative(data->c_blue))
-		error("color values cannot be negative\n");
+		error("\e[0;31m color values cannot be negative\n");
 	if (data->c_red > max_color_value || data->c_green > max_color_value
 			|| data->c_blue > max_color_value)
-		error("color values cannot exceed the value 255\n");
+		error("\e[0;31m color values cannot exceed the value 255\n");
 }
 
 int		read_map(t_struct *data, char *buff)
@@ -65,12 +65,12 @@ int		check_textures_f_c_s_availibility(char *buff)
 	len = ft_strlen(buff);
 	if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len))
 			|| !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
-		error("Texture error!\n");
+		error("\e[0;31m Texture error!\n");
 	if (!(ft_strchr((char *)buff, 'R'))
 			|| !(ft_strchr((char *)buff, 'F'))
 			|| !(ft_strchr((char *)buff, 'C'))
 			|| !(ft_strchr((char *)buff, 'S')))
-		error("Error : valuable informations are not involved!\n");
+		error("\e[0;31m Error : valuable informations are not involved!\n");
 	return (TRUE);
 }
 
@@ -81,9 +81,9 @@ int		check_read_values(t_struct *data)
 	if (data->w_width > 3200)
 		data->w_width = 3200;
 	if (data->w_height == 0 || data->w_width == 0)
-		error("Error : missing width or height\n");
+		error("\e[0;31m Error : missing width or height\n");
 	if (data->w_height < 0 || data->w_width < 0)
-		error("Error : width or height cannot be negative\n");
+		error("\e[0;31m Error : width or height cannot be negative\n");
 	check_floor_ceilling_values(data);
 	return (TRUE);
 }
@@ -98,7 +98,7 @@ int		parse(t_struct *data, char **av)
 	initialize_file_struct(data);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || read(fd, buff, len) <= 0)
-		error("No such file!\n");
+		error("\e[0;31m No such file!\n");
 	if (!check_textures_f_c_s_availibility((char *)buff))
 		return (FALSE);
 	if (!read_map(data, (char *)buff))

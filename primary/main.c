@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 20:21:41 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/21 17:43:32 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 10:05:36 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		initialize_window(t_struct *data)
 int		are_valid_args(int ac, char **av)
 {
 	if (ac < 2)
-		error("No map included!\n");
+		error("\e[0;31m No map included!\n");
 	else if (ac == 2 && ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 		return (TRUE);
 	else if (ac == 3 && ft_strlen(av[2]) == 6
@@ -64,7 +64,7 @@ int		main(int ac, char *av[])
 	t_struct *data;
 
 	if (!are_valid_args(ac, av))
-		error("args are not valid\n");
+		error("\e[0;31m args are not valid\n");
 	data = malloc(sizeof(t_struct));
 	if (!parse(data, av))
 		return (1);

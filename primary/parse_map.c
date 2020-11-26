@@ -17,11 +17,11 @@ static void	insert_and_check_element(t_struct *data,
 {
 	data->map[i][j] = buff[data->pos];
 	if (is_not_valid_element(data, buff))
-		error("Invalid map element");
+		error("\e[0;31m Invalid map element");
 	if (is_player(data, buff))
 	{
 		if (data->is_multi_player)
-			error("Too many players provided!\n");
+			error("\e[0;31m Too many players provided!\n");
 		data->i_player = i;
 		data->j_player = j;
 		init_player(data);

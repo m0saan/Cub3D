@@ -19,9 +19,9 @@ int		is_valid_texture(t_struct *data, const char *buff)
 	while (buff[data->pos] != '.' && buff[data->pos + 1] != '/')
 	{
 		if (buff[data->pos] != ' ')
-			error("Invalid separator\n");
+			error("\e[0;31m Invalid separator\n");
 		if (buff[data->pos] == '\n')
-			error("Invalid texture alignment\n");
+			error("\e[0;31m Invalid texture alignment\n");
 		(data->pos)++;
 	}
 	return (buff[data->pos] != '.' && buff[data->pos + 1] != '/');

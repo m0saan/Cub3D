@@ -23,7 +23,7 @@ void		texture_from_file(t_struct *data)
 	data->xpm_ptr4 = mlx_xpm_file_to_image(data->mlx_ptr, data->ea, &w, &h);
 	data->sprite_xpm = mlx_xpm_file_to_image(data->mlx_ptr, data->sp, &w, &h);
 	if (is_not_valid_xpm(data))
-		error("Error : wrong texture path!\n");
+		error("\e[0;31m Error : wrong texture path!\n");
 	data->img_tex1 = (int *)mlx_get_data_addr(data->xpm_ptr1,
 			&data->bpp_text, &data->size_line_text, &data->endian_text);
 	data->img_tex2 = (int *)mlx_get_data_addr(data->xpm_ptr2,
