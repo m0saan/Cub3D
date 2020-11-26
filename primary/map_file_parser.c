@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/26 13:32:22 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 13:49:15 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int		read_map(t_struct *data, char *buff)
 {
 	while (buff[data->pos])
 	{
-		if (data->get_to_map == 8 && buff[data->pos] != '\n' &&
-				buff[data->pos] != ' ' && buff[data->pos] != '0'
-				&& buff[data->pos] != '1')
-			error("Invalid element\n");
+		not_valid_element(data, buff);
 		if (buff[data->pos] == 'R')
 			get_resolution_values(data, buff);
 		else if (buff[data->pos] == 'F')
@@ -97,7 +94,7 @@ int		parse(t_struct *data, char **av)
 	int			fd;
 	const int	len = 12000;
 	char		buff[len];
-	int         last;
+	int			last;
 
 	ft_memset(buff, 0, len);
 	initialize_file_struct(data);

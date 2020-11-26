@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 12:15:19 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 13:49:36 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,4 +342,9 @@ void					render_splash_screen(t_struct *data,
 int						destruct(t_struct *data);
 int						ft_close(void *param);
 int						int_len(int x);
+void					check_after_given_infos(t_struct *data,
+		const char *buff);
+void					not_valid_element(const t_struct *data,
+		const char *buff);
+
 #endif

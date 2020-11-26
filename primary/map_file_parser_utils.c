@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:07 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/26 13:34:52 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 13:48:33 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,12 @@ void	check_after_given_infos(t_struct *data, const char *buff)
 			error("Invalid elements\n");
 		data->pos++;
 	}
+}
+
+void	not_valid_element(const t_struct *data, const char *buff)
+{
+	if (data->get_to_map == 8 && buff[data->pos] != '\n' &&
+			buff[data->pos] != ' ' && buff[data->pos] != '0'
+			&& buff[data->pos] != '1')
+		error("Invalid element\n");
 }
