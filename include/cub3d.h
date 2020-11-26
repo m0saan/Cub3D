@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 11:11:26 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/24 12:15:19 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,11 +202,11 @@ typedef struct			s_struct
 	signed int			c_red;
 	signed int			c_green;
 	signed int			c_blue;
-	char				no[25];
-	char				so[25];
-	char				we[25];
-	char				ea[25];
-	char				sp[25];
+	char				no[150];
+	char				so[150];
+	char				we[150];
+	char				ea[150];
+	char				sp[150];
 	int					found_r;
 	int					found_f;
 	int					found_c;
