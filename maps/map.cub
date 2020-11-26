@@ -1,9 +1,9 @@
 R 1920 1080
-NO ./img/1.xpm
-SO ./img/2.xpm
-WE ./img/3.xpm
+NO       ./img/1.xpm
+SO   ./img/2.xpm
+WE       ./img/3.xpm
 EA ./img/4.xpm
-S ./img/sp3.xpm
+S   ./img/sp.xpm
 F 181,135,82
 C 38,134,217
 
