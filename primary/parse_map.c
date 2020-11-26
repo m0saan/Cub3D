@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:33 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/21 17:44:02 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 10:11:06 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void		initialize_file_struct(t_struct *data)
 	data->found_r = 0;
 	data->found_c = 0;
 	data->found_f = 0;
-	ft_memset(data->no, 0, 25);
-	ft_memset(data->so, 0, 25);
-	ft_memset(data->ea, 0, 25);
-	ft_memset(data->we, 0, 25);
-	ft_memset(data->sp, 0, 25);
+	ft_memset(data->no, 0, 150);
+	ft_memset(data->so, 0, 150);
+	ft_memset(data->ea, 0, 150);
+	ft_memset(data->we, 0, 150);
+	ft_memset(data->sp, 0, 150);
 }

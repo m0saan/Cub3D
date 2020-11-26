@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:07 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 09:45:36 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 13:34:52 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 int		is_valid_texture(t_struct *data, const char *buff)
 {
 	if (buff[data->pos] != ' ')
-		return (TRUE);
+		return (FALSE);
 	while (buff[data->pos] != '.' && buff[data->pos + 1] != '/')
 	{
+		if (ft_isalpha(buff[data->pos]))
+			return (TRUE);
 		if (buff[data->pos] != ' ')
 			error("\e[0;31m Invalid separator\n");
 		if (buff[data->pos] == '\n')
 			error("\e[0;31m Invalid texture alignment\n");
 		(data->pos)++;
 	}
-	return (buff[data->pos] != '.' && buff[data->pos + 1] != '/');
+	return (buff[data->pos] == '.' && buff[data->pos + 1] == '/');
 }
 
 int		is_negative(int v)
@@ -38,4 +40,14 @@ int		screw_this_norminette(t_struct *data, char *buff)
 	data->is_multi_player = FALSE;
 	fill_out_map(data, buff);
 	return (TRUE);
+}
+
+void	check_after_given_infos(t_struct *data, const char *buff)
+{
+	while (buff[data->pos] != '\n')
+	{
+		if (buff[data->pos] != ' ')
+			error("Invalid elements\n");
+		data->pos++;
+	}
 }

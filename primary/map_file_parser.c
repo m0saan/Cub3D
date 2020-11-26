@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 10:22:04 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 13:32:22 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ int		read_map(t_struct *data, char *buff)
 {
 	while (buff[data->pos])
 	{
+		if (data->get_to_map == 8 && buff[data->pos] != '\n' &&
+				buff[data->pos] != ' ' && buff[data->pos] != '0'
+				&& buff[data->pos] != '1')
+			error("Invalid element\n");
 		if (buff[data->pos] == 'R')
 			get_resolution_values(data, buff);
 		else if (buff[data->pos] == 'F')
@@ -93,11 +97,12 @@ int		parse(t_struct *data, char **av)
 	int			fd;
 	const int	len = 12000;
 	char		buff[len];
+	int         last;
 
 	ft_memset(buff, 0, len);
 	initialize_file_struct(data);
 	fd = open(av[1], O_RDONLY);
-	if (fd < 0 || read(fd, buff, len) <= 0)
+	if (fd < 0 || (last = read(fd, buff, len)) <= 0 || buff[last - 1] == '\n')
 		error("\e[0;31m No such file!\n");
 	if (!check_textures_f_c_s_availibility((char *)buff))
 		return (FALSE);

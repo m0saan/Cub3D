@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:23 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 12:14:29 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 13:33:43 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,11 @@ void	get_resolution_values(t_struct *data, char *buff)
 	if (buff[data->pos] != ' ')
 		error("\e[0;31m Resolution identifier misalignment\n");
 	skip_spaces(data, buff);
-	data->w_width = ft_atoi(&buff[data->pos++]);
+	data->w_width = ft_atoi(&buff[data->pos]);
 	data->pos += skip_number(&buff[data->pos]);
 	data->w_height = ft_atoi(&buff[data->pos]);
+	data->pos += int_len(data->w_height) + 1;
+	check_after_given_infos(data, buff);
 	data->get_to_map += 1;
 	data->found_r = 1;
 }
@@ -81,6 +83,7 @@ void	get_floor_values(t_struct *data, char *buff)
 	data->pos += int_len(data->f_blue);
 	data->get_to_map += 1;
 	data->found_f = 1;
+	check_after_given_infos(data, buff);
 	if (!data->f_red || !data->f_green || !data->f_blue)
 		error("\e[0;31m missing color");
 }
@@ -105,6 +108,7 @@ void	get_ceilling_values(t_struct *data, char *buff)
 	data->pos += int_len(data->c_blue);
 	data->get_to_map += 1;
 	data->found_c = 1;
+	check_after_given_infos(data, buff);
 	if (!data->c_red || !data->c_green || !data->c_blue)
 		error("\e[0;31m missing color");
 }

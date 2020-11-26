@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:18:42 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/24 12:03:08 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/26 11:11:55 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	get_western_texture_path(t_struct *data, const char *buff)
 	if (data->found_we)
 		error("\e[0;31m duplicate west texture symbol\n");
 	data->pos += 2;
-	if (is_valid_texture(data, buff))
+	if (!is_valid_texture(data, buff))
 		error("\e[0;31m Invalid texture path!\n");
-	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
+	while (buff[(data->pos)] != '\n')
 	{
 		data->we[i] = buff[(data->pos)];
 		i++;
@@ -40,9 +40,9 @@ void	get_easter_texture_path(t_struct *data, const char *buff)
 	if (data->found_ea)
 		error("\e[0;31m duplicate east texture symbol\n");
 	data->pos += 2;
-	if (is_valid_texture(data, buff))
+	if (!is_valid_texture(data, buff))
 		error("\e[0;31m Invalid texture path!\n");
-	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
+	while (buff[(data->pos)] != '\n')
 	{
 		data->ea[i] = buff[(data->pos)];
 		i++;
@@ -60,9 +60,9 @@ void	get_north_texture_path(t_struct *data, const char *buff)
 	if (data->found_no)
 		error("\e[0;31m duplicate north texture symbol\n");
 	data->pos += 2;
-	if (is_valid_texture(data, buff))
+	if (!is_valid_texture(data, buff))
 		error("Invalid texture path!\n");
-	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
+	while (buff[(data->pos)] != '\n')
 	{
 		data->no[i] = buff[data->pos];
 		i++;
@@ -80,9 +80,9 @@ void	get_south_texture_path(t_struct *data, const char *buff)
 	if (data->found_so)
 		error("\e[0;31m duplicate south texture symbol\n");
 	data->pos += 2;
-	if (is_valid_texture(data, buff))
+	if (!is_valid_texture(data, buff))
 		error("\e[0;31m Invalid texture path!\n");
-	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
+	while (buff[(data->pos)] != '\n')
 	{
 		data->so[i] = buff[data->pos];
 		i++;
@@ -100,10 +100,10 @@ void	get_sprite_path(t_struct *data, char *buff)
 	if (data->found_sp)
 		error("\e[0;31m duplicate sprite texture symbol\n");
 	data->pos += 1;
-	if (is_valid_texture(data, buff))
+	if (!is_valid_texture(data, buff))
 		error("\e[0;31m Invalid texture path!\n");
 	data->pos += 2;
-	while (buff[(data->pos)] != '\n' && buff[(data->pos)] != ' ')
+	while (buff[(data->pos)] != '\n')
 	{
 		data->sp[i] = buff[data->pos];
 		i++;
