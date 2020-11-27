@@ -280,7 +280,7 @@ void					get_north_texture_path(t_struct *data,
 void					get_south_texture_path(t_struct *data,
 		const char *buff);
 int						skip_number(const char *str);
-int						check_textures_f_c_s_availibility(char *buff);
+int						check_textures_f_c_s_availibility(char *buff, int last);
 void					get_sprite_path(t_struct *data, char *buff);
 int						screw_this_norminette(t_struct *data, char *buff);
 void					initialize_sprite(t_struct *data);
