@@ -22,10 +22,10 @@ SRC_NAMES = cube3d_utils.c map_file_parser_utils.c sprite.c destruct.c sprite_ut
 
 SRC_BONUS_NAMES = cube3d_utils.c map_file_parser_utils.c parse_floor_ceilling_resolution.c init_data.c\
                   intersection.c parse_textures.c utils2.c parse_map.c utils.c ray_casting.c \
-                  			map_error_handling.c render.c map_file_parser.c screenshot.c wall_utils.c
+                  			map_error_handling.c render.c map_file_parser.c screenshot.c wall_utils.c sprite_utils.c
 BONUS_PATH = bonus
 BONUS_NAMES = walls_bonus.c destruct_bonus.c events_bonus.c main_bonus.c misc_bonus.c \
-			sprite_bonus.c sprite_utils2_bonus.c sprite_utils_bonus.c
+			sprite_bonus.c sprite_utils2_bonus.c
 
 LIBFT_PATH = libft
 LIBFT = $(LIBFT_PATH)/libft.a
