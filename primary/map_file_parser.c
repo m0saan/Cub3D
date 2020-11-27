@@ -59,11 +59,13 @@ int		read_map(t_struct *data, char *buff)
 	return (TRUE);
 }
 
-int		check_textures_f_c_s_availibility(char *buff)
+int		check_textures_f_c_s_availibility(char *buff, int last)
 {
 	size_t len;
 
 	len = ft_strlen(buff);
+	if (buff[last - 1] == '\n')
+	    error("\e[0;31m New line at the end of the map!\n");
 	if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len))
 			|| !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
 		error("\e[0;31m Texture error!\n");
@@ -96,12 +98,13 @@ int		parse(t_struct *data, char **av)
 	char		buff[len];
 	int			last;
 
+	last = 0;
 	ft_memset(buff, 0, len);
 	initialize_file_struct(data);
 	fd = open(av[1], O_RDONLY);
-	if (fd < 0 || (last = read(fd, buff, len)) <= 0 || buff[last - 1] == '\n')
+	if (fd < 0 || (last = read(fd, buff, len)) <= 0)
 		error("\e[0;31m No such file!\n");
-	if (!check_textures_f_c_s_availibility((char *)buff))
+	if (!check_textures_f_c_s_availibility((char *)buff, last))
 		return (FALSE);
 	if (!read_map(data, (char *)buff))
 		return (FALSE);
