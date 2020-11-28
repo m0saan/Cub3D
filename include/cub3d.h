@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/26 13:49:36 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/28 10:38:07 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,5 +346,6 @@ void					check_after_given_infos(t_struct *data,
 		const char *buff);
 void					not_valid_element(const t_struct *data,
 		const char *buff);
+void	get_texture_path(t_struct *data, const char *buff, int found, char *txt);
 
 #endif
