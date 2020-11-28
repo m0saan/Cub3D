@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/26 14:55:58 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/28 10:38:07 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int		read_map(t_struct *data, char *buff)
 		else if (buff[data->pos] == 'C')
 			get_ceilling_values(data, buff);
 		else if (buff[data->pos] == 'N' && buff[data->pos + 1] == 'O')
-			get_north_texture_path(data, buff);
+			get_texture_path(data, buff, data->found_no, data->no);
 		else if (buff[data->pos] == 'S' && buff[data->pos + 1] == 'O')
-			get_south_texture_path(data, buff);
+            get_texture_path(data, buff, data->found_so, data->so);
 		else if (buff[data->pos] == 'W' && buff[data->pos + 1] == 'E')
-			get_western_texture_path(data, buff);
+            get_texture_path(data, buff, data->found_we, data->we);
 		else if (buff[data->pos] == 'E' && buff[data->pos + 1] == 'A')
-			get_easter_texture_path(data, buff);
+            get_texture_path(data, buff, data->found_ea, data->ea);
 		else if (buff[data->pos] == 'S')
 			get_sprite_path(data, buff);
 		else if ((buff[data->pos] == '1' || buff[data->pos] == ' ')
