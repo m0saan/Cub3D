@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 12:18:33 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/20 22:37:21 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/28 10:59:09 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ void	normalize_sprite_angle(t_struct *data, float *spt_angle)
 
 void	normalize_sprite_size(t_struct *data, int *i_spt)
 {
-	if (data->w_height > data->w_width)
-		data->sprite[*i_spt].size = ((float)data->w_height
-				/ data->sprite[*i_spt].dis) * SQUARE_SIZE;
-	else
-		data->sprite[*i_spt].size = ((float)data->w_width
+    data->sprite[*i_spt].size = ((float)data->w_width
 				/ data->sprite[*i_spt].dis) * SQUARE_SIZE;
 }
