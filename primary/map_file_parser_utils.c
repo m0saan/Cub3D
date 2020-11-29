@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 01:11:07 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/26 13:48:33 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/28 10:38:07 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_after_given_infos(t_struct *data, const char *buff)
 	while (buff[data->pos] != '\n')
 	{
 		if (buff[data->pos] != ' ')
-			error("Invalid elements\n");
+			error("\e[0;31m Invalid elements\n");
 		data->pos++;
 	}
 }
@@ -57,5 +57,5 @@ void	not_valid_element(const t_struct *data, const char *buff)
 	if (buff[data->pos] != '\n' &&
 			buff[data->pos] != ' ' && buff[data->pos] != '0'
 			&& buff[data->pos] != '1')
-		error("Invalid element\n");
+		error("\e[0;31m Error detected\n");
 }
