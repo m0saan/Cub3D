@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 10:56:35 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/28 10:38:07 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/29 09:57:24 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define SQUARE_SIZE 512
+# define SQUARE_SIZE 1000
 # define TEX_WIDTH SQUARE_SIZE
 # define TEX_HEIGHT SQUARE_SIZE
 # define SPRITE_SIZE 64
