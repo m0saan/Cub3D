@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/28 10:38:07 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/28 11:33:28 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		check_textures_f_c_s_availibility(char *buff, int last)
 	if (!(ft_strchr((char *)buff, 'R'))
 			|| !(ft_strchr((char *)buff, 'F'))
 			|| !(ft_strchr((char *)buff, 'C'))
-			|| !(ft_strchr((char *)buff, 'S')))
+			|| !(ft_strnstr(buff, "S ", len)))
 		error("\e[0;31m Error : valuable informations are not involved!\n");
 	return (TRUE);
 }
