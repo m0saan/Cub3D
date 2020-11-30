@@ -50,7 +50,7 @@ bonus: fclean $(BONUS_SRCS) $(BONUS__)
 	@ make -C $(LIBFT_PATH)
 	@  $(CC) $(CFLAGS) $(BONUS_SRCS) $(BONUS__) $(OPT) -o $(NAME) $(LD_LIBS) $(LIBFT)
 
-build:
+run:
 	@./Cub3D "maps/map.cub"
 
 save:
