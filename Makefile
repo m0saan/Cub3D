@@ -12,7 +12,7 @@
 
 # -*- This is a MakeFile -*- #
 
-NAME = Cub3D
+NAME = cub3D
 
 SRC_PATH = primary
 SRC_NAMES = cube3d_utils.c map_file_parser_utils.c sprite.c destruct.c sprite_utils.c events.c \
