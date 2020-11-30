@@ -41,19 +41,19 @@ int		read_map(t_struct *data, char *buff)
 		else if (buff[data->pos] == 'C')
 			get_ceilling_values(data, buff);
 		else if (buff[data->pos] == 'N' && buff[data->pos + 1] == 'O')
-			get_texture_path(data, buff, data->found_no, data->no);
+			get_texture_path(data, buff, &data->found_no, data->no);
 		else if (buff[data->pos] == 'S' && buff[data->pos + 1] == 'O')
-            get_texture_path(data, buff, data->found_so, data->so);
+            get_texture_path(data, buff, &data->found_so, data->so);
 		else if (buff[data->pos] == 'W' && buff[data->pos + 1] == 'E')
-            get_texture_path(data, buff, data->found_we, data->we);
+            get_texture_path(data, buff, &data->found_we, data->we);
 		else if (buff[data->pos] == 'E' && buff[data->pos + 1] == 'A')
-            get_texture_path(data, buff, data->found_ea, data->ea);
+            get_texture_path(data, buff, &data->found_ea, data->ea);
 		else if (buff[data->pos] == 'S')
 			get_sprite_path(data, buff);
 		else if ((buff[data->pos] == '1' || buff[data->pos] == ' ')
 				&& data->get_to_map == 8)
 			return (screw_this_norminette(data, buff));
-		not_valid_element(data, buff);
+		//not_valid_element(data, buff);
 		data->pos++;
 	}
 	return (TRUE);
@@ -104,7 +104,7 @@ int		parse(t_struct *data, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || (last = read(fd, buff, len)) <= 0)
 		error("\e[0;31m No such file!\n");
-	if (!check_textures_f_c_s_availibility((char *)buff, last))
+	if (!check_textures_f_c_s_availibility((char *)buff, last - 1))
 		return (FALSE);
 	if (!read_map(data, (char *)buff))
 		return (FALSE);
