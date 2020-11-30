@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 10:32:47 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/28 11:33:28 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/30 09:45:18 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int		read_map(t_struct *data, char *buff)
 		else if (buff[data->pos] == 'N' && buff[data->pos + 1] == 'O')
 			get_texture_path(data, buff, &data->found_no, data->no);
 		else if (buff[data->pos] == 'S' && buff[data->pos + 1] == 'O')
-            get_texture_path(data, buff, &data->found_so, data->so);
+			get_texture_path(data, buff, &data->found_so, data->so);
 		else if (buff[data->pos] == 'W' && buff[data->pos + 1] == 'E')
-            get_texture_path(data, buff, &data->found_we, data->we);
+			get_texture_path(data, buff, &data->found_we, data->we);
 		else if (buff[data->pos] == 'E' && buff[data->pos + 1] == 'A')
-            get_texture_path(data, buff, &data->found_ea, data->ea);
+			get_texture_path(data, buff, &data->found_ea, data->ea);
 		else if (buff[data->pos] == 'S')
 			get_sprite_path(data, buff);
 		else if ((buff[data->pos] == '1' || buff[data->pos] == ' ')
 				&& data->get_to_map == 8)
 			return (screw_this_norminette(data, buff));
-		//not_valid_element(data, buff);
+		not_valid_element(data, buff);
 		data->pos++;
 	}
 	return (TRUE);
@@ -65,7 +65,7 @@ int		check_textures_f_c_s_availibility(char *buff, int last)
 
 	len = ft_strlen(buff);
 	if (buff[last - 1] == '\n')
-	    error("\e[0;31m New line at the end of the map!\n");
+		error("\e[0;31m New line at the end of the map!\n");
 	if (!(ft_strnstr(buff, "NO", len)) || !(ft_strnstr(buff, "SO", len))
 			|| !(ft_strnstr(buff, "WE", len)) || !(ft_strnstr(buff, "EA", len)))
 		error("\e[0;31m Texture error!\n");
