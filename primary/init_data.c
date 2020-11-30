@@ -6,7 +6,7 @@
 /*   By: moboustt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:09:30 by moboustt          #+#    #+#             */
-/*   Updated: 2020/11/29 10:25:09 by moboustt         ###   ########.fr       */
+/*   Updated: 2020/11/30 09:27:14 by moboustt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	set_up_data(t_struct *data)
 	data->updated_player_y = 0;
 	data->turn_direction = 0;
 	data->walk_direction = 0;
-	data->walk_speed = 110;
-	data->turn_speed = 6 * (PI / 180);
+	data->walk_speed = 125;
+	data->turn_speed = 4 * (PI / 180);
 	data->reset = 0;
 	data->shift = 0;
 	data->m = 0;
