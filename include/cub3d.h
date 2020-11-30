@@ -346,6 +346,6 @@ void					check_after_given_infos(t_struct *data,
 		const char *buff);
 void					not_valid_element(const t_struct *data,
 		const char *buff);
-void	get_texture_path(t_struct *data, const char *buff, int found, char *txt);
+void	get_texture_path(t_struct *data, const char *buff, int *found, char *txt);
 
 #endif
