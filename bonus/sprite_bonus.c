@@ -84,7 +84,7 @@ void	initialize_sprite(t_struct *data)
 
 	i = -1;
 	i_spt = 0;
-	if (data->count_spt <= 0)
+	if (data->count_spt < 0)
 		error("sprite error");
 	if (!(data->sprite = (t_sprite *)malloc(sizeof(t_sprite)
 					* (data->count_spt))))

@@ -53,15 +53,23 @@ int		initialize_window(t_struct *data)
 
 int		are_valid_args(int ac, char **av)
 {
+	size_t av_len;
+
+	if (av[1] != NULL)
+		av_len = ft_strlen(av[1]) - 1;
 	if (ac < 2)
-		error("No map included!\n");
-	else if (ac == 2 && ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
-		return (TRUE);
-	else if (ac == 3 && ft_strlen(av[2]) == 6
-			&& !ft_strncmp(av[2], "--save", ft_strlen(av[2])))
+		error("\e[0;31m No map included!\n");
+	else if (ac >= 2 && av[1][av_len] == 'b' && av[1][av_len - 1] == 'u'
+	&& ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 	{
-		g_screenshot = TRUE;
-		return (TRUE);
+		if (ac == 2)
+			return (TRUE);
+		if (ac == 3 && ft_strlen(av[2]) == 6
+		&& !ft_strncmp(av[2], "--save", ft_strlen(av[2])))
+		{
+			g_screenshot = TRUE;
+			return (TRUE);
+		}
 	}
 	return (FALSE);
 }
@@ -71,7 +79,7 @@ int		main(int ac, char *av[])
 	t_struct *data;
 
 	if (!are_valid_args(ac, av))
-		error("args are not valid\n");
+		error("\e[0;31m args are not valid\n");
 	data = malloc(sizeof(t_struct));
 	if (!parse(data, av))
 		return (1);
