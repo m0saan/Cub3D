@@ -91,7 +91,7 @@ int		set_up_window(t_struct *data)
 	if ((data->mlx_ptr = mlx_init()) == NULL)
 		return (FALSE);
 	if ((data->win_ptr = mlx_new_window(data->mlx_ptr,
-					data->w_width, data->w_height, "Cub3d")) == NULL)
+					data->w_width, data->w_height, "cub3D")) == NULL)
 		return (FALSE);
 	if ((data->img_ptr = mlx_new_image(data->mlx_ptr,
 					data->w_width, data->w_height)) == NULL)
