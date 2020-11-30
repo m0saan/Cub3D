@@ -104,7 +104,7 @@ int		parse(t_struct *data, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || (last = read(fd, buff, len)) <= 0)
 		error("\e[0;31m No such file!\n");
-	if (!check_textures_f_c_s_availibility((char *)buff, last - 1))
+	if (!check_textures_f_c_s_availibility((char *)buff, last))
 		return (FALSE);
 	if (!read_map(data, (char *)buff))
 		return (FALSE);

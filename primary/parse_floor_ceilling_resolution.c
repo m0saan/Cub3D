@@ -84,8 +84,6 @@ void	get_floor_values(t_struct *data, char *buff)
 	data->get_to_map += 1;
 	data->found_f = 1;
 	check_after_given_infos(data, buff);
-	if (!data->f_red || !data->f_green || !data->f_blue)
-		error("\e[0;31m missing color");
 }
 
 void	get_ceilling_values(t_struct *data, char *buff)
@@ -109,6 +107,4 @@ void	get_ceilling_values(t_struct *data, char *buff)
 	data->get_to_map += 1;
 	data->found_c = 1;
 	check_after_given_infos(data, buff);
-	if (!data->c_red || !data->c_green || !data->c_blue)
-		error("\e[0;31m missing color");
 }

@@ -54,8 +54,9 @@ void	check_after_given_infos(t_struct *data, const char *buff)
 
 void	not_valid_element(const t_struct *data, const char *buff)
 {
+	if (buff[data->pos] == '\n' && buff[data->pos] == ' ')
+		error("\e[0;31m Error detected\n");
 	if (buff[data->pos] != '\n' &&
-			buff[data->pos] != ' ' && buff[data->pos] != '0'
-			&& buff[data->pos] != '1')
+	buff[data->pos] != ' ' && buff[data->pos] != '0' && buff[data->pos] != '1')
 		error("\e[0;31m Error detected\n");
 }
