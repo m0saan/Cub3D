@@ -1,7 +1,7 @@
-R 1920 1080
+R 1920 1
 NO ./img/5.XPM
 SO img/6.xpm
-WE img/7 7.xpm
+WE img/7.xpm
 EA img/9.xpm
 S img/s.XPM
 F 145,144,144
